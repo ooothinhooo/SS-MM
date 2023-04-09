@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const connection = require("./db");
+const router = require("./routes/index.js");
 
 // Database Connection
 connection();
@@ -10,6 +11,7 @@ connection();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/api", router);
 
 const PORT = process.env.PORT;
 

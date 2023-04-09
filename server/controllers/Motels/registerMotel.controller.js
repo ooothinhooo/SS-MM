@@ -8,17 +8,25 @@ const Motels = require("../../models/Motels.model.js");
 const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 
-const addWater = async (req, res) => {
+const registerMotel = async (req, res) => {
   try {
-    const { newWater, oldWater } = req.body;
-    const result = await Room.findById(req.body.roomId);
+    const result = await Motels.create({
+      userId: req.userId,
+      motel_Name: req.body.motel_Name,
+    });
 
     if (result) {
-      await result.updateOne({ $push: { water: { newWater, oldWater } } });
-      return res.json(jsonGenerate(StatusCode.SUCCESS, "Them thanh cong"));
+      const user = await User.findOneAndUpdate(
+        { _id: req.userId },
+        {
+          $push: { Motel: result },
+        }
+      );
+      return res.json(
+        jsonGenerate(StatusCode.SUCCESS, "created Succssfully", result)
+      );
     }
-    return res.json(jsonGenerate(StatusCode.FORBIDDEN, "Them That Bai"));
   } catch (error) {}
 };
 
-module.exports = addWater;
+module.exports = registerMotel;

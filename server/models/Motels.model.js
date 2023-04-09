@@ -3,19 +3,22 @@ const mongoose = require("mongoose");
 
 const MotelsSchema = mongoose.Schema(
   {
-    host_Id: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "users",
       required: true,
     },
-    Rom: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "room",
-      required: true,
-    },
+    motel_Name: { type: String, required: true },
+    rooms: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "rooms",
+      },
+    ],
   },
   { timestamps: true }
 );
 
 const Motels = mongoose.model("motels", MotelsSchema);
 module.exports = Motels;
+    

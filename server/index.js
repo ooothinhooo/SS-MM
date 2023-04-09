@@ -4,6 +4,8 @@ const app = express();
 const cors = require("cors");
 const connection = require("./db");
 const router = require("./routes/index.js");
+const AuthMiddleware = require("./middlewares/AuthMidleware.js");
+const MotelRouter = require("./routes/Motel.router.js");
 
 // Database Connection
 connection();
@@ -12,6 +14,8 @@ connection();
 app.use(cors());
 app.use(express.json());
 app.use("/api", router);
+// app.use("/api/motel", AuthMiddleware, MotelRouter);
+
 
 const PORT = process.env.PORT;
 

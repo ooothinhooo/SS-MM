@@ -8,20 +8,22 @@ const Motels = require("../../models/Motels.model.js");
 const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 
-const editRoom = async (req, res) => {
+const listRoom = async (req, res) => {
   try {
-    const { roomId, name, sdt, avatar, email, cccd, note } = req.body;
+    // var uid = req.query.uid;
+    // const result = await Motels.findOne({ userId: req.userId })
+    const result = await Motels.findById(req.query.motel_Id)
+      .populate("rooms")
+      .exec();
 
-    const room = await Room.findOneAndUpdate(
-      { _id: roomId },
-      {
-        $push: { member: { name, sdt, avatar, email, cccd, note } },
-      }
-    );
     return res.json(
-      jsonGenerate(StatusCode.SUCCESS, "Thêm Thành Viên Thành Công", room)
+      jsonGenerate(StatusCode.SUCCESS, result?.motel_Name, result)
     );
-  } catch (error) {}
+  } catch (error) {
+    return res.json(
+      jsonGenerate(StatusCode.UNPROCESSABLE_ENTITY, "Error", error)
+    );
+  }
 };
 
-module.exports = editRoom;
+module.exports = listRoom;

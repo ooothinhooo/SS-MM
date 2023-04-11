@@ -6,17 +6,17 @@ export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  // const [category, setCategory] = useState(localStorage.getItem("category"));
+  const [isConvert, setIsConvert] = useState(localStorage.getItem("isConvert"));
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
-  // useEffect(() => {
-  //   localStorage.setItem("category", category);
-  // }, [category]);
+  useEffect(() => {
+    localStorage.setItem("isConvert", true);
+  }, [isConvert]);
 
   return (
-    <ProductContext.Provider value={{ setUser, user }}>
+    <ProductContext.Provider value={{ setUser, user, isConvert, setIsConvert }}>
       {children}
     </ProductContext.Provider>
   );

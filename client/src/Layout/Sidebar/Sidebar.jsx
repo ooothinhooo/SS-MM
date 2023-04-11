@@ -53,7 +53,7 @@ function Sidebar() {
                         <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                         <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                       </svg>
-                      <span class="ml-3">Dashboard</span>
+                      <span class="ml-3">Trang chính</span>
                     </a>
                   </li>
                   <li>
@@ -70,10 +70,10 @@ function Sidebar() {
                       >
                         <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                       </svg>
-                      <span class="ml-3 flex-1 whitespace-nowrap">Kanban</span>
-                      <span class="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
+                      <span class="ml-3 flex-1 whitespace-nowrap">Phòng</span>
+                      {/* <span class="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
                         Pro
-                      </span>
+                      </span> */}
                     </a>
                   </li>
                   <li>
@@ -91,10 +91,12 @@ function Sidebar() {
                         <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
                         <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
                       </svg>
-                      <span class="ml-3 flex-1 whitespace-nowrap">Inbox</span>
-                      <span class="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
-                        Pro
+                      <span class="ml-3 flex-1 whitespace-nowrap">
+                        Chỉ số điện
                       </span>
+                      {/* <span class="bg-gray-200 text-gray-800 ml-3 text-sm font-medium inline-flex items-center justify-center px-2 rounded-full">
+                        Pro
+                      </span> */}
                     </a>
                   </li>
                   <li>
@@ -114,7 +116,9 @@ function Sidebar() {
                           clip-rule="evenodd"
                         ></path>
                       </svg>
-                      <span class="ml-3 flex-1 whitespace-nowrap">Users</span>
+                      <span class="ml-3 flex-1 whitespace-nowrap">
+                        Chỉ số nước
+                      </span>
                     </a>
                   </li>
                   <li>
@@ -135,7 +139,7 @@ function Sidebar() {
                         ></path>
                       </svg>
                       <span class="ml-3 flex-1 whitespace-nowrap">
-                        Products
+                        Phát sinh
                       </span>
                     </a>
                   </li>
@@ -156,7 +160,9 @@ function Sidebar() {
                           clip-rule="evenodd"
                         ></path>
                       </svg>
-                      <span class="ml-3 flex-1 whitespace-nowrap">Sign In</span>
+                      <span class="ml-3 flex-1 whitespace-nowrap">
+                        Tính Tiền
+                      </span>
                     </a>
                   </li>
                   <li>
@@ -176,7 +182,9 @@ function Sidebar() {
                           clip-rule="evenodd"
                         ></path>
                       </svg>
-                      <span class="ml-3 flex-1 whitespace-nowrap">Sign Up</span>
+                      <span class="ml-3 flex-1 whitespace-nowrap">
+                        Phiếu chi
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -200,7 +208,7 @@ function Sidebar() {
                         d="M378.7 32H133.3L256 182.7L378.7 32zM512 192l-107.4-141.3L289.6 192H512zM107.4 50.67L0 192h222.4L107.4 50.67zM244.3 474.9C247.3 478.2 251.6 480 256 480s8.653-1.828 11.67-5.062L510.6 224H1.365L244.3 474.9z"
                       ></path>
                     </svg>
-                    <span class="ml-4">Upgrade to Pro</span>
+                    <span class="ml-4">Báo Cáo</span>
                   </a>
                   <a
                     href="#"

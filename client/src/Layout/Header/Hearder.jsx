@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Hearder() {
+import { motion } from "framer-motion";
+
+import { BsFillKeyboardFill } from "react-icons/bs";
+
+function Hearder({ isShow }) {
+  // const router = useRouter();
+  const [user] = useState();
+  const [dropMenu, setDropMenu] = useState(false);
+
+  const logout = async () => {
+    // await signOut(auth);
+  };
   return (
     <>
       <div>
         {/* <span className="text-black text-xl">Header</span> */}
-        <nav class="bg-white border-b border-gray-200 fixed z-30 w-full">
+        <nav class="bg-white border-b border-gray-200 fixed  z-30 w-full">
           <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center justify-start">

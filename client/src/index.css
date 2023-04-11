@@ -2,7 +2,7 @@ html,
 body {
     scroll-behavior: smooth;
     overflow-x: visible;
-    background-color:#8db1fb;
+    /* background-color:#8db1fb; */
 }
 
 br {

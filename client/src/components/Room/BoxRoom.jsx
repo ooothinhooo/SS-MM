@@ -1,6 +1,6 @@
 import React from "react";
 
-function BoxRoom({ data }) {
+function BoxRoom({ data, user }) {
   return (
     <div>
       <div class="flex items-center justify-center">

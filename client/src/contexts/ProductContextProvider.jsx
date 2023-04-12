@@ -12,7 +12,7 @@ const ProductContextProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
   useEffect(() => {
-    localStorage.setItem("isConvert", true);
+    localStorage.setItem("isConvert", JSON.stringify(isConvert));
   }, [isConvert]);
 
   return (

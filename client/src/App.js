@@ -13,7 +13,7 @@ import { ProductContext } from "./contexts/ProductContextProvider.jsx";
 
 function App() {
   const { user, isConvert } = useContext(ProductContext);
-  console.log(user, isConvert);
+  // console.log(user, isConvert);
   return (
     <>
       {isConvert ? (

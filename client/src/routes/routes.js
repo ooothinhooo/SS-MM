@@ -3,6 +3,7 @@ import config from "../config";
 import HomePage from "../pages/HomePage.jsx";
 import MotelPage from "../pages/Motel/MotelPage.jsx";
 import AddRoomPage from "../pages/Room/AddRoomPage.jsx";
+import DeleteRoomPage from "../pages/Room/DeleteRoomPage.jsx";
 import RoomPage from "../pages/Room/RoomPage.jsx";
 
 // Pages
@@ -16,6 +17,7 @@ const SignedIn = [
   { path: config.routes.Motel, component: MotelPage },
   { path: config.routes.Room, component: RoomPage },
   { path: config.routes.AddRoom, component: AddRoomPage },
+  { path: config.routes.DeleteRoom, component: DeleteRoomPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: HomePage },

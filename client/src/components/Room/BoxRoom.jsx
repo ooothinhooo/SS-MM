@@ -1,12 +1,13 @@
 import React from "react";
 
 function BoxRoom({ data, user }) {
+  console.log(data);
   return (
     <div>
       <div class="flex items-center justify-center">
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
           {data &&
-            data.map((item, index) => {
+            data?.map((item, index) => {
               return (
                 <>
                   <div class="relative bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
@@ -28,7 +29,9 @@ function BoxRoom({ data, user }) {
                       </svg>
                     </div>
                     <div class="mt-8">
-                      <p class="text-xl font-semibold my-2">Phòng {data}</p>
+                      <p class="text-xl font-semibold my-2">
+                        Phòng {item?.roomCode}
+                      </p>
                       {/* <div class="flex space-x-2 text-gray-400 text-sm">
            
             <svg

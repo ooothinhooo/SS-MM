@@ -14,8 +14,9 @@ function MotelPage({ user }) {
       const result = await GET_USER(user.token);
       console.log(result.data.data);
       setData(result.data.data);
-      if (data?.Motel == "") {
+      if (!data?.Motel) {
         localStorage.setItem("isConvert", data?.Motel);
+        console.log("motel rong");
       } else {
         navigation("/room");
       }
@@ -33,7 +34,7 @@ function MotelPage({ user }) {
   return (
     <div>
       <div className="mt-20 mr-20">
-        {data?.Motel != "" ? (
+        {!data?.Motel ? (
           <>
             <section class="h-screen bg-cover  w-full">
               <div class="flex h-full w-full items-center justify-center container mx-auto px-8">

@@ -14,6 +14,8 @@ import { useParams } from "react-router-dom";
 import { GET_ONE_ROOM } from "../../API/Motels/GetOneRoom.api.js";
 
 import Member from "../../components/Room/Member.jsx";
+import InfoRom from "../../components/Room/InfoRom.jsx";
+import ServiceRoom from "../../components/Room/ServiceRoom.jsx";
 
 function ViewRoomPage({ user }) {
   let { id } = useParams();
@@ -36,20 +38,17 @@ function ViewRoomPage({ user }) {
   const data = [
     {
       label: "Thông tin phòng",
-      value: "html",
-      desc: `It really matters and then like it really doesn't matter.
-      What matters is the people who are sparked by it. And the people 
-      who are like offended by it, it doesn't matter.`,
+      value: "info",
+      desc: <InfoRom data={dataRoom} user={user} />,
     },
     {
       label: "Dịch Vụ",
-      value: "react",
-      desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
+      value: "service",
+      desc: <ServiceRoom data={dataRoom} user={user} />,
     },
     {
       label: "Thành Viên",
-      value: "vue",
+      value: "member",
       desc: <Member data={dataRoom} user={user} />,
     },
   ];
@@ -57,7 +56,7 @@ function ViewRoomPage({ user }) {
   return (
     <>
       <ToastContainer />
-      <div className="mt-20 mr-20">
+      <div className="mt-20 mr-20 w-full">
         <div class="flex ">
           <div className=" w-full h-full bg-slate-100">
             <div></div>
@@ -69,9 +68,9 @@ function ViewRoomPage({ user }) {
                   </Tab>
                 ))}
               </TabsHeader>
-              <TabsBody>
+              <TabsBody className="w-full">
                 {data.map(({ value, desc }) => (
-                  <TabPanel key={value} value={value}>
+                  <TabPanel className="w-full" key={value} value={value}>
                     {desc}
                   </TabPanel>
                 ))}

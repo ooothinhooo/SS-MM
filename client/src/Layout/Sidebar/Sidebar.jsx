@@ -14,6 +14,11 @@ function Sidebar() {
       path: "/room",
     },
     {
+      title: "Thành Viên",
+      icon: "",
+      path: "/member",
+    },
+    {
       title: "Chỉ số điện",
       icon: "",
       path: "/electricity",

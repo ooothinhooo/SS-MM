@@ -3,6 +3,7 @@ const routes = {
   Mainpage: "/main",
   Motel: "/motel",
   Room: "/room",
+  Member: "/member",
   ViewRoom: "/room/view/:id",
   Service: "/service",
   ElectricityStats: "/electricity",

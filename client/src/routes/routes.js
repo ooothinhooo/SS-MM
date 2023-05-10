@@ -1,6 +1,7 @@
 import Login from "../components/Account/Login.jsx";
 import config from "../config";
 import HomePage from "../pages/HomePage.jsx";
+import MemberPage from "../pages/Members/MemberPage.jsx";
 import MotelPage from "../pages/Motel/MotelPage.jsx";
 
 import RoomPage from "../pages/Room/RoomPage.jsx";
@@ -17,6 +18,7 @@ const SignedIn = [
   { path: config.routes.Motel, component: MotelPage },
   { path: config.routes.Room, component: RoomPage },
   { path: config.routes.ViewRoom, component: ViewRoomPage },
+  { path: config.routes.Member, component: MemberPage },
   // { path: config.routes.DeleteRoom, component: DeleteRoomPage },
 ];
 const NotLoggedIn = [

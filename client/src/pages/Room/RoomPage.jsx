@@ -85,10 +85,10 @@ function RoomPage({ user }) {
                 class="rounded-lg py-2 border bg-blue-600 px-3  text-xs font-semibold"
               >
                 {/* <NavLink to={`/room/add`}>Thêm Phòng</NavLink> */}
-                Thêm Phòng
+                Thêm Thành Viên
               </button>
               <button class="rounded-lg py-2 border bg-green-600 px-3  text-xs font-semibold">
-                Sửa Phòng
+                Sửa Thành Viên
               </button>
               <button
                 onClick={(e) => setDele(!dele)}

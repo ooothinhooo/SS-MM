@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import AddMember from "../../components/Member/AddMember.jsx";
 
 function MemberPage({ user }) {
   const navigation = useNavigate();
@@ -23,6 +24,7 @@ function MemberPage({ user }) {
           </div>
           <div className={`${isAdd ? " " : "hidden"} h-full overflow-y-auto`}>
             {/* <AddMemberToRoom /> */}
+            <AddMember />
           </div>
           <div className={`${!isAdd ? " " : "hidden"}`}>
             <div class="w-full flex flex-col">

@@ -8,6 +8,10 @@ import { NavLink } from "react-router-dom";
 function Hearder({ isShow }) {
   // const router = useRouter();
   const [user] = useState();
+  /* `const [dropMenu, setDropMenu] = useState(false);` is declaring a state variable `dropMenu` and a
+  function `setDropMenu` to update its value. The initial value of `dropMenu` is set to `false`.
+  This state variable is likely used to control the visibility of a dropdown menu in the header
+  component. */
   const [dropMenu, setDropMenu] = useState(false);
 
   const logout = async () => {

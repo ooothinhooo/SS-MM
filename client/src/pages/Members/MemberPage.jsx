@@ -94,7 +94,7 @@ function MemberPage({ user }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {dataMember.map((i, index) => {
+                        {dataMember?.map((i, index) => {
                           return (
                             <>
                               <tr class="bg-gray-100 border-b">

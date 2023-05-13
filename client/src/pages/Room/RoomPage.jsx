@@ -58,7 +58,18 @@ function RoomPage({ user }) {
         console.log(result);
         if (result.data.status == 200) {
           setNum("");
-          toast.success(`${value} được thêm thành công`);
+          // toast.success(`${value} được thêm thành công`);
+          toast.success(`${value} được thêm thành công`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            // theme: "colored",
+          });
           GetAPI();
         }
       } catch (error) {}
@@ -68,7 +79,18 @@ function RoomPage({ user }) {
   let R = new Room();
   return (
     <div className="mt-20 mr-20">
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
       <div class="flex ">
         {" "}

@@ -1,16 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddMemberToRoom from "./AddMemberToRoom.jsx";
 import Button from "../Componets/InputType/Button.jsx";
+import { LIST_MEMBER_ONROOM } from "../../API/Member/listMemberOnRoom.api.js";
+import { useParams } from "react-router-dom";
+import { REMOVE_MEMBER_OUTROOM } from "../../API/Room/removeMemberOutRoom.api.js";
+import { ToastContainer, toast } from "react-toastify";
 
 function Member({ data, user }) {
   const a = [1, 2, 4];
+  let { id } = useParams();
   const [isAdd, setIsAdd] = useState(Boolean(false));
   const [member, setMember] = useState(data?.member);
   // motelId
   // token
-  console.log("member", data);
+
+  const getMember = async () => {
+    try {
+      const result = await LIST_MEMBER_ONROOM(user?.token, id);
+      setMember(result?.data?.data?.member);
+    } catch (error) {}
+  };
+
+  const removeMember = async (_id) => {
+    try {
+      const result = await REMOVE_MEMBER_OUTROOM(user?.token, id, _id);
+      getMember();
+      console.log("x1", result);
+      if (result?.data?.status === 200)
+        toast.success("Xoá thành công", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          // theme: "colored",
+        });
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getMember();
+  }, [isAdd]);
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       <div
         className={`${
           !isAdd ? "mt-28 bottom-0  right-4" : "top-0 left-0"
@@ -36,7 +83,7 @@ function Member({ data, user }) {
       <div
         className={`${isAdd ? " " : "hidden"} h-full overflow-y-auto shadow-xl`}
       >
-        <AddMemberToRoom />
+        <AddMemberToRoom user={user} roomId={id} isAdd={isAdd} />
       </div>
       <div className={`${!isAdd ? " " : "hidden"}`}>
         <div class="w-full flex flex-col">
@@ -115,7 +162,7 @@ function Member({ data, user }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {member.map((i) => {
+                    {member?.map((i) => {
                       return (
                         <>
                           <tr class="bg-gray-100 border-b">
@@ -123,36 +170,39 @@ function Member({ data, user }) {
                               1
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              Mark
+                              {i?.fullName}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              Otto
+                              {i?.dob}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.sex}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.cccd}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.dateRange}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.address}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.phone}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.carNum}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              @mdo
+                              {i?.dateSub}
                             </td>{" "}
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               <div className="flex gap-2">
-                                <Button title={"X"} />
-                                <Button title={"Sửa"} />
+                                <div onClick={(e) => removeMember(i?._id)}>
+                                  <Button title={"X"} />
+                                </div>
+
+                                {/* <Button title={"Sửa"} /> */}
                               </div>
                             </td>
                           </tr>

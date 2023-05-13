@@ -1,23 +1,41 @@
 import React, { useState } from "react";
 import AddMemberToRoom from "./AddMemberToRoom.jsx";
+import Button from "../Componets/InputType/Button.jsx";
 
 function Member({ data, user }) {
   const a = [1, 2, 4];
   const [isAdd, setIsAdd] = useState(Boolean(false));
+  const [member, setMember] = useState(data?.member);
   // motelId
   // token
-  console.log(data);
+  console.log("member", data);
   return (
     <>
-      <div className="absolute flex z-40 items-end mt-28 bottom-0  right-0">
+      <div
+        className={`${
+          !isAdd ? "mt-28 bottom-0  right-4" : "top-0 left-0"
+        } absolute flex z-40 items-end `}
+      >
         <div
           onClick={(e) => setIsAdd(!isAdd)}
-          className="bg-red-600  p-4 rounded-full"
+          class={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4  inline-flex items-center ${
+            isAdd ? "rounded-full shadow-lg" : "rounded"
+          }`}
         >
-          <button>Thêm +</button>
+          {isAdd ? (
+            <>
+              <button>X</button>
+            </>
+          ) : (
+            <>
+              <button>Thêm +</button>
+            </>
+          )}
         </div>
       </div>
-      <div className={`${isAdd ? " " : "hidden"} h-full overflow-y-auto`}>
+      <div
+        className={`${isAdd ? " " : "hidden"} h-full overflow-y-auto shadow-xl`}
+      >
         <AddMemberToRoom />
       </div>
       <div className={`${!isAdd ? " " : "hidden"}`}>
@@ -88,10 +106,16 @@ function Member({ data, user }) {
                       >
                         Ngày ĐKTT
                       </th>
+                      <th
+                        scope="col"
+                        class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        Hành Động
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {a.map((i) => {
+                    {member.map((i) => {
                       return (
                         <>
                           <tr class="bg-gray-100 border-b">
@@ -124,6 +148,12 @@ function Member({ data, user }) {
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               @mdo
+                            </td>{" "}
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                              <div className="flex gap-2">
+                                <Button title={"X"} />
+                                <Button title={"Sửa"} />
+                              </div>
                             </td>
                           </tr>
                         </>

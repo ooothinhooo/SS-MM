@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from "react";
 import Input from "../Componets/InputType/Input.jsx";
-
-function AddMember() {
+import Button from "../Componets/InputType/Button.jsx";
+import { ADD_MEMBER } from "../../API/Member/addMember.api.js";
+function AddMember({ user }) {
+  console.log("user - add", user);
   const [data, setData] = useState({});
   const handleInputState = (name, value) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
   useEffect(() => {
     console.table(data);
+    data.motelId = user?.motelId;
   }, [data]);
+  const addMember = async () => {
+    try {
+      console.log("ađ");
+      const result = await ADD_MEMBER(user?.token, data);
+      console.log(result);
+    } catch (error) {}
+  };
+
   return (
     <div>
       <div>
-        <div class="w-full max-w-4xl">
+        <div class="w-full ">
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <Input
@@ -69,6 +80,7 @@ function AddMember() {
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                 data-te-select-init
               >
+                <option value="">Choose</option>
                 <option value="1">Nam</option>
                 <option value="0">Nữ</option>
               </select>
@@ -100,11 +112,11 @@ function AddMember() {
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <Input
-                name="numCar"
+                name="carNum"
                 type="text"
                 placeholder="Biển số xe"
                 labelText="Biển số xe"
-                value={data.numCar}
+                value={data.carNum}
                 handleInputState={handleInputState}
               />
             </div>
@@ -119,6 +131,10 @@ function AddMember() {
               />
             </div>
           </div>
+        </div>
+        <div onClick={(e) => addMember()}>
+          {/* xác nhận them */}
+          <Button title={"Xác Nhận Thêm"} />
         </div>
       </div>
     </div>

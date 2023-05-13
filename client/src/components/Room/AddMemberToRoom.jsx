@@ -1,4 +1,6 @@
+// import { Button } from "@material-tailwind/react";
 import React from "react";
+import Button from "../Componets/InputType/Button.jsx";
 
 function AddMemberToRoom() {
   const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -42,35 +44,19 @@ function AddMemberToRoom() {
                     >
                       CMND/ CCCD
                     </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Ngày cấp
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Địa chỉ
-                    </th>
+
                     <th
                       scope="col"
                       class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
                       Điện thoại
                     </th>
+
                     <th
                       scope="col"
                       class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Số xe
-                    </th>
-                    <th
-                      scope="col"
-                      class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                    >
-                      Ngày ĐKTT
+                      Thêm
                     </th>
                   </tr>
                 </thead>
@@ -91,6 +77,7 @@ function AddMemberToRoom() {
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             @mdo
                           </td>
+
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             @mdo
                           </td>
@@ -98,16 +85,7 @@ function AddMemberToRoom() {
                             @mdo
                           </td>
                           <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            @mdo
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            @mdo
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            @mdo
-                          </td>
-                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            @mdo
+                            <Button title="Thêm" />
                           </td>
                         </tr>
                       </>

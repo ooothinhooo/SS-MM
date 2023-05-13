@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AddMember from "../../components/Member/AddMember.jsx";
+import { LIST_MEMBER } from "../../API/Member/listMember.api.js";
+import { DELETE_MEMBER } from "../../API/Member/deleteMember.api.js";
 
 function MemberPage({ user }) {
   const navigation = useNavigate();
@@ -10,21 +12,39 @@ function MemberPage({ user }) {
   const [num, setNum] = useState("");
   const a = [1, 2, 4];
   const [isAdd, setIsAdd] = useState(Boolean(false));
+  const [dataMember, setDataMember] = useState();
+  const getApiMember = async () => {
+    try {
+      const result = await LIST_MEMBER(user?.token, user?.motelId);
+      console.log("api ", result.data.data);
+      setDataMember(result?.data?.data);
+    } catch (error) {}
+  };
+  const deteleMemberAPI = async (_id) => {
+    try {
+      const result = await DELETE_MEMBER(user?.token, _id);
+      console.log(result);
+      getApiMember();
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getApiMember();
+  }, [isAdd]);
   return (
     <>
       <div className="mt-20 mr-20">
         <>
-          <div className="absolute flex z-40 items-end mt-28 bottom-0  right-0">
+          <div className="absolute flex z-40 items-end  bottom-6  right-6">
             <div
               onClick={(e) => setIsAdd(!isAdd)}
-              className="bg-red-600  p-4 rounded-full"
+              class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
             >
               <button>Thêm +</button>
             </div>
           </div>
           <div className={`${isAdd ? " " : "hidden"} h-full overflow-y-auto`}>
             {/* <AddMemberToRoom /> */}
-            <AddMember />
+            <AddMember user={user} />
           </div>
           <div className={`${!isAdd ? " " : "hidden"}`}>
             <div class="w-full flex flex-col">
@@ -74,31 +94,35 @@ function MemberPage({ user }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {a.map((i) => {
+                        {dataMember.map((i, index) => {
                           return (
                             <>
                               <tr class="bg-gray-100 border-b">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                  1
+                                  {index}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Trần Văn Thịnh
+                                  {i?.fullName}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  15/04/2000
+                                  {i?.dob}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Nam
+                                  {/* {i?.dob} */}
+                                  name
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  366353686
+                                  {i?.cccd}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   <div className="flex gap-4">
                                     <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                                       Sửa
                                     </button>
-                                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                    <button
+                                      onClick={(e) => deteleMemberAPI(i?._id)}
+                                      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                    >
                                       Xoá
                                     </button>
                                   </div>

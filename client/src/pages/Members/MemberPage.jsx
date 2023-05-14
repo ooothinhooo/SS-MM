@@ -10,7 +10,6 @@ function MemberPage({ user }) {
   const [room, setRoom] = useState();
   const [dele, setDele] = useState(Boolean(false));
   const [num, setNum] = useState("");
-  const a = [1, 2, 4];
   const [isAdd, setIsAdd] = useState(Boolean(false));
   const [dataMember, setDataMember] = useState();
   const getApiMember = async () => {
@@ -84,7 +83,12 @@ function MemberPage({ user }) {
                           >
                             CMND/ CCCD
                           </th>
-
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          >
+                            Phòng
+                          </th>
                           <th
                             scope="col"
                             class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
@@ -108,11 +112,17 @@ function MemberPage({ user }) {
                                   {i?.dob}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  {/* {i?.dob} */}
-                                  name
+                                  {i?.sex == 0 ? <>Nữ</> : <>Nam</>}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   {i?.cccd}
+                                </td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                  {i?.roomId?.roomCode ? (
+                                    <>{i?.roomId?.roomCode}</>
+                                  ) : (
+                                    <>[ ]</>
+                                  )}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   <div className="flex gap-4">

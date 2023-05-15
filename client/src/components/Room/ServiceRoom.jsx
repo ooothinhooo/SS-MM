@@ -2,12 +2,7 @@ import React from "react";
 
 function ServiceRoom({ data, user }) {
   return (
-    <div className="w-full bg-blue-gray-200">
-      <div className="absolute flex z-40 items-end mt-28 bottom-0  right-0">
-        <div className="bg-red-600  p-4 rounded-full">
-          <button>Thêm +</button>
-        </div>
-      </div>
+    <div className="w-full">
       <div class="w-full flex flex-col">
         <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -104,6 +99,11 @@ function ServiceRoom({ data, user }) {
                   <div className="w-full h-10"></div>
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div className=" flex  z-40 items-center flex justify-center">
+            <div className="bg-blue-300 items-center p-4 rounded-md w-full">
+              <button>Xác Nhận Thay Đổi </button>
             </div>
           </div>
         </div>

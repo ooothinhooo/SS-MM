@@ -17,35 +17,33 @@ import Member from "../../components/Room/Member.jsx";
 import InfoRom from "../../components/Room/InfoRom.jsx";
 import ServiceRoom from "../../components/Room/ServiceRoom.jsx";
 
+
+
 function ViewRoomPage({ user }) {
   let { id } = useParams();
   const [dataRoom, setDataRoom] = useState();
-  const getAPI = async () => {
+  const getAPI_Room = async () => {
     try {
       const result = await GET_ONE_ROOM(user?.token, id);
-      console.log(result.data.data);
+
       if (result.status == 200) {
         if (result.data.status) {
           setDataRoom(result.data.data);
-          console.log(dataRoom);
         }
       }
     } catch (error) {}
   };
+
   useEffect(() => {
-    getAPI();
+    getAPI_Room();
   }, []);
   const data = [
     {
       label: "Thông tin phòng",
       value: "info",
-      desc: <InfoRom data={dataRoom} user={user} />,
+      desc: <InfoRom data={dataRoom} user={user} getAPI_Room={getAPI_Room} />,
     },
-    {
-      label: "Dịch Vụ",
-      value: "service",
-      desc: <ServiceRoom data={dataRoom} user={user} />,
-    },
+
     {
       label: "Thành Viên",
       value: "member",

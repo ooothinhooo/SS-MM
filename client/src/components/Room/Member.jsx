@@ -58,31 +58,35 @@ function Member({ data, user }) {
         theme="light"
       />
 
-      <div
-        className={`${
-          !isAdd ? "mt-28 bottom-0  right-4" : "top-0 left-0"
-        } absolute flex z-40 items-end `}
-      >
+      <div className="w-full flex justify-center items-center  ">
         <div
-          onClick={(e) => setIsAdd(!isAdd)}
-          class={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4  inline-flex items-center ${
-            isAdd ? "rounded-full shadow-lg" : "rounded"
-          }`}
+          className={` ${
+            !isAdd
+              ? "mt-28 bottom-0 justify-center items-center w-[90%] mr-10 "
+              : "top-0 left-0"
+          } absolute flex z-40 items-end  `}
         >
-          {isAdd ? (
-            <>
-              <button>X</button>
-            </>
-          ) : (
-            <>
-              <button>Thêm +</button>
-            </>
-          )}
+          <div
+            onClick={(e) => setIsAdd(!isAdd)}
+            class={`w-full bg-blue-300 hover:bg-blue-400 text-gray-800 font-bold py-2 px-4  inline-flex items-center ${
+              isAdd ? "rounded-full shadow-lg" : "rounded"
+            }`}
+          >
+            <div className="w-full">
+              {isAdd ? (
+                <>
+                  <button>X</button>
+                </>
+              ) : (
+                <>
+                  <button>Thêm Thành Viên Vào Phòng +</button>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-      <div
-        className={`${isAdd ? " " : "hidden"} h-full overflow-y-auto shadow-xl`}
-      >
+      <div className={`${isAdd ? " " : "hidden"}  overflow-y-auto shadow-xl`}>
         <AddMemberToRoom user={user} roomId={id} isAdd={isAdd} />
       </div>
       <div className={`${!isAdd ? " " : "hidden"}`}>

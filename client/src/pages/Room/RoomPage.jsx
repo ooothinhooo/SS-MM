@@ -78,7 +78,7 @@ function RoomPage({ user }) {
 
   let R = new Room();
   return (
-    <div className="mt-20 mr-20">
+    <div className="mt-20 mr-20 w-full ">
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -92,9 +92,9 @@ function RoomPage({ user }) {
         theme="light"
       />
 
-      <div class="flex ">
+      <div class="flex w-full  justify-center items-center">
         {" "}
-        <div class="rounded-xl border p-2 shadow-md w-full bg-white">
+        <div class="rounded-xl border p-2 shadow-md w-[90%] bg-white">
           <div class="flex w-full items-center justify-between  ">
             <div class="flex items-center space-x-3">
               <div class="text-lg font-bold text-slate-700">
@@ -104,19 +104,21 @@ function RoomPage({ user }) {
             <div class="flex items-center space-x-8 text-white">
               <button
                 onClick={(e) => R.addRoom()}
-                class="rounded-lg py-2 border bg-blue-600 px-3  text-xs font-semibold"
+                class={`${
+                  dele ? "hidden" : ""
+                } rounded-lg py-2 border bg-blue-600 px-3  text-[13px] font-semibold`}
               >
                 {/* <NavLink to={`/room/add`}>Thêm Phòng</NavLink> */}
-                Thêm Thành Viên
+                Thêm Phòng Trọ
               </button>
-              <button class="rounded-lg py-2 border bg-green-600 px-3  text-xs font-semibold">
+              {/* <button class="rounded-lg py-2 border bg-green-600 px-3  text-xs font-semibold">
                 Sửa Thành Viên
-              </button>
+              </button> */}
               <button
                 onClick={(e) => setDele(!dele)}
-                class="rounded-lg py-2 border bg-red-600 px-3  text-xs font-semibold"
+                class="rounded-lg py-2 border bg-red-600 px-3  text-[13px] font-semibold"
               >
-                Xoá Phòng
+                {dele ? <>Xoá Phòng Trọ</> : <>Quay lại trang chủ</>}
               </button>
             </div>
           </div>

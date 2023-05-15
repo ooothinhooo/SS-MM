@@ -13,7 +13,7 @@ function AddMember({ user }) {
     setData({ ...data, [input.name]: input.value });
   };
   useEffect(() => {
-    console.table(data);
+    // console.table(data);
     data.motelId = user?.motelId;
   }, [data]);
   const addMember = async () => {

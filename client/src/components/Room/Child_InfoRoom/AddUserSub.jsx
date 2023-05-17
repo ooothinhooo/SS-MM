@@ -7,14 +7,16 @@ import { ToastContainer, toast } from "react-toastify";
 import { LIST_MEMBER_NO_ROOM } from "../../../API/Member/listMemberNoRoom.api.js";
 import { USERS_SUB_TOROOM } from "../../../API/Room/userSubToRoom.api.js";
 import ViewRoomPage from "../../../pages/Room/ViewRoomPage.jsx";
+import { LIST_MEMBER } from "../../../API/Member/listMember.api.js";
+import { LIST_MEMBER_ONROOM } from "../../../API/Member/listMemberOnRoom.api.js";
 
 function AddUserSub({ user, roomId, isAdd, getAPI_Room }) {
   const [dataMember, setDataMember] = useState();
 
   const getApiMember = async () => {
     try {
-      const result = await LIST_MEMBER_NO_ROOM(user?.token, user?.motelId);
-      setDataMember(result?.data?.data);
+      const result = await LIST_MEMBER_ONROOM(user?.token, roomId);
+      setDataMember(result?.data?.data?.member);
       console.log("api2 ", result?.data?.data);
     } catch (error) {}
   };
@@ -26,8 +28,7 @@ function AddUserSub({ user, roomId, isAdd, getAPI_Room }) {
     try {
       const result = await USERS_SUB_TOROOM(user?.token, roomId, _id);
       console.log(result);
-      // toast.success("Thêm thành công");
-      toast.success("🦄 Thêm thành công", {
+      toast.success("Thêm thành công", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -45,7 +46,6 @@ function AddUserSub({ user, roomId, isAdd, getAPI_Room }) {
   return (
     <div className=" z-10 w-full h-full overflow-scroll  ">
       <ToastContainer />
-
       <div class="w-full flex flex-col">
         <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">

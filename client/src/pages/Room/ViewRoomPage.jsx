@@ -6,8 +6,6 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { MdOutlineDeleteSweep, MdHome } from "react-icons/md";
-import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
@@ -17,8 +15,6 @@ import Member from "../../components/Room/Member.jsx";
 import InfoRom from "../../components/Room/InfoRom.jsx";
 import ServiceRoom from "../../components/Room/ServiceRoom.jsx";
 
-
-
 function ViewRoomPage({ user }) {
   let { id } = useParams();
   const [dataRoom, setDataRoom] = useState();
@@ -26,7 +22,7 @@ function ViewRoomPage({ user }) {
     try {
       const result = await GET_ONE_ROOM(user?.token, id);
 
-      if (result.status == 200) {
+      if (result.status === 200) {
         if (result.data.status) {
           setDataRoom(result.data.data);
         }
@@ -61,12 +57,16 @@ function ViewRoomPage({ user }) {
             <Tabs value="html">
               <TabsHeader>
                 {data.map(({ label, value }) => (
-                  <Tab key={value} value={value}>
+                  <Tab
+                    className="bg-blue-200 rounded-lg text-lg text-blue-900"
+                    key={value}
+                    value={value}
+                  >
                     {label}
                   </Tab>
                 ))}
               </TabsHeader>
-              <TabsBody className="w-full">
+              <TabsBody className="w-full ">
                 {data.map(({ value, desc }) => (
                   <TabPanel className="w-full" key={value} value={value}>
                     {desc}

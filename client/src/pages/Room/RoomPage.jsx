@@ -118,7 +118,7 @@ function RoomPage({ user }) {
                 onClick={(e) => setDele(!dele)}
                 class="rounded-lg py-2 border bg-red-600 px-3  text-[13px] font-semibold"
               >
-                {dele ? <>Xoá Phòng Trọ</> : <>Quay lại trang chủ</>}
+                {!dele ? <>Xoá Phòng Trọ</> : <>Quay lại trang chủ</>}
               </button>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AddMember from "../../components/Member/AddMember.jsx";
 import { LIST_MEMBER } from "../../API/Member/listMember.api.js";
@@ -37,7 +37,7 @@ function MemberPage({ user }) {
   return (
     <>
       <div className="mt-20 mr-20 w-full">
-        <>
+        {/* <>
           <div
             className={`flex justify-start ml-5 mt-10 ${
               isUp ? " " : "hidden"
@@ -51,14 +51,14 @@ function MemberPage({ user }) {
             </button>
           </div>
           <div className={`${isUp ? " " : "hidden"} h-full overflow-y-auto`}>
-            {/* <AddMemberToRoom /> */}
+          
             <UpdateMember
               user={user}
               dataMember={member}
               getApiMember={getApiMember}
             />
           </div>
-        </>
+        </> */}
         <div className={`${isUp ? "hidden" : ""}`}>
           <div className="w-full flex justify-center items-center ">
             <div className="w-[80%] flex z-40 shadow-xl justify-between     items-center rounded-lg p-1">
@@ -84,7 +84,7 @@ function MemberPage({ user }) {
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                   <div class="overflow-hidden">
                     <table class="min-w-full">
-                      <thead class="bg-white border-b">
+                      <thead class="bg-white border-b  text-left">
                         <tr>
                           <th
                             scope="col"
@@ -118,13 +118,13 @@ function MemberPage({ user }) {
                           </th>
                           <th
                             scope="col"
-                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                            class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                           >
                             Phòng
                           </th>
                           <th
                             scope="col"
-                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                            class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
                           >
                             Hành Động
                           </th>
@@ -134,39 +134,36 @@ function MemberPage({ user }) {
                         {dataMember?.map((i, index) => {
                           return (
                             <>
-                              <tr class="bg-gray-100 border-b">
+                              <tr class="bg-gray-100 border-b ">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   {index}
                                 </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
                                   {i?.fullName}
                                 </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
                                   {i?.dob}
                                 </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
                                   {i?.sex == 0 ? <>Nữ</> : <>Nam</>}
                                 </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
                                   {i?.cccd}
                                 </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td class="text-sm text-gray-900 text-center  font-light px-6 py-4 whitespace-nowrap">
                                   {i?.roomId?.roomCode ? (
                                     <>{i?.roomId?.roomCode}</>
                                   ) : (
                                     <>[ ]</>
                                   )}
                                 </td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                <td class="text-sm text-gray-900 text-center font-light px-6 py-4 whitespace-nowrap">
                                   <div className="flex gap-4">
-                                    <button
-                                      onClick={(e) =>
-                                        updateMember(dataMember[index])
-                                      }
-                                      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                                    >
-                                      Sửa
-                                    </button>
+                                    <NavLink to={`/member/${i?._id}`}>
+                                      <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                        Sửa
+                                      </button>
+                                    </NavLink>
                                     <button
                                       onClick={(e) => deteleMemberAPI(i?._id)}
                                       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"

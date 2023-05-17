@@ -25,7 +25,6 @@ function Member({ data, user }) {
     try {
       const result = await REMOVE_MEMBER_OUTROOM(user?.token, id, _id);
       getMember();
-      console.log("x1", result);
       if (result?.data?.status === 200)
         toast.success("Xoá thành công", {
           position: "top-right",
@@ -133,12 +132,7 @@ function Member({ data, user }) {
                       >
                         Ngày cấp
                       </th>
-                      <th
-                        scope="col"
-                        class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
-                      >
-                        Địa chỉ
-                      </th>
+
                       <th
                         scope="col"
                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
@@ -166,12 +160,12 @@ function Member({ data, user }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {member?.map((i) => {
+                    {member?.map((i, index) => {
                       return (
                         <>
                           <tr class="bg-gray-100 border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                              1
+                              {index + 1}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               {i?.fullName}
@@ -180,16 +174,13 @@ function Member({ data, user }) {
                               {i?.dob}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {i?.sex}
+                              {i?.sex == 0 ? <>Nữ</> : <>Nam</>}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               {i?.cccd}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               {i?.dateRange}
-                            </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {i?.address}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               {i?.phone}

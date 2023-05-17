@@ -99,7 +99,7 @@ function AddMemberToRoom({ user, roomId, isAdd }) {
                   {dataMember?.map((i, index) => {
                     return (
                       <>
-                        <tr class="bg-gray-100 border-b">
+                        <tr class="bg-gray-100 border-b text-left">
                           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             {index + 1}
                           </td>

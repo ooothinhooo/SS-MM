@@ -12,11 +12,11 @@ import {
 import { ProductContext } from "./contexts/ProductContextProvider.jsx";
 
 function App() {
-  const { user, isConvert } = useContext(ProductContext);
-  // console.log(user, isConvert);
+  const { setUser, user, isConvert } = useContext(ProductContext);
+  console.log(user);
   return (
     <>
-      {isConvert ? (
+      {true ? (
         <>
           {user && user?.userId ? (
             <>
@@ -37,7 +37,7 @@ function App() {
                               path={route.path}
                               element={
                                 <Layout>
-                                  <Page user={user} />
+                                  <Page user={user} setUser={setUser} />
                                 </Layout>
                               }
                             />
@@ -64,7 +64,7 @@ function App() {
                               path={route.path}
                               element={
                                 <Layout>
-                                  <Page user={user} />
+                                  <Page user={user} setUser={setUser} />
                                 </Layout>
                               }
                             />
@@ -93,7 +93,7 @@ function App() {
                           path={route.path}
                           element={
                             <Layout>
-                              <Page user={user} />
+                              <Page user={user} setUser={setUser} />
                             </Layout>
                           }
                         />
@@ -122,7 +122,7 @@ function App() {
                       path={route.path}
                       element={
                         <Layout>
-                          <Page user={user} />
+                          <Page user={user} setUser={setUser} />
                         </Layout>
                       }
                     />

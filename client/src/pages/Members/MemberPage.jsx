@@ -16,7 +16,7 @@ function MemberPage({ user }) {
   const [dataMember, setDataMember] = useState();
   const getApiMember = async () => {
     try {
-      const result = await LIST_MEMBER(user?.token, user?.motelId);
+      const result = await LIST_MEMBER(user?.token, user?.Motel);
       setDataMember(result?.data?.data);
     } catch (error) {}
   };

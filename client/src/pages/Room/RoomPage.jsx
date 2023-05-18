@@ -14,7 +14,7 @@ function RoomPage({ user }) {
 
   const GetAPI = async () => {
     try {
-      const result = await LIST_ROOM(user?.token, user?.motelId);
+      const result = await LIST_ROOM(user?.token, user?.Motel);
       setRoom(result.data.data.rooms);
     } catch (error) {}
   };
@@ -54,7 +54,8 @@ function RoomPage({ user }) {
 
     PostAPI_addRoom = async (value) => {
       try {
-        const result = await ADD_ROOM(user?.token, user?.motelId, value);
+        console.log(user);
+        const result = await ADD_ROOM(user?.token, user?.Motel, value);
         console.log(result);
         if (result.data.status == 200) {
           setNum("");

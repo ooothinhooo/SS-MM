@@ -4,7 +4,7 @@ import { GET_USER } from "../../API/User/GetUser.js";
 import { useNavigate } from "react-router-dom";
 import { REGISTER_MOTEL } from "../../API/Motels/RegisterMotel.js";
 
-function MotelPage({ user }) {
+function MotelPage({ user, props }) {
   const navigation = useNavigate();
   const [motelName, setmotelName] = useState();
   //   console.log(user);
@@ -15,8 +15,7 @@ function MotelPage({ user }) {
       console.log(result.data.data);
       setData(result.data.data);
       if (!data?.Motel) {
-        localStorage.setItem("isConvert", data?.Motel);
-        console.log("motel rong");
+        localStorage.setItem("isConvert", JSON.stringify(data?.Motel));
       } else {
         navigation("/room");
       }
@@ -24,13 +23,26 @@ function MotelPage({ user }) {
   };
   const handlerSubmit = async () => {
     try {
+      console.log(user);
       const result = await REGISTER_MOTEL(user?.token, motelName);
-      CallAPI();
+      // CallAPI();
+      console.log(result?.data.data);
+      if (result) {
+        // localStorage.setItem("user", JSON.stringify(result?.data.data));
+        // props.setUser(JSON.stringify(result?.data.data));
+        // window.location.reload();
+        localStorage.setItem("user", JSON.stringify(result.data.data));
+
+        setTimeout(() => {
+          window.location = "/room";
+        }, 2000);
+      } else {
+      }
     } catch (error) {}
   };
-  useEffect(() => {
-    CallAPI();
-  }, [data]);
+  // useEffect(() => {
+  //   CallAPI();
+  // }, [data]);
   return (
     <div>
       <div className="mt-20 mr-20">

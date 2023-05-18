@@ -14,7 +14,7 @@ function BoxRoom({ data, user, dele }) {
 
   const GetAPI = async () => {
     try {
-      const result = await LIST_ROOM(user?.token, user?.motelId);
+      const result = await LIST_ROOM(user?.token, user?.Motel);
       setRoom(result.data.data.rooms);
     } catch (error) {}
   };

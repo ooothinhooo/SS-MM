@@ -11,7 +11,7 @@ function AddMemberToRoom({ user, roomId, isAdd }) {
 
   const getApiMember = async () => {
     try {
-      const result = await LIST_MEMBER_NO_ROOM(user?.token, user?.motelId);
+      const result = await LIST_MEMBER_NO_ROOM(user?.token, user?.Motel);
       setDataMember(result?.data?.data);
       console.log("api2 ", result?.data?.data);
     } catch (error) {}

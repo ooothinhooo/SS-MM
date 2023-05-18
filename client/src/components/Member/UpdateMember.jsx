@@ -31,7 +31,7 @@ function UpdateMember({ user, memberId }) {
   };
   useEffect(() => {
     console.log(data);
-    data.motelId = user?.motelId;
+    data.motelId = user?.Motel;
   }, [data]);
   const updateMember = async () => {
     try {
@@ -70,7 +70,7 @@ function UpdateMember({ user, memberId }) {
 
   const GetListRoomAPI = async () => {
     try {
-      const result = await LIST_ROOM(user?.token, user?.motelId);
+      const result = await LIST_ROOM(user?.token, user?.Motel);
       setRoom(result.data.data.rooms);
     } catch (error) {}
   };

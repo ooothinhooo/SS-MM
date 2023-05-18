@@ -13,16 +13,48 @@ function AddMember({ user }) {
     setData({ ...data, [input.name]: input.value });
   };
   useEffect(() => {
-    // console.table(data);
-    data.motelId = user?.motelId;
+    console.log(data);
+    data.motelId = user?.Motel;
   }, [data]);
+  function isObjectEmptyExceptA(obj) {
+    for (let key in obj) {
+      if (key !== "carNum" && obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  }
   const addMember = async () => {
     try {
-      const result = await ADD_MEMBER(user?.token, data);
+      if (!isObjectEmptyExceptA(data)) {
+        const result = await ADD_MEMBER(user?.token, data);
+        console.log(result?.data);
+        if (result?.data?.status === 200) {
+          toast.success("Thêm Thành Viên thành công", {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
 
-      console.log(result?.data?.status);
-      if (result?.data?.status === 200) {
-        toast.success("Thêm Thành Viên thành công", {
+          setData({
+            fullName: "",
+            dob: "",
+            cccd: "",
+            dateRange: "",
+            sex: "",
+            phone: "",
+            address: "",
+            carNum: "",
+            dateSub: "",
+          });
+        }
+      } else {
+        toast.error("Thông tin chưa điền đủ", {
           position: "top-right",
           autoClose: 1500,
           hideProgressBar: false,
@@ -31,18 +63,6 @@ function AddMember({ user }) {
           draggable: true,
           progress: undefined,
           theme: "light",
-        });
-
-        setData({
-          fullName: "",
-          dob: "",
-          cccd: "",
-          dateRange: "",
-          sex: "",
-          phone: "",
-          address: "",
-          carNum: "",
-          dateSub: "",
         });
       }
     } catch (error) {}

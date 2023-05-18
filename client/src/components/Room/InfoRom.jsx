@@ -6,8 +6,6 @@ import AddUserSub from "./Child_InfoRoom/AddUserSub.jsx";
 import UpdateService from "./Child_InfoRoom/UpdateService.jsx";
 
 function InfoRom({ user, data, getAPI_Room }) {
-  console.log("info room=>", data);
-  console.log(data?.userSub?.fullName);
   const [isAdd, setIsAdd] = useState(Boolean(false));
   const [isUp, setIsUp] = useState(Boolean(false));
   // getAPI_Room();

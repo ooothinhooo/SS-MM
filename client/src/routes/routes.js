@@ -2,6 +2,7 @@ import Login from "../components/Account/Login.jsx";
 import UpdateMember from "../components/Member/UpdateMember.jsx";
 import config from "../config";
 import BillPage from "../pages/Billing/BillPage.jsx";
+import UpdateBillPage from "../pages/Billing/UpdateBillPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
@@ -24,6 +25,7 @@ const SignedIn = [
   { path: config.routes.Member, component: MemberPage },
   { path: config.routes.UpdateMember, component: UpdateMemberPage },
   { path: config.routes.Billing, component: BillPage },
+  { path: config.routes.UpdateBill, component: UpdateBillPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: HomePage },

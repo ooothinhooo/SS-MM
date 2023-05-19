@@ -11,6 +11,7 @@ const routes = {
   WaterStats: "/water",
   Invoices: "/invoices",
   Billing: "/bill",
+  UpdateBill: "/bill/:id/:roomCode",
   Payment: "/payment",
   Reports: "/reports",
   Login: "/login",

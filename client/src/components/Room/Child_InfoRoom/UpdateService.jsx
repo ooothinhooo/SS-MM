@@ -3,6 +3,7 @@ import Input from "../../Componets/InputType/Input.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import { UPDATE_SERVICE_TOROOM } from "../../../API/Room/updateServiceToRoom.api.js";
 
+import { NumericFormat } from "react-number-format";
 function UpdateService({ user, roomId, getAPI_Room }) {
   const [data, setData] = useState({});
   const handleInputState = (name, value) => {
@@ -79,6 +80,7 @@ function UpdateService({ user, roomId, getAPI_Room }) {
                 value={data.roomFee}
                 handleInputState={handleInputState}
               />
+
               <span className="font-serif text-blue-700">VND</span>
             </p>
           </div>

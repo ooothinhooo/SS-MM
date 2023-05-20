@@ -13,6 +13,7 @@ const routes = {
   Billing: "/bill",
   UpdateBill: "/bill/:id/:roomCode",
   Payment: "/payment",
+  PrintPayment: "/payment/print",
   Reports: "/reports",
   Login: "/login",
   Register: "/register",

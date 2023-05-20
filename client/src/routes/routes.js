@@ -7,6 +7,8 @@ import HomePage from "../pages/HomePage.jsx";
 import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
 import MotelPage from "../pages/Motel/MotelPage.jsx";
+import PaymentsPage from "../pages/Paymentslips/PaymentsPage.jsx";
+import PrintPayPage from "../pages/Paymentslips/PrinPayPage.jsx";
 
 import RoomPage from "../pages/Room/RoomPage.jsx";
 import ViewRoomPage from "../pages/Room/ViewRoomPage.jsx";
@@ -26,6 +28,8 @@ const SignedIn = [
   { path: config.routes.UpdateMember, component: UpdateMemberPage },
   { path: config.routes.Billing, component: BillPage },
   { path: config.routes.UpdateBill, component: UpdateBillPage },
+  { path: config.routes.Payment, component: PaymentsPage },
+  { path: config.routes.PrintPayment, component: PrintPayPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: HomePage },

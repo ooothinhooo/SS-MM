@@ -9,7 +9,6 @@ import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 
 function BoxRoom({ data, user, dele }) {
   const [room, setRoom] = useState();
-
   const navigation = useNavigate();
 
   const GetAPI = async () => {

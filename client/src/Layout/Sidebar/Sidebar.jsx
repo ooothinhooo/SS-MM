@@ -110,7 +110,7 @@ function Sidebar() {
       path: "/bill",
     },
     {
-      title: "Phát sinh",
+      title: "Dịch vụ",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +127,7 @@ function Sidebar() {
           />
         </svg>
       ),
-      path: "/invoices",
+      path: "/service",
     },
     {
       title: "Phiếu chi",

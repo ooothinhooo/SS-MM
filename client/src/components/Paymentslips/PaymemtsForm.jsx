@@ -20,8 +20,8 @@ function PaymemtsForm({ user }) {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
       if (result.data.status == 200) {
-        setRoom(result.data.data?.rooms);
-        setValue(result.data.data?.rooms);
+        setRoom(result.data.data);
+        setValue(result.data.data);
       }
     } catch (error) {}
   };

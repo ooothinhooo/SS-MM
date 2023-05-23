@@ -12,6 +12,7 @@ import PrintPayPage from "../pages/Paymentslips/PrinPayPage.jsx";
 
 import RoomPage from "../pages/Room/RoomPage.jsx";
 import ViewRoomPage from "../pages/Room/ViewRoomPage.jsx";
+import ServicePage from "../pages/Service/ServicePage.jsx";
 
 // Pages
 
@@ -30,6 +31,7 @@ const SignedIn = [
   { path: config.routes.UpdateBill, component: UpdateBillPage },
   { path: config.routes.Payment, component: PaymentsPage },
   { path: config.routes.PrintPayment, component: PrintPayPage },
+  { path: config.routes.Service, component: ServicePage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: HomePage },

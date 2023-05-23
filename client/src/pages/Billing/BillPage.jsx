@@ -102,7 +102,8 @@ function BillPage({ user }) {
   const GETAPI_ROOM = async () => {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
-      setRoom(result.data.data.rooms);
+      // console.log(result.data.data);
+      setRoom(result.data.data);
     } catch (error) {}
   };
   const Render = async (data) => {

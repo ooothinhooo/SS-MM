@@ -185,10 +185,10 @@ function Login() {
     <>
       <ToastContainer />
 
-      <div className="relative flex bg-white opacity-100 justify-center min-h-[90vh] items-center  overflow-hidden">
+      <div className="relative flex bg-white opacity-100 justify-center h-full items-center  overflow-hidden">
         <img
           src={"https://wallpaperaccess.com/full/1236480.jpg"}
-          className="absolute w-full h-full z-0 bg-cover bg-center bg-no-repeat opacity-60 "
+          className="absolute w-full h-full z-0 bg-cover bg-center bg-no-repeat opacity-60 scale-125 "
         />
         <div className="w-full m-auto  rounded-xs   lg:max-w-4xl">
           <div class="grid grid-flow-row-dense grid-cols-3  ">

@@ -1,6 +1,8 @@
 import Login from "../components/Account/Login.jsx";
 import UpdateMember from "../components/Member/UpdateMember.jsx";
 import config from "../config";
+import LoginPage from "../pages/Account/LoginPage.jsx";
+import SignUpPage from "../pages/Account/SignUpPage.jsx";
 import BillPage from "../pages/Billing/BillPage.jsx";
 import UpdateBillPage from "../pages/Billing/UpdateBillPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
@@ -34,9 +36,9 @@ const SignedIn = [
   { path: config.routes.Service, component: ServicePage },
 ];
 const NotLoggedIn = [
-  { path: config.routes.home, component: HomePage },
-  { path: config.routes.Login, component: Login },
   // { path: config.routes.home, component: HomePage },
+  { path: config.routes.Login, component: LoginPage },
+  { path: config.routes.Register, component: SignUpPage },
   // { path: config.routes.home, component: HomePage },
   // { path: config.routes.home, component: HomePage },
 ];

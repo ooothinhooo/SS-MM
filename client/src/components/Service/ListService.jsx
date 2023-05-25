@@ -105,19 +105,27 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
 
   const Render_DeleteService = async (id, name) => {
     try {
-      Swal.fire({
-        title: "Are you sure?",
-        text: `Bạn Muốn Xoá Dịch Vụ ${name}`,
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          DeleteService(id);
-        }
-      });
+   if (name == "Tiền Điện" || name == "Tiền Nước") {
+     Swal.fire({
+       icon: "error",
+       title: "KHÔNG THỂ XOÁ",
+       text: "ĐÂY LÀ DỊCH VỤ MẶT ĐỊNH CHỈ CÓ THỂ SỬA KHÔNG THỂ XOÁ",
+     });
+   } else {
+     Swal.fire({
+       title: "Are you sure?",
+       text: `Bạn Muốn Xoá Dịch Vụ ${name}`,
+       icon: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#3085d6",
+       cancelButtonColor: "#d33",
+       confirmButtonText: "Yes, delete it!",
+     }).then((result) => {
+       if (result.isConfirmed) {
+         DeleteService(id);
+       }
+     });
+   }
     } catch (error) {}
   };
   const DeleteService = async (id) => {

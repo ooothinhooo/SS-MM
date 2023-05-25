@@ -10,6 +10,7 @@ import {
   SignedIn,
 } from "./routes/routes.js";
 import { ProductContext } from "./contexts/ProductContextProvider.jsx";
+import NoLoginLayout from "./Layout/DefaultLayout/NoLoginLayout.jsx";
 
 function App() {
   const { setUser, user, isConvert } = useContext(ProductContext);
@@ -20,7 +21,7 @@ function App() {
         <>
           {user && user?.userId ? (
             <>
-              {user?.form !== "LRO" ? (
+              {user?.form == "LRO" ? (
                 <>
                   <Router>
                     <div className="App">
@@ -83,7 +84,7 @@ function App() {
                   <Routes>
                     {NotLoggedIn.map((route, index) => {
                       const Page = route.component;
-                      let Layout = DefaultLayout;
+                      let Layout = NoLoginLayout;
                       if (route.layout) Layout = route.layout;
                       else if (route.layout === null) Layout = Fragment;
 

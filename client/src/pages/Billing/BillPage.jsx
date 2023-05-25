@@ -64,7 +64,7 @@ function BillPage({ user }) {
         if (result.status === 200) {
           if (result.data.status) {
             // setDataRoom(result.data.data);
-            console.log(result?.data.data);
+
             if (
               !result?.data.data.bill.find((item) => item.month == data?.month)
             ) {
@@ -102,80 +102,124 @@ function BillPage({ user }) {
   const GETAPI_ROOM = async () => {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
-      // console.log(result.data.data);
+      console.log(result.data.data);
       setRoom(result.data.data);
     } catch (error) {}
   };
-  const Render = async (data) => {
+  const Render = async (data, x) => {
     try {
       const { value: formValues } = await Swal.fire({
         title: `Nhập chỉ số điện/nước cho phòng ${data?.roomCode}`,
+        width: 650,
+        // background: "#f13532",
         html: `
-          <div class="w-full max-w-lg">
-      <div class="flex flex-wrap -mx-3 mb-6">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                  Chỉ Số Điện Cũ
-              </label>
-              <input 
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              id="oldEle"
-              type="number" 
-              value=${
-                data?.bill != "" ? data?.bill[data?.bill.length - 1].newEle : 0
-              }
-              placeholder="Nhập số điện" 
-              />
-          </div>
-          <div class="w-full md:w-1/2 px-3">
-              <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-                  Chỉ Số Điện Mới
-              </label>
-              <input
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="newEle"
-                  type="number" 
-                  placeholder="Nhập số điện" 
-              />
-          </div>
-      </div>
-  </div>
-  <div class="w-full max-w-lg">
-  <div class="flex flex-wrap -mx-3 mb-6">
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-          Chỉ Số Nước Cũ
-          </label>
-          <input 
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-          id="oldWater"
-          type="number" 
-          value=${
-            data?.bill != "" ? data?.bill[data?.bill.length - 1].newWater : 0
-          }
-          placeholder="Nhập số nước"  />
-        
-      </div>
-      <div class="w-full md:w-1/2 px-3">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-          Chỉ Số Nước Mới
-          </label>
-          <input
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="newWater"
-              type="number" 
-              placeholder="Nhập số nước" 
-          />
-      </div>
-  </div>
-  </div> `,
+        <div class="mb-6"> Tiền Phòng: ${data?.roomFee} </div>
+ <div class="w-full text-sm mb-6"> ${data?.services?.map((i) => {
+   return ` <span className="text-red-700"> ${i.name}: ${i.value}/${i.unit}</span>`;
+ })} </div>
+ <div class="w-full max-w-xl flex justify-center items-center">
+   <div class="flex  w-full -mx-3 mb-2 ">
+     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name"> Chỉ Số Điện Cũ </label>
+       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="oldEle" type="number" value=${
+         data?.bill != "" ? data?.bill[data?.bill.length - 1].newEle : 0
+       } placeholder="Nhập số điện" />
+     </div>
+     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name"> Chỉ Số Điện Mới </label>
+       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="newEle" type="number" placeholder="Nhập số điện" />
+     </div>
+     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name"> Đơn Vị Điện </label>
+       <p class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  >
+       <span>
+       ${
+         data?.services?.find((i) => {
+           return i.name === "Tiền Điện";
+         })?.value
+       }
+       </span>
+       <span>/</span>
+       <span>
+       ${
+         data?.services?.find((i) => {
+           return i.name === "Tiền Điện";
+         })?.unit
+       }
+       </span>
+       </p>
+     </div>
+   </div>
+ </div>
+
+
+ <div class="w-full max-w-xl flex justify-center items-center">
+   <div class="flex  w-full -mx-3 mb-2 ">
+     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name"> Chỉ Số Nước Cũ </label>
+     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+      id="oldWater" type="number" 
+     value=${data?.bill != "" ? data?.bill[data?.bill.length - 1].newWater : 0} 
+     placeholder="Nhập số nước" />
+     </div>
+     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name"> Chỉ Số Nước Mới </label>
+     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" // class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="newWater" type="number" placeholder="Nhập số nước" />
+     </div>
+     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name" >Đơn Vị Nước </label>
+       <p class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  >
+        <span>
+        ${
+          data?.services?.find((i) => {
+            return i.name === "Tiền Nước";
+          })?.value
+        }
+        </span>
+        <span>/</span>
+        <span>
+        ${
+          data?.services?.find((i) => {
+            return i.name === "Tiền Nước";
+          })?.unit
+        }
+        </span>
+        </p>
+     </div>
+   </div>
+ </div>
+
+
+   `,
         focusConfirm: false,
         preConfirm: () => {
+          let elePrice = data?.services?.find((i) => {
+            return i.name === "Tiền Điện";
+          })?.value;
+          let waterPrice = data?.services?.find((i) => {
+            return i.name === "Tiền Nước";
+          })?.value;
+          let waterUnit = data?.services?.find((i) => {
+            return i.name === "Tiền Nước";
+          })?.unit;
+          let eleUnit = data?.services?.find((i) => {
+            return i.name === "Tiền Điện";
+          })?.unit;
+          const filteredArr = data?.services?.filter((item) => {
+            return item.name !== "Tiền Điện" && item.name !== "Tiền Nước";
+          });
+          // console.log(x)
           return [
             document.getElementById("oldEle").value,
             document.getElementById("newEle").value,
             document.getElementById("oldWater").value,
             document.getElementById("newWater").value,
+            data.roomFee,
+            elePrice,
+            eleUnit,
+            waterPrice,
+            waterUnit,
+            filteredArr,
           ];
         },
       });
@@ -187,6 +231,13 @@ function BillPage({ user }) {
           newEle: formValues[1],
           oldWater: formValues[2],
           newWater: formValues[3],
+          roomFee: formValues[4],
+          elePrice: formValues[5],
+          eleUnit: formValues[6],
+          waterPrice: formValues[7],
+          waterUnit: formValues[8],
+          service: formValues[9],
+          status: false,
         };
         POSTAPI(data?._id, obj);
       }
@@ -327,12 +378,17 @@ function BillPage({ user }) {
                                     ? i?.bill[i?.bill.length - 1]?.newEle -
                                       i?.bill[i?.bill.length - 1]?.oldEle
                                     : ""}{" "}
-                                  (kWh) -{" "}
+                                  {i?.bill != ""
+                                    ? i?.bill[i?.bill.length - 1]?.eleUnit
+                                    : ""}{" "}
+                                  -{" "}
                                   {i?.bill != ""
                                     ? i?.bill[i?.bill.length - 1]?.newWater -
                                       i?.bill[i?.bill.length - 1]?.oldWater
                                     : ""}{" "}
-                                  Khối
+                                  {i?.bill != ""
+                                    ? i?.bill[i?.bill.length - 1]?.waterUnit
+                                    : ""}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                   <div className="flex  justify-between items-center w-full">

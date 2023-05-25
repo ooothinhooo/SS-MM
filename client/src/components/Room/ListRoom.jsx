@@ -60,18 +60,18 @@ function ListRoom({ data, user, dele, GetAPI }) {
       <div class="overflow-x-auto">
         <div class="w-full h-full flex items-center justify-center  font-sans overflow-hidden">
           <div class="w-[97%] ">
-            <div class="bg-white shadow-md rounded my-2 overflow-scroll h-[550px]">
+            <div class="bg-white shadow-md rounded my-2  overflow-scroll h-[550px]">
               <table class="min-w-max w-full table-auto ">
-                <thead>
-                  <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left">Tên Phòng</th>
-                    <th class="py-3 px-6 text-left">Loại Phòng</th>
-                    <th class="py-3 px-6 text-left">Giá thuê</th>
-                    <th class="py-3 px-6 text-center">Cọc</th>
-                    <th class="py-3 px-6 text-center">Khách Thuê</th>
-                    <th class="py-3 px-6 text-center">Ngày Vào</th>
-                    <th class="py-3 px-6 text-center">Tình Trạng</th>
-                    <th class="py-3 px-6 text-center"></th>
+                <thead className="">
+                  <tr class="  bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left ">Tên Phòng</th>
+                    <th class="py-3 px-6 text-left ">Loại Phòng</th>
+                    <th class="py-3 px-6 text-left ">Giá thuê</th>
+                    <th class="py-3 px-6 text-center ">Cọc</th>
+                    <th class="py-3 px-6 text-center ">Khách Thuê</th>
+                    <th class="py-3 px-6 text-center ">Ngày Vào</th>
+                    <th class="py-3 px-6 text-center ">Tình Trạng</th>
+                    <th class="py-3 px-6 text-center "></th>
                   </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light  ">

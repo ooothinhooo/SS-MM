@@ -279,12 +279,6 @@ function TableService({ user }) {
                           >
                             Sử dụng
                           </th>
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-[10px] font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            Action
-                          </th>
                         </tr>
                       </thead>
                       <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -333,53 +327,6 @@ function TableService({ user }) {
                                       i?.bill[i?.bill.length - 1]?.oldWater
                                     : ""}{" "}
                                   Khối
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center text-[10px] font-medium">
-                                  <div className="flex  justify-between items-center w-full">
-                                    <div>
-                                      <p class="group max-w-max relative flex flex-col items-center justify-center rounded-full border border-gray-500 p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-600">
-                                        <button
-                                          id="addbtn"
-                                          onClick={(e) => getAPI_Room(i?._id)}
-                                          className="cursor-pointer p-2 z-10 bg-blue-300 rounded-full hover:bg-blue-500"
-                                        >
-                                          <i className="text-xl">
-                                            <AiOutlineFileAdd />
-                                          </i>
-                                        </button>
-                                        <div class="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] z-1 group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
-                                          <div class="flex max-w-xs flex-col items-center">
-                                            <div class="rounded bg-gray-100 p-2 text-[10px] text-gray-800  text-center shadow-lg">
-                                              Thêm
-                                            </div>
-                                            <div class="clip-bottom h-2 w-4 bg-gray-900"></div>
-                                          </div>
-                                        </div>
-                                      </p>
-                                    </div>
-                                    <div>
-                                      <NavLink
-                                        to={`/bill/${i?._id}/${i?.roomCode}`}
-                                      >
-                                        <p class="group max-w-max relative flex flex-col items-center justify-center rounded-full border border-gray-500 p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-600">
-                                          <button className="cursor-pointer p-2 z-10 bg-blue-300 rounded-full hover:bg-blue-500">
-                                            <i className="text-xl">
-                                              <AiOutlineEdit />
-                                            </i>
-                                          </button>
-
-                                          <div class="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] z-11 group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
-                                            <div class="flex max-w-xs flex-col items-center">
-                                              <div class="rounded bg-gray-100 p-2 text-[10px] text-gray-800  text-center shadow-lg">
-                                                Chỉnh sửa
-                                              </div>
-                                              <div class="clip-bottom h-2 w-4  "></div>
-                                            </div>
-                                          </div>
-                                        </p>
-                                      </NavLink>
-                                    </div>
-                                  </div>
                                 </td>
                               </tr>
                             </>

@@ -36,7 +36,7 @@ const SignedIn = [
   { path: config.routes.Service, component: ServicePage },
 ];
 const NotLoggedIn = [
-  // { path: config.routes.home, component: HomePage },
+  { path: config.routes.home, component: LoginPage },
   { path: config.routes.Login, component: LoginPage },
   { path: config.routes.Register, component: SignUpPage },
   // { path: config.routes.home, component: HomePage },

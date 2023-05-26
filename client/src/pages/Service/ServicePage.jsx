@@ -6,8 +6,9 @@ import ListService from "../../components/Service/ListService.jsx";
 import { GET_LIST_SERVICE } from "../../API/Service/getListService.api.js";
 import BillPage from "../Billing/BillPage.jsx";
 import TableService from "../../components/Service/TableService.jsx";
+import RoomUseService from "../../components/Service/RoomUseService.jsx";
 
-function ServicePage({ user }) {
+function ServicePage({ user, service }) {
   const [Service, setService] = useState();
   const GETAPI_MOTELS = async () => {
     try {
@@ -34,9 +35,9 @@ function ServicePage({ user }) {
         pauseOnHover
         theme="light"
       />
-      <div className="mt-20 mr-20 w-full w-full">
+      <div className="mt-20 mr-20  w-full">
         <div className="w-full flex justify-center items-center ">
-          <div class="grid grid-cols-3 gap-4 w-full  ">
+          <div class="grid grid-flow-col auto-cols-max w-full  ">
             {/* left */}
             <div className="w-full">
               <div className="text-left mx-6">
@@ -52,15 +53,30 @@ function ServicePage({ user }) {
             </div>
 
             {/* right */}
-            <div class="col-span-2  w-full">
-              <div className="w-full">
-                <div className="text-left mx-6">
-                  <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
-                    Quản lý dịch vụ
-                  </span>
-                </div>
-                <TableService user={user} />
-              </div>
+            <div class="  w-full">
+              {service != "" ? (
+                <>
+                  <div className="w-full">
+                    <div className="text-left">
+                      <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
+                        Quản lý dịch vụ
+                      </span>
+                    </div>
+                    <TableService user={user} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="w-full">
+                    <div className="text-left">
+                      <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
+                        Quản lý dịch vụ
+                      </span>
+                    </div>
+                    <RoomUseService user={user} service={service} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

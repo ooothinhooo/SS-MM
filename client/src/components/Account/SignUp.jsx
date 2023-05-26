@@ -251,7 +251,7 @@ function SignUp() {
 
       const storageRef = ref(
         storage,
-        `avt/${fileName.split("").join("").toUpperCase()}`
+        `SSMM/AVATAR/${fileName.split("").join("").toUpperCase()}`
       );
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
@@ -277,13 +277,13 @@ function SignUp() {
   return (
     <>
       <ToastContainer />
-      <div class="relative min-h-screen flex items-center justify-center bg-center bg-white py-12 px-4 sm:px-6 lg:px-8  bg-no-repeat bg-cover">
+      <div class="relative h-screen flex items-center justify-center bg-center bg-white py-12 px-4 sm:px-6 lg:px-8  bg-no-repeat bg-cover">
         {/* <div class="absolute  bg-black opacity-60 inset-0 z-0"></div> */}
         <img
           src={
             "https://t4.ftcdn.net/jpg/03/83/39/01/360_F_383390104_aTxmmJEIcGe4bPfYjR8lZLcPx5Duc0Y2.jpg"
           }
-          className="absolute w-full h-full z-0 bg-cover bg-center bg-no-repeat opacity-60 "
+          className="absolute w-full h-full z-0 bg-cover bg-center bg-no-repeat opacity-60  scale-125"
         />
         {layout ? (
           <>

@@ -1,13 +1,28 @@
-import React from "react";
-import { AiFillEdit, AiFillTags } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiFillEdit, AiFillTags, AiOutlineUserAdd } from "react-icons/ai";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { CREATE_SERVICE } from "../../API/Service/createService.api.js";
 import { DELETE_SERVICE } from "../../API/Service/deleteService.api.js";
+import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
+import ServicePage from "../../pages/Service/ServicePage.jsx";
+import { ADD_SERVICE_TOROOM } from "../../API/Service/addService.api.js";
 
 function ListService({ user, Service, GETAPI_MOTELS }) {
-  console.log(Service);
+  const [room, setRoom] = useState();
+  const [serviceID, setServiceID] = useState();
+  const [serviceId, setServiceId] = useState();
+  const GETAPI_ROOM = async () => {
+    try {
+      const result = await LIST_ROOM(user?.token, user?.Motel);
+      console.log(result.data.data);
+      setRoom(result.data.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    GETAPI_ROOM();
+  }, []);
   const Render_CreateService = async () => {
     try {
       const { value: formService } = await Swal.fire({
@@ -105,27 +120,27 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
 
   const Render_DeleteService = async (id, name) => {
     try {
-   if (name == "Tiền Điện" || name == "Tiền Nước") {
-     Swal.fire({
-       icon: "error",
-       title: "KHÔNG THỂ XOÁ",
-       text: "ĐÂY LÀ DỊCH VỤ MẶT ĐỊNH CHỈ CÓ THỂ SỬA KHÔNG THỂ XOÁ",
-     });
-   } else {
-     Swal.fire({
-       title: "Are you sure?",
-       text: `Bạn Muốn Xoá Dịch Vụ ${name}`,
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#3085d6",
-       cancelButtonColor: "#d33",
-       confirmButtonText: "Yes, delete it!",
-     }).then((result) => {
-       if (result.isConfirmed) {
-         DeleteService(id);
-       }
-     });
-   }
+      if (name == "Tiền Điện" || name == "Tiền Nước") {
+        Swal.fire({
+          icon: "error",
+          title: "KHÔNG THỂ XOÁ",
+          text: "ĐÂY LÀ DỊCH VỤ MẶT ĐỊNH CHỈ CÓ THỂ SỬA KHÔNG THỂ XOÁ",
+        });
+      } else {
+        Swal.fire({
+          title: "Are you sure?",
+          text: `Bạn Muốn Xoá Dịch Vụ ${name}`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            DeleteService(id);
+          }
+        });
+      }
     } catch (error) {}
   };
   const DeleteService = async (id) => {
@@ -135,6 +150,152 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       GETAPI_MOTELS();
       if (result?.data.status == 200)
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
+    } catch (error) {}
+  };
+
+  const Render_UpdateService = async (id, name) => {
+    try {
+      const htnl =
+        name === "Tiền Điện" || name === "Tiền Nước"
+          ? `
+          <input
+          class="appearance-none block w-full bg-gray-100 text-black border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          type="text"
+          id="name"
+          value=${name === "Tiền Điện" ? "Tiền Điện" : "Tiền Nước"}
+          disabled readonly
+        />`
+          : ` <input
+      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+      type="text"
+      id="name"
+      placeholder="Tên Phòng"
+    />`;
+      const { value: formService } = await Swal.fire({
+        title: `CẬP NHẬT DỊCH VỤ ${name} CHO PHÒNG`,
+        showCancelButton: true,
+        cancelButtonColor: "#d33",
+        html: `
+              <div class="w-full max-w-lg">
+          <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full  px-3 mb-6 md:mb-0">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                      Tên dịch vụ
+                  </label>
+                 ${htnl}
+              </div>
+       
+          </div>
+      </div>
+      <div class="w-full max-w-lg">
+      <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+        Giá Dịch Vụ
+         </label>
+         <input
+             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+             type="number" 
+             id="value"
+         placeholder="Giá Dịch Vụ" 
+         />
+            
+          </div>
+          <div class="w-full md:w-1/2 px-3">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Đơn Vị Tính</label>
+          <select 
+          id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose a service</option>
+          <option value="Trên Người">Trên Người</option>
+          <option value="Kwh">Kwh</option>
+          <option value="Khối">Khối</option>
+          <option value="Phòng">Phòng</option>
+          <option value="Miễm Phí">Miễn Phí</option>
+      </select>
+          </div>
+      </div>
+      </div> `,
+        focusConfirm: false,
+
+        preConfirm: () => {
+          return [
+            document.getElementById("name").value,
+            document.getElementById("value").value,
+            document.getElementById("unit").value,
+          ];
+        },
+      });
+      if (formService) {
+        // R.PostAPI_addRoom(formValues,formService)
+        console.log(JSON.stringify(formService));
+        // CreateService(formService);
+      }
+    } catch (error) {}
+  };
+
+  const UpdateService = async (id) => {
+    try {
+    } catch (error) {}
+  };
+
+  const Render_AddRoomUseService = async (id, name) => {
+    try {
+      let html = "";
+      const x = room.map((i) => {
+        html += `
+        
+        <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+    <input ${
+      i?.services.map((x) => x._id).includes(id) ? "checked" : ""
+    } type="checkbox" value=${
+          i?._id
+        } name="bordered-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+    <label for="bordered-checkbox-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">${
+      i?.roomCode
+    }</label>
+</div>
+        `;
+      });
+      const { value: formValues } = await Swal.fire({
+        title: "Multiple inputs",
+        html: `
+        <div class="grid grid-cols-4 gap-4 p-2">  
+       
+        ${html}
+
+      </div>
+         `,
+        focusConfirm: false,
+        preConfirm: () => {
+          const checkboxes = document.querySelectorAll(
+            "input[type=checkbox]:checked"
+          );
+          let values = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            values.push(el.value);
+          });
+          console.log(values);
+          return [
+            // document.getElementById("swal-input1").value,
+            // document.getElementById("swal-input2").value,
+            id,
+            values,
+          ];
+        },
+      });
+
+      if (formValues) {
+        // Swal.fire(JSON.stringify(formValues));
+        AddRoomUseService(formValues);
+      }
+    } catch (error) {}
+  };
+
+  const AddRoomUseService = async (form) => {
+    try {
+      const result = await ADD_SERVICE_TOROOM(user?.token, form[0], form[1]);
+      console.log(result);
+      GETAPI_MOTELS();
     } catch (error) {}
   };
   return (
@@ -183,7 +344,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         return (
           <>
             <div class="w-full h-auto flex justify-center items-center my-2  ">
-              <div className=" h-auto border-2 rounded-xl w-[98%] px-4 py-2 flex ">
+              <div className=" h-auto border-2 rounded-xl w-[98%] min-w-570 px-4 py-2 flex ">
                 <div className="flex justify-between items-center w-full">
                   <div className=" rounded-full  justify-start flex ">
                     <div className="flex justify-center items-center">
@@ -214,8 +375,21 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                   </div>
 
                   <div className="flex justify-end gap-2">
-                    <p className="text-4xl border-2 text-black bg-gray-100 rounded-full p-2 cursor-pointer">
+                    <p
+                      onClick={(e) =>
+                        Render_UpdateService(item?._id, item?.name)
+                      }
+                      className="text-4xl border-2 text-black bg-gray-100 rounded-full p-2 cursor-pointer"
+                    >
                       <AiFillEdit />
+                    </p>
+                    <p
+                      onClick={(e) =>
+                        Render_AddRoomUseService(item?._id, item?.name)
+                      }
+                      className="text-4xl border-2 text-black bg-gray-100 rounded-full p-2 cursor-pointer"
+                    >
+                      <AiOutlineUserAdd />
                     </p>
                     <p
                       onClick={(e) =>

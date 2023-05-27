@@ -1,7 +1,12 @@
 import axios from "axios";
 import { URL_LIST_ROOM } from "../index.js";
 
-export function ADD_SERVICE_TOROOM(auth, serviceId, RoomArray) {
+export function ADD_SERVICE_TOROOM(
+  auth,
+  serviceId,
+  ArrayChecked,
+  ArrayNoChecked
+) {
   return axios({
     method: "post",
     url: "http://localhost:9000/api/service/addservice",
@@ -11,7 +16,8 @@ export function ADD_SERVICE_TOROOM(auth, serviceId, RoomArray) {
     // },
     params: { serviceId: serviceId },
     data: {
-      RoomArray: RoomArray,
+      Push: ArrayChecked,
+      Pull: ArrayNoChecked,
     },
   });
 }

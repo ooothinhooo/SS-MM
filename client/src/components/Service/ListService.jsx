@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiFillEdit, AiFillTags, AiOutlineUserAdd } from "react-icons/ai";
+import { MdAddToQueue } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -8,6 +9,7 @@ import { DELETE_SERVICE } from "../../API/Service/deleteService.api.js";
 import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import ServicePage from "../../pages/Service/ServicePage.jsx";
 import { ADD_SERVICE_TOROOM } from "../../API/Service/addService.api.js";
+import { UPDATE_SERVICE } from "../../API/Service/updateService.api.js";
 
 function ListService({ user, Service, GETAPI_MOTELS }) {
   const [room, setRoom] = useState();
@@ -17,7 +19,11 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
       console.log(result.data.data);
-      setRoom(result.data.data);
+      const array = result.data.data.sort((a, b) =>
+        String(a.roomCode) > String(b.roomCode) ? 1 : -1
+      );
+      setRoom(array);
+      // setRoom(result.data.data);
     } catch (error) {}
   };
   useEffect(() => {
@@ -153,26 +159,29 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
     } catch (error) {}
   };
 
-  const Render_UpdateService = async (id, name) => {
+  const Render_UpdateService = async (id, data) => {
     try {
-      const htnl =
-        name === "Tiền Điện" || name === "Tiền Nước"
-          ? `
+      console.log(data.name);
+      const check = data.name === "Tiền Điện" || data.name === "Tiền Nước";
+      console.log(check);
+      const htnl = check
+        ? `
           <input
           class="appearance-none block w-full bg-gray-100 text-black border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           type="text"
           id="name"
-          value=${name === "Tiền Điện" ? "Tiền Điện" : "Tiền Nước"}
+          value=${data.name}
           disabled readonly
         />`
-          : ` <input
+        : ` <input
       class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
       type="text"
       id="name"
-      placeholder="Tên Phòng"
+      value=${data.name}
+
     />`;
       const { value: formService } = await Swal.fire({
-        title: `CẬP NHẬT DỊCH VỤ ${name} CHO PHÒNG`,
+        title: `CẬP NHẬT DỊCH VỤ ${data.name} CHO PHÒNG`,
         showCancelButton: true,
         cancelButtonColor: "#d33",
         html: `
@@ -229,16 +238,26 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         // R.PostAPI_addRoom(formValues,formService)
         console.log(JSON.stringify(formService));
         // CreateService(formService);
+        var obj = {
+          name: formService[0],
+          value: formService[1],
+          unit: formService[2],
+        };
+        UpdateService(id, obj);
       }
     } catch (error) {}
   };
 
-  const UpdateService = async (id) => {
+  const UpdateService = async (id, data) => {
     try {
+      const result = await UPDATE_SERVICE(user?.token, user?.Motel, id, data);
+      console.log(result);
+      GETAPI_MOTELS();
+      GETAPI_ROOM();
     } catch (error) {}
   };
 
-  const Render_AddRoomUseService = async (id, name) => {
+  const Render_AddRoomUseService = async (serviceId, name) => {
     try {
       let html = "";
       const x = room.map((i) => {
@@ -246,7 +265,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         
         <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
     <input ${
-      i?.services.map((x) => x._id).includes(id) ? "checked" : ""
+      i?.services.map((x) => x._id).includes(serviceId) ? "checked" : ""
     } type="checkbox" value=${
           i?._id
         } name="bordered-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -270,32 +289,59 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           const checkboxes = document.querySelectorAll(
             "input[type=checkbox]:checked"
           );
-          let values = [];
+          let ArrayChecked = [];
           Array.prototype.forEach.call(checkboxes, function (el) {
-            values.push(el.value);
+            ArrayChecked.push(el.value);
           });
-          console.log(values);
+          // console.log(values);
+          const Nocheckboxes = document.querySelectorAll(
+            "input[type=checkbox]"
+          );
+          let ArrayNoChecked = [];
+          Array.prototype.forEach.call(Nocheckboxes, function (el) {
+            if (!el.checked) {
+              ArrayNoChecked.push(el.value);
+            }
+          });
+          console.log(ArrayChecked);
+          console.log(ArrayNoChecked);
           return [
             // document.getElementById("swal-input1").value,
             // document.getElementById("swal-input2").value,
-            id,
-            values,
+            serviceId,
+            ArrayChecked,
+            ArrayNoChecked,
           ];
         },
       });
 
       if (formValues) {
         // Swal.fire(JSON.stringify(formValues));
-        AddRoomUseService(formValues);
+
+        const serviceId = formValues[0];
+        const ArrayChecked = formValues[1];
+        formValues[2].pop();
+        const ArrayNoChecked = formValues[2];
+
+        console.log(serviceId, ArrayChecked, ArrayNoChecked);
+        AddRoomUseService(serviceId, ArrayChecked, ArrayNoChecked);
       }
     } catch (error) {}
   };
 
-  const AddRoomUseService = async (form) => {
+  const AddRoomUseService = async (serviceId, ArrayChecked, ArrayNoChecked) => {
     try {
-      const result = await ADD_SERVICE_TOROOM(user?.token, form[0], form[1]);
+      console.log(serviceId, ArrayChecked, ArrayNoChecked);
+      const result = await ADD_SERVICE_TOROOM(
+        user?.token,
+        serviceId,
+        ArrayChecked,
+        ArrayNoChecked
+      );
       console.log(result);
+      toast.success("Thay đổi thành công");
       GETAPI_MOTELS();
+      GETAPI_ROOM();
     } catch (error) {}
   };
   return (
@@ -340,7 +386,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           </p>
         </div>
       </div>
-      {Service?.map((item) => {
+      {Service?.map((item, index) => {
         return (
           <>
             <div class="w-full h-auto flex justify-center items-center my-2  ">
@@ -377,7 +423,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                   <div className="flex justify-end gap-2">
                     <p
                       onClick={(e) =>
-                        Render_UpdateService(item?._id, item?.name)
+                        Render_UpdateService(item?._id, Service[index])
                       }
                       className="text-4xl border-2 text-black bg-gray-100 rounded-full p-2 cursor-pointer"
                     >
@@ -387,9 +433,9 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                       onClick={(e) =>
                         Render_AddRoomUseService(item?._id, item?.name)
                       }
-                      className="text-4xl border-2 text-black bg-gray-100 rounded-full p-2 cursor-pointer"
+                      className="text-4xl border-2 text-black bg-blue-300 rounded-full p-2 cursor-pointer"
                     >
-                      <AiOutlineUserAdd />
+                      <MdAddToQueue />
                     </p>
                     <p
                       onClick={(e) =>

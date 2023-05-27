@@ -19,12 +19,25 @@ import ServicePage from "../pages/Service/ServicePage.jsx";
 // Pages
 
 // Public routes
-const SignInWithAcc = [{ path: config.routes.home, component: HomePage }];
+const SignInWithAcc = [
+  { path: config.routes.home, component: HomePage },
+  { path: config.routes.Motel, component: MotelPage },
+];
 
 //Login with Create Acc register
 const SignedIn = [
   { path: config.routes.home, component: HomePage },
   { path: config.routes.Motel, component: MotelPage },
+];
+const NotLoggedIn = [
+  { path: config.routes.home, component: LoginPage },
+  { path: config.routes.Login, component: LoginPage },
+  { path: config.routes.Register, component: SignUpPage },
+  // { path: config.routes.home, component: HomePage },
+  // { path: config.routes.home, component: HomePage },
+];
+const ManagingMotel = [
+  { path: config.routes.home, component: HomePage },
   { path: config.routes.Room, component: RoomPage },
   { path: config.routes.ViewRoom, component: ViewRoomPage },
   { path: config.routes.Member, component: MemberPage },
@@ -35,12 +48,4 @@ const SignedIn = [
   { path: config.routes.PrintPayment, component: PrintPayPage },
   { path: config.routes.Service, component: ServicePage },
 ];
-const NotLoggedIn = [
-  { path: config.routes.home, component: LoginPage },
-  { path: config.routes.Login, component: LoginPage },
-  { path: config.routes.Register, component: SignUpPage },
-  // { path: config.routes.home, component: HomePage },
-  // { path: config.routes.home, component: HomePage },
-];
-const ManagingMotel = [{ path: config.routes.home, component: HomePage }];
 export { SignInWithAcc, SignedIn, NotLoggedIn, ManagingMotel };

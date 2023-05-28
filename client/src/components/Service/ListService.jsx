@@ -10,6 +10,7 @@ import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import ServicePage from "../../pages/Service/ServicePage.jsx";
 import { ADD_SERVICE_TOROOM } from "../../API/Service/addService.api.js";
 import { UPDATE_SERVICE } from "../../API/Service/updateService.api.js";
+import { NumericFormat } from "react-number-format";
 
 function ListService({ user, Service, GETAPI_MOTELS }) {
   const [room, setRoom] = useState();
@@ -166,13 +167,12 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       console.log(check);
       const htnl = check
         ? `
-          <input
-          class="appearance-none block w-full bg-gray-100 text-black border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-          type="text"
-          id="name"
-          value=${data.name}
-          disabled readonly
-        />`
+         <p
+         class="appearance-none block w-full bg-gray-100 text-black border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+         
+         >
+         ${data.name}
+         </p>`
         : ` <input
       class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
       type="text"
@@ -206,6 +206,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
              type="number" 
              id="value"
+             value=${data?.value}
          placeholder="Giá Dịch Vụ" 
          />
             
@@ -213,8 +214,8 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           <div class="w-full md:w-1/2 px-3">
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Đơn Vị Tính</label>
           <select 
-          id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>Choose a service</option>
+          id="unit"   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option  value=${data?.unit} >${data.unit}</option>
           <option value="Trên Người">Trên Người</option>
           <option value="Kwh">Kwh</option>
           <option value="Khối">Khối</option>
@@ -227,8 +228,11 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         focusConfirm: false,
 
         preConfirm: () => {
+          const name = check
+            ? data?.name
+            : document.getElementById("name").value;
           return [
-            document.getElementById("name").value,
+            name,
             document.getElementById("value").value,
             document.getElementById("unit").value,
           ];
@@ -400,7 +404,13 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                       <div className="justify-start text-left ml-2">
                         <p className="font-bold ">{item?.name}</p>
                         <p className="font-thin">
-                          <span>{item?.value}</span>
+                          <span>
+                            <NumericFormat
+                              value={item?.value}
+                              thousandSeparator
+                              displayType="text"
+                            />{" "}
+                          </span>
                           <span className="italic text-sm">VNĐ</span>
                           <span>/{item?.unit}</span>
                         </p>

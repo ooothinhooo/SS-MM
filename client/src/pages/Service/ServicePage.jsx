@@ -53,30 +53,15 @@ function ServicePage({ user, service }) {
             </div>
 
             {/* right */}
-            <div class="  w-full">
-              {service != "" ? (
-                <>
-                  <div className="w-full">
-                    <div className="text-left">
-                      <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
-                        Quản lý dịch vụ
-                      </span>
-                    </div>
-                    <TableService user={user} />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="w-full">
-                    <div className="text-left">
-                      <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
-                        Quản lý dịch vụ
-                      </span>
-                    </div>
-                    <RoomUseService user={user} service={service} />
-                  </div>
-                </>
-              )}
+            <div class="ml-4  w-full">
+              <div className="w-full">
+                <div className="text-left">
+                  <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
+                    Quản lý dịch vụ
+                  </span>
+                </div>
+                <TableService user={user} />
+              </div>
             </div>
           </div>
         </div>

@@ -71,6 +71,7 @@ function ListRoom({ data, user, dele, GetAPI }) {
                     <th class="py-3 px-6 text-center ">Khách Thuê</th>
                     <th class="py-3 px-6 text-center ">Ngày Vào</th>
                     <th class="py-3 px-6 text-center ">Tình Trạng</th>
+                    <th class="py-3 px-6 text-center ">Thu tiền</th>
                     <th class="py-3 px-6 text-center "></th>
                   </tr>
                 </thead>
@@ -120,6 +121,23 @@ function ListRoom({ data, user, dele, GetAPI }) {
                             </td>
                             <td class="py-3 px-6 text-center">
                               {item?.member?.length != 0 ? "Đã thuê" : "Trống"}
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                              <span className="text-[12px]">
+                                {item?.bill[item?.bill.length - 1]?.status ? (
+                                  <>
+                                    <span className="text-green-600 font-bold">
+                                      Đã thu
+                                    </span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <span className="text-red-600 font-bold">
+                                      Chưa thu
+                                    </span>
+                                  </>
+                                )}
+                              </span>
                             </td>
                             <td class="py-3 px-6 text-center">
                               <div class="flex item-center justify-center">

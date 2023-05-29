@@ -64,19 +64,24 @@ function PaymemtsForm({ user }) {
   }, [pay, value]);
   const printListData = async () => {
     const { value: fruit } = await Swal.fire({
-      title: "Select field validation",
+      title: "Chọn Dạng Phiếu",
       input: "select",
+      width: 900,
       inputOptions: {
-        1: "Ice cream1",
-        2: "Ice cream2",
-        3: "Ice cream3",
+        1: "Dạng 1",
+        2: "Dạng 2",
       },
-      inputPlaceholder: "Select a fruit",
+      inputPlaceholder: "Chọn Dạng Phiếu",
       showCancelButton: true,
       html: ` <section class="py-8 px-4">
       <div class="flex flex-wrap -mx-4">
-        <div class="md:w-1/2 px-4 mb-8 md:mb-0"><img class="rounded shadow-md" src="https://source.unsplash.com/random/1280x720" alt=""></div>
-        <div class="md:w-1/2 px-4 mb-8 md:mb-0"><img class="rounded shadow-md" src="https://source.unsplash.com/random/1280x720" alt=""></div>
+    
+        <div class="md:w-1/3 px-4 mb-8 md:mb-0">
+       Dạng 1
+        <img class="rounded shadow-md" src="https://i.ibb.co/1mSPssr/image.png" alt=""></div>
+        <div class="md:w-2/3 px-4 mb-8 md:mb-0">Dạng 2
+       
+        <img class="rounded shadow-md" src="https://i.ibb.co/vD6Jy7M/image.png" alt=""></div>
       </div>
     </section>`,
     });
@@ -88,10 +93,39 @@ function PaymemtsForm({ user }) {
       navigation("/payment/print");
     }
   };
-  const printALlData = () => {
-    sessionStorage.setItem("pay", JSON.stringify(value));
-    navigation("/payment/print");
+  const printALlData = async () => {
+    const { value: fruit } = await Swal.fire({
+      title: "Chọn Dạng Phiếu",
+      input: "select",
+      width: 900,
+      inputOptions: {
+        1: "Dạng 1",
+        2: "Dạng 2",
+      },
+      inputPlaceholder: "Chọn Dạng Phiếu",
+      showCancelButton: true,
+      html: ` <section class="py-8 px-4">
+      <div class="flex flex-wrap -mx-4">
+    
+        <div class="md:w-1/3 px-4 mb-8 md:mb-0">
+       Dạng 1
+        <img class="rounded shadow-md" src="https://i.ibb.co/1mSPssr/image.png" alt=""></div>
+        <div class="md:w-2/3 px-4 mb-8 md:mb-0">Dạng 2
+       
+        <img class="rounded shadow-md" src="https://i.ibb.co/vD6Jy7M/image.png" alt=""></div>
+      </div>
+    </section>`,
+    });
+
+    if (fruit) {
+      // Swal.fire(`You selected: ${fruit}`);
+
+      sessionStorage.setItem("card", JSON.stringify(fruit));
+      sessionStorage.setItem("pay", JSON.stringify(value));
+      navigation("/payment/print");
+    }
   };
+   
   return (
     <div>
       <div>

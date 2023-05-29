@@ -153,22 +153,6 @@ function InfoRom({ user, data, getAPI_Room }) {
             </div>
 
             <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-              <p class="text-sm text-gray-600">GIÁ ĐIỆN</p>
-              <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
-                <span className="font-extrabold">{data?.electricityPrice}</span>
-                <span className="font-serif text-blue-700">VND</span>
-              </p>
-            </div>
-
-            <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-              <p class="text-sm text-gray-600">GIÁ NƯỚC</p>
-              <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
-                <span className="font-extrabold">{data?.waterPrice}</span>
-                <span className="font-serif text-blue-700">VND</span>
-              </p>
-            </div>
-
-            <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">NGÀY NHẬN PHÒNG</p>
               <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
                 <span className="font-extrabold">{data?.checkIn}</span>

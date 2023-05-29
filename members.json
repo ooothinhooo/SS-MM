@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "646fabc254d024bd0c797b6d"
+  },
+  "fullName": "My Tú",
+  "cccd": "4532310105065959",
+  "dateRange": "2021-02-07",
+  "sex": "0",
+  "phone": "095-143-1701",
+  "dob": "2000-08-05",
+  "address": "333 Phố Bùi Thạc Trang, Phường Ngụy Lâm Quỳnh, Quận 72 Tiền Giang",
+  "dateSub": "2023-05-01",
+  "motelId": {
+    "$oid": "64724436b034abea3cfeb815"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T18:41:06.766Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T18:41:06.766Z"
+  }
+},{
+  "_id": {
+    "$oid": "646fac0c54d024bd0c797b6f"
+  },
+  "fullName": "Hưng Thông",
+  "cccd": "4532556691391429",
+  "dateRange": "2018-05-10",
+  "sex": "1",
+  "phone": "095-780-4695",
+  "dob": "2000-09-11",
+  "address": "0 Phố Lã, Xã Phước, Huyện Anh Dao Hồ Chí Minh",
+  "carNum": "21H1-52934",
+  "dateSub": "2023-03-01",
+  "motelId": {
+    "$oid": "64724436b034abea3cfeb815"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T18:42:20.409Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T18:42:20.409Z"
+  }
+},{
+  "_id": {
+    "$oid": "646face754d024bd0c797b71"
+  },
+  "fullName": "Thuỳ Dương",
+  "cccd": "93208633652",
+  "dateRange": "2017-05-30",
+  "sex": "0",
+  "phone": "0763234779",
+  "dob": "2002-10-28",
+  "address": "14 Thap Muoi, Ward 2, District 6",
+  "carNum": "95C1- 998244",
+  "dateSub": "2023-01-01",
+  "motelId": {
+    "$oid": "64724436b034abea3cfeb815"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T18:45:59.239Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T18:45:59.239Z"
+  }
+},{
+  "_id": {
+    "$oid": "646fad1c54d024bd0c797b73"
+  },
+  "fullName": "Văn Thịnh",
+  "cccd": "366353686",
+  "dateRange": "2018-05-18",
+  "sex": "1",
+  "phone": "0967527325",
+  "dob": "2000-04-15",
+  "address": "166/46B5 Thich Quang Duc Street, Ward 4",
+  "carNum": "83C1-55366",
+  "dateSub": "2022-10-01",
+  "motelId": {
+    "$oid": "64724436b034abea3cfeb815"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T18:46:52.590Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T18:46:52.590Z"
+  }
+}]

@@ -52,13 +52,12 @@ function ViewRoomPage({ user }) {
       <ToastContainer />
       <div className="mt-20 mr-20 w-full">
         <div class="flex ">
-          <div className=" w-full h-full bg-slate-100">
-            <div></div>
-            <Tabs value="html">
+          <div className=" w-full h-full">
+            <Tabs value="info">
               <TabsHeader>
                 {data.map(({ label, value }) => (
                   <Tab
-                    className="bg-blue-200 rounded-lg text-lg text-blue-900"
+                    className="bg-green-600 rounded-lg text-lg text-black mx-4"
                     key={value}
                     value={value}
                   >

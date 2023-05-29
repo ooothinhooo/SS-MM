@@ -3,12 +3,13 @@ import {
   exportComponentAsPDF,
   exportComponentAsPNG,
 } from "react-component-export-image";
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AiOutlineFileAdd, AiOutlineFolderView } from "react-icons/ai";
 
 import { NumericFormat } from "react-number-format";
 export default function PrintPay({ user, pay }) {
+  const [card, setCard] = useState();
   return (
     <div className="App">
       <div>
@@ -144,7 +145,8 @@ export default function PrintPay({ user, pay }) {
         </nav>
       </div>
       <h1>DANH SÁCH IN PHIẾU</h1>
-      <MyComponent />
+      <button onClick={(e) => setCard("1")}>xxxx</button>
+      <MyComponent card={card} />
     </div>
   );
 }
@@ -153,147 +155,591 @@ export function PrintData() {
   //   console.log(JSON.parse(localStorage.getItem("user")));
   const value = JSON.parse(sessionStorage.getItem("pay"));
   console.log(value);
+  const now = new Date(Date.now());
+  const formattedDate = now.toLocaleString();
   return (
     <>
-      <div>
-        <div>
-          <div>
-            <div class="flex flex-col">
-              <div class="-m-1.5 overflow-x-auto">
-                <div class="p-1.5 min-w-full inline-block align-middle">
-                  <div class="border rounded-lg shadow overflow-hidden dark:border-gray-700 dark:shadow-gray-900">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                      <thead class="bg-gray-50 dark:bg-gray-700">
-                        <tr>
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            Phòng
-                          </th>
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            Giá Phòng
-                          </th>
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            Tháng
-                          </th>
+      <div className="w-[98%]">
+        <div class="grid grid-cols-2 gap-4">
+          {value?.map((item, index) => {
+            return (
+              <>
+                <div className=" w-auto h-auto shadow-xl border-2">
+                  <div>
+                    <p>NHÀ TRỌ: {item?.motelId?.motelName}</p>
+                    <div className="flex justify-between items-center">
+                      <div className="text-left mx-2">
+                        <p>
+                          PHÒNG :{" "}
+                          <span className="font-bold text-blue-700">
+                            {item?.roomCode}
+                          </span>
+                        </p>
+                        <p>
+                          Phiếu thu tháng:{" "}
+                          {item?.bill[item?.bill?.length - 1]?.month}
+                        </p>
+                        <p>Tên Khách:{item?.userSub?.fullName}</p>
+                        <p>SĐT Khách:{item?.userSub?.phone}</p>
+                      </div>
+                      <div className="text-left mx-2">
+                        <p>Ngày in : {now.toLocaleDateString()}</p>
+                        <p>Giờ in: {now.toLocaleTimeString()}</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="overflow-x-auto p-3">
+                        <table class="table-auto w-full">
+                          <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                            <tr>
+                              <th class="p-2">
+                                <div class="font-semibold text-center">
+                                  Tên Dịch Vụ
+                                </div>
+                              </th>
+                              <th class="p-2">
+                                <div class="font-semibold text-center">
+                                  Đơn Vị
+                                </div>
+                              </th>
+                              <th class="p-2">
+                                <div class="font-semibold text-center">
+                                  Số Lượng
+                                </div>
+                              </th>
+                              <th class="p-2">
+                                <div class="font-semibold text-center">
+                                  Đơn Giá
+                                </div>
+                              </th>
+                              <th class="p-2">
+                                <div class="font-semibold text-center">
+                                  Thành Tiền
+                                </div>
+                              </th>
+                            </tr>
+                          </thead>
 
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            SD Điện
-                          </th>
-
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            SD Nước
-                          </th>
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            Tổng tiền
-                          </th>
-                          <th
-                            scope="col"
-                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                          >
-                            Tổng Thu
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                        {value?.map((i, index) => {
-                          return (
-                            <>
-                              <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                  {i?.roomCode}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
+                          <tbody class="text-sm divide-y divide-gray-100">
+                            <tr>
+                              <td class="p-2">
+                                <div class="text-center">Tiền Phòng</div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  Phòng
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  1
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
                                   <NumericFormat
-                                    value={i?.roomFee}
-                                    thousandSeparator
-                                    displayType="text"
-                                  />{" "}
-                                  VNĐ
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                  {i?.bill[i?.bill.length - 1]?.month}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill[i?.bill?.length - 1]?.newEle} -{" "}
-                                  {i?.bill[i?.bill?.length - 1]?.oldEle} ={" "}
-                                  {i?.bill[i?.bill?.length - 1]?.newEle -
-                                    i?.bill[i?.bill?.length - 1]?.oldEle}{" "}
-                                  Kí ({" "}
-                                  <NumericFormat
-                                    value={i?.electricityPrice}
+                                    value={item?.roomFee}
                                     thousandSeparator
                                     displayType="text"
                                   />
-                                  /1kí)
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill[i?.bill?.length - 1]?.newWater} -{" "}
-                                  {i?.bill[i?.bill?.length - 1]?.oldWater} ={" "}
-                                  {i?.bill[i?.bill?.length - 1]?.newWater -
-                                    i?.bill[i?.bill?.length - 1]?.oldWater}{" "}
-                                  Khối ({" "}
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
                                   <NumericFormat
-                                    value={i?.waterPrice}
+                                    value={item?.roomFee}
                                     thousandSeparator
                                     displayType="text"
                                   />
-                                  /1 Khối)
-                                </td>
-
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="p-2">
+                                <div class="font-medium text-center text-gray-800">
+                                  Tiền Điện
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center">
+                                  {item?.bill[item?.bill?.length - 1]?.eleUnit}
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  {Number(
+                                    item?.bill[item?.bill?.length - 1]?.newEle
+                                  ) -
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]?.oldEle
+                                    )}
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  <NumericFormat
+                                    value={
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
                                   <NumericFormat
                                     value={
                                       Number(
                                         Number(
-                                          (i?.bill[i?.bill.length - 1]
-                                            ?.newWater -
-                                            i?.bill[i?.bill.length - 1]
-                                              ?.oldWater) *
-                                            Number(i?.waterPrice)
-                                        ) +
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.newEle
+                                        ) -
                                           Number(
-                                            i?.bill[i?.bill.length - 1]
-                                              ?.newEle -
-                                              i?.bill[i?.bill.length - 1]
-                                                ?.oldEle
-                                          ) *
-                                            Number(i?.electricityPrice)
-                                      ) + Number(i?.roomFee)
+                                            item?.bill[item?.bill?.length - 1]
+                                              ?.oldEle
+                                          )
+                                      ) *
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.elePrice
+                                      )
                                     }
                                     thousandSeparator
                                     displayType="text"
-                                  />{" "}
-                                  VNĐ
-                                </td>
-                              </tr>
-                            </>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="p-2">
+                                <div class="font-medium text-center text-gray-800">
+                                  Tiền Nước
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center">
+                                  {
+                                    item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit
+                                  }
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  {Number(
+                                    item?.bill[item?.bill?.length - 1]?.newWater
+                                  ) -
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.oldWater
+                                    )}
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  <NumericFormat
+                                    value={
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.waterPrice
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  <NumericFormat
+                                    value={
+                                      Number(
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.newWater
+                                        ) -
+                                          Number(
+                                            item?.bill[item?.bill?.length - 1]
+                                              ?.oldWater
+                                          )
+                                      ) *
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.waterPrice
+                                      )
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
+                                </div>
+                              </td>
+                            </tr>
+                            {item?.bill[item?.bill?.length - 1]?.service?.map(
+                              (b) => {
+                                return (
+                                  <>
+                                    <tr>
+                                      <td class="p-2">
+                                        <div class="font-medium text-center text-gray-800">
+                                          {b?.name}
+                                        </div>
+                                      </td>
+                                      <td class="p-2">
+                                        <div class="text-center">{b?.unit}</div>
+                                      </td>
+                                      <td class="p-2">
+                                        <div class="text-center font-medium text-green-500">
+                                          1
+                                        </div>
+                                      </td>
+                                      <td class="p-2">
+                                        <div class="text-center font-medium text-green-500">
+                                          <NumericFormat
+                                            value={b?.value}
+                                            thousandSeparator
+                                            displayType="text"
+                                          />
+                                        </div>
+                                      </td>
+                                      <td class="p-2">
+                                        <div class="text-center font-medium text-green-500">
+                                          <NumericFormat
+                                            value={b?.value}
+                                            thousandSeparator
+                                            displayType="text"
+                                          />
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </>
+                                );
+                              }
+                            )}
+                            <tr>
+                              <td class="p-2"></td>
+                              <td class="p-2"></td>
+                              <td class="p-2"></td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  Tổng cộng
+                                </div>
+                              </td>
+                              <td class="p-2">
+                                <div class="text-center font-medium text-green-500">
+                                  {/* tong tien */}
+                                  <div>
+                                    <NumericFormat
+                                      value={
+                                        Number(item?.roomFee) +
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.eleUnit == "Kwh"
+                                            ? (Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.newEle
+                                              ) -
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.oldEle
+                                                )) *
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.elePrice
+                                                )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.eleUnit == "Phòng"
+                                            ? Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.elePrice
+                                              )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.eleUnit == "Người"
+                                            ? Number(item.member.length) *
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.elePrice
+                                              )
+                                            : 0
+                                        ) +
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.waterUnit == "Khối"
+                                            ? (Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.newWater
+                                              ) -
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.oldWater
+                                                )) *
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.waterPrice
+                                                )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.waterUnit == "Phòng"
+                                            ? Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.waterPrice
+                                              )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.waterUnit == "Người"
+                                            ? Number(item.member.length) *
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.waterPrice
+                                              )
+                                            : 0
+                                        ) +
+                                        Number(
+                                          item?.bill[
+                                            item?.bill?.length - 1
+                                          ]?.service.reduce(
+                                            (accumulator, currentValue) =>
+                                              accumulator +
+                                              parseInt(currentValue.value),
+                                            0
+                                          )
+                                        )
+                                      }
+                                      thousandSeparator
+                                      displayType="text"
+                                    />
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </>
+            );
+          })}
         </div>
+      </div>
+    </>
+  );
+}
+
+export function Card1() {
+  const value = JSON.parse(sessionStorage.getItem("pay"));
+  return (
+    <>
+      <div class="p-2 border rounded-lg shadow overflow-scroll h-[540px]">
+        <table class="w-full text-sm text-center text-black rounded-lg">
+          <thead class="text-xs text-blue uppercase bg-blue-50  ">
+            <tr>
+              <th
+                rowspan="2"
+                scope="col"
+                class="text-center   border-2 border-gray-500"
+              >
+                Phòng
+              </th>
+              <th
+                rowspan="2"
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Tháng
+              </th>
+              <th
+                colspan="2"
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Tiền Điện
+              </th>
+              <th
+                colspan="2"
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Tiền Nước
+              </th>
+              <th
+                scope="col"
+                rowspan="2"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Dịch vụ Khác
+              </th>
+            </tr>
+            <tr>
+              <th
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Sử dụng
+              </th>
+              <th
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Thành Tiền
+              </th>
+              <th
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Sử dụng
+              </th>
+
+              <th
+                scope="col"
+                class="text-center py-2 px-1 border-2 border-gray-500"
+              >
+                Thành Tiền
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {value?.map((item, index) => {
+              return (
+                <>
+                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-200 dark:hover:bg-gray-600">
+                    <td class="px-4 py-2 font-bold  border-gray-400 border-2 border-x">
+                      {item?.roomCode}
+                    </td>
+                    <td class="px-4 py-2 border-2 border-gray-400 border-x">
+                      {item?.bill[item?.bill?.length - 1]?.month}
+                    </td>
+                    <td class="px-4 py-2 border-2 border-gray-400 border-x">
+                      <NumericFormat
+                        value={
+                          Number(item?.bill[item?.bill?.length - 1]?.newEle) -
+                          Number(item?.bill[item?.bill?.length - 1]?.oldEle)
+                        }
+                        thousandSeparator
+                        displayType="text"
+                      />{" "}
+                      <span className="italic font-bold text-[13px]">
+                        {item?.bill[item?.bill?.length - 1]?.eleUnit}
+                      </span>
+                    </td>
+                    <td class="px-4 py-2 border-2 border-gray-400 border-x">
+                      <NumericFormat
+                        value={
+                          item?.bill[item?.bill?.length - 1]?.eleUnit == "Kwh"
+                            ? (Number(
+                                item?.bill[item?.bill?.length - 1]?.newEle
+                              ) -
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.oldEle
+                                )) *
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.elePrice
+                              )
+                            : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "Phòng"
+                            ? Number(
+                                item?.bill[item?.bill?.length - 1]?.elePrice
+                              )
+                            : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "Người"
+                            ? Number(item.member.length) *
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.elePrice
+                              )
+                            : 0
+                        }
+                        thousandSeparator
+                        displayType="text"
+                      />
+                      <span className="italic font-bold text-[13px]">đ</span>
+                    </td>
+                    <td class="px-4 py-2 border-2 border-gray-400 border-x">
+                      <NumericFormat
+                        value={
+                          Number(item?.bill[item?.bill?.length - 1]?.newWater) -
+                          Number(item?.bill[item?.bill?.length - 1]?.oldWater)
+                        }
+                        thousandSeparator
+                        displayType="text"
+                      />{" "}
+                      <span className="italic font-bold text-[13px]">
+                        {item?.bill[item?.bill?.length - 1]?.waterUnit}
+                      </span>
+                    </td>
+                    <td class="px-4 py-2 border-2 border-gray-400 border-x">
+                      <NumericFormat
+                        value={
+                          item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                          "Khối"
+                            ? (Number(
+                                item?.bill[item?.bill?.length - 1]?.newWater
+                              ) -
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.oldWater
+                                )) *
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.waterPrice
+                              )
+                            : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "Phòng"
+                            ? Number(
+                                item?.bill[item?.bill?.length - 1]?.waterPrice
+                              )
+                            : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "Người"
+                            ? Number(item.member.length) *
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.waterPrice
+                              )
+                            : 0
+                        }
+                        thousandSeparator
+                        displayType="text"
+                      />
+                      <span className="italic font-bold text-[13px]">đ</span>
+                    </td>
+                    <td class="px-4 py-2 border-2 border-gray-400 border-x">
+                      {item?.bill[item?.bill?.length - 1]?.service?.map((i) => {
+                        return (
+                          <>
+                            <p className="">
+                              <span className="italic font-bold text-[13px]">
+                                {i.name}
+                              </span>{" "}
+                              ={" "}
+                              <NumericFormat
+                                value={i?.value}
+                                thousandSeparator
+                                displayType="text"
+                              />
+                              <span className="italic font-bold text-[13px]">
+                                đ
+                              </span>{" "}
+                              <span className="italic font-bold text-[16px]">
+                                /
+                              </span>
+                              <span className="italic  text-[13px]">
+                                {i.unit}
+                              </span>
+                            </p>
+                          </>
+                        );
+                      })}
+                    </td>
+                  </tr>
+                </>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </>
   );
@@ -309,14 +755,14 @@ class MyComponent extends React.Component {
     super(props);
     this.componentRef = React.createRef();
   }
-
   render() {
     const now = new Date(Date.now());
     const formattedDate = now.toLocaleString();
-    console.log(formattedDate);
     const fileName = `phiếu thu tiền trọ ${formattedDate}`;
     const html2CanvasOptions = {};
     const pdfOptions = { w: 300, h: 100, x: 0, y: 0 };
+    let card = JSON.parse(sessionStorage.getItem("card"));
+
     return (
       <React.Fragment>
         <div className="flex justify-center items-end gap-2 my-2">
@@ -373,8 +819,10 @@ class MyComponent extends React.Component {
             </p>
           </div>
         </div>
+
         <div ref={this.componentRef}>
-          <PrintData />
+          {/* <PrintData /> */}
+          {card == "1" ? <PrintData /> : <Card1 />}
         </div>
       </React.Fragment>
     );

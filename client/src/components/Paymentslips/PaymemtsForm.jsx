@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import PrintPay, { PrintData } from "./PrintPay.jsx";
 import { NumericFormat } from "react-number-format";
+import Swal from "sweetalert2";
 
 function PaymemtsForm({ user }) {
   const navigation = useNavigate();
@@ -61,9 +62,31 @@ function PaymemtsForm({ user }) {
     // setPay(JSON.parse(sessionStorage.getItem("pay")));
     console.log(pay);
   }, [pay, value]);
-  const printListData = () => {
-    sessionStorage.setItem("pay", JSON.stringify(pay));
-    navigation("/payment/print");
+  const printListData = async () => {
+    const { value: fruit } = await Swal.fire({
+      title: "Select field validation",
+      input: "select",
+      inputOptions: {
+        1: "Ice cream1",
+        2: "Ice cream2",
+        3: "Ice cream3",
+      },
+      inputPlaceholder: "Select a fruit",
+      showCancelButton: true,
+      html: ` <section class="py-8 px-4">
+      <div class="flex flex-wrap -mx-4">
+        <div class="md:w-1/2 px-4 mb-8 md:mb-0"><img class="rounded shadow-md" src="https://source.unsplash.com/random/1280x720" alt=""></div>
+        <div class="md:w-1/2 px-4 mb-8 md:mb-0"><img class="rounded shadow-md" src="https://source.unsplash.com/random/1280x720" alt=""></div>
+      </div>
+    </section>`,
+    });
+
+    if (fruit) {
+      // Swal.fire(`You selected: ${fruit}`);
+      sessionStorage.setItem("pay", JSON.stringify(pay));
+      sessionStorage.setItem("card", JSON.stringify(fruit));
+      navigation("/payment/print");
+    }
   };
   const printALlData = () => {
     sessionStorage.setItem("pay", JSON.stringify(value));

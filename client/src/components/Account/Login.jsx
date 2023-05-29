@@ -202,7 +202,7 @@ function Login() {
                     <div className="mb-2">
                       <label
                         for="email"
-                        className="block text-sm font-semibold text-gray-800"
+                        className="block text-sm font-semibold text-gray-800 text-left"
                       >
                         Tên tài khoản
                       </label>
@@ -218,7 +218,7 @@ function Login() {
                     <div className="mb-2">
                       <label
                         for="password"
-                        className="block text-sm font-semibold text-gray-800"
+                        className="block text-sm font-semibold text-gray-800 text-left"
                       >
                         Mật khẩu
                       </label>

@@ -80,7 +80,11 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       </select>
           </div>
       </div>
-      </div> `,
+      </div> 
+      
+
+
+      `,
         focusConfirm: false,
 
         preConfirm: () => {
@@ -88,13 +92,14 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
             document.getElementById("name").value,
             document.getElementById("value").value,
             document.getElementById("unit").value,
+            // document.getElementById("dropzone-file").value,
           ];
         },
       });
       if (formService) {
         // R.PostAPI_addRoom(formValues,formService)
         console.log(JSON.stringify(formService));
-        CreateService(formService);
+        // CreateService(formService);
       }
     } catch (error) {}
   };
@@ -184,6 +189,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         title: `CẬP NHẬT DỊCH VỤ ${data.name} CHO PHÒNG`,
         showCancelButton: true,
         cancelButtonColor: "#d33",
+
         html: `
               <div class="w-full max-w-lg">
           <div class="flex flex-wrap -mx-3 mb-6">
@@ -267,7 +273,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       const x = room.map((i) => {
         html += `
         
-        <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+        <div class="flex items-center   pl-4 border border-gray-200 rounded dark:border-gray-700">
     <input ${
       i?.services.map((x) => x._id).includes(serviceId) ? "checked" : ""
     } type="checkbox" value=${
@@ -281,8 +287,9 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       });
       const { value: formValues } = await Swal.fire({
         title: "Multiple inputs",
+        width: 1200,
         html: `
-        <div class="grid grid-cols-4 gap-4 p-2">  
+        <div class="grid grid-cols-8 gap-4 p-2">  
        
         ${html}
 

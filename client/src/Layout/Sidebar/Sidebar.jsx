@@ -1,7 +1,8 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Swal from "sweetalert2";
-function Sidebar() {
+import { NavLink, useLocation } from "react-router-dom";
+
+const Sidebar = () => {
+  // const router = useRouter();
+  // const { isCollapsed, toggleSidebarcollapse } = useContext(SidebarContext);
   const Menu = [
     {
       title: "Trang chính",
@@ -21,7 +22,7 @@ function Sidebar() {
           />
         </svg>
       ),
-      path: "/main",
+      path: "/dashboard",
     },
     {
       title: "Phòng Trọ",
@@ -90,7 +91,7 @@ function Sidebar() {
     // },
 
     {
-      title: "Thêm chỉ số điện/nước",
+      title: "Hoá đơn",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -175,83 +176,75 @@ function Sidebar() {
       path: "/reports",
     },
   ];
-
-  const handlerLogout = () => {
-    Swal.fire({
-      title: "Bạn muốn đăng xuất",
-      // text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Đăng xuất ngay",
-      cancelButtonText: "Huỷ",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Đã Đăng Xuất", "Đăng Xuất Thành Công", "success");
-        localStorage.clear();
-        // navigation("/");
-        // window.location.href = "/";
-
-        setTimeout(() => {
-          window.location = "/";
-        }, 1500);
-      }
-    });
-  };
+  const location = useLocation().pathname;
   return (
-    <div className="mt-5">
-      <aside class="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-        <div class="flex flex-col justify-between flex-1 mt-6">
-          <nav class="-mx-3 space-y-6 ">
-            <div class="space-y-3 ">
-              {Menu?.map((i) => {
+    <div class="min-h-screen bg-gray-100">
+      <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r w-56 bg-white hover:shadow-lg">
+        <div class="flex h-screen flex-col justify-between pt-2 pb-6 px-2">
+          <div>
+            <ul class="mt-6 space-y-2 tracking-wide">
+              {Menu?.map((item) => {
                 return (
-                  <div className="text-lg">
-                    <NavLink
-                      className="text-lg flex items-center px-3 py-2 text-black transition-colors duration-300 transform rounded-lg bg-gray-200 hover:bg-blue-200
-                  "
-                      to={i?.path}
-                    >
-                      {i?.icon}
-
-                      <span class="mx-2 text-[15px] font-medium">
-                        {i?.title}
-                      </span>
+                  <li className=" text-left justify-start w-full">
+                    <NavLink to={item?.path}>
+                      {/* <span
+                        class={`bg group flex items-center  space-x-4  px-4 py-3 text-gray-600 border-b border-2 border-black`}
+                      >
+                       
+               
+                        {item?.icon}
+                        <span class="group-hover:text-gray-700 text-left">
+                          {item?.title}
+                        </span>
+                      </span> */}
+                      <a
+                        href="#_"
+                        class="bg group w-full px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-black inline-block"
+                      >
+                        <span
+                          class={`${
+                            location == item?.path ? "text-white h-full" : ""
+                          } absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-400 group-hover:h-full opacity-90`}
+                        ></span>
+                        <span
+                          class={`${
+                            location == item?.path ? "text-white" : ""
+                          } relative group-hover:text-white w-full flex gap-2`}
+                        >
+                          {" "}
+                          {item?.icon} {item?.title}
+                        </span>
+                      </a>
                     </NavLink>
-                  </div>
+                  </li>
                 );
               })}
-            </div>
-          </nav>
-        </div>
-        <div className="text-lg">
-          <p
-            className="text-lg flex items-center px-3 py-2 text-black transition-colors duration-300 transform rounded-lg bg-gray-200 hover:bg-blue-200
-                  "
-            onClick={(e) => handlerLogout()}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
+            </ul>
+          </div>
+          <div class="w-max mb-6">
+            <a
+              href="#"
+              class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"
-              />
-            </svg>
-
-            <span class="mx-2 text-[15px] font-medium">Đăng Xuất</span>
-          </p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 group-hover:fill-cyan-600"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="group-hover:text-gray-700">Đăng Xuất</span>
+            </a>
+          </div>
         </div>
-      </aside>
+      </div>
     </div>
   );
-}
+};
 
 export default Sidebar;

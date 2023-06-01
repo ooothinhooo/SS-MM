@@ -45,7 +45,7 @@ function MotelPage({ user, props }) {
   // }, [data]);
   return (
     <div>
-      <div className="mt-20 mr-20">
+      <div className="">
         {!data?.Motel ? (
           <>
             <section class=" bg-cover  w-full">

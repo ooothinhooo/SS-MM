@@ -5,6 +5,7 @@ import LoginPage from "../pages/Account/LoginPage.jsx";
 import SignUpPage from "../pages/Account/SignUpPage.jsx";
 import BillPage from "../pages/Billing/BillPage.jsx";
 import UpdateBillPage from "../pages/Billing/UpdateBillPage.jsx";
+import DashboardPage from "../pages/Dashboard/DashboardPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
@@ -38,7 +39,7 @@ const NotLoggedIn = [
   // { path: config.routes.home, component: HomePage },
 ];
 const ManagingMotel = [
-  { path: config.routes.home, component: HomePage },
+  { path: config.routes.Dashboard, component: DashboardPage },
   { path: config.routes.Room, component: RoomPage },
   { path: config.routes.ViewRoom, component: ViewRoomPage },
   { path: config.routes.Member, component: MemberPage },

@@ -1,5 +1,6 @@
 const routes = {
   home: "/*",
+  Dashboard: "/dashboard*",
   Mainpage: "/main",
   Motel: "/motel",
   Room: "/room",

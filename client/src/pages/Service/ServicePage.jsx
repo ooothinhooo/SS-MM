@@ -35,7 +35,7 @@ function ServicePage({ user, service }) {
         pauseOnHover
         theme="light"
       />
-      <div className="mt-20 mr-20  w-full">
+      <div className="w-full">
         <div className="w-full flex justify-center items-center ">
           <div class="grid grid-flow-col auto-cols-max w-full  ">
             {/* left */}

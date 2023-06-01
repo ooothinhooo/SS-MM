@@ -5,7 +5,7 @@ function UpdateBillPage({ user }) {
   let { id, roomCode } = useParams();
   return (
     <div>
-      <div className="mt-20 mr-20 w-full  ">
+      <div className="w-full  ">
         <div className="flex justify-start mx-4">
           <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">

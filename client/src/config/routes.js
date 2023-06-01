@@ -5,6 +5,7 @@ const routes = {
   Room: "/room",
   Member: "/member",
   UpdateMember: "/member/:id",
+  ViewMember: "/member/view/:id",
   ViewRoom: "/room/view/:id",
   Service: "/service",
   ElectricityStats: "/electricity",

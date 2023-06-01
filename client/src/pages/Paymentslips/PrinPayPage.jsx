@@ -18,7 +18,7 @@ import PrintPay from "../../components/Paymentslips/PrintPay.jsx";
 
 export default function PrintPayPage({ user }) {
   return (
-    <div className="mt-20 mr-20 w-full ">
+    <div className="w-full ">
       {/* <PaymemtsForm user={user} /> */}
       <PrintPay />
     </div>

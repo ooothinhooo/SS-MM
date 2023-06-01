@@ -434,20 +434,7 @@ function RoomPage({ user }) {
   let MR = new ManyRoom();
   let OR = new OneRoom();
   return (
-    <div className="mt-20 mr-20 w-full ">
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-
+    <div className=" w-full ">
       <div class="flex w-full  justify-center items-center">
         {" "}
         <div class="rounded-xl border p-2 shadow-md w-[90%] bg-white">

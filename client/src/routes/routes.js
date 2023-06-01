@@ -8,6 +8,7 @@ import UpdateBillPage from "../pages/Billing/UpdateBillPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
+import ViewMemberPage from "../pages/Members/ViewMemberPage.jsx";
 import MotelPage from "../pages/Motel/MotelPage.jsx";
 import PaymentsPage from "../pages/Paymentslips/PaymentsPage.jsx";
 import PrintPayPage from "../pages/Paymentslips/PrinPayPage.jsx";
@@ -41,6 +42,7 @@ const ManagingMotel = [
   { path: config.routes.Room, component: RoomPage },
   { path: config.routes.ViewRoom, component: ViewRoomPage },
   { path: config.routes.Member, component: MemberPage },
+  { path: config.routes.ViewMember, component: ViewMemberPage },
   { path: config.routes.UpdateMember, component: UpdateMemberPage },
   { path: config.routes.Billing, component: BillPage },
   { path: config.routes.UpdateBill, component: UpdateBillPage },

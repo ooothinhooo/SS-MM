@@ -21,7 +21,11 @@ function PaymemtsForm({ user }) {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
       if (result.data.status == 200) {
-        setRoom(result.data.data);
+        // setRoom(result.data.data);
+        const array = result.data.data.sort((a, b) =>
+          String(a.roomCode) > String(b.roomCode) ? 1 : -1
+        );
+        setRoom(array);
         setValue(result.data.data);
       }
     } catch (error) {}

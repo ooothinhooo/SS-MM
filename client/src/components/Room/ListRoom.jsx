@@ -57,7 +57,7 @@ function ListRoom({ data, user, dele, GetAPI }) {
 
   return (
     <div>
-      <div class="overflow-x-auto">
+      <div class="w-full ">
         <div class="w-full h-full flex items-center justify-center  font-sans overflow-hidden">
           <div class="w-[97%] ">
             <div class="bg-white shadow-md rounded my-2  overflow-scroll h-[550px]">

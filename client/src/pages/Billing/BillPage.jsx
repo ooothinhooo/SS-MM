@@ -103,7 +103,11 @@ function BillPage({ user }) {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
       console.log(result.data.data);
-      setRoom(result.data.data);
+      // setRoom(result.data.data);
+      const array = result.data.data.sort((a, b) =>
+        String(a.roomCode) > String(b.roomCode) ? 1 : -1
+      );
+      setRoom(array);
     } catch (error) {}
   };
   const Render = async (data, x) => {
@@ -250,7 +254,7 @@ function BillPage({ user }) {
     <div>
       <ToastContainer />
 
-      <div className="mt-20 mr-20 w-full flex justify-center items-center ">
+      <div className="w-full flex justify-center items-center ">
         <div className="w-[95%] p-6 h-full shadow-xl rounded-md">
           <div>
             <p className="text-left uppercase text-lg font-bold">

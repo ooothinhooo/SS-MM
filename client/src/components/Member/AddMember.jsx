@@ -9,7 +9,21 @@ import { randomString } from "../../Func/RamdomString.js";
 import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import Swal from "sweetalert2";
 function AddMember({ user, isAdd, setIsAdd }) {
-  const [data, setData] = useState({});
+  const [roomId, setRoomId] = useState("");
+  const [data, setData] = useState({
+    // fullName: "",
+    // dob: "",
+    // cccd: "",
+    // dateRange: "",
+    // sex: "",
+    // phone: "",
+    // address: "",
+    // carNum: "",
+    // idPhoto1: "",
+    // idPhoto2: "",
+    // roomId: "",
+  });
+
   var a = [];
 
   const [room, setRoom] = useState();
@@ -32,9 +46,10 @@ function AddMember({ user, isAdd, setIsAdd }) {
     setData({ ...data, [input.name]: input.value });
   };
   useEffect(() => {
-    console.log(data);
+    console.table(data);
     data.motelId = user?.Motel;
   }, [data]);
+
   function isObjectEmptyExceptA(obj) {
     for (let key in obj) {
       if (key !== "carNum" && key !== "roomId" && obj.hasOwnProperty(key)) {
@@ -45,8 +60,6 @@ function AddMember({ user, isAdd, setIsAdd }) {
   }
   const addMember = async () => {
     try {
-      // data.roomId= roomId;
-      data.roomId = a[0];
       if (true) {
         const result = await ADD_MEMBER(user?.token, data);
         console.log(result);
@@ -73,6 +86,7 @@ function AddMember({ user, isAdd, setIsAdd }) {
             carNum: "",
             idPhoto1: "",
             idPhoto2: "",
+            roomId: "",
           });
           a = [];
         }
@@ -95,16 +109,12 @@ function AddMember({ user, isAdd, setIsAdd }) {
     e.preventDefault();
     try {
       const imageFile = e.target.files[0];
-      // console.log(imageFile);
-      // const fileName = new Date().getTime() + imageFile.name;
       const fileName = randomString(15);
-
       const storageRef = ref(
         storage,
         `SSMM/MEMBER/${fileName.split("").join("").toUpperCase()}`
       );
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
-
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -114,15 +124,11 @@ function AddMember({ user, isAdd, setIsAdd }) {
         (error) => {},
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // setAvatar(downloadURL);
-            // toast.success("Thêm ảnh đại diện thành công");
             if (id == "idPhoto1") {
               data.idPhoto1 = downloadURL;
             } else {
               data.idPhoto2 = downloadURL;
             }
-
-            console.log(data);
           });
         }
       );
@@ -134,11 +140,10 @@ function AddMember({ user, isAdd, setIsAdd }) {
       let html = "";
       const x = room.map((i) => {
         html += `
-        
-        <div class="flex items-center   pl-4 border border-gray-200 rounded dark:border-gray-700">
-    <input  type="radio"  name="fav_language" value=${i?._id} name="bordered-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    <label for="bordered-checkbox-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">${i?.roomCode}</label>
-</div>
+      <div class="flex items-center   pl-4 border border-gray-200 rounded dark:border-gray-700">
+        <input  type="radio"  name="fav_language" value=${i?._id} name="bordered-checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+        <label for="bordered-checkbox-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">${i?.roomCode}</label>
+      </div>
         `;
       });
       const { value: formValues } = await Swal.fire({
@@ -146,10 +151,8 @@ function AddMember({ user, isAdd, setIsAdd }) {
         width: 1200,
         html: `
         <div class="grid grid-cols-8 gap-4 p-2">  
-       
         ${html}
-
-      </div>
+        </div>
          `,
         focusConfirm: false,
         preConfirm: () => {
@@ -160,7 +163,6 @@ function AddMember({ user, isAdd, setIsAdd }) {
           Array.prototype.forEach.call(checkboxes, function (el) {
             ArrayChecked.push(el.value);
           });
-          // console.log(values);
           const Nocheckboxes = document.querySelectorAll("input[type=radio]");
           let ArrayNoChecked = [];
           Array.prototype.forEach.call(Nocheckboxes, function (el) {
@@ -168,29 +170,19 @@ function AddMember({ user, isAdd, setIsAdd }) {
               ArrayNoChecked.push(el.value);
             }
           });
-          console.log(ArrayChecked);
-          console.log(ArrayNoChecked);
-          return [
-            // document.getElementById("swal-input1").value,
-            // document.getElementById("swal-input2").value,
-
-            ArrayChecked,
-            ArrayNoChecked,
-          ];
+          return [ArrayChecked, ArrayNoChecked];
         },
       });
 
       if (formValues) {
-        // Swal.fire(JSON.stringify(formValues));
-
         const ArrayChecked = formValues[0];
         formValues[1].pop();
         const ArrayNoChecked = formValues[1];
-        // data?.roomId= ArrayChecked[0];
         a.push(ArrayChecked[0]);
-        // console.log(ArrayChecked, ArrayNoChecked);
-        // AddRoomUseService(serviceId, ArrayChecked, ArrayNoChecked);
-        // addMember(ArrayChecked[0]);
+        setData({
+          ...data,
+          roomId: ArrayChecked[0],
+        });
       }
     } catch (error) {}
   };
@@ -463,9 +455,10 @@ function AddMember({ user, isAdd, setIsAdd }) {
                 type="text"
                 id="carNum"
                 placeholder="83C1-55366"
-                name="cardNum"
+                name="carNum"
                 onChange={handleChange}
-                value={data.carNum}
+                // carNum: "",
+                value={data?.carNum}
               />
             </div>
 

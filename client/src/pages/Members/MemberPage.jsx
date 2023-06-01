@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { GrEdit } from "react-icons/gr";
+import { BsImage } from "react-icons/bs";
+import { RiDeleteBin2Line } from "react-icons/ri";
 import { ToastContainer, toast } from "react-toastify";
 import AddMember from "../../components/Member/AddMember.jsx";
 import { LIST_MEMBER } from "../../API/Member/listMember.api.js";
@@ -9,6 +12,7 @@ import Swal from "sweetalert2";
 import { storage } from "../../Firebase/firebase.config.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { randomString } from "../../Func/RamdomString.js";
+import { AiFillEye } from "react-icons/ai";
 function MemberPage({ user }) {
   const navigation = useNavigate();
   const [member, setMember] = useState();
@@ -39,177 +43,33 @@ function MemberPage({ user }) {
     getApiMember();
   }, [isAdd]);
 
-  class Member {
-    Render_AddMember = async () => {
-      try {
-        const { value: formService } = await Swal.fire({
-          title: `THÊM THÀNH VIÊN `,
-          showCancelButton: true,
-          width: 1000,
-          cancelButtonColor: "#d33",
-          html: `
+  const ViewIdPhoto = async (id1, id2) => {
+    try {
+      const { value: formValues } = await Swal.fire({
+        title: "CCCD/CMND",
+        width: 800,
+        html: `
+  <section class="py-8 px-4">
+  <div class="flex flex-wrap -mx-4">
+    <div class="md:w-1/2 px-4 mb-8 md:mb-0"><img class="rounded shadow-md" src=${id1} alt=""></div>
+    <div class="md:w-1/2 px-4 mb-8 md:mb-0"><img class="rounded shadow-md" src=${id1} alt=""></div>
+  </div>
+</section>
+  `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [];
+        },
+      });
 
-          <div class="w-full ">
-          <div class="grid grid-cols-3 gap-4">
-            <div class="w-full  px-3">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Họ và Tên </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-               type="text" id="fullName" placeholder="Họ và Tên" />
-            </div>
-            <div class="w-full  px-3">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Ngày Sinh </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              type="date" id="dob" placeholder="dd-mm-yyyy" />
-            </div>
-            <div class="w-full  px-3">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Số điện thoại </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              type="number" id="phone" placeholder="Số điện thoại" />
-            </div>
-          </div>
-          <div class="grid grid-cols-3 gap-4">
-            <div class="w-full  px-3">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> CCCD/CMND </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              type="number" id="cccd" placeholder="" />
-            </div>
-            <div class="w-full  px-3">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Ngày Cấp </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              type="date" id="dateRange" placeholder="dd-mm-yyyy" />
-            </div>
-            <div class="w-full  px-3">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Giới tính</label>
-              <select 
-              id="sex" 
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value="">Chọn</option>
-                <option value="1">Nam</option>
-                <option value="0">Nữ</option>
-              </select>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="w-full  px-3">
-              <div class=" w-full">
-                
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Ảnh mặt trước CMND/CCCD </label>
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
-                id="idPhoto1" type="file" multiple>
-
-              </div>
-            </div>
-            <div class="w-full  px-3">
-              <div class=" w-full">
-              
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Ảnh mặt sau CMND/CCCD </label>
-                <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                id="idPhoto2" type="file" multiple>
-
-              </div>
-            </div>
-          </div>
-          <div class="grid grid-cols-3 gap-4 py-4">
-            <div class="w-full  ">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Biển số xe </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              type="text" id="carNum" placeholder="" />
-            </div>
-            <div class="w-full  col-span-2">
-              <label class="text-left block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name "> Địa chỉ </label>
-              <input class="appearance-none block w-full bg-white text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
-              type="text" id="address" placeholder="" />
-            </div>
-          </div>
-        </div>
-
-          `,
-          focusConfirm: false,
-
-          preConfirm: () => {
-            return [
-              document.getElementById("fullName").value,
-              document.getElementById("dob").value,
-              document.getElementById("phone").value,
-              document.getElementById("cccd").value,
-              document.getElementById("dateRange").value,
-              document.getElementById("sex").value,
-              document.getElementById("idPhoto1").value,
-              document.getElementById("idPhoto2").value,
-              document.getElementById("carNum").value,
-              document.getElementById("address").value,
-
-              // document.getElementById("dropzone-file").value,
-            ];
-          },
-        });
-        if (formService) {
-          var obj = {
-            fullName: "",
-            dob: "",
-            phone: "",
-            cccd: "",
-            dateRange: "",
-            sex: "",
-            idPhoto1: "",
-            idPhoto2: "",
-            carNum: "",
-            address: "",
-          };
-          // R.PostAPI_addRoom(formValues,formService)
-          Swal.fire(JSON.stringify(formService));
-          console.log(formService);
-          // CreateService(formService);
-          // document.getElementById("idPhoto1").value,   [6]
-          // document.getElementById("idPhoto2").value,   [7]
-          // e.preventDefault();
-          M.UPLOAD_IMG_ADDMEMBER(formService[6]);
-          M.UPLOAD_IMG_ADDMEMBER(formService[7]);
-        }
-      } catch (error) {}
-    };
-
-    UPLOAD_IMG_ADDMEMBER = async (img) => {
-      try {
-        const imageFile = img;
-        // console.log(imageFile);
-        // const fileName = new Date().getTime() + imageFile.name;
-        const fileName = randomString(15);
-
-        const storageRef = ref(
-          storage,
-          `SSMM/MEMBER/${fileName.split("").join("").toUpperCase()}`
-        );
-        const uploadTask = uploadBytesResumable(storageRef, imageFile);
-
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const uploadProgress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          },
-          (error) => {},
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              // toast.success("Thêm ảnh đại diện thành công");
-              IDPHOTO.push(downloadURL);
-              console.log(IDPHOTO);
-            });
-          }
-        );
-      } catch (error) {}
-    };
-
-    POSTAPI_AddMember = () => {
-      try {
-      } catch (error) {}
-    };
-  }
-
-  const M = new Member();
+      if (formValues) {
+        // Swal.fire(JSON.stringify(formValues))
+      }
+    } catch (error) {}
+  };
   return (
     <>
-      <div className="mt-20 mr-20 w-full">
+      <div className=" w-full">
         <div
           className={`${
             isAdd ? " " : "hidden"
@@ -218,7 +78,7 @@ function MemberPage({ user }) {
           {/* <AddMemberToRoom /> */}
           <AddMember user={user} isAdd={isAdd} setIsAdd={setIsAdd} />
         </div>
-        <div className={`${isUp || isAdd ? "hidden" : ""}`}>
+        <div className={`${isUp || isAdd ? "hidden" : ""} w-full `}>
           <div className="w-full flex justify-center items-center ">
             <div className="w-[80%] flex z-40 shadow-xl justify-between items-center rounded-lg py-1 px-4">
               <p className="text-lg text-blue-700 font-medium flex justify-start">
@@ -234,13 +94,17 @@ function MemberPage({ user }) {
             </div>
           </div>
 
-          <div className={`${!isAdd || !isUp ? " " : "hidden"}`}>
-            <div class="w-full flex flex-col">
-              <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                  <div class="overflow-hidden">
-                    <table class="min-w-full">
-                      <thead class="bg-white border-b  text-left">
+          <div
+            className={`${
+              !isAdd || !isUp ? " " : "hidden"
+            } w-full flex justify-center items-center`}
+          >
+            <div class="w-full flex justify-center items-center">
+              <div class="w-full ">
+                <div class="w-full py-2 inline-block w-full ">
+                  <div class="overflow-y-scroll h-[550px] w-full justify-center items-center">
+                    <table class="w-full">
+                      <thead class="bg-white border-b  text-left w-full">
                         <tr>
                           <th
                             scope="col"
@@ -272,6 +136,13 @@ function MemberPage({ user }) {
                           >
                             CMND/ CCCD
                           </th>
+
+                          <th
+                            scope="col"
+                            class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          >
+                            SĐT
+                          </th>
                           <th
                             scope="col"
                             class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
@@ -290,9 +161,9 @@ function MemberPage({ user }) {
                         {dataMember?.map((i, index) => {
                           return (
                             <>
-                              <tr class="bg-gray-100 border-b ">
+                              <tr class="border-b ">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                  {index}
+                                  {index + 1}
                                 </td>
                                 <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
                                   {i?.fullName}
@@ -306,6 +177,10 @@ function MemberPage({ user }) {
                                 <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
                                   {i?.cccd}
                                 </td>
+
+                                <td class="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
+                                  {i?.phone}
+                                </td>
                                 <td class="text-sm text-gray-900 text-center  font-light px-6 py-4 whitespace-nowrap">
                                   {i?.roomId?.roomCode ? (
                                     <>{i?.roomId?.roomCode}</>
@@ -313,18 +188,30 @@ function MemberPage({ user }) {
                                     <>[ ]</>
                                   )}
                                 </td>
-                                <td class="text-sm text-gray-900 text-center font-light px-6 py-4 whitespace-nowrap">
-                                  <div className="flex gap-4">
+                                <td class="text-sm text-gray-900 text-center font-light px-6 py-1 whitespace-nowrap">
+                                  <div className="flex gap-4 justify-center items-center">
+                                    <NavLink to={`/member/view/${i?._id}`}>
+                                      <button class="bg-transparent text-black hover:bg-blue-500  font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+                                        <i>
+                                          <AiFillEye />
+                                        </i>
+                                      </button>
+                                    </NavLink>
                                     <NavLink to={`/member/${i?._id}`}>
-                                      <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                        Sửa
+                                      <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded">
+                                        <i>
+                                          <GrEdit />
+                                        </i>
                                       </button>
                                     </NavLink>
                                     <button
                                       onClick={(e) => deteleMemberAPI(i?._id)}
-                                      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                      class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded"
                                     >
-                                      Xoá
+                                      <i>
+                                        {/* <GrEdit /> */}
+                                        <RiDeleteBin2Line />
+                                      </i>
                                     </button>
                                   </div>
                                 </td>

@@ -9,6 +9,7 @@ import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import { NumericFormat } from "react-number-format";
 import { AiOutlineUser } from "react-icons/ai";
 import { CiMinimize2 } from "react-icons/ci";
+import { CHECK_STATUS_BILL } from "../../API/Bill/CheckStatusBill.api.js";
 
 function ListRoom({ data, user, dele, GetAPI }) {
   const [room, setRoom] = useState();
@@ -59,35 +60,44 @@ function ListRoom({ data, user, dele, GetAPI }) {
   // console.log(data);
   const Render_CheckStatus = async (data) => {
     try {
-      console.log(data?.bill);
+      // console.log(data?.bill);
       const html = "";
-      const x = data?.bill.map((item) => {
+      const x = data?.bill.map((i) => {
         return ` 
             
           <div class="px-4 py-5 sm:px-6 border w-full">
             <div class="flex items-center justify-between">
               <h3 class="text-lg leading-6 font-medium text-gray-900">
-              ${item?.month}
+               Hoá Đơn Tháng <span class="text-blue-800 font-bold">${
+                 i?.month
+               }</span>
               </h3>
-              <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Description for Item 1
-              </p>
             </div>
-            <div class="mt-4 flex items-center justify-between">
-              <p class="text-sm font-medium text-gray-500">
-                Status: <span class="text-green-600">Active</span>
-              </p>
-              <a
-                href="#"
-                class="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Edit
-              </a>
+            <div class="mt-2.5">
+            <div class="flex items-center mr-4">
+            <input 
+            ${i?.status ? "checked" : ""}
+            type="checkbox" value=${
+              i?.month
+            } name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="inline-2-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            ${
+              i?.status
+                ? ` <p class="text-sm font-medium text-gray-500">
+             <span class="text-green-600">Đã thu</span>
+          </p>`
+                : ` <p class="text-sm font-medium text-gray-500">
+          <span class="text-red-600">Chưa thu</span>
+        </p>`
+            }
+            </label>
+        </div>
             </div>
+            
         </div>
         `;
       });
-      console.log(x);
+      // console.log(x);
 
       const { value: formValues } = await Swal.fire({
         title: `PHÒNG ${data?.roomCode}`,
@@ -99,19 +109,50 @@ function ListRoom({ data, user, dele, GetAPI }) {
          `,
         focusConfirm: false,
         preConfirm: () => {
-          return [
-            // document.getElementById("swal-input1").value,
-            // document.getElementById("swal-input2").value,
-          ];
+          const checkboxes = document.querySelectorAll(
+            "input[type=checkbox]:checked"
+          );
+          let ArrayChecked = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            ArrayChecked.push(el.value);
+          });
+
+          const Nocheckboxes = document.querySelectorAll(
+            "input[type=checkbox]"
+          );
+          let ArrayNoChecked = [];
+          Array.prototype.forEach.call(Nocheckboxes, function (el) {
+            if (!el.checked) {
+              ArrayNoChecked.push(el.value);
+            }
+          });
+          ArrayNoChecked.pop();
+          return [ArrayChecked, ArrayNoChecked];
         },
       });
 
       if (formValues) {
-        Swal.fire(JSON.stringify(formValues));
+        // Swal.fire(JSON.stringify(formValues));
+        POST_CheckStatus(data?._id, formValues[0], formValues[1]);
       }
     } catch (error) {}
   };
-  const POST_CheckStatus = async () => {};
+  const POST_CheckStatus = async (roomId, ArrayChecked, ArrayNoChecked) => {
+    try {
+      console.log(roomId, ArrayChecked, ArrayNoChecked);
+      const result = await CHECK_STATUS_BILL(
+        user?.token,
+        roomId,
+        ArrayChecked,
+        ArrayNoChecked
+      );
+      console.log(result);
+      if (result?.data.status == 200) {
+        toast.success("Cập nhật thành công");
+        GetAPI();
+      }
+    } catch (error) {}
+  };
   return (
     <div>
       <div class="w-full ">

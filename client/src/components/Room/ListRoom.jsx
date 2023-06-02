@@ -8,6 +8,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import { NumericFormat } from "react-number-format";
 import { AiOutlineUser } from "react-icons/ai";
+import { CiMinimize2 } from "react-icons/ci";
 
 function ListRoom({ data, user, dele, GetAPI }) {
   const [room, setRoom] = useState();
@@ -55,6 +56,62 @@ function ListRoom({ data, user, dele, GetAPI }) {
     } catch (error) {}
   };
 
+  // console.log(data);
+  const Render_CheckStatus = async (data) => {
+    try {
+      console.log(data?.bill);
+      const html = "";
+      const x = data?.bill.map((item) => {
+        return ` 
+            
+          <div class="px-4 py-5 sm:px-6 border w-full">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+              ${item?.month}
+              </h3>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Description for Item 1
+              </p>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <p class="text-sm font-medium text-gray-500">
+                Status: <span class="text-green-600">Active</span>
+              </p>
+              <a
+                href="#"
+                class="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                Edit
+              </a>
+            </div>
+        </div>
+        `;
+      });
+      console.log(x);
+
+      const { value: formValues } = await Swal.fire({
+        title: `PHÒNG ${data?.roomCode}`,
+        width: 900,
+        html: `
+        <div class="grid grid-cols-3 gap-2">
+          ${x.join("").split(",")}
+        </div>
+         `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            // document.getElementById("swal-input1").value,
+            // document.getElementById("swal-input2").value,
+          ];
+        },
+      });
+
+      if (formValues) {
+        Swal.fire(JSON.stringify(formValues));
+      }
+    } catch (error) {}
+  };
+  const POST_CheckStatus = async () => {};
   return (
     <div>
       <div class="w-full ">
@@ -123,21 +180,40 @@ function ListRoom({ data, user, dele, GetAPI }) {
                               {item?.member?.length != 0 ? "Đã thuê" : "Trống"}
                             </td>
                             <td class="py-3 px-6 text-center">
-                              <span className="text-[12px]">
-                                {item?.bill[item?.bill.length - 1]?.status ? (
-                                  <>
-                                    <span className="text-green-600 font-bold">
-                                      Đã thu
-                                    </span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <span className="text-red-600 font-bold">
-                                      Chưa thu
-                                    </span>
-                                  </>
-                                )}
-                              </span>
+                              <div
+                                onClick={(e) => Render_CheckStatus(data[index])}
+                                className="bg-gray-200  border-b rounded-md flex justify-center items-center cursor-pointer "
+                              >
+                                <svg
+                                  width="28px"
+                                  height="40px"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M14.6923 6.08088C14.6923 5.48393 14.2618 5 13.7308 5H7.96154C7.4305 5 7 5.48393 7 6.08088V16.5294L7.76923 15.9529M10.2692 7.47059H16.0385C16.5695 7.47059 17 7.95452 17 8.55147V19L13.1538 16.1176L9.30769 19V8.55147C9.30769 7.95452 9.73819 7.47059 10.2692 7.47059Z"
+                                    stroke="#464455"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  />
+                                </svg>
+                                <span className="text-[12px]">
+                                  {item?.bill[item?.bill.length - 1]?.status ? (
+                                    <>
+                                      <span className="text-green-600 font-bold">
+                                        Đã thu
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <span className="text-red-600 font-bold">
+                                        Chưa thu
+                                      </span>
+                                    </>
+                                  )}
+                                </span>
+                              </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                               <div class="flex item-center justify-center">

@@ -26,7 +26,7 @@ function RoomPage({ user }) {
   };
   useEffect(() => {
     GetAPI();
-  }, [room]);
+  }, []);
 
   class OneRoom {
     addRoom = () => {

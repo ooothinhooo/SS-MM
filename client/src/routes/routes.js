@@ -39,6 +39,7 @@ const NotLoggedIn = [
   // { path: config.routes.home, component: HomePage },
 ];
 const ManagingMotel = [
+  // { path: config.routes.home, component: DashboardPage },
   { path: config.routes.Dashboard, component: DashboardPage },
   { path: config.routes.Room, component: RoomPage },
   { path: config.routes.ViewRoom, component: ViewRoomPage },

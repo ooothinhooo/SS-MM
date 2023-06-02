@@ -178,8 +178,8 @@ const Sidebar = () => {
   ];
   const location = useLocation().pathname;
   return (
-    <div class="min-h-screen bg-gray-100">
-      <div class="sidebar min-h-screen w-[3.35rem] overflow-hidden border-r w-56 bg-white hover:shadow-lg">
+    <div class="min-h-screen mt-12 bg-gray-100 ">
+      <div class="sidebar min-h-screen  overflow-hidden border-r w-56 bg-white hover:shadow-lg">
         <div class="flex h-screen flex-col justify-between pt-2 pb-6 px-2">
           <div>
             <ul class="mt-6 space-y-2 tracking-wide">

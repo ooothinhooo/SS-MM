@@ -27,7 +27,7 @@ function DefaultLayout({ children }) {
       <Hearder />
 
       <div class="h-screen flex overflow-hidden bg-white">
-        <div class="h-screen ">
+        <div class="h-screen w-18 ">
           {/* <!-- Static sidebar for desktop --> */}
           <Sidebar />
           {/* <div class="hidden md:flex md:flex-shrink-0">

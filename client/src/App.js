@@ -13,7 +13,7 @@ import { ProductContext } from "./contexts/ProductContextProvider.jsx";
 import NoLoginLayout from "./Layout/DefaultLayout/NoLoginLayout.jsx";
 
 function App() {
-  const { setUser, user, isConvert } = useContext(ProductContext);
+  const { setUser, user, social, setSocial } = useContext(ProductContext);
   console.log(user);
   const Fun_ManagingMotel = () => {
     return (
@@ -106,7 +106,7 @@ function App() {
           <Routes>
             {SignedIn.map((route, index) => {
               const Page = route.component;
-              let Layout = DefaultLayout;
+              let Layout = ViewLayout;
               if (route.layout) Layout = route.layout;
               else if (route.layout === null) Layout = Fragment;
 
@@ -132,14 +132,20 @@ function App() {
     <>
       {user && user ? (
         <>
-          {!user?.Motel ? (
+          {Boolean(social) ? (
             <>
-              <Fun_SignedIn />
+              {!user?.Motel ? (
+                <>
+                  <Fun_SignedIn />
+                </>
+              ) : (
+                <>
+                  <Fun_ManagingMotel />
+                </>
+              )}
             </>
           ) : (
-            <>
-              <Fun_ManagingMotel />
-            </>
+            <></>
           )}
         </>
       ) : (

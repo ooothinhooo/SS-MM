@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 import { BsFillKeyboardFill } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-function Hearder({ isShow }) {
+function Hearder({ isShow, social, setSocial }) {
   // const router = useRouter();
   const [user] = useState();
   /* `const [dropMenu, setDropMenu] = useState(false);` is declaring a state variable `dropMenu` and a
@@ -13,9 +13,17 @@ function Hearder({ isShow }) {
   This state variable is likely used to control the visibility of a dropdown menu in the header
   component. */
   const [dropMenu, setDropMenu] = useState(false);
+  const navigation = useNavigate();
 
   const logout = async () => {
     // await signOut(auth);
+  };
+
+  const NavLinkTo = () => {
+    // setSocial(!social);
+    localStorage.setItem("social", false);
+
+    navigation("/room");
   };
   return (
     <>
@@ -162,7 +170,7 @@ function Hearder({ isShow }) {
                     </>
                   ) : (
                     <>
-                      <NavLink to={`/room`}>
+                      <div onClick={(e) => NavLinkTo()}>
                         <p class="hidden sm:inline-flex ml-5 text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center mr-3">
                           <svg
                             class="svg-inline--fa fa-gem -ml-1 mr-2 h-4 w-4"
@@ -181,7 +189,7 @@ function Hearder({ isShow }) {
                           </svg>
                           Quản Lý Nhà Trọ
                         </p>
-                      </NavLink>
+                      </div>
                     </>
                   )}
                 </>

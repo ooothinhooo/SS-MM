@@ -6,8 +6,8 @@ export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  localStorage.setItem("social", true);
-  const [social, setSocial] = useState(localStorage.getItem("social"));
+
+  const [social, setSocial] = useState(Boolean(true));
 
   // const [isConvert, setIsConvert] = useState(localStorage.getItem("isConvert"));
 
@@ -15,7 +15,9 @@ const ProductContextProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
   useEffect(() => {
-    localStorage.setItem("social", social);
+    console.log(social);
+
+    // setSocial(!social);
   }, [social]);
 
   return (

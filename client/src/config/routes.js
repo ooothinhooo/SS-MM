@@ -1,8 +1,14 @@
-const routes = {
+export const routes = {
   home: "/*",
+
+  Login: "/login",
+  Register: "/register",
+};
+
+export const routesManagingMotel = {
   Dashboard: "/dashboard*",
   Mainpage: "/main",
-  Motel: "/motel",
+
   Room: "/room",
   Member: "/member",
   UpdateMember: "/member/:id",
@@ -17,8 +23,9 @@ const routes = {
   Payment: "/payment",
   PrintPayment: "/payment/print",
   Reports: "/reports",
-  Login: "/login",
-  Register: "/register",
 };
 
-export default routes;
+export const routeSocial = {
+  home: "/*",
+  Motel: "/motel",
+};

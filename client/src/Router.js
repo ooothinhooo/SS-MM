@@ -1,6 +1,6 @@
 import "./App.css";
 import { Fragment, useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import DefaultLayout from "./Layout/DefaultLayout/ManagingLayout.jsx";
 import ViewLayout from "./Layout/DefaultLayout/ViewLayout.jsx";
 import {
@@ -12,12 +12,12 @@ import {
 import { ProductContext } from "./contexts/ProductContextProvider.jsx";
 import NoLoginLayout from "./Layout/DefaultLayout/NoLoginLayout.jsx";
 
-function App() {
+function Router() {
   const { setUser, user, social, setSocial } = useContext(ProductContext);
   console.log(user);
   const Fun_ManagingMotel = () => {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="App">
           <Routes>
             {ManagingMotel.map((route, index) => {
@@ -40,12 +40,12 @@ function App() {
             })}
           </Routes>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   };
   const Fun_NotLoggedIn = () => {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="App">
           <Routes>
             {NotLoggedIn.map((route, index) => {
@@ -68,12 +68,12 @@ function App() {
             })}
           </Routes>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   };
   const Fun_SignInWithAcc = () => {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="App">
           <Routes>
             {SignInWithAcc.map((route, index) => {
@@ -96,12 +96,12 @@ function App() {
             })}
           </Routes>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   };
   const Fun_SignedIn = () => {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="App">
           <Routes>
             {SignedIn.map((route, index) => {
@@ -124,7 +124,7 @@ function App() {
             })}
           </Routes>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   };
 
@@ -134,12 +134,18 @@ function App() {
         <>
           {Boolean(social) ? (
             <>
-              <Fun_SignedIn />
+              {user?.Motel ? (
+                <>
+                  <Fun_SignedIn />
+                </>
+              ) : (
+                <>
+                  <Fun_ManagingMotel />
+                </>
+              )}
             </>
           ) : (
-            <>
-              <Fun_ManagingMotel />
-            </>
+            <></>
           )}
         </>
       ) : (
@@ -151,4 +157,4 @@ function App() {
   );
 }
 
-export default App;
+export default Router;

@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { motion } from "framer-motion";
 
 import { BsFillKeyboardFill } from "react-icons/bs";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { ProductContext } from "../../contexts/ProductContextProvider.jsx";
+import { routes } from "../../config/routes.js";
+import Swal from "sweetalert2";
 
-function Hearder({ isShow, social, setSocial }) {
+function Hearder() {
   // const router = useRouter();
-  const [user] = useState();
+  // const [user] = useState();
+  const { setUser, user, social, setSocial } = useContext(ProductContext);
   /* `const [dropMenu, setDropMenu] = useState(false);` is declaring a state variable `dropMenu` and a
   function `setDropMenu` to update its value. The initial value of `dropMenu` is set to `false`.
   This state variable is likely used to control the visibility of a dropdown menu in the header
@@ -18,13 +22,42 @@ function Hearder({ isShow, social, setSocial }) {
   const logout = async () => {
     // await signOut(auth);
   };
+  const location = useLocation().pathname;
 
+  function isLocationInRoutes(location, data) {
+    for (const key in data) {
+      if (data[key] === location) {
+        console.log(data[key]);
+        return true;
+      }
+    }
+    return false;
+  }
   const NavLinkTo = () => {
-    // setSocial(!social);
-    localStorage.setItem("social", false);
+    Swal.fire({
+      title: "Bạn muốn chuyển trang",
+      text: "Chọn Lựa Chọn Của Bạn",
+      // icon: "warning",
+      width: 600,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Quản Lý Nhà Trọ",
+      cancelButtonText: "Mạng Xã Hội",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setSocial(false);
+        navigation("/room");
+      } else {
+        setSocial(true);
+        navigation("/");
+      }
+    });
 
-    navigation("/room");
+    // window.location = "/room";
   };
+
+  // if()
   return (
     <>
       <div>

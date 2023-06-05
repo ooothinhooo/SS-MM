@@ -43,17 +43,17 @@ export const auth = getAuth(app);
 export const authentication = getAuth(app);
 export { app, firestore, storage };
 
-export const DeleteFileDoc = (FolderUser, FileName) => {
+export const DeleteFileImg = (FolderUser, FileName) => {
   // console.log(FolderUser);
-  // console.log(FileName);
+  console.log(FileName);
   // Create a reference to the file to delete
-  const desertRef = ref(storage, `/docs/${FolderUser}/${FileName}`);
+  const desertRef = ref(storage, `/SSMM/${FolderUser}/${FileName}`);
 
   // Delete the file
   deleteObject(desertRef)
     .then(() => {
       // File deleted successfully
-      // console.log("File deleted successfully");
+      console.log("File deleted successfully");
     })
     .catch((error) => {
       // Uh-oh, an error occurred!

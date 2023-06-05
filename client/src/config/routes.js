@@ -28,4 +28,8 @@ export const routesManagingMotel = {
 export const routeSocial = {
   home: "/*",
   Motel: "/motel",
+  Post: "/post",
+  CreatePost: "/post/create",
+  ViewPost: "/post/view/:id",
+  UpdatePost: "/post/update/:id",
 };

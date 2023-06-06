@@ -3,7 +3,7 @@ import PostPage from "../Post/PostPage.jsx";
 import { callAPI, callApiDistrict, callApiWard } from "../../API/Auth/API.js";
 import CreatePostPage from "../Post/CreatePostPage.js";
 import { NavLink } from "react-router-dom";
-
+import { HiChevronDoubleRight } from "react-icons/hi";
 function MainPage({ user }) {
   const province = callAPI("https://provinces.open-api.vn/api/?depth=1");
   const host = "https://provinces.open-api.vn/api/";
@@ -43,9 +43,8 @@ function MainPage({ user }) {
                       Xem theo giá
                     </p>
                     <div class="grid grid-cols-2 gap-4">
-                      <div className=" w-full text-left">
-                        {" "}
-                        {"> "}Dưới 1 triệu
+                      <div className=" w-full text-left flex justify-start items-center">
+                        {"> "} Dưới 1 triệu
                       </div>
                       <div className=" w-full text-left">
                         {"> "}Từ 1 - 2 triệu

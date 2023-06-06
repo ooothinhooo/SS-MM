@@ -10,8 +10,12 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { randomString } from "../../Func/RamdomString.js";
 import { ToastContainer, toast } from "react-toastify";
 import { CREATE_POST } from "../../API/Posts/CreatePost.api.js";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 function CreatePost({ user }) {
   const host = "https://provinces.open-api.vn/api/";
+  const navigation = useNavigate();
+
   const [province, setProvince] = useState();
   const [district, setDistrict] = useState();
   const [ward, setWard] = useState();
@@ -70,6 +74,7 @@ function CreatePost({ user }) {
       const result = await callApiWard(
         host + "d/" + value?.district + "?depth=2"
       );
+
       setWard(result);
     } catch (error) {}
   };
@@ -149,6 +154,8 @@ function CreatePost({ user }) {
       console.log(form);
       const result = await CREATE_POST(user?.token, form);
       console.log(result);
+      toast.success("Đăng bài thành công");
+      navigation("/");
     } catch (error) {}
   };
   return (
@@ -251,7 +258,7 @@ function CreatePost({ user }) {
                 <div className="flex justify-center items-center px-8">
                   <div className="w-full">
                     <input
-                      class="w-full appearance-none block w-full  text-black border border-blue-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      class="w-full appearance-none block bg-gray-200  text-black border border-blue-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                       type="text"
                       value={
                         form?.ward + "," + form?.district + "," + form?.province

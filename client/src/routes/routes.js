@@ -15,6 +15,7 @@ import MotelPage from "../pages/Motel/MotelPage.jsx";
 import PaymentsPage from "../pages/Paymentslips/PaymentsPage.jsx";
 import PrintPayPage from "../pages/Paymentslips/PrinPayPage.jsx";
 import CreatePostPage from "../pages/Post/CreatePostPage.js";
+import ViewPostPage from "../pages/Post/ViewPostPage.jsx";
 
 import RoomPage from "../pages/Room/RoomPage.jsx";
 import ViewRoomPage from "../pages/Room/ViewRoomPage.jsx";
@@ -33,6 +34,7 @@ const SignedIn = [
   { path: config.routeSocial.home, component: MainPage },
   { path: config.routeSocial.Motel, component: MotelPage },
   { path: config.routeSocial.CreatePost, component: CreatePostPage },
+  { path: config.routeSocial.ViewPost, component: ViewPostPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: LoginPage },

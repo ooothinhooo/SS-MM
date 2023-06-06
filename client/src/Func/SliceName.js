@@ -4,3 +4,6 @@ export function splitName(fullName) {
   const lastName = nameArray.join(" ");
   return { firstName, lastName };
 }
+// mai bao tin
+// mai 
+// bao tin

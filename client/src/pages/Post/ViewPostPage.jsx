@@ -4,10 +4,13 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import { GET_ONE_POST } from "../../API/Api/GetOnePost.api.js";
 import { useState } from "react";
+import { HiChevronDoubleRight } from "react-icons/hi";
+
+import CommentsPage from "../Comments/CommentsPage.jsx";
 
 function ViewPostPage({ user }) {
   let { id } = useParams();
-
+  let colDB = `SSMM/POST/${id}`;
   const [data, setData] = useState();
   const [images, setImages] = useState();
   const GETAPI = async () => {
@@ -35,20 +38,22 @@ function ViewPostPage({ user }) {
           <div>
             <div class="grid grid-cols-2 gap-4">
               <div className="border rounded-md">
-                <div className="">
-                  <Slide>
-                    {data?.images?.map((slideImage, index) => (
-                      <div key={index}>
-                        <div class="bg-indigo-300 flex justify-center items-center">
-                          <img
-                            src={slideImage?.imgUrl}
-                            class="object-cover w-full h-[500px]"
-                          />
+                {data?.images && (
+                  <div className="">
+                    <Slide>
+                      {data?.images?.map((slideImage, index) => (
+                        <div key={index}>
+                          <div class="bg-indigo-300 flex justify-center items-center">
+                            <img
+                              src={slideImage?.imgUrl}
+                              class="object-cover w-full h-[500px]"
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </Slide>
-                </div>
+                      ))}
+                    </Slide>
+                  </div>
+                )}
               </div>
 
               <div className="border rounded-md text-left">
@@ -56,7 +61,7 @@ function ViewPostPage({ user }) {
                   <div class="card md:flex max-w-lg">
                     <div class="w-20 h-20 mx-auto mb-6 md:mr-6 flex-shrink-0">
                       <img
-                        class="object-cover rounded-full"
+                        class="object-cover w-20 h-20 bg-gray-300 rounded-full border"
                         src={data?.userId?.avatar}
                       />
                     </div>
@@ -81,7 +86,38 @@ function ViewPostPage({ user }) {
                     </span>{" "}
                     <span>{" " + data?.ward + "," + data?.district}</span>
                   </span>
+                  <p className="font-bold flex justify-start items-center">
+                    <HiChevronDoubleRight />
+                    {data?.province}
+                  </p>
+                  <div class="whitespace-normal text-sm italic">
+                    {data?.desc}
+                  </div>
+                  <div>
+                    <a
+                      href="#_"
+                      class="inline-flex overflow-hidden text-white bg-blue-700 rounded group"
+                    >
+                      <span class="px-3.5 py-2 text-white bg-purple-500 group-hover:bg-purple-600 flex items-center justify-center">
+                        Liên Hệ
+                      </span>
+                      <span class="pl-4 pr-5 py-2.5">{data?.phone}</span>
+                    </a>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full flex justify-center items-center mt-2">
+        <div className="w-[90%] ">
+          <div>
+            <div class="grid grid-cols-2 gap-4">
+              <div className="border rounded-md bg-red-300"></div>
+
+              <div className="border w-full rounded-md text-left">
+                <CommentsPage user={user} colDB={colDB} />
               </div>
             </div>
           </div>

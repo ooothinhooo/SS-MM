@@ -25,7 +25,7 @@ function ServicePage({ user, service }) {
     <div>
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={200}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

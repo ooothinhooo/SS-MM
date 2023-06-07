@@ -99,7 +99,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       if (formService) {
         // R.PostAPI_addRoom(formValues,formService)
         console.log(JSON.stringify(formService));
-        // CreateService(formService);
+        CreateService(formService);
       }
     } catch (error) {}
   };
@@ -116,7 +116,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       if (result?.data?.status == 200) {
         toast.success(`Dịch vụ ${form[0]} được thêm thành công`, {
           position: "top-right",
-          autoClose: 2000,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -286,7 +286,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         `;
       });
       const { value: formValues } = await Swal.fire({
-        title: "Multiple inputs",
+        title: "Danh Sách Phòng Sử Dụng Dịch Vụ",
         width: 1200,
         html: `
         <div class="grid grid-cols-8 gap-4 p-2">  

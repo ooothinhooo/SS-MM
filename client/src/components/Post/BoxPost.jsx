@@ -6,6 +6,11 @@ import { MdReadMore } from "react-icons/md";
 import { HiChevronDoubleRight } from "react-icons/hi";
 
 function BoxPost({ value }) {
+  
+
+  const handelLike = () => {
+    console.log("like");
+  };
   return (
     <>
       {/* xl:flex-col */}
@@ -43,8 +48,13 @@ function BoxPost({ value }) {
               </p>
             </div>
           </div>
-          <div className="w-full gap-2 flex justify-start items-center border-t rounded-md cursor-pointer">
-            <span className=" text-blue-900 flex justify-center items-center ml-2  px-2 py-1">
+          <div className="w-full z-10 gap-2 flex justify-start items-center border-t rounded-md cursor-pointer">
+            <span
+              onclick={() => {
+                handelLike();
+              }}
+              className=" text-blue-900 hover:text-black flex justify-center  items-center ml-2  px-2 py-1"
+            >
               <AiFillLike className="text-xl mx-1 justify-center items-center" />{" "}
               Thích
             </span>

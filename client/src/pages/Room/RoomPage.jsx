@@ -234,7 +234,7 @@ function RoomPage({ user }) {
           // toast.success(`${value} được thêm thành công`);
           toast.success(`${formValues[0]} được thêm thành công`, {
             position: "top-right",
-            autoClose: 2000,
+            autoClose: 200,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -243,7 +243,7 @@ function RoomPage({ user }) {
             theme: "light",
             // theme: "colored",
           });
-          ListRoom.GetAPI();
+          GetAPI();
         }
       } catch (error) {}
     };
@@ -407,13 +407,16 @@ function RoomPage({ user }) {
         if (room) {
           console.log(room);
           const result = await CREATE_ROOM(user?.token, user?.Motel, room);
-          console.log(JSON.stringify(result?.config?.data));
+          // console.log(JSON.stringify(result?.config?.data));
+          console.log(result.data.status);
           console.log(result);
           if (result.data.status == 200) {
+            setForm({});
+            GetAPI();
             // toast.success(`${value} được thêm thành công`);
-            toast.success(`Các Phòng được thêm thành công`, {
+            toast.success(`Thêm Phòng thành công`, {
               position: "top-right",
-              autoClose: 2000,
+              autoClose: 200,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -423,9 +426,6 @@ function RoomPage({ user }) {
               // theme: "colored",
             });
             // ArrayRoom = [];
-
-            setForm({});
-            ListRoom.GetAPI();
           }
         }
       } catch (error) {}
@@ -435,6 +435,7 @@ function RoomPage({ user }) {
   let OR = new OneRoom();
   return (
     <div className=" w-full ">
+      <ToastContainer />
       <div class="flex w-full  justify-center items-center">
         {" "}
         <div class="rounded-xl border p-2 shadow-md w-[90%] bg-white">

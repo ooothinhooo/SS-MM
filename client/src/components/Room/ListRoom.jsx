@@ -50,7 +50,17 @@ function ListRoom({ data, user, dele, GetAPI }) {
       console.log(result);
       if (result.status == 200) {
         if (result.data.status == 200) {
-          toast.success("Xoá Phòng Thành Công");
+          toast.success("Xoá Phòng Thành Công", {
+            position: "top-right",
+            autoClose: 200,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            // theme: "colored",
+          });
           GetAPI();
         }
       }

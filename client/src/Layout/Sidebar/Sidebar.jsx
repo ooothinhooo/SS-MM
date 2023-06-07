@@ -1,8 +1,30 @@
 import { NavLink, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Sidebar = () => {
   // const router = useRouter();
   // const { isCollapsed, toggleSidebarcollapse } = useContext(SidebarContext);
+  const handlerLogout = () => {
+    Swal.fire({
+      title: "Bạn muốn đăng xuất",
+      // text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đăng xuất ngay",
+      cancelButtonText: "Huỷ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Đã Đăng Xuất", "Đăng Xuất Thành Công", "success");
+        localStorage.clear();
+        // navigation("/");
+        // window.location.href = "/";
+        window.location = "/";
+      }
+    });
+  };
+
   const Menu = [
     {
       title: "Trang chính",
@@ -223,7 +245,7 @@ const Sidebar = () => {
           </div>
           <div class="w-max mb-6">
             <a
-              href="#"
+              onClick={(e) => handlerLogout()}
               class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"
             >
               <svg

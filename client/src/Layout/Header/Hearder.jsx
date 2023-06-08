@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 
 import { BsFillKeyboardFill } from "react-icons/bs";
+import { AiOutlineBars } from "react-icons/ai";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContextProvider.jsx";
 import { routes } from "../../config/routes.js";
@@ -11,6 +12,7 @@ import Swal from "sweetalert2";
 function Hearder() {
   // const router = useRouter();
   // const [user] = useState();
+  const [bar, setBar] = useState(Boolean(false));
   const { setUser, user, social, setSocial } = useContext(ProductContext);
   /* `const [dropMenu, setDropMenu] = useState(false);` is declaring a state variable `dropMenu` and a
   function `setDropMenu` to update its value. The initial value of `dropMenu` is set to `false`.
@@ -57,6 +59,28 @@ function Hearder() {
     // window.location = "/room";
   };
 
+  const Bar = [
+    {
+      title: "Trang cá nhân",
+      icon: "",
+      path: `/u/${user?.userId}`,
+    },
+    {
+      title: "Quản lý nội dung",
+      icon: "",
+      path: `/u/dash/${user?.userId}`,
+    },
+    {
+      title: "Cập nhật tài khoản",
+      icon: "",
+      path: `/u/edit/${user?.userId}`,
+    },
+    {
+      title: "Thay đổi mật khẩu",
+      icon: "",
+      path: `/u/pass/${user?.userId}`,
+    },
+  ];
   // if()
   return (
     <>
@@ -66,50 +90,52 @@ function Hearder() {
           <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center justify-start">
-                <button
-                  id="toggleSidebarMobile"
-                  aria-expanded="true"
-                  aria-controls="sidebar"
-                  class="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
-                >
-                  <svg
-                    id="toggleSidebarMobileHamburger"
-                    class="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+                <NavLink to="/">
+                  <button
+                    id="toggleSidebarMobile"
+                    aria-expanded="true"
+                    aria-controls="sidebar"
+                    class="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <svg
-                    id="toggleSidebarMobileClose"
-                    class="w-6 h-6 hidden"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+                    <svg
+                      id="toggleSidebarMobileHamburger"
+                      class="w-6 h-6"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                    <svg
+                      id="toggleSidebarMobileClose"
+                      class="w-6 h-6 hidden"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </button>
+                  <a
+                    href="#"
+                    class="text-xl font-bold flex items-center lg:ml-2.5"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </button>
-                <a
-                  href="#"
-                  class="text-xl font-bold flex items-center lg:ml-2.5"
-                >
-                  <img
-                    src="https://demo.themesberg.com/windster/images/logo.svg"
-                    class="h-6 mr-2"
-                    alt="Windster Logo"
-                  />
-                  <span class="self-center whitespace-nowrap">Windster</span>
-                </a>
+                    <img
+                      src="https://demo.themesberg.com/windster/images/logo.svg"
+                      class="h-6 mr-2"
+                      alt="Windster Logo"
+                    />
+                    <span class="self-center whitespace-nowrap">Windster</span>
+                  </a>
+                </NavLink>
                 <form action="#" method="GET" class="hidden lg:block lg:pl-32">
                   <label for="topbar-search" class="sr-only">
                     Search
@@ -225,6 +251,48 @@ function Hearder() {
                       </div>
                     </>
                   )}
+                </>
+                <>
+                  <div
+                    onClick={(e) => {
+                      setBar(!bar);
+                    }}
+                  >
+                    <a class="relative cursor-pointer inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-gray-500 rounded-xl group">
+                      <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-white rounded group-hover:-mr-4 group-hover:-mt-4">
+                        <span class="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-gray-300"></span>
+                      </span>
+                      <span class="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-gray-600 rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
+                      <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
+                        <AiOutlineBars />
+                      </span>
+                    </a>
+                  </div>
+                  <div
+                    className={`${
+                      bar ? "" : "hidden"
+                    } w-[180px] h-auto absolute top-[60px] right-[23px] bg-white drop-shadow-2xl shadow-indigo-500/40 z-100   rounded-md flex items-start justify-start`}
+                  >
+                    <div className="w-full  py-2 items-start justify-start text-left">
+                      {Bar.map((item) => {
+                        return (
+                          <NavLink to={item?.path}>
+                            <button className="mb-2 w-[160px] flex items-start justify-start ml-2">
+                              <a
+                                href="#_"
+                                class="relative w-50 border text-left inline-flex items-center justify-start px-1 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
+                              >
+                                <span class="w-48 h-48 rounded rotate-[-40deg] bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                                <span class="relative w-[160px] text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
+                                  {item?.title}
+                                </span>
+                              </a>
+                            </button>
+                          </NavLink>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </>
               </div>
             </div>

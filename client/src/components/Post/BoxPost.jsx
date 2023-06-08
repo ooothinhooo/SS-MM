@@ -4,17 +4,30 @@ import { AiFillLike } from "react-icons/ai";
 import { BsSave } from "react-icons/bs";
 import { MdReadMore } from "react-icons/md";
 import { HiChevronDoubleRight } from "react-icons/hi";
+import { ToastContainer, toast } from "react-toastify";
+import { INTERACT_POST } from "../../API/Posts/InteractPost.api.js";
+import { SAVE_POST } from "../../API/Posts/SavePost.api.js";
 
-function BoxPost({ value }) {
-  
-
-  const handelLike = () => {
-    console.log("like");
+function BoxPost({ user, value, GETAPI_LISTPOST }) {
+  const handlerLike = async (id) => {
+    try {
+      const result = await INTERACT_POST(user?.token, id);
+      GETAPI_LISTPOST();
+    } catch (error) {}
   };
+
+  const handlerSavePost = async (id) => {
+    try {
+      const result = await SAVE_POST(user?.token, id);
+      console.log(result);
+      GETAPI_LISTPOST();
+    } catch (error) {}
+  };
+
   return (
     <>
       {/* xl:flex-col */}
-
+      <ToastContainer />
       <li class="relative flex flex-col sm:flex-row h-[250px] items-start bg-white shadow-lg p-3 rounded-md  ">
         <div class="order-1 sm:ml-6 xl:ml-1 text-left ">
           <NavLink to={`/post/view/${value?._id}`}>
@@ -50,27 +63,43 @@ function BoxPost({ value }) {
           </div>
           <div className="w-full z-10 gap-2 flex justify-start items-center border-t rounded-md cursor-pointer">
             <span
-              onclick={() => {
-                handelLike();
+              onClick={(e) => {
+                handlerLike(value?._id);
               }}
-              className=" text-blue-900 hover:text-black flex justify-center  items-center ml-2  px-2 py-1"
+              className={`${
+                value?.likes?.some((obj) =>
+                  Object.values(obj).includes(user?.userId)
+                )
+                  ? "text-blue-600"
+                  : "text-black"
+              }  flex justify-center  items-center ml-2  px-2 py-1`}
             >
               <AiFillLike className="text-xl mx-1 justify-center items-center" />{" "}
               Thích
             </span>
-            <span className=" text-blue-900 flex justify-center items-center ml-2  px-2 py-1">
+            <span
+              className={`${
+                value?.saves?.some((obj) =>
+                  Object.values(obj).includes(user?.userId)
+                )
+                  ? "text-blue-600"
+                  : "text-black"
+              } flex justify-center items-center ml-2  px-2 py-1`}
+            >
               <BsSave className="text-md mx-1 justify-center items-center" />{" "}
               Lưu bài
             </span>
-            <span className=" text-blue-900 flex justify-center items-center ml-2  px-2 py-1">
-              <MdReadMore className="text-2xl mx-1 justify-center items-center" />{" "}
-              Xem thêm
-            </span>
+            <NavLink to={`/post/view/${value?._id}`}>
+              <span className=" text-blue-900 flex justify-center items-center ml-2  px-2 py-1">
+                <MdReadMore className="text-2xl mx-1 justify-center items-center" />{" "}
+                Xem thêm
+              </span>
+            </NavLink>
           </div>
         </div>
         {/* xl:mb-6 xl:w-full */}
         <img
-          src={value?.images[0].imgUrl}
+          src={value?.images[0]?.imgUrl}
           alt=""
           class="mb-6 shadow-md rounded-lg bg-slate-50 w-full h-full sm:w-[17rem] sm:mb-0 mr-2 "
         />

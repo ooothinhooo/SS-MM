@@ -7,6 +7,10 @@ import BillPage from "../pages/Billing/BillPage.jsx";
 import UpdateBillPage from "../pages/Billing/UpdateBillPage.jsx";
 import DashboardPage from "../pages/Dashboard/DashboardPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
+import ChangPassPage from "../pages/Info/ChangPassPage.jsx";
+import DashContentPage from "../pages/Info/DashContentPage.jsx";
+import InfoPage from "../pages/Info/InfoPage.jsx";
+import UpdateUserPage from "../pages/Info/UpdateUserPage.jsx";
 import MainPage from "../pages/Mainpage/MainPage.jsx";
 import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
@@ -35,6 +39,10 @@ const SignedIn = [
   { path: config.routeSocial.Motel, component: MotelPage },
   { path: config.routeSocial.CreatePost, component: CreatePostPage },
   { path: config.routeSocial.ViewPost, component: ViewPostPage },
+  { path: config.routeSocial.Info, component: InfoPage },
+  { path: config.routeSocial.UpdateUser, component: UpdateUserPage },
+  { path: config.routeSocial.Pass, component: ChangPassPage },
+  { path: config.routeSocial.Dash, component: DashContentPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: LoginPage },

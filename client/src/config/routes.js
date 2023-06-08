@@ -32,4 +32,8 @@ export const routeSocial = {
   CreatePost: "/post/create",
   ViewPost: "/post/view/:id",
   UpdatePost: "/post/update/:id",
+  Info: "/u/:id",
+  UpdateUser: "/u/edit/:id",
+  Pass: "/u/pass/:id",
+  Dash: "/u/dash/:id",
 };

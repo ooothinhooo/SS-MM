@@ -36,4 +36,5 @@ export const routeSocial = {
   UpdateUser: "/u/edit/:id",
   Pass: "/u/pass/:id",
   Dash: "/u/dash/:id",
+  Search: "/search/:q",
 };

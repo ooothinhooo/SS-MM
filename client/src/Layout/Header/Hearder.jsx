@@ -8,7 +8,8 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ProductContext } from "../../contexts/ProductContextProvider.jsx";
 import { routes } from "../../config/routes.js";
 import Swal from "sweetalert2";
-
+import LOGO from "../../images/smart-meter.png";
+import InputSearch from "../../components/Search/InputSearch.jsx";
 function Hearder() {
   // const router = useRouter();
   // const [user] = useState();
@@ -82,6 +83,26 @@ function Hearder() {
     },
   ];
   // if()
+  const handlerLogout = () => {
+    Swal.fire({
+      title: "Bạn muốn đăng xuất",
+      // text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Đăng xuất ngay",
+      cancelButtonText: "Huỷ",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Đã Đăng Xuất", "Đăng Xuất Thành Công", "success");
+        localStorage.clear();
+        // navigation("/");
+        // window.location.href = "/";
+        window.location = "/";
+      }
+    });
+  };
   return (
     <>
       <div>
@@ -96,47 +117,16 @@ function Hearder() {
                     aria-expanded="true"
                     aria-controls="sidebar"
                     class="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded"
-                  >
-                    <svg
-                      id="toggleSidebarMobileHamburger"
-                      class="w-6 h-6"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                    <svg
-                      id="toggleSidebarMobileClose"
-                      class="w-6 h-6 hidden"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </button>
+                  ></button>
                   <a
                     href="#"
                     class="text-xl font-bold flex items-center lg:ml-2.5"
                   >
-                    <img
-                      src="https://demo.themesberg.com/windster/images/logo.svg"
-                      class="h-6 mr-2"
-                      alt="Windster Logo"
-                    />
-                    <span class="self-center whitespace-nowrap">Windster</span>
+                    <img src={LOGO} class="h-10 mr-2" alt="Windster Logo" />
+                    <span class="self-center whitespace-nowrap">SSMM</span>
                   </a>
                 </NavLink>
-                <form action="#" method="GET" class="hidden lg:block lg:pl-32">
+                {/* <div action="#" method="GET" class="hidden lg:block lg:pl-32">
                   <label for="topbar-search" class="sr-only">
                     Search
                   </label>
@@ -163,7 +153,10 @@ function Hearder() {
                       placeholder="Search"
                     />
                   </div>
-                </form>
+                </div> */}
+                <div>
+                  <InputSearch />
+                </div>
               </div>
               <div class="flex items-center">
                 <button
@@ -280,9 +273,11 @@ function Hearder() {
                             <button className="mb-2 w-[160px] flex items-start justify-start ml-2">
                               <a
                                 href="#_"
-                                class="relative w-50 border text-left inline-flex items-center justify-start px-1 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
+                                class="relative w-50 border text-left inline-flex items-center justify-start px-1 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-blue-400 group"
                               >
-                                <span class="w-48 h-48 rounded rotate-[-40deg] bg-purple-600 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                                <span
+                                  class={`w-48 h-48 rounded rotate-[-80deg] bg-blue-400 absolute bottom-1 left-10 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0`}
+                                ></span>
                                 <span class="relative w-[160px] text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
                                   {item?.title}
                                 </span>
@@ -291,6 +286,17 @@ function Hearder() {
                           </NavLink>
                         );
                       })}
+                      <button
+                        onClick={(e) => handlerLogout()}
+                        className="mb-2 w-[160px] flex items-start justify-start ml-2"
+                      >
+                        <a class="relative w-50 border text-left inline-flex items-center justify-start px-1 py-2 overflow-hidden font-medium transition-all bg-white rounded hover:bg-green-300 group">
+                          <span class="w-48 h-48 rounded rotate-[30deg] bg-green-400 absolute bottom-2 left-14 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                          <span class="relative w-[160px] text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
+                            Đăng xuất
+                          </span>
+                        </a>
+                      </button>
                     </div>
                   </div>
                 </>

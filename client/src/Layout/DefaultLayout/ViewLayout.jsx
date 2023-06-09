@@ -14,7 +14,7 @@ function ViewLayout({ children }) {
     <>
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={600}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -28,7 +28,7 @@ function ViewLayout({ children }) {
 
       <div class="h-screen flex overflow-hidden bg-white">
         <div class="flex flex-col w-0 flex-1 overflow-hidden">
-          <main class="flex-1 relative z-0 mt-20 ml-8  overflow-y-auto focus:outline-none">
+          <main class="flex-1 relative z-0 mt-20   overflow-y-auto focus:outline-none">
             <div class="">{children}</div>
           </main>
         </div>

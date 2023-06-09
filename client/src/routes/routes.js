@@ -23,6 +23,7 @@ import ViewPostPage from "../pages/Post/ViewPostPage.jsx";
 
 import RoomPage from "../pages/Room/RoomPage.jsx";
 import ViewRoomPage from "../pages/Room/ViewRoomPage.jsx";
+import SearchPage from "../pages/Search/SearchPage.jsx";
 import ServicePage from "../pages/Service/ServicePage.jsx";
 
 // Pages
@@ -43,6 +44,7 @@ const SignedIn = [
   { path: config.routeSocial.UpdateUser, component: UpdateUserPage },
   { path: config.routeSocial.Pass, component: ChangPassPage },
   { path: config.routeSocial.Dash, component: DashContentPage },
+  { path: config.routeSocial.Search, component: SearchPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: LoginPage },

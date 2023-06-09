@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { GET_USER } from "../../API/User/GetUser.js";
 import { useNavigate } from "react-router-dom";
 import { REGISTER_MOTEL } from "../../API/Motels/RegisterMotel.js";
+import { ToastContainer, toast } from "react-toastify";
 
 function MotelPage({ user, props }) {
   const navigation = useNavigate();
@@ -32,7 +33,7 @@ function MotelPage({ user, props }) {
         // props.setUser(JSON.stringify(result?.data.data));
         // window.location.reload();
         localStorage.setItem("user", JSON.stringify(result.data.data));
-
+        toast.success("Đăng ký thành công");
         setTimeout(() => {
           window.location = "/room";
         }, 2000);
@@ -45,6 +46,8 @@ function MotelPage({ user, props }) {
   // }, [data]);
   return (
     <div>
+      {/* <ToastContainer /> */}
+
       <div className="">
         {!data?.Motel ? (
           <>

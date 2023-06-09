@@ -8,6 +8,7 @@ import { LIST_POST } from "../../API/Api/ListPost.api.js";
 function MainPage({ user }) {
   const host = "https://provinces.open-api.vn/api/";
   const [data, setData] = useState();
+  const [data2, setData2] = useState();
   const [page, setPage] = useState("1");
   const [fee, setFee] = useState({
     feeStart: "",
@@ -115,6 +116,16 @@ function MainPage({ user }) {
     CallAPI_PROVINCE();
   }, []);
 
+  const GETAPI_LISTPOST2 = async () => {
+    try {
+      const result = await LIST_POST("1");
+      setData2(result?.data);
+      console.log(result);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    GETAPI_LISTPOST2();
+  }, []);
   return (
     <div>
       {/* <CreatePostPage /> */}
@@ -425,7 +436,38 @@ function MainPage({ user }) {
                     <p className="text-left font-bold mb-4 mt-2">
                       Tin mới đăng
                     </p>
-                    <div className="h-[100px]"></div>
+                    <div className="">
+                      <>
+                        {data2?.map((i) => {
+                          return (
+                            <>
+                              <NavLink to={`/post/view/${i?._id}`}>
+                                <div class="rounded cursor-pointer my-1 ">
+                                  <div class="flex justify-start border-black shadow-lg  border rounded-md">
+                                    <div class="flex mx-2 my-1  ">
+                                      <div class="w-[80px] h-[80px]">
+                                        <img
+                                          class="w-full h-full"
+                                          src={i?.images[0]?.imgUrl}
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="text-left w-full">
+                                      <span class="text-sm text-blue-500 font-bold whitespace-normal">
+                                        {i?.title.substring(0, 40) + " ..."}
+                                      </span>
+                                      <p class=" text-base ">
+                                        Giá: {i?.roomFee}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </NavLink>
+                            </>
+                          );
+                        })}
+                      </>
+                    </div>
                   </div>
                 </div>
               </div>

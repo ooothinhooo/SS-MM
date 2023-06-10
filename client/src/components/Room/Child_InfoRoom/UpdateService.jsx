@@ -24,9 +24,9 @@ function UpdateService({ user, roomId, getAPI_Room }) {
 
       if (result?.data?.status === 200) {
         getAPI_Room();
-        toast.success("Thêm Thành Viên thành công", {
+        toast.success("Cập nhật thành công", {
           position: "top-right",
-          autoClose: 1500,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -38,10 +38,10 @@ function UpdateService({ user, roomId, getAPI_Room }) {
     } catch (error) {}
   };
   return (
-    <div className="w-full flex justify-center items-center  h-auto bg-white">
+    <div className="w-full flex justify-center items-center   bg-white">
       <ToastContainer />
 
-      <div className="w-[90%] h-auto bg-white">
+      <div className="w-[90%]  bg-white">
         <p class="mt-2 px-2 text-base text-gray-600">THÔNG TIN DỊCH VỤ PHÒNG</p>
         <div>
           <div
@@ -94,36 +94,6 @@ function UpdateService({ user, roomId, getAPI_Room }) {
                 placeholder="1.000.000"
                 // labelText="Ngày Sinh"
                 value={data.deposit}
-                handleInputState={handleInputState}
-              />
-              <span className="font-serif text-blue-700">VND</span>
-            </p>
-          </div>
-
-          <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-            <p class="text-sm text-gray-600">GIÁ ĐIỆN</p>
-            <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
-              <Input
-                name="electricityPrice"
-                type="number"
-                placeholder="3.000"
-                // labelText="Ngày Sinh"
-                value={data.electricityPrice}
-                handleInputState={handleInputState}
-              />
-              <span className="font-serif text-blue-700">VND</span>
-            </p>
-          </div>
-
-          <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-            <p class="text-sm text-gray-600">GIÁ NƯỚC</p>
-            <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
-              <Input
-                name="waterPrice"
-                type="number"
-                placeholder="3.000"
-                // labelText="Ngày Sinh"
-                value={data.waterPrice}
                 handleInputState={handleInputState}
               />
               <span className="font-serif text-blue-700">VND</span>

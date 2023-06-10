@@ -11,8 +11,7 @@ import Swal from "sweetalert2";
 import LOGO from "../../images/smart-meter.png";
 import InputSearch from "../../components/Search/InputSearch.jsx";
 function Hearder() {
-  // const router = useRouter();
-  // const [user] = useState();
+
   const [bar, setBar] = useState(Boolean(false));
   const { setUser, user, social, setSocial } = useContext(ProductContext);
   /* `const [dropMenu, setDropMenu] = useState(false);` is declaring a state variable `dropMenu` and a
@@ -21,10 +20,6 @@ function Hearder() {
   component. */
   const [dropMenu, setDropMenu] = useState(false);
   const navigation = useNavigate();
-
-  const logout = async () => {
-    // await signOut(auth);
-  };
   const location = useLocation().pathname;
 
   function isLocationInRoutes(location, data) {
@@ -103,6 +98,7 @@ function Hearder() {
       }
     });
   };
+
   return (
     <>
       <div>
@@ -180,7 +176,7 @@ function Hearder() {
                 </button>
                 <div class="hidden lg:flex items-center">
                   <span class="text-base font-normal text-gray-500 mr-5">
-                    Open source ❤️
+                    ❤️
                   </span>
                   <div class="-mb-1">
                     <a
@@ -192,7 +188,7 @@ function Hearder() {
                       data-show-count="true"
                       aria-label="Star themesberg/windster-tailwind-css-dashboard on GitHub"
                     >
-                      Star
+                      Xin Chào
                     </a>
                   </div>
                 </div>
@@ -250,6 +246,7 @@ function Hearder() {
                     onClick={(e) => {
                       setBar(!bar);
                     }}
+                    className={`${!social ? "hidden" : ""}`}
                   >
                     <a class="relative cursor-pointer inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-gray-500 rounded-xl group">
                       <span class="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-white rounded group-hover:-mr-4 group-hover:-mt-4">

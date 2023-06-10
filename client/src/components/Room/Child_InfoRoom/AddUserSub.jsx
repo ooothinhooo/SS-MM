@@ -30,7 +30,7 @@ function AddUserSub({ user, roomId, isAdd, getAPI_Room }) {
       console.log(result);
       toast.success("Thêm thành công", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

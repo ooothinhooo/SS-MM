@@ -50,7 +50,7 @@ function ViewRoomPage({ user }) {
   return (
     <>
       <ToastContainer />
-      <div className="mt-20 mr-20 w-full">
+      <div className=" w-full">
         <div class="flex ">
           <div className=" w-full h-full">
             <Tabs value="info">

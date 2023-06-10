@@ -34,7 +34,7 @@ function BoxPost({ user, value, GETAPI_LISTPOST }) {
           <NavLink to={`/post/view/${value?._id}`}>
             <h3 class="mb-1 text-slate-900 font-semibold dark:text-slate-200">
               <span class="mb-1 block text-sm leading-6 text-indigo-500">
-                {value?.title.substring(0, 40) + " ..."}
+                {value?.title?.substring(0, 40) + " ..."}
               </span>
               Giá Phòng:
               <NumericFormat
@@ -58,7 +58,7 @@ function BoxPost({ user, value, GETAPI_LISTPOST }) {
             </p>
             <div class="w-[90%]">
               <div class="whitespace-normal text-sm italic">
-                {value?.desc.substring(0, 60) + " ..."}
+                {value?.desc?.substring(0, 60) + " ..."}
               </div>
             </div>
             <div className="my-1">

@@ -64,9 +64,9 @@ function AddMember({ user, isAdd, setIsAdd }) {
         const result = await ADD_MEMBER(user?.token, data);
         console.log(result);
         if (result?.data?.status === 200) {
-          toast.success("Thêm Thành Viên thành công", {
+          toast.success("Thêm thành viên thành công", {
             position: "top-right",
-            autoClose: 1500,
+            autoClose: 500,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -93,7 +93,7 @@ function AddMember({ user, isAdd, setIsAdd }) {
       } else {
         toast.error("Thông tin chưa điền đủ", {
           position: "top-right",
-          autoClose: 1500,
+          autoClose: 500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

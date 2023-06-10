@@ -14,7 +14,6 @@ import NoLoginLayout from "./Layout/DefaultLayout/NoLoginLayout.jsx";
 
 function App() {
   const { setUser, user, social, setSocial } = useContext(ProductContext);
-  console.log(user);
   const Fun_ManagingMotel = () => {
     return (
       <Router>

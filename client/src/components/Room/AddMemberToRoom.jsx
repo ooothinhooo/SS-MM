@@ -26,7 +26,7 @@ function AddMemberToRoom({ user, roomId, isAdd }) {
       // toast.success("Thêm thành công");
       toast.success("🦄 Thêm thành công", {
         position: "top-right",
-        autoClose: 2000,
+        autoClose: 500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

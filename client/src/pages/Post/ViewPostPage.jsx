@@ -7,6 +7,7 @@ import { useState } from "react";
 import { HiChevronDoubleRight } from "react-icons/hi";
 
 import CommentsPage from "../Comments/CommentsPage.jsx";
+import { NumericFormat } from "react-number-format";
 
 function ViewPostPage({ user }) {
   let { id } = useParams();
@@ -78,7 +79,14 @@ function ViewPostPage({ user }) {
                   </div>
                   <p>
                     <span>Giá phòng: </span>
-                    <span>{data?.roomFee}</span>
+                    <span>
+                      <NumericFormat
+                        value={data?.roomFee}
+                        thousandSeparator
+                        displayType="text"
+                      />{" "}
+                      VNĐ/Phòng
+                    </span>
                   </p>
                   <span className="whitespace-normal flex">
                     <span className="flex">

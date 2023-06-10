@@ -7,6 +7,7 @@ import { HiChevronDoubleRight } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import { INTERACT_POST } from "../../API/Posts/InteractPost.api.js";
 import { SAVE_POST } from "../../API/Posts/SavePost.api.js";
+import { NumericFormat } from "react-number-format";
 
 function BoxPost({ user, value, GETAPI_LISTPOST }) {
   const handlerLike = async (id) => {
@@ -35,7 +36,13 @@ function BoxPost({ user, value, GETAPI_LISTPOST }) {
               <span class="mb-1 block text-sm leading-6 text-indigo-500">
                 {value?.title.substring(0, 40) + " ..."}
               </span>
-              Giá Phòng: {value?.roomFee}
+              Giá Phòng:
+              <NumericFormat
+                value={value?.roomFee}
+                thousandSeparator
+                displayType="text"
+              />{" "}
+              VNĐ/Phòng
             </h3>
           </NavLink>
           <div class="prose w-full prose-slate prose-sm text-slate-600 dark:prose-dark">

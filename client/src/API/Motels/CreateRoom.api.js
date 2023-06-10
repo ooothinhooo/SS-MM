@@ -2,17 +2,19 @@ import axios from "axios";
 import { URL_LIST_ROOM } from "../index.js";
 
 //create nhiều phòng cùng lúc
-// export function CREATE_ROOM(auth, motelId, data) {
-//   return axios({
-//     method: "post",
-//     url: "http://localhost:9000/api/motel/createroom",
-//     headers: { auth: auth },
-//     params: { motelId: motelId },
-//     data,
-//   });
-// }
+export function CREATE_ROOM(auth, motelId, data) {
+  return axios({
+    method: "post",
+    url: "http://localhost:9000/api/motel/createroom",
+    headers: { auth: auth },
+    params: { motelId: motelId },
+    data: {
+      room: data,
+    },
+  });
+}
 //create nhiều phòng cùng lúc
-export function CREATE_ROOM(auth, motelId, roon) {
+export function CREATE_ROOM1(auth, motelId, roon) {
   console.log(roon);
   return axios
     .post(

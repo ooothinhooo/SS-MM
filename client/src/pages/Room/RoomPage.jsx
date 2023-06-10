@@ -397,6 +397,7 @@ function RoomPage({ user }) {
         });
 
         if (text) {
+          console.log(text);
           MR.POSTAPI_CREATEROOM(ArrayRoom);
         }
       } catch (error) {}

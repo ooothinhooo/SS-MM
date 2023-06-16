@@ -78,7 +78,7 @@ export default function Articles({ colDB }) {
                     <div class="relative flex gap-4 mx-4 ">
                       <img
                         src={userPhotoURL ? userPhotoURL : avatars}
-                        class="relative rounded-lg -top-8 -mb-4 bg-white border h-20 w-20"
+                        class="relative rounded-lg -top-8 -mb-4 bg-white border h-20  w-20"
                         alt=""
                         loading="lazy"
                       />
@@ -211,7 +211,7 @@ export default function Articles({ colDB }) {
                       </AccordionItemHeading>
                       <AccordionItemPanel>
                         {" "}
-                        <div className={``}>
+                        <div className={` mt-4`}>
                           <Comment id={id} colDB={colDB} />
                         </div>
                       </AccordionItemPanel>

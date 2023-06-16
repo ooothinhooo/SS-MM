@@ -438,7 +438,7 @@ function CreatePost({ user }) {
           </div>
         </div>
         <div className="w-full flex justify-end mt-4">
-          <div>
+          <div className="cursor-pointer">
             <p
               onClick={(e) => Upload()}
               class="inline-flex items-center justify-center w-full px-6 py-3 mb-2 text-lg text-white bg-green-500 rounded-md hover:bg-green-400 sm:w-auto sm:mb-0"

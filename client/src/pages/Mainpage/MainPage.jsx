@@ -388,48 +388,7 @@ function MainPage({ user }) {
                 </div>
               </div>
               {/* ... */}
-              <div className="w-full flex justify-center items-center my-4">
-                <div className="w-[90%]  border rounded-md">
-                  <div className="p-2">
-                    <p className="text-left font-bold mb-4 mt-2">
-                      Xem theo diện tích
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                      <div className=" w-full text-left">
-                        <p className="hover:text-blue-600 cursor-pointer">
-                          {"> "}Dưới 20 m²
-                        </p>
-                      </div>
-                      <div className=" w-full text-left">
-                        <p className="hover:text-blue-600 cursor-pointer">
-                          {"> "}Từ 20 - 30m²
-                        </p>
-                      </div>
-                      <div className=" w-full text-left">
-                        <p className="hover:text-blue-600 cursor-pointer">
-                          {"> "}Từ 30 - 50m²
-                        </p>
-                      </div>
-                      <div className=" w-full text-left">
-                        <p className="hover:text-blue-600 cursor-pointer">
-                          {"> "}Từ 50 - 70m²
-                        </p>
-                      </div>
-                      <div className=" w-full text-left">
-                        <p className="hover:text-blue-600 cursor-pointer">
-                          {"> "}Từ 70 - 90m²
-                        </p>
-                      </div>
-                      <div className=" w-full text-left">
-                        <p className="hover:text-blue-600 cursor-pointer">
-                          {"> "}Trên 90m²
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* ... */}
+
               <div className="w-full flex justify-center items-center my-4">
                 <div className="w-[90%]  border rounded-md">
                   <div className="p-2">
@@ -471,6 +430,20 @@ function MainPage({ user }) {
                   </div>
                 </div>
               </div>
+              {/*  */}
+              <div className="w-full flex justify-center items-center my-4">
+                <div className="w-[90%]  border rounded-md">
+                  <div className="p-2 h-[900px] bg-blue-300"> quảng cáo</div>
+                </div>
+              </div>
+              {/* ... */}
+              {/*  */}
+              <div className="w-full flex justify-center items-center my-4">
+                <div className="w-[90%]  border rounded-md">
+                  <div className="p-2 h-[900px] bg-blue-300"> quảng cáo</div>
+                </div>
+              </div>
+              {/* ... */}
             </div>
           </div>
         </div>

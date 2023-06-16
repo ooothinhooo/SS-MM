@@ -8,6 +8,7 @@ import { AiOutlineFileAdd, AiOutlineEdit } from "react-icons/ai";
 // ES6 Modules or TypeScript
 import Swal from "sweetalert2";
 import { GET_ONE_ROOM } from "../../API/Motels/GetOneRoom.api.js";
+import { NumericFormat } from "react-number-format";
 function BillPage({ user }) {
   const [month, setMonth] = useState();
   const [value, setValue] = useState();
@@ -278,9 +279,9 @@ function BillPage({ user }) {
                   class="peer block w-full font-bold  rounded-md appearance-none  border-gray-500 bg-transparent py-2.5 px-2 text-md text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
                   placeholder=" "
                 />
-                <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                {/* <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                   Chọn Tháng
-                </label>
+                </label> */}
               </div>
             </div>
           </div>
@@ -356,40 +357,77 @@ function BillPage({ user }) {
                                     : ""}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill != ""
-                                    ? i?.bill[i?.bill.length - 1]?.oldEle
-                                    : ""}
+                                  <NumericFormat
+                                    value={
+                                      i?.bill != ""
+                                        ? i?.bill[i?.bill.length - 1]?.oldEle
+                                        : ""
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill != ""
-                                    ? i?.bill[i?.bill.length - 1]?.newEle
-                                    : ""}
+                                  <NumericFormat
+                                    value={
+                                      i?.bill != ""
+                                        ? i?.bill[i?.bill.length - 1]?.newEle
+                                        : ""
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill != ""
-                                    ? i?.bill[i?.bill.length - 1]?.oldWater
-                                    : ""}
+                                  <NumericFormat
+                                    value={
+                                      i?.bill != ""
+                                        ? i?.bill[i?.bill.length - 1]?.oldWater
+                                        : ""
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill != ""
-                                    ? i?.bill[i?.bill.length - 1]?.newWater
-                                    : ""}
+                                  <NumericFormat
+                                    value={
+                                      i?.bill != ""
+                                        ? i?.bill[i?.bill.length - 1]?.newWater
+                                        : ""
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                  {i?.bill != ""
-                                    ? i?.bill[i?.bill.length - 1]?.newEle -
-                                      i?.bill[i?.bill.length - 1]?.oldEle
-                                    : ""}{" "}
+                                  <NumericFormat
+                                    value={
+                                      i?.bill != ""
+                                        ? i?.bill[i?.bill.length - 1]?.newEle -
+                                          i?.bill[i?.bill.length - 1]?.oldEle
+                                        : ""
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />{" "}
                                   {i?.bill != ""
                                     ? i?.bill[i?.bill.length - 1]?.eleUnit
                                     : ""}{" "}
                                   -{" "}
-                                  {i?.bill != ""
-                                    ? i?.bill[i?.bill.length - 1]?.newWater -
-                                      i?.bill[i?.bill.length - 1]?.oldWater
-                                    : ""}{" "}
+                                  <NumericFormat
+                                    value={
+                                      i?.bill != ""
+                                        ? i?.bill[i?.bill.length - 1]
+                                            ?.newWater -
+                                          i?.bill[i?.bill.length - 1]?.oldWater
+                                        : ""
+                                    }
+                                    thousandSeparator
+                                    displayType="text"
+                                  />{" "}
                                   {i?.bill != ""
                                     ? i?.bill[i?.bill.length - 1]?.waterUnit
                                     : ""}

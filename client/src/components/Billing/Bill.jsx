@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { UPDATE_BILL } from "../../API/Bill/updateBill.api.js";
 import { DELETE_BILL } from "../../API/Bill/deleteBill.api.js";
 import { DELETE_ALL_BILL } from "../../API/Bill/deteleAllBill.api.js";
+import { NumericFormat } from "react-number-format";
 
 function Bill({ user, roomId }) {
   const [room, setRoom] = useState();
@@ -292,22 +293,45 @@ function Bill({ user, roomId }) {
                                 {i?.month}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {i?.oldEle}
+                                <NumericFormat
+                                  value={i?.oldEle}
+                                  thousandSeparator
+                                  displayType="text"
+                                />
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {i?.newEle}
+                                <NumericFormat
+                                  value={i?.newEle}
+                                  thousandSeparator
+                                  displayType="text"
+                                />
                               </td>
 
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {i?.oldWater}
+                                <NumericFormat
+                                  value={i?.oldWater}
+                                  thousandSeparator
+                                  displayType="text"
+                                />
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                {i?.newWater}
+                                <NumericFormat
+                                  value={i?.newWater}
+                                  thousandSeparator
+                                  displayType="text"
+                                />
                               </td>
 
                               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                <span> {i?.newEle - i?.oldEle} Kí</span> |{" "}
-                                <span> {i?.newWater - i?.oldWater} Khối</span>
+                                <span>
+                                  {" "}
+                                  {i?.newEle - i?.oldEle} {i?.eleUnit}
+                                </span>{" "}
+                                |{" "}
+                                <span>
+                                  {" "}
+                                  {i?.newWater - i?.oldWater} {i?.waterUnit}
+                                </span>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <div className="flex justify-center items-center gap-1">

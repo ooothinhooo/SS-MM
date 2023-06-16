@@ -4,6 +4,7 @@ import { ADD_MEMBER_TOROOM } from "../../API/Room/addMemberToRoom.api.js";
 import { ToastContainer } from "react-toastify";
 import AddUserSub from "./Child_InfoRoom/AddUserSub.jsx";
 import UpdateService from "./Child_InfoRoom/UpdateService.jsx";
+import { NumericFormat } from "react-number-format";
 
 function InfoRom({ user, data, getAPI_Room }) {
   const [isAdd, setIsAdd] = useState(Boolean(false));
@@ -139,7 +140,13 @@ function InfoRom({ user, data, getAPI_Room }) {
             <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">GIÁ PHÒNG</p>
               <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
-                <span className="font-extrabold">{data?.roomFee}</span>
+                <span className="font-extrabold">
+                  <NumericFormat
+                    value={data?.roomFee}
+                    thousandSeparator
+                    displayType="text"
+                  />
+                </span>
                 <span className="font-serif text-blue-700">VND</span>
               </p>
             </div>
@@ -147,7 +154,13 @@ function InfoRom({ user, data, getAPI_Room }) {
             <div class="flex flex-col items-start justify-center rounded-2xl bg-blue-200 shadow-xl bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
               <p class="text-sm text-gray-600">TIỀN CỌC</p>
               <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
-                <span className="font-extrabold">{data?.deposit}</span>
+                <span className="font-extrabold">
+                  <NumericFormat
+                    value={data?.deposit}
+                    thousandSeparator
+                    displayType="text"
+                  />
+                </span>
                 <span className="font-serif text-blue-700">VND</span>
               </p>
             </div>
@@ -156,7 +169,7 @@ function InfoRom({ user, data, getAPI_Room }) {
               <p class="text-sm text-gray-600">NGÀY NHẬN PHÒNG</p>
               <p class="text-base font-medium text-navy-700 dark:text-white flex gap-1 uppercase">
                 <span className="font-extrabold">{data?.checkIn}</span>
-                <span className="font-serif text-blue-700">VND</span>
+                {/* <span className="font-serif text-blue-700">VND</span> */}
               </p>
             </div>
 

@@ -134,7 +134,128 @@ function MainPage({ user }) {
           <div class="grid grid-cols-3 gap-8 ">
             {/* overflow-y-scroll h-[600px] */}
             <div class="col-span-2 ">
-              {" "}
+              <div className=" w-full border -mb-10 mt-8">
+                <div className="p-2">
+                  {/* <p className="text-left font-bold mb-4 mt-2">Lọc Bài Viết</p> */}
+                  <div className="flex justify-center items-center  mb-2  px-2">
+                    <section className="w-full mx-2">
+                      <label
+                        for="country"
+                        class="block text-left text-md font-medium leading-6 text-gray-900"
+                      >
+                        Tỉnh/Thành Phố
+                      </label>
+                      <select
+                        onChange={(e) => {
+                          setValue({
+                            ...value,
+                            [e.target.name]: e.target.value,
+                          });
+                          setForm({
+                            ...form,
+                            [e.target.name]:
+                              e.target.options[e.target.selectedIndex].text,
+                          });
+                          handleChange(e);
+                        }}
+                        name="province"
+                        class="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                      >
+                        <option selected>Chọn Thành Phố</option>
+                        {province?.map((i) => {
+                          return (
+                            <>
+                              <option value={i?.code}>{i?.name}</option>
+                            </>
+                          );
+                        })}
+                      </select>
+                    </section>
+                    <section className="w-full mx-2">
+                      <label
+                        for="country"
+                        class="block text-left text-md font-medium leading-6 text-gray-900"
+                      >
+                        Quận/Huyện
+                      </label>
+                      <select
+                        onChange={handleChange}
+                        name="district"
+                        class="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                      >
+                        <option selected>Chọn Quận/Huyện</option>
+                        {district?.map((i) => {
+                          return (
+                            <>
+                              <option value={i?.code}>{i?.name}</option>
+                            </>
+                          );
+                        })}
+                      </select>
+                    </section>
+                    <section className="w-full mx-2">
+                      <label
+                        for="country"
+                        class="block text-left text-md font-medium leading-6 text-gray-900"
+                      >
+                        Phường/Xã
+                      </label>
+                      <select
+                        onChange={handleChange}
+                        name="ward"
+                        class="py-3 px-4 pr-9 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                      >
+                        <option selected>Chọn Phường/Xã</option>
+                        {ward?.map((i) => {
+                          return (
+                            <>
+                              <option value={i?.code}>{i?.name}</option>
+                            </>
+                          );
+                        })}
+                      </select>
+                    </section>
+                    <section className="w-full mx-2">
+                      <div className="w-full block justify-center items-center ">
+                        <button
+                          className="w-full"
+                          onClick={() => {
+                            GETAPI_LISTPOST();
+                          }}
+                        >
+                          <a
+                            href="#_"
+                            class="px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-purple-600 inline-block"
+                          >
+                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-600 group-hover:h-full opacity-90"></span>
+                            <span class="relative group-hover:text-white">
+                              Lọc bài viết
+                            </span>
+                          </a>
+                        </button>
+                        <button
+                          className="w-full"
+                          onClick={() => {
+                            setForm("");
+                            GETAPI_LISTPOST();
+                            console.log(form);
+                          }}
+                        >
+                          <a
+                            href="#_"
+                            class="px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-purple-600 inline-block"
+                          >
+                            <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-600 group-hover:h-full opacity-90"></span>
+                            <span class="relative group-hover:text-white">
+                              Xoá bộ lọc
+                            </span>
+                          </a>
+                        </button>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </div>{" "}
               <PostPage
                 user={user}
                 data={data}
@@ -158,7 +279,7 @@ function MainPage({ user }) {
                 </div>
               </div>
               {/* ... */}
-              <div className="w-full flex justify-center items-center my-4">
+              {/* <div className="w-full flex justify-center items-center my-4">
                 <div className="w-[90%]  border rounded-md">
                   <div className="p-2">
                     <p className="text-left font-bold mb-4 mt-2">
@@ -277,7 +398,7 @@ function MainPage({ user }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               {/* ... */}
               {/* ... */}
               <div className="w-full flex justify-center items-center my-4">

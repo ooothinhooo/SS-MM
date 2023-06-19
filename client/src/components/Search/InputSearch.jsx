@@ -12,13 +12,13 @@ function InputSearch() {
       //   searchValue.toLocaleLowerCase(),
       //   false
       // );
-      const value = searchValue;
-      navigation(`/search/${value}`);
+      // const value = searchValue;
+      navigation(`/search/${searchValue}`);
     }
   };
   return (
     <div>
-      <div action="#" method="GET" class="hidden lg:block lg:pl-32">
+      <div class="hidden lg:block lg:pl-32">
         <label for="topbar-search" class="sr-only">
           Search
         </label>

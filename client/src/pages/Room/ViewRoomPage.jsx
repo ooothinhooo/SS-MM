@@ -57,7 +57,7 @@ function ViewRoomPage({ user }) {
               <TabsHeader>
                 {data.map(({ label, value }) => (
                   <Tab
-                    className="bg-green-600 rounded-lg text-lg text-black mx-4"
+                    className={` bg-gray-200 rounded-lg text-lg text-black mx-4`}
                     key={value}
                     value={value}
                   >

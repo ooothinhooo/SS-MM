@@ -216,7 +216,13 @@ function MainPage({ user }) {
                       </select>
                     </section>
                     <section className="w-full mx-2">
-                      <div className="w-full block justify-center items-center ">
+                      <label
+                        for="country"
+                        class="block text-left text-md font-medium leading-6 text-gray-900"
+                      >
+                        Bộ lọc
+                      </label>
+                      <div className="w-full flex justify-center items-center ">
                         <button
                           className="w-full"
                           onClick={() => {
@@ -225,10 +231,10 @@ function MainPage({ user }) {
                         >
                           <a
                             href="#_"
-                            class="px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-purple-600 inline-block"
+                            class="px-2 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-purple-600 inline-block"
                           >
                             <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-600 group-hover:h-full opacity-90"></span>
-                            <span class="relative group-hover:text-white">
+                            <span class="relative text-sm group-hover:text-white">
                               Lọc bài viết
                             </span>
                           </a>
@@ -243,10 +249,10 @@ function MainPage({ user }) {
                         >
                           <a
                             href="#_"
-                            class="px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-purple-600 inline-block"
+                            class="px-2 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-purple-600 inline-block"
                           >
                             <span class="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-purple-600 group-hover:h-full opacity-90"></span>
-                            <span class="relative group-hover:text-white">
+                            <span class="relative text-sm group-hover:text-white">
                               Xoá bộ lọc
                             </span>
                           </a>

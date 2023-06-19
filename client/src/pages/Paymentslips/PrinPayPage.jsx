@@ -15,12 +15,15 @@ import {
 } from "react-icons/ai";
 import PaymemtsForm from "../../components/Paymentslips/PaymemtsForm.jsx";
 import PrintPay from "../../components/Paymentslips/PrintPay.jsx";
+import Print from "../../components/PrintTo/Print.jsx";
 
 export default function PrintPayPage({ user }) {
   return (
     <div className="w-full ">
       {/* <PaymemtsForm user={user} /> */}
-      <PrintPay />
+      {/* <PrintPay />
+       */}
+      <Print />
     </div>
   );
 }

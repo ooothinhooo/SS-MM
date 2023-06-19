@@ -11,14 +11,14 @@ function SearchPage({ user }) {
 
   const Call_Data_Search = async () => {
     const result = await SEARCH_POST(q);
-    console.log(q);
+    // console.log(q);
     console.log(result);
-    setValue(result.data.data);
+    setValue(result?.data?.data);
   };
   useEffect(() => {
     Call_Data_Search();
   }, [q]);
-  console.log(q);
+  // console.log(q);
   return (
     <div>
       <div className="w-full flex justify-center items-center">
@@ -32,11 +32,11 @@ function SearchPage({ user }) {
             <div class="col-span-2 ">
               <ul class="grid grid-cols-1  gap-y-2 gap-x-6 items-start justify-start text-left">
                 <ToastContainer />
-                {value?.map((value) => {
+                {value?.map((item) => {
                   return (
                     <BoxPost
                       user={user}
-                      value={value}
+                      value={item}
                       GETAPI_LISTPOST={Call_Data_Search}
                     />
                   );

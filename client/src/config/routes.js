@@ -22,6 +22,7 @@ export const routesManagingMotel = {
   UpdateBill: "/bill/:id/:roomCode",
   Payment: "/payment",
   PrintPayment: "/payment/print",
+  ExportPayment: "/payment/export",
   Reports: "/reports",
 };
 

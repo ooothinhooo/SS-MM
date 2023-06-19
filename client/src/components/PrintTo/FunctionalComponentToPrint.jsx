@@ -3,6 +3,8 @@ import * as React from "react";
 import image from "../../images/avt.jpg";
 import PrintPay from "../Paymentslips/PrintPay.jsx";
 
+import ComponetPrint from "./ComponetPrint.jsx";
+
 export class ComponentToPrint extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -178,7 +180,9 @@ export const FunctionalComponentToPrint = React.forwardRef((props, ref) => {
   return (
     <>
       <div ref={ref} text={props.text}>
-        <PrintPay />
+        {/* <PrintPay /> */}
+        {/* <PrintData /> */}
+        <ComponetPrint />
       </div>
     </>
   );

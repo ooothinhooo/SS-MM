@@ -16,6 +16,7 @@ import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
 import ViewMemberPage from "../pages/Members/ViewMemberPage.jsx";
 import MotelPage from "../pages/Motel/MotelPage.jsx";
+import ExportPayPage from "../pages/Paymentslips/ExportPayPage.jsx";
 import PaymentsPage from "../pages/Paymentslips/PaymentsPage.jsx";
 import PrintPayPage from "../pages/Paymentslips/PrinPayPage.jsx";
 import CreatePostPage from "../pages/Post/CreatePostPage.js";
@@ -68,6 +69,7 @@ const ManagingMotel = [
   { path: config.routesManagingMotel.UpdateBill, component: UpdateBillPage },
   { path: config.routesManagingMotel.Payment, component: PaymentsPage },
   { path: config.routesManagingMotel.PrintPayment, component: PrintPayPage },
+  { path: config.routesManagingMotel.ExportPayment, component: ExportPayPage },
   { path: config.routesManagingMotel.Service, component: ServicePage },
 ];
 export { SignInWithAcc, SignedIn, NotLoggedIn, ManagingMotel };

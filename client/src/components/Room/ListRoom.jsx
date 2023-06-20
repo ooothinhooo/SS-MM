@@ -167,20 +167,20 @@ function ListRoom({ data, user, dele, GetAPI }) {
     <div>
       <div class="w-full ">
         <div class="w-full h-full flex items-center justify-center  font-sans overflow-hidden">
-          <div class="w-[97%] ">
+          <div class="w-full mr-3 ">
             <div class="bg-white shadow-md rounded my-2  overflow-scroll h-[550px]">
-              <table class="min-w-max w-full table-auto ">
+              <table class=" w-full table-auto ">
                 <thead className="">
-                  <tr class="  bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                  <tr class="  bg-gray-200 text-gray-600 uppercase text-[13px] leading-normal">
                     <th class="py-3 px-6 text-left ">Tên Phòng</th>
                     <th class="py-3 px-6 text-left ">Loại Phòng</th>
                     <th class="py-3 px-6 text-left ">Giá thuê</th>
-                    <th class="py-3 px-6 text-center ">Cọc</th>
-                    <th class="py-3 px-6 text-center ">Khách Thuê</th>
-                    <th class="py-3 px-6 text-center ">Ngày Vào</th>
-                    <th class="py-3 px-6 text-center ">Tình Trạng</th>
-                    <th class="py-3 px-6 text-center ">Thu tiền</th>
-                    <th class="py-3 px-6 text-center "></th>
+                    <th class="py-3 px-6 text-left ">Cọc</th>
+                    <th class="py-3 px-6 text-left ">Khách Thuê</th>
+                    <th class="py-3 px-6 text-left ">Ngày Vào</th>
+                    <th class="py-3 px-6 text-left ">Tình Trạng</th>
+                    <th class="py-3 px-6 text-left ">Thu tiền</th>
+                    <th class="py-3 px-6 text-left "></th>
                   </tr>
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light  ">
@@ -190,15 +190,15 @@ function ListRoom({ data, user, dele, GetAPI }) {
                         <>
                           <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
-                              <div class="flex items-center">
-                                Phòng
-                                <span className="py-1 px-[10px] ml-1 rounded-full bg-blue-200 text-black font-bold">
+                              <div class="flex items-center text-[13px]">
+                                {/* Phòng */}
+                                <span className=" ml-1 rounded-full text-blue-700 font-bold">
                                   {item?.roomCode}
                                 </span>
                               </div>
                             </td>
                             <td class="py-3 px-6 text-left">
-                              <div class="flex items-center">
+                              <div class="flex items-center text-xs">
                                 {item?.category}
                               </div>
                             </td>
@@ -209,7 +209,7 @@ function ListRoom({ data, user, dele, GetAPI }) {
                                 thousandSeparator
                                 displayType="text"
                               />{" "}
-                              VNĐ
+                              <span className="italic text-sm"> VNĐ</span>
                             </td>
                             <td class="py-3 px-6 text-left">
                               <NumericFormat
@@ -219,23 +219,21 @@ function ListRoom({ data, user, dele, GetAPI }) {
                               />{" "}
                               VNĐ
                             </td>
-                            <td class="py-3 px-6 text-center">
+                            <td class="py-3 px-6 text-left">
                               <div class="flex items-center justify-center text-lg">
                                 {item?.member?.length} <AiOutlineUser />
                               </div>
                             </td>
-                            <td class="py-3 px-6 text-center">
-                              {item?.checkIn}
-                            </td>
-                            <td class="py-3 px-6 text-center">
+                            <td class="py-3 px-6 text-left">{item?.checkIn}</td>
+                            <td class="py-3 px-6 text-left">
                               {item?.member?.length != 0 ? "Đã thuê" : "Trống"}
                             </td>
-                            <td class="py-3 px-6 text-center">
+                            <td class="py-3 px-6 text-left">
                               <div
                                 onClick={(e) => Render_CheckStatus(data[index])}
                                 className="bg-gray-200  border-b rounded-md flex justify-center items-center cursor-pointer "
                               >
-                                <svg
+                                {/* <svg
                                   width="28px"
                                   height="40px"
                                   viewBox="0 0 24 24"
@@ -248,8 +246,8 @@ function ListRoom({ data, user, dele, GetAPI }) {
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                   />
-                                </svg>
-                                <span className="text-[12px]">
+                                </svg> */}
+                                <span className="text-[12px] p-1">
                                   {item?.bill[item?.bill.length - 1]?.status ? (
                                     <>
                                       <span className="text-green-600 font-bold">
@@ -266,7 +264,7 @@ function ListRoom({ data, user, dele, GetAPI }) {
                                 </span>
                               </div>
                             </td>
-                            <td class="py-3 px-6 text-center">
+                            <td class="py-3 px-6 text-left">
                               <div class="flex item-center justify-center">
                                 <div class="w-4 mr-2 cursor-pointer text-lg transform hover:text-purple-500 hover:scale-150">
                                   <NavLink to={`/room/view/${item?._id}`}>

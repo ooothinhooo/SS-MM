@@ -71,7 +71,7 @@ function DefaultLayout({ children }) {
         </div>
 
         <div class="flex flex-col w-0 flex-1 overflow-hidden">
-          <main class="flex-1 relative z-0 mt-20 ml-8  overflow-y-auto focus:outline-none">
+          <main class="flex-1 relative z-0 mt-20 ml-4  overflow-y-auto focus:outline-none">
             <div class="">{children}</div>
           </main>
         </div>

@@ -219,14 +219,11 @@ const Sidebar = () => {
                           {item?.title}
                         </span>
                       </span> */}
-                      <a
-                        href="#_"
-                        class="bg group w-full px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-purple-50 text-black inline-block"
-                      >
+                      <a class="bg group w-full px-5 py-2.5 relative rounded group overflow-hidden font-medium bg-[#F7F7F7] text-black inline-block">
                         <span
                           class={`${
                             location == item?.path ? "text-white h-full" : ""
-                          } absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-green-400 group-hover:h-full opacity-90`}
+                          } absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-[#3D8361] group-hover:h-full opacity-90`}
                         ></span>
                         <span
                           class={`${
@@ -243,7 +240,7 @@ const Sidebar = () => {
               })}
             </ul>
           </div>
-          <div class="w-max mb-6">
+          <div class="w-full mb-8 cursor-pointer border rounded-md ">
             <a
               onClick={(e) => handlerLogout()}
               class="group flex items-center space-x-4 rounded-md px-4 py-3 text-gray-600"

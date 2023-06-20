@@ -24,7 +24,7 @@ function BillPage({ user }) {
   };
   const POSTAPI = async (roomId, formValues) => {
     try {
-      console.log("obj da truye", formValues);
+      // console.log("obj da truye", formValues);
       var obj = {
         ...formValues,
         ...data,
@@ -256,7 +256,7 @@ function BillPage({ user }) {
       <ToastContainer />
 
       <div className="w-full flex justify-center items-center ">
-        <div className="w-[95%] p-6 h-full shadow-xl rounded-md">
+        <div className="w-full px-2 mr-2 h-full shadow-xl rounded-md ">
           <div>
             <p className="text-left uppercase text-lg font-bold">
               Thêm Chỉ Số Điện và Nước Cho Phòng Trọ
@@ -335,6 +335,13 @@ function BillPage({ user }) {
                           >
                             Sử dụng
                           </th>
+                          <th
+                            scope="col"
+                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          >
+                            Dịch Vụ
+                          </th>
+
                           <th
                             scope="col"
                             class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
@@ -432,6 +439,36 @@ function BillPage({ user }) {
                                     ? i?.bill[i?.bill.length - 1]?.waterUnit
                                     : ""}
                                 </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                  {i?.bill[i?.bill?.length - 1]?.service?.map(
+                                    (item) => {
+                                      return (
+                                        <>
+                                          <p className="">
+                                            <span className="italic font-bold text-[13px]">
+                                              {item.name}
+                                            </span>{" "}
+                                            ={" "}
+                                            <NumericFormat
+                                              value={item?.value}
+                                              thousandSeparator
+                                              displayType="text"
+                                            />
+                                            <span className="italic font-bold text-[13px]">
+                                              đ
+                                            </span>{" "}
+                                            <span className="italic font-bold text-[16px]">
+                                              /
+                                            </span>
+                                            <span className="italic  text-[13px]">
+                                              {item.unit}
+                                            </span>
+                                          </p>
+                                        </>
+                                      );
+                                    }
+                                  )}
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                   <div className="flex  justify-between items-center w-full">
                                     <div>
@@ -439,7 +476,7 @@ function BillPage({ user }) {
                                         <button
                                           id="addbtn"
                                           onClick={(e) => getAPI_Room(i?._id)}
-                                          className="cursor-pointer p-2 z-10 bg-blue-300 rounded-full hover:bg-blue-500"
+                                          className="cursor-pointer px-2 z-10 bg-blue-300 rounded-full hover:bg-blue-500"
                                         >
                                           <i className="text-xl">
                                             <AiOutlineFileAdd />
@@ -447,7 +484,7 @@ function BillPage({ user }) {
                                         </button>
                                         <div class="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] z-1 group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
                                           <div class="flex max-w-xs flex-col items-center">
-                                            <div class="rounded bg-gray-100 p-2 text-xs text-gray-800  text-center shadow-lg">
+                                            <div class="rounded bg-gray-100 px-2 text-xs text-gray-800  text-center shadow-lg">
                                               Thêm
                                             </div>
                                             <div class="clip-bottom h-2 w-4 bg-gray-900"></div>
@@ -460,7 +497,7 @@ function BillPage({ user }) {
                                         to={`/bill/${i?._id}/${i?.roomCode}`}
                                       >
                                         <p class="group max-w-max relative flex flex-col items-center justify-center rounded-full border border-gray-500 p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-600">
-                                          <button className="cursor-pointer p-2 z-10 bg-blue-300 rounded-full hover:bg-blue-500">
+                                          <button className="cursor-pointer px-2 z-10 bg-blue-300 rounded-full hover:bg-blue-500">
                                             <i className="text-xl">
                                               <AiOutlineEdit />
                                             </i>
@@ -468,7 +505,7 @@ function BillPage({ user }) {
 
                                           <div class="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] z-11 group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
                                             <div class="flex max-w-xs flex-col items-center">
-                                              <div class="rounded bg-gray-100 p-2 text-xs text-gray-800  text-center shadow-lg">
+                                              <div class="rounded bg-gray-100 px-2 text-xs text-gray-800  text-center shadow-lg">
                                                 Chỉnh sửa
                                               </div>
                                               <div class="clip-bottom h-2 w-4  "></div>

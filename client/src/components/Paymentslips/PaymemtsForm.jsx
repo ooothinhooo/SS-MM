@@ -9,6 +9,9 @@ import {
 import PrintPay, { PrintData } from "./PrintPay.jsx";
 import { NumericFormat } from "react-number-format";
 import Swal from "sweetalert2";
+import cardpay3 from "../../images/cardpay3.png";
+import cardpay2 from "../../images/cardpay2.png";
+import cardpay1 from "../../images/cardpay1.png";
 
 function PaymemtsForm({ user }) {
   const navigation = useNavigate();
@@ -66,105 +69,412 @@ function PaymemtsForm({ user }) {
     // setPay(JSON.parse(sessionStorage.getItem("pay")));
     console.log(pay);
   }, [pay, value]);
-  const printListData = async () => {
-    const { value: fruit } = await Swal.fire({
-      title: "Chọn Dạng Phiếu",
-      input: "select",
-      width: 900,
-      inputOptions: {
-        1: "Dạng 1",
-        2: "Dạng 2",
-      },
-      inputPlaceholder: "Chọn Dạng Phiếu",
-      showCancelButton: true,
-      html: ` <section class="py-8 px-4">
-      <div class="flex flex-wrap -mx-4">
-    
-        <div class="md:w-1/3 px-4 mb-8 md:mb-0">
-       Dạng 1
-        <img class="rounded shadow-md" src="https://i.ibb.co/1mSPssr/image.png" alt=""></div>
-        <div class="md:w-2/3 px-4 mb-8 md:mb-0">Dạng 2
-       
-        <img class="rounded shadow-md" src="https://i.ibb.co/vD6Jy7M/image.png" alt=""></div>
-      </div>
-    </section>`,
-    });
 
-    if (fruit) {
-      // Swal.fire(`You selected: ${fruit}`);
-      sessionStorage.setItem("pay", JSON.stringify(pay));
-      sessionStorage.setItem("card", JSON.stringify(fruit));
-      navigation("/payment/print");
-    }
+  const Render_Invo = async () => {
+    try {
+      const { value: x } = await Swal.fire({
+        title: "Chọn Dạng Phiếu Để In",
+        width: 1200,
+        html: `
+        <input type="radio" value="1" name="emotion" id="happy" class="input-hidden" />
+        <label for="happy">
+        <img src="https://i.ibb.co/PW470y8/image.png" class="cursor-pointer" alt="image" border="0">
+        </label>
+
+        <div class="grid grid-cols-3 gap-4 p-2">
+        <input type="radio" name="emotion" id="sad" value="4"    class="input-hidden" />
+        <label for="sad">
+          <img  src=${cardpay1} class="cursor-pointer" />
+        </label>
+        
+        <input type="radio" name="emotion" id="sad1" value="3"   class="input-hidden" />
+        <label for="sad1">
+          <img src=${cardpay3}  class="cursor-pointer" />
+        </label>
+
+        <input type="radio" value="2" name="emotion" id="happy2"   class="input-hidden" />
+        <label for="happy2">
+        <img src=${cardpay2}   class="cursor-pointer" />
+        </label>
+
+        <style>
+          .input-hidden {
+            position: absolute;
+            left: -9999px;
+          }
+    
+          input[type=radio]:checked+label>img {
+            border: 1px solid #fff;
+            box-shadow: 0 0 3px 3px #090;
+          }
+    
+          /* Stuff after this is only to make things more pretty */
+          input[type=radio]+label>img {
+           
+            transition: 500ms all;
+          }
+        </style>
+      </div>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          const checkboxes = document.querySelectorAll(
+            "input[type=radio]:checked"
+          );
+          let ArrayChecked = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            ArrayChecked.push(el.value);
+          });
+
+          // return [ArrayChecked];
+          const formValues = ArrayChecked[0];
+          return formValues;
+        },
+      });
+
+      if (x) {
+      }
+    } catch (error) {}
+  };
+  const printListData = async () => {
+    try {
+      const { value: x } = await Swal.fire({
+        title: "Chọn Dạng Phiếu Để In",
+        width: 1200,
+        html: `
+        <input type="radio" value="1" name="emotion" id="happy" class="input-hidden" />
+        <label for="happy">
+        <img src="https://i.ibb.co/PW470y8/image.png" class="cursor-pointer" alt="image" border="0">
+        </label>
+
+        <div class="grid grid-cols-3 gap-4 p-2">
+        <input type="radio" name="emotion" id="sad" value="4"    class="input-hidden" />
+        <label for="sad">
+          <img  src=${cardpay1} class="cursor-pointer" />
+        </label>
+        
+        <input type="radio" name="emotion" id="sad1" value="3"   class="input-hidden" />
+        <label for="sad1">
+          <img src=${cardpay3}  class="cursor-pointer" />
+        </label>
+
+        <input type="radio" value="2" name="emotion" id="happy2"   class="input-hidden" />
+        <label for="happy2">
+        <img src=${cardpay2}   class="cursor-pointer" />
+        </label>
+
+        <style>
+          .input-hidden {
+            position: absolute;
+            left: -9999px;
+          }
+    
+          input[type=radio]:checked+label>img {
+            border: 1px solid #fff;
+            box-shadow: 0 0 3px 3px #090;
+          }
+    
+          /* Stuff after this is only to make things more pretty */
+          input[type=radio]+label>img {
+           
+            transition: 500ms all;
+          }
+        </style>
+      </div>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          const checkboxes = document.querySelectorAll(
+            "input[type=radio]:checked"
+          );
+          let ArrayChecked = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            ArrayChecked.push(el.value);
+          });
+
+          // return [ArrayChecked];
+          const formValues = ArrayChecked[0];
+          return formValues;
+        },
+      });
+
+      if (x) {
+        sessionStorage.setItem("card", JSON.stringify(x));
+        sessionStorage.setItem("pay", JSON.stringify(value));
+        // sessionStorage.setItem("card", JSON.stringify(fruit));
+        navigation("/payment/print");
+      }
+    } catch (error) {}
   };
   const printALlData = async () => {
-    const { value: fruit } = await Swal.fire({
-      title: "Chọn Dạng Phiếu",
-      input: "select",
-      width: 900,
-      inputOptions: {
-        1: "Dạng 1",
-        2: "Dạng 2",
-      },
-      inputPlaceholder: "Chọn Dạng Phiếu",
-      showCancelButton: true,
-      html: ` <section class="py-8 px-4">
-      <div class="flex flex-wrap -mx-4">
+    try {
+      const { value: x } = await Swal.fire({
+        title: "Chọn Dạng Phiếu Để In",
+        width: 1200,
+        html: `
+        <input type="radio" value="1" name="emotion" id="happy" class="input-hidden" />
+        <label for="happy">
+        <img src="https://i.ibb.co/PW470y8/image.png" class="cursor-pointer" alt="image" border="0">
+        </label>
+
+        <div class="grid grid-cols-3 gap-4 p-2">
+        <input type="radio" name="emotion" id="sad" value="4"    class="input-hidden" />
+        <label for="sad">
+          <img  src=${cardpay1} class="cursor-pointer" />
+        </label>
+        
+        <input type="radio" name="emotion" id="sad1" value="3"   class="input-hidden" />
+        <label for="sad1">
+          <img src=${cardpay3}  class="cursor-pointer" />
+        </label>
+
+        <input type="radio" value="2" name="emotion" id="happy2"   class="input-hidden" />
+        <label for="happy2">
+        <img src=${cardpay2}   class="cursor-pointer" />
+        </label>
+
+        <style>
+          .input-hidden {
+            position: absolute;
+            left: -9999px;
+          }
     
-        <div class="md:w-1/3 px-4 mb-8 md:mb-0">
-       Dạng 1
-        <img class="rounded shadow-md" src="https://i.ibb.co/1mSPssr/image.png" alt=""></div>
-        <div class="md:w-2/3 px-4 mb-8 md:mb-0">Dạng 2
-       
-        <img class="rounded shadow-md" src="https://i.ibb.co/vD6Jy7M/image.png" alt=""></div>
+          input[type=radio]:checked+label>img {
+            border: 1px solid #fff;
+            box-shadow: 0 0 3px 3px #090;
+          }
+    
+          /* Stuff after this is only to make things more pretty */
+          input[type=radio]+label>img {
+           
+            transition: 500ms all;
+          }
+        </style>
       </div>
-    </section>`,
-    });
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          const checkboxes = document.querySelectorAll(
+            "input[type=radio]:checked"
+          );
+          let ArrayChecked = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            ArrayChecked.push(el.value);
+          });
 
-    if (fruit) {
-      // Swal.fire(`You selected: ${fruit}`);
+          // return [ArrayChecked];
+          const formValues = ArrayChecked[0];
+          return formValues;
+        },
+      });
 
-      sessionStorage.setItem("card", JSON.stringify(fruit));
-      sessionStorage.setItem("pay", JSON.stringify(value));
-      navigation("/payment/print");
-    }
+      if (x) {
+        sessionStorage.setItem("card", JSON.stringify(x));
+        sessionStorage.setItem("pay", JSON.stringify(value));
+        navigation("/payment/print");
+      }
+    } catch (error) {}
   };
-   
+
+  const ExportListData = async () => {
+    // const x = Render_Invo();
+    try {
+      const { value: x } = await Swal.fire({
+        title: "Chọn Dạng Phiếu Để Xuất",
+        width: 1200,
+        html: `
+        <input type="radio" value="1" name="emotion" id="happy" class="input-hidden" />
+        <label for="happy">
+        <img src="https://i.ibb.co/PW470y8/image.png" class="cursor-pointer" alt="image" border="0">
+        </label>
+
+        <div class="grid grid-cols-3 gap-4 p-2">
+        <input type="radio" name="emotion" id="sad" value="4"    class="input-hidden" />
+        <label for="sad">
+          <img  src=${cardpay1} class="cursor-pointer" />
+        </label>
+        
+        <input type="radio" name="emotion" id="sad1" value="3"   class="input-hidden" />
+        <label for="sad1">
+          <img src=${cardpay3}  class="cursor-pointer" />
+        </label>
+
+        <input type="radio" value="2" name="emotion" id="happy2"   class="input-hidden" />
+        <label for="happy2">
+        <img src=${cardpay2}   class="cursor-pointer" />
+        </label>
+
+        <style>
+          .input-hidden {
+            position: absolute;
+            left: -9999px;
+          }
+    
+          input[type=radio]:checked+label>img {
+            border: 1px solid #fff;
+            box-shadow: 0 0 3px 3px #090;
+          }
+    
+          /* Stuff after this is only to make things more pretty */
+          input[type=radio]+label>img {
+           
+            transition: 500ms all;
+          }
+        </style>
+      </div>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          const checkboxes = document.querySelectorAll(
+            "input[type=radio]:checked"
+          );
+          let ArrayChecked = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            ArrayChecked.push(el.value);
+          });
+
+          // return [ArrayChecked];
+          const formValues = ArrayChecked[0];
+          return formValues;
+        },
+      });
+
+      if (x) {
+        sessionStorage.setItem("card", JSON.stringify(x));
+        sessionStorage.setItem("pay", JSON.stringify(value));
+        navigation("/payment/export");
+      }
+    } catch (error) {}
+  };
+  const ExportALlData = async () => {
+    // const x = Render_Invo();
+    try {
+      const { value: x } = await Swal.fire({
+        title: "Chọn Dạng Phiếu Để Xuất",
+        width: 1200,
+        html: `
+        <input type="radio" value="1" name="emotion" id="happy" class="input-hidden" />
+        <label for="happy">
+        <img src="https://i.ibb.co/PW470y8/image.png" class="cursor-pointer" alt="image" border="0">
+        </label>
+
+        <div class="grid grid-cols-3 gap-4 p-2">
+        <input type="radio" name="emotion" id="sad" value="4"    class="input-hidden" />
+        <label for="sad">
+          <img  src=${cardpay1} class="cursor-pointer" />
+        </label>
+        
+        <input type="radio" name="emotion" id="sad1" value="3"   class="input-hidden" />
+        <label for="sad1">
+          <img src=${cardpay3}  class="cursor-pointer" />
+        </label>
+
+        <input type="radio" value="2" name="emotion" id="happy2"   class="input-hidden" />
+        <label for="happy2">
+        <img src=${cardpay2}   class="cursor-pointer" />
+        </label>
+
+        <style>
+          .input-hidden {
+            position: absolute;
+            left: -9999px;
+          }
+    
+          input[type=radio]:checked+label>img {
+            border: 1px solid #fff;
+            box-shadow: 0 0 3px 3px #090;
+          }
+    
+          /* Stuff after this is only to make things more pretty */
+          input[type=radio]+label>img {
+           
+            transition: 500ms all;
+          }
+        </style>
+      </div>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          const checkboxes = document.querySelectorAll(
+            "input[type=radio]:checked"
+          );
+          let ArrayChecked = [];
+          Array.prototype.forEach.call(checkboxes, function (el) {
+            ArrayChecked.push(el.value);
+          });
+
+          // return [ArrayChecked];
+          const formValues = ArrayChecked[0];
+          return formValues;
+        },
+      });
+
+      if (x) {
+        sessionStorage.setItem("card", JSON.stringify(x));
+        sessionStorage.setItem("pay", JSON.stringify(value));
+        navigation("/payment/export");
+      }
+    } catch (error) {}
+  };
   return (
     <div>
       <div>
-        <div className="flex justify-center items-center w-full ">
-          <div className="py-2 px-4 flex justify-between items-center ">
-            <div onClick={(e) => printListData()}>
-              <p class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white">
-                <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-                <span class="relative">IN THEO DS ĐÃ CHỌN</span>
-              </p>
-            </div>
-            <div onClick={(e) => printALlData()}>
-              <p class="px-5 py-2.5 relative rounded group font-medium text-white font-medium inline-block">
-                <span class="absolute top-0 left-0 w-full h-full rounded opacity-50 filter blur-sm bg-gradient-to-br from-purple-600 to-blue-500"></span>
-                <span class="h-full w-full inset-0 absolute mt-0.5 ml-0.5 bg-gradient-to-br filter group-active:opacity-0 rounded opacity-50 from-purple-600 to-blue-500"></span>
-                <span class="absolute inset-0 w-full h-full transition-all duration-200 ease-out rounded shadow-xl bg-gradient-to-br filter group-active:opacity-0 group-hover:blur-sm from-purple-600 to-blue-500"></span>
-                <span class="absolute inset-0 w-full h-full transition duration-200 ease-out rounded bg-gradient-to-br to-purple-600 from-blue-500"></span>
-                <span class="relative">IN TẤT CẢ</span>
-              </p>
+        <div class=" bg-white mr-6 w-full rounded-md border-dashed border-2 border-gray-500">
+          <div class=" flex w-full">
+            <div class="grid grid-cols-3 gap-2 w-full">
+              <div class="col-span-2 w-full">
+                <div className="flex justify-start text-left px-2 w-full">
+                  <div className="font-thin">
+                    <p>Lưu Ý</p>
+                    <p>
+                      Các giá tiền điện/nước không hiện thị tức là phòng trọ
+                      chưa được thêm
+                    </p>
+                    <p>
+                      Các chỉ số điện nước không hiện thị tức là phòng trọ chưa
+                      thêm hoá đơn mới nhất
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-center items-center  w-full">
+                <div className="flex items-center justify-center w-full">
+                  <div class="flex items-center justify-center w-full mx-2">
+                    <button
+                      type="button"
+                      onClick={ExportListData}
+                      class="w-full border-l border-t border-b text-base font-medium rounded-l-md text-black bg-white hover:bg-blue-200 px-1 py-0.5 "
+                    >
+                      Xuất hoá đơn đã chọn
+                    </button>
+                    <button
+                      type="button"
+                      onClick={ExportALlData}
+                      class="w-full border text-base font-medium text-black bg-white hover:bg-blue-200 px-1 py-0.5"
+                    >
+                      Xuất tất cả hoá đơn
+                    </button>
+                    <button
+                      type="button"
+                      onClick={printListData}
+                      class="w-full border text-base font-medium text-black bg-white hover:bg-blue-200 px-1 py-0.5"
+                    >
+                      In hoá đơn đã chọn
+                    </button>
+                    <button
+                      onClick={printALlData}
+                      type="button"
+                      class="w-full h-full border-t border-b border-r text-base font-medium rounded-r-md text-black bg-white hover:bg-blue-200 px-1 py-0.5"
+                    >
+                      In tất cả hoá đơn
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-start text-left px-2">
-          <div className="font-thin">
-            <p>Lưu Ý</p>
-            <p>
-              Các giá tiền điện/nước không hiện thị tức là phòng trọ chưa được
-              thêm
-            </p>
-            <p>
-              Các chỉ số điện nước không hiện thị tức là phòng trọ chưa thêm hoá
-              đơn mới nhất
-            </p>
-          </div>
-        </div>
+
         <div>
           <div className="my-2">DANH SÁCH PHÒNG TRỌ CẦN IN HOÁ ĐƠN</div>
           <div class="flex flex-col">

@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-number-format": "^5.2.2",
+    "react-qr-code": "^2.0.11",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-slideshow-image": "^4.2.1",

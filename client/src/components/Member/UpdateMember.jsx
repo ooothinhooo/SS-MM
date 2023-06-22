@@ -253,9 +253,9 @@ function UpdateMember({ user, memberId }) {
   };
 
   return (
-    <div className="w-full flex justify-center items-center p-4  ">
+    <div className="w-full flex justify-center items-center  ">
       <div class="w-[80%] ">
-        <div className="w-full flex justify-center items-center p-2 my-8">
+        <div className="w-full flex justify-center items-center mb-4 ">
           <p className="text-xl font-bold uppercase">
             cập nhật THÔNG TIN KHÁCH THUÊ
           </p>

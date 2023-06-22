@@ -205,9 +205,9 @@ function Bill({ user, roomId }) {
       <div>
         <div>
           <div class="flex flex-col">
-            <div className="w-full  p-1 justify-center items-center flex">
-              <div class="w-[70%] bg-gray-200 rounded-md px-2">
-                <div class="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+            <div className="w-full  p-1 justify-start items-center flex">
+              <div class="w-full flex justify-start bg-gray-200 rounded-md px-2">
+                <div class="w-full flex items-center justify-around space-x-5 py-1.5 px-2">
                   <div class="flex items-center flex-1 min-w-0">
                     <img
                       src="https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/SlackLogo_CompanyNews_SecondaryAubergine_Hero.jpg?d=500x500&amp;f=fill"
@@ -215,11 +215,9 @@ function Bill({ user, roomId }) {
                     />
                     <div class="mt-0 mr-0 mb-0 ml-4 flex-1 min-w-0">
                       <p class="text-lg font-bold text-gray-800 truncate">
-                        DANH MỤC CHỈNH SỬA HOÁ ĐƠN CHO
+                        DANH MỤC CHỈNH SỬA HOÁ ĐƠN CHO PHÒNG {room?.roomCode}
                       </p>
-                      <p class="text-blue-600 text-md">
-                        PHÒNG {room?.roomCode}
-                      </p>
+                      <p class="text-blue-600 text-md"></p>
                     </div>
                   </div>
                   <div class="mt-4 mr-0 mb-0 ml-0 pt-0 pr-0 pb-0 pl-14 flex items-center sm:space-x-6 sm:pl-0 sm:mt-0">

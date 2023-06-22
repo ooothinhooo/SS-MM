@@ -12,77 +12,19 @@ import CardPay1 from "./CardPay1.jsx";
 import CardPay2 from "./CardPay2.jsx";
 import CardPay3 from "./CardPay3.jsx";
 import Cardpay4 from "./Cardpay4.jsx";
+import Breadcrumb from "../Componets/Breadcrumb.jsx";
 export default function PrintPay({ user, pay }) {
   const [card, setCard] = useState();
   return (
     <div className="App">
       <div>
         {/* <!-- Breadcrumb --> */}
-        <nav
-          class="justify-between px-4 py-3 text-gray-700 border border-gray-200 rounded-lg sm:flex sm:px-5 bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
-          aria-label="Breadcrumb"
-        >
-          <ol class="inline-flex items-center mb-3 space-x-1 md:space-x-3 sm:mb-0">
-            <li>
-              <NavLink to="/">
-                <div class="flex items-center">
-                  <p
-                    href="#"
-                    class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                  >
-                    Trang chủ
-                  </p>
-                </div>
-              </NavLink>
-            </li>
-            <li aria-current="page">
-              <NavLink to="/payment">
-                <div class="flex items-center">
-                  <svg
-                    aria-hidden="true"
-                    class="w-6 h-6 text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <p
-                    href="#"
-                    class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"
-                  >
-                    Phiếu Chi
-                  </p>
-                </div>
-              </NavLink>
-            </li>
-            <li aria-current="page">
-              <div class="flex items-center">
-                <svg
-                  aria-hidden="true"
-                  class="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                <span class="mx-1 text-sm font-medium text-gray-500 md:mx-2 dark:text-gray-400">
-                  Xuất phiếu chi
-                </span>
-              </div>
-            </li>
-          </ol>
-          <div></div>
-        </nav>
+        <Breadcrumb
+          to1={"/payment"}
+          s1={`Phiếu chi`}
+          to2={`/payment/export`}
+          s2={`Xuất phiếu chi`}
+        />
       </div>
       <h1>DANH SÁCH XUẤT PHIẾU</h1>
       <MyComponent card={card} />

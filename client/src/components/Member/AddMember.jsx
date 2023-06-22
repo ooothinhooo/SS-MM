@@ -8,7 +8,8 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { randomString } from "../../Func/RamdomString.js";
 import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import Swal from "sweetalert2";
-function AddMember({ user, isAdd, setIsAdd }) {
+import { NavLink } from "react-router-dom";
+function AddMember({ user }) {
   const [roomId, setRoomId] = useState("");
   const [data, setData] = useState({
     // fullName: "",
@@ -190,9 +191,9 @@ function AddMember({ user, isAdd, setIsAdd }) {
   return (
     <div>
       <ToastContainer />
-      <div className="w-full flex justify-center items-center p-4  ">
-        <div class="w-[80%] ">
-          <div className="w-full flex justify-center items-center p-2 my-8">
+      <div className="w-full h-full  flex justify-center items-center py-2  ">
+        <div class="w-[90%] h-full  ">
+          <div className="w-full  h-full flex justify-center items-center mb-4">
             <p className="text-xl font-bold">THÊM THÔNG TIN KHÁCH THUÊ</p>
           </div>
           <div class="grid grid-cols-3 gap-4">
@@ -497,15 +498,17 @@ function AddMember({ user, isAdd, setIsAdd }) {
             </div>
           </div>
           <div className="w-full flex justify-between">
-            <div onClick={(e) => setIsAdd(!isAdd)}>
-              <a
-                href="#_"
-                class="relative rounded px-5 py-2.5 overflow-hidden group  relative hover:bg-gradient-to-r hover:from-gray-500 hover:to-gray-400 text-black hover:ring-2 hover:ring-offset-2 hover:ring-gray-400 transition-all ease-out duration-300"
-              >
-                <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-gray-200 opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
-                <span class="relative">Quay Lại</span>
-              </a>
-            </div>
+            <NavLink to="/member">
+              <div>
+                <a
+                  href="#_"
+                  class="relative rounded px-5 py-2.5 overflow-hidden group  relative hover:bg-gradient-to-r hover:from-gray-500 hover:to-gray-400 text-black hover:ring-2 hover:ring-offset-2 hover:ring-gray-400 transition-all ease-out duration-300"
+                >
+                  <span class="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-gray-200 opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
+                  <span class="relative">Quay Lại</span>
+                </a>
+              </div>
+            </NavLink>
             <div>
               <div className="w-full flex justify-between gap-4">
                 <div>

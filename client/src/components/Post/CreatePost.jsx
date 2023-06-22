@@ -258,12 +258,18 @@ function CreatePost({ user }) {
                 <div className="flex justify-center items-center px-8">
                   <div className="w-full">
                     <input
-                      class="w-full appearance-none block bg-gray-200  text-black border border-blue-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                      class="w-full appearance-none block bg-gray-200  text-black border  rounded py-3 px-4 mb-3 leading-tight "
                       type="text"
                       value={
-                        form?.ward + "," + form?.district + "," + form?.province
+                        form?.ward || form?.district || form?.province
+                          ? form?.ward +
+                            "," +
+                            form?.district +
+                            "," +
+                            form?.province
+                          : ""
                       }
-                      placeholder="Nhập Địa Chỉ Cụ Thể"
+                      placeholder="Địa chỉ cụ thể của bạn"
                       readOnly
                     />
                   </div>

@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Bill from "../../components/Billing/Bill.jsx";
 import { NavLink, useParams } from "react-router-dom";
+import Breadcrumb from "../../components/Componets/Breadcrumb.jsx";
 function UpdateBillPage({ user }) {
   let { id, roomCode } = useParams();
   return (
     <div>
       <div className="w-full  ">
         <div className="flex justify-start mx-4">
-          <nav class="flex" aria-label="Breadcrumb">
+          <div className="w-full">
+            <Breadcrumb
+              to1={"/bill"}
+              s1={"Hoá đơn điện nước"}
+              to2={`/bill/${roomCode}`}
+              s2={`Phòng ${roomCode}`}
+            />
+          </div>
+          {/* <nav class="flex" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
               <li class="inline-flex items-center">
                 <NavLink to={"/main"}>
@@ -72,7 +81,7 @@ function UpdateBillPage({ user }) {
                 </div>
               </li>
             </ol>
-          </nav>
+          </nav> */}
         </div>
         <div>
           {/* <div className="flex justify-center items-center px-4 py-2 rounded-md bg-blue-gray-50">

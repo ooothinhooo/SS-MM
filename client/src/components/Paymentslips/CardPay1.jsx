@@ -102,13 +102,28 @@ function CardPay1() {
                           displayType="text"
                         />{" "}
                         <span className="italic font-bold text-[13px]">
-                          {item?.bill[item?.bill?.length - 1]?.eleUnit}
+                          {/* {item?.bill[item?.bill?.length - 1]?.eleUnit} */}
+                          {item?.bill[item?.bill?.length - 1]?.eleUnit == "free"
+                            ? "Miễn Phí"
+                            : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "room"
+                            ? "Phòng"
+                            : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "member"
+                            ? "Trên Người"
+                            : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "met"
+                            ? "Khối"
+                            : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "kwh"
+                            ? "Kwh"
+                            : ""}
                         </span>
                       </td>
                       <td class="px-4 py-2 border-2 border-gray-400 border-x">
                         <NumericFormat
                           value={
-                            item?.bill[item?.bill?.length - 1]?.eleUnit == "Kwh"
+                            item?.bill[item?.bill?.length - 1]?.eleUnit == "kwh"
                               ? (Number(
                                   item?.bill[item?.bill?.length - 1]?.newEle
                                 ) -
@@ -119,12 +134,12 @@ function CardPay1() {
                                   item?.bill[item?.bill?.length - 1]?.elePrice
                                 )
                               : item?.bill[item?.bill?.length - 1]?.eleUnit ==
-                                "Phòng"
+                                "room"
                               ? Number(
                                   item?.bill[item?.bill?.length - 1]?.elePrice
                                 )
                               : item?.bill[item?.bill?.length - 1]?.eleUnit ==
-                                "Người"
+                                "member"
                               ? Number(item.member.length) *
                                 Number(
                                   item?.bill[item?.bill?.length - 1]?.elePrice
@@ -148,14 +163,30 @@ function CardPay1() {
                           displayType="text"
                         />{" "}
                         <span className="italic font-bold text-[13px]">
-                          {item?.bill[item?.bill?.length - 1]?.waterUnit}
+                          {/* {item?.bill[item?.bill?.length - 1]?.waterUnit} */}
+                          {item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                          "free"
+                            ? "Miễn Phí"
+                            : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "room"
+                            ? "Phòng"
+                            : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "member"
+                            ? "Trên Người"
+                            : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "met"
+                            ? "Khối"
+                            : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "kwh"
+                            ? "Kwh"
+                            : ""}
                         </span>
                       </td>
                       <td class="px-4 py-2 border-2 border-gray-400 border-x">
                         <NumericFormat
                           value={
                             item?.bill[item?.bill?.length - 1]?.waterUnit ==
-                            "Khối"
+                            "met"
                               ? (Number(
                                   item?.bill[item?.bill?.length - 1]?.newWater
                                 ) -
@@ -166,12 +197,12 @@ function CardPay1() {
                                   item?.bill[item?.bill?.length - 1]?.waterPrice
                                 )
                               : item?.bill[item?.bill?.length - 1]?.waterUnit ==
-                                "Phòng"
+                                "room"
                               ? Number(
                                   item?.bill[item?.bill?.length - 1]?.waterPrice
                                 )
                               : item?.bill[item?.bill?.length - 1]?.waterUnit ==
-                                "Người"
+                                "member"
                               ? Number(item.member.length) *
                                 Number(
                                   item?.bill[item?.bill?.length - 1]?.waterPrice
@@ -218,6 +249,83 @@ function CardPay1() {
                           {/* tong tien */}
                           <div>
                             <NumericFormat
+                              value={
+                                Number(item?.roomFee) +
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                    "kwh"
+                                    ? (Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newEle
+                                      ) -
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.oldEle
+                                        )) *
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.elePrice
+                                        )
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "room"
+                                    ? Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.elePrice
+                                      )
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "member"
+                                    ? Number(item.member.length) *
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.elePrice
+                                      )
+                                    : 0
+                                ) +
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]
+                                    ?.waterUnit == "met"
+                                    ? (Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newWater
+                                      ) -
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.oldWater
+                                        )) *
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.waterPrice
+                                        )
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "room"
+                                    ? Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.waterPrice
+                                      )
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "member"
+                                    ? Number(item.member.length) *
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.waterPrice
+                                      )
+                                    : 0
+                                ) +
+                                Number(
+                                  item?.bill[
+                                    item?.bill?.length - 1
+                                  ]?.service.reduce(
+                                    (accumulator, currentValue) =>
+                                      accumulator +
+                                      parseInt(currentValue.value),
+                                    0
+                                  )
+                                )
+                              }
+                              thousandSeparator
+                              displayType="text"
+                            />
+                            {/* <NumericFormat
                               value={
                                 Number(item?.roomFee) +
                                 Number(
@@ -293,7 +401,7 @@ function CardPay1() {
                               }
                               thousandSeparator
                               displayType="text"
-                            />{" "}
+                            />{" "} */}
                             <span className="italic font-bold text-[13px]">
                               đ
                             </span>{" "}

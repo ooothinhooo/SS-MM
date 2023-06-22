@@ -12,6 +12,7 @@ import DashContentPage from "../pages/Info/DashContentPage.jsx";
 import InfoPage from "../pages/Info/InfoPage.jsx";
 import UpdateUserPage from "../pages/Info/UpdateUserPage.jsx";
 import MainPage from "../pages/Mainpage/MainPage.jsx";
+import AddMemberPage from "../pages/Members/AddMemberPage.jsx";
 import MemberPage from "../pages/Members/MemberPage.jsx";
 import UpdateMemberPage from "../pages/Members/UpdateMemberPage.jsx";
 import ViewMemberPage from "../pages/Members/ViewMemberPage.jsx";
@@ -60,6 +61,7 @@ const ManagingMotel = [
   { path: config.routesManagingMotel.Room, component: RoomPage },
   { path: config.routesManagingMotel.ViewRoom, component: ViewRoomPage },
   { path: config.routesManagingMotel.Member, component: MemberPage },
+  { path: config.routesManagingMotel.AddMember, component: AddMemberPage },
   { path: config.routesManagingMotel.ViewMember, component: ViewMemberPage },
   {
     path: config.routesManagingMotel.UpdateMember,

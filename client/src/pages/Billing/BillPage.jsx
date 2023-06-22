@@ -117,12 +117,41 @@ function BillPage({ user }) {
         title: `Nhập chỉ số điện/nước cho phòng ${data?.roomCode}`,
         width: 650,
         // background: "#f13532",
+        confirmButtonText: `Xác Nhận Tạo Hoá Đơn `,
         html: `
-        <div class="mb-6"> Tiền Phòng: ${data?.roomFee} </div>
+       <div class="flex justify-center items-center gap-4">
+       <div class="mb-6"> Tiền Phòng: ${data?.roomFee} </div>
+       <div class="mb-6"> Thành viên: ${data?.member?.length} </div>
+       </div>
  <div class="w-full text-sm mb-6"> ${data?.services?.map((i) => {
-   return ` <span className="text-red-700"> ${i.name}: ${i.value}/${i.unit}</span>`;
+   return ` <span className="text-red-700"> ${i.name}: ${i.value}/${
+     i.unit == "free"
+       ? "Miễn Phí"
+       : i.unit == "room"
+       ? "Phòng"
+       : i.unit == "member"
+       ? "Trên Người"
+       : i.unit == "met"
+       ? "Khối"
+       : i.unit == "kwh"
+       ? "Kwh"
+       : ""
+   }</span>`;
  })} </div>
- <div class="w-full max-w-xl flex justify-center items-center">
+
+ ${
+   data?.services?.find((i) => {
+     return i.name === "Tiền Điện";
+   })?.unit === "free" ||
+   data?.services?.find((i) => {
+     return i.name === "Tiền Điện";
+   })?.unit === "member" ||
+   data?.services?.find((i) => {
+     return i.name === "Tiền Điện";
+   })?.unit === "room"
+     ? ``
+     : `
+   <div class="w-full max-w-xl flex justify-center items-center">
    <div class="flex  w-full -mx-3 mb-2 ">
      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name"> Chỉ Số Điện Cũ </label>
@@ -132,7 +161,14 @@ function BillPage({ user }) {
      </div>
      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name"> Chỉ Số Điện Mới </label>
-       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="newEle" type="number" placeholder="Nhập số điện" />
+       <input
+       class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+       id="newEle"
+       type="number"
+       placeholder="Nhập số điện"
+     />
+     
+      
      </div>
      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name"> Đơn Vị Điện </label>
@@ -156,9 +192,22 @@ function BillPage({ user }) {
      </div>
    </div>
  </div>
+   `
+ }
 
-
- <div class="w-full max-w-xl flex justify-center items-center">
+${
+  data?.services?.find((i) => {
+    return i.name === "Tiền Nước";
+  })?.unit === "free" ||
+  data?.services?.find((i) => {
+    return i.name === "Tiền Nước";
+  })?.unit === "member" ||
+  data?.services?.find((i) => {
+    return i.name === "Tiền Nước";
+  })?.unit === "room"
+    ? ``
+    : `
+   <div class="w-full max-w-xl flex justify-center items-center">
    <div class="flex  w-full -mx-3 mb-2 ">
      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name"> Chỉ Số Nước Cũ </label>
@@ -193,6 +242,10 @@ function BillPage({ user }) {
      </div>
    </div>
  </div>
+   `
+}
+
+
 
 
    `,
@@ -213,12 +266,31 @@ function BillPage({ user }) {
           const filteredArr = data?.services?.filter((item) => {
             return item.name !== "Tiền Điện" && item.name !== "Tiền Nước";
           });
-          // console.log(x)
+
+          if (eleUnit != "free" && eleUnit != "member" && eleUnit != "room") {
+            var oldEle = document.getElementById("oldEle").value;
+            var newEle = document.getElementById("newEle").value;
+          } else {
+            var oldEle = 0;
+            var newEle = 0;
+          }
+          if (
+            waterUnit != "free" &&
+            waterUnit != "member" &&
+            waterUnit != "room"
+          ) {
+            var oldWater = document.getElementById("oldWater").value;
+            var newWater = document.getElementById("newWater").value;
+          } else {
+            var oldWater = 0;
+            var newWater = 0;
+          }
           return [
-            document.getElementById("oldEle").value,
-            document.getElementById("newEle").value,
-            document.getElementById("oldWater").value,
-            document.getElementById("newWater").value,
+            oldEle,
+            newEle,
+            oldWater,
+            newWater,
+
             data.roomFee,
             elePrice,
             eleUnit,
@@ -487,7 +559,7 @@ function BillPage({ user }) {
                                             <div class="rounded bg-gray-100 px-2 text-xs text-gray-800  text-center shadow-lg">
                                               Thêm
                                             </div>
-                                            <div class="clip-bottom h-2 w-4 bg-gray-900"></div>
+                                            <div class="clip-bottom h-2 w-4 "></div>
                                           </div>
                                         </div>
                                       </p>
@@ -505,7 +577,7 @@ function BillPage({ user }) {
 
                                           <div class="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] z-11 group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
                                             <div class="flex max-w-xs flex-col items-center">
-                                              <div class="rounded bg-gray-100 px-2 text-xs text-gray-800  text-center shadow-lg">
+                                              <div class="rounded  px-2 text-xs text-gray-800  text-center shadow-lg">
                                                 Chỉnh sửa
                                               </div>
                                               <div class="clip-bottom h-2 w-4  "></div>

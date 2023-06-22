@@ -164,6 +164,81 @@ function CardPay3() {
                               Number(item?.roomFee) +
                               Number(
                                 item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                  "kwh"
+                                  ? (Number(
+                                      item?.bill[item?.bill?.length - 1]?.newEle
+                                    ) -
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.oldEle
+                                      )) *
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.elePrice
+                                      )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "room"
+                                  ? Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
+                                    )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "member"
+                                  ? Number(item.member.length) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
+                                    )
+                                  : 0
+                              ) +
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                  "met"
+                                  ? (Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.newWater
+                                    ) -
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.oldWater
+                                      )) *
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.waterPrice
+                                      )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "room"
+                                  ? Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.waterPrice
+                                    )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "member"
+                                  ? Number(item.member.length) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.waterPrice
+                                    )
+                                  : 0
+                              ) +
+                              Number(
+                                item?.bill[
+                                  item?.bill?.length - 1
+                                ]?.service.reduce(
+                                  (accumulator, currentValue) =>
+                                    accumulator + parseInt(currentValue.value),
+                                  0
+                                )
+                              )
+                            }
+                            thousandSeparator
+                            displayType="text"
+                          />
+                          {/* <NumericFormat
+                            value={
+                              Number(item?.roomFee) +
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.eleUnit ==
                                   "Kwh"
                                   ? (Number(
                                       item?.bill[item?.bill?.length - 1]?.newEle
@@ -233,7 +308,7 @@ function CardPay3() {
                             }
                             thousandSeparator
                             displayType="text"
-                          />
+                          /> */}
                           <span className="text-[12px] italic">VNĐ</span>
                         </td>
                       </tr>

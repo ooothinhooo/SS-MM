@@ -20,6 +20,7 @@ function PaymemtsForm({ user }) {
   const [pay, setPay] = useState([]);
   let arr = [];
   const [value, setValue] = useState();
+  const [allvalue, setAllValue] = useState();
   const getAPI_LISTROOM = async () => {
     try {
       const result = await LIST_ROOM(user?.token, user?.Motel);
@@ -30,6 +31,7 @@ function PaymemtsForm({ user }) {
         );
         setRoom(array);
         setValue(result.data.data);
+        setAllValue(result.data.data);
       }
     } catch (error) {}
   };
@@ -65,9 +67,9 @@ function PaymemtsForm({ user }) {
     getAPI_LISTROOM();
   }, []);
   useEffect(() => {
-    console.log(value);
+    console.log("value", value);
     // setPay(JSON.parse(sessionStorage.getItem("pay")));
-    console.log(pay);
+    console.log("pay", pay);
   }, [pay, value]);
 
   const Render_Invo = async () => {
@@ -199,8 +201,9 @@ function PaymemtsForm({ user }) {
       });
 
       if (x) {
+        sessionStorage.clear();
         sessionStorage.setItem("card", JSON.stringify(x));
-        sessionStorage.setItem("pay", JSON.stringify(value));
+        sessionStorage.setItem("pay", JSON.stringify(pay));
         // sessionStorage.setItem("card", JSON.stringify(fruit));
         navigation("/payment/print");
       }
@@ -269,8 +272,9 @@ function PaymemtsForm({ user }) {
       });
 
       if (x) {
+        sessionStorage.clear();
         sessionStorage.setItem("card", JSON.stringify(x));
-        sessionStorage.setItem("pay", JSON.stringify(value));
+        sessionStorage.setItem("pay", JSON.stringify(allvalue));
         navigation("/payment/print");
       }
     } catch (error) {}
@@ -341,7 +345,7 @@ function PaymemtsForm({ user }) {
 
       if (x) {
         sessionStorage.setItem("card", JSON.stringify(x));
-        sessionStorage.setItem("pay", JSON.stringify(value));
+        sessionStorage.setItem("pay", JSON.stringify(pay));
         navigation("/payment/export");
       }
     } catch (error) {}
@@ -411,7 +415,7 @@ function PaymemtsForm({ user }) {
 
       if (x) {
         sessionStorage.setItem("card", JSON.stringify(x));
-        sessionStorage.setItem("pay", JSON.stringify(value));
+        sessionStorage.setItem("pay", JSON.stringify(allvalue));
         navigation("/payment/export");
       }
     } catch (error) {}
@@ -605,18 +609,48 @@ function PaymemtsForm({ user }) {
                                 {i?.bill[i?.bill?.length - 1]?.month}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.oldEle}
-                                {i?.bill[i?.bill?.length - 1]?.eleUnit}
+                                {i?.bill[i?.bill?.length - 1]?.oldEle}{" "}
+                                {i?.bill[i?.bill?.length - 1]?.eleUnit == "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : ""}
+                                {/* {i?.bill[i?.bill?.length - 1]?.eleUnit} */}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.newEle}
-                                {i?.bill[i?.bill?.length - 1]?.eleUnit}
+                                {i?.bill[i?.bill?.length - 1]?.newEle}{" "}
+                                {i?.bill[i?.bill?.length - 1]?.eleUnit == "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : ""}
+                                {/* {i?.bill[i?.bill?.length - 1]?.eleUnit} */}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
                                 <NumericFormat
                                   value={
                                     i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                    "Kwh"
+                                    "kwh"
                                       ? (Number(
                                           i?.bill[i?.bill?.length - 1]?.newEle
                                         ) -
@@ -627,12 +661,12 @@ function PaymemtsForm({ user }) {
                                           i?.bill[i?.bill?.length - 1]?.elePrice
                                         )
                                       : i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                        "Phòng"
+                                        "room"
                                       ? Number(
                                           i?.bill[i?.bill?.length - 1]?.elePrice
                                         )
                                       : i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                        "Người"
+                                        "member"
                                       ? Number(i.member.length) *
                                         Number(
                                           i?.bill[i?.bill?.length - 1]?.elePrice
@@ -648,18 +682,50 @@ function PaymemtsForm({ user }) {
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
                                 {i?.bill[i?.bill?.length - 1]?.oldWater}{" "}
-                                {i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                {/* {i?.bill[i?.bill?.length - 1]?.waterUnit} */}
                               </td>
 
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
                                 {i?.bill[i?.bill?.length - 1]?.newWater}
-                                {i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                {/* {i?.bill[i?.bill?.length - 1]?.waterUnit} */}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
                                 <NumericFormat
                                   value={
                                     i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "Khối"
+                                    "met"
                                       ? (Number(
                                           i?.bill[i?.bill?.length - 1]?.newWater
                                         ) -
@@ -672,13 +738,13 @@ function PaymemtsForm({ user }) {
                                             ?.waterPrice
                                         )
                                       : i?.bill[i?.bill?.length - 1]
-                                          ?.waterUnit == "Phòng"
+                                          ?.waterUnit == "room"
                                       ? Number(
                                           i?.bill[i?.bill?.length - 1]
                                             ?.waterPrice
                                         )
                                       : i?.bill[i?.bill?.length - 1]
-                                          ?.waterUnit == "Người"
+                                          ?.waterUnit == "member"
                                       ? Number(i.member.length) *
                                         Number(
                                           i?.bill[i?.bill?.length - 1]
@@ -730,7 +796,7 @@ function PaymemtsForm({ user }) {
                                     Number(i?.roomFee) +
                                     Number(
                                       i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                        "Kwh"
+                                        "kwh"
                                         ? (Number(
                                             i?.bill[i?.bill?.length - 1]?.newEle
                                           ) -
@@ -743,13 +809,13 @@ function PaymemtsForm({ user }) {
                                                 ?.elePrice
                                             )
                                         : i?.bill[i?.bill?.length - 1]
-                                            ?.eleUnit == "Phòng"
+                                            ?.eleUnit == "room"
                                         ? Number(
                                             i?.bill[i?.bill?.length - 1]
                                               ?.elePrice
                                           )
                                         : i?.bill[i?.bill?.length - 1]
-                                            ?.eleUnit == "Người"
+                                            ?.eleUnit == "member"
                                         ? Number(i.member.length) *
                                           Number(
                                             i?.bill[i?.bill?.length - 1]
@@ -759,7 +825,7 @@ function PaymemtsForm({ user }) {
                                     ) +
                                     Number(
                                       i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                        "Khối"
+                                        "met"
                                         ? (Number(
                                             i?.bill[i?.bill?.length - 1]
                                               ?.newWater
@@ -773,13 +839,13 @@ function PaymemtsForm({ user }) {
                                                 ?.waterPrice
                                             )
                                         : i?.bill[i?.bill?.length - 1]
-                                            ?.waterUnit == "Phòng"
+                                            ?.waterUnit == "room"
                                         ? Number(
                                             i?.bill[i?.bill?.length - 1]
                                               ?.waterPrice
                                           )
                                         : i?.bill[i?.bill?.length - 1]
-                                            ?.waterUnit == "Người"
+                                            ?.waterUnit == "member"
                                         ? Number(i.member.length) *
                                           Number(
                                             i?.bill[i?.bill?.length - 1]
@@ -800,7 +866,8 @@ function PaymemtsForm({ user }) {
                                   }
                                   thousandSeparator
                                   displayType="text"
-                                />
+                                />{" "}
+                                đ
                               </td>
                               <td class=" whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
                                 {i?.bill[i?.bill?.length - 1]?.status ? (
@@ -885,51 +952,106 @@ function PaymemtsForm({ user }) {
               <div class="p-1.5 min-w-full inline-block align-middle">
                 <div class="border rounded-lg shadow overflow-hidden dark:border-gray-700 dark:shadow-gray-900">
                   <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
+                    <thead class="text-xs text-blue uppercase bg-blue-50  ">
                       <tr>
                         <th
+                          rowspan="2"
                           scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          class="text-center   border-2 border-gray-500"
                         >
                           Phòng
                         </th>
                         <th
+                          rowspan="2"
                           scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          class="text-center   border-2 border-gray-500"
                         >
-                          Giá Phòng
+                          Tiền Phòng
                         </th>
                         <th
+                          rowspan="2"
                           scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
                         >
                           Tháng
                         </th>
-
                         <th
+                          colspan="3"
                           scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
                         >
-                          SD Điện
-                        </th>
-
-                        <th
-                          scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
-                        >
-                          SD Nước
+                          Tiền Điện
                         </th>
                         <th
+                          colspan="3"
                           scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
                         >
-                          Tổng Tiền
+                          Tiền Nước
                         </th>
                         <th
                           scope="col"
-                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-gray-400"
+                          rowspan="2"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
                         >
-                          Action
+                          Dịch vụ Khác
+                        </th>
+                        <th
+                          scope="col"
+                          rowspan="2"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Tổng cộng
+                        </th>
+                        <th
+                          scope="col"
+                          rowspan="2"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Trạng thái
+                        </th>
+                        <th
+                          scope="col"
+                          rowspan="2"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        ></th>
+                      </tr>
+                      <tr>
+                        <th
+                          scope="col"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Điện Cũ
+                        </th>
+                        <th
+                          scope="col"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Điện Mới
+                        </th>
+                        <th
+                          scope="col"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Thành Tiền
+                        </th>
+                        <th
+                          scope="col"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Nước Cũ
+                        </th>
+                        <th
+                          scope="col"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Nước Mới
+                        </th>
+                        <th
+                          scope="col"
+                          class="text-center py-2 px-1 border-2 border-gray-500"
+                        >
+                          Thành Tiền
                         </th>
                       </tr>
                     </thead>
@@ -947,65 +1069,292 @@ function PaymemtsForm({ user }) {
                                   thousandSeparator
                                   displayType="text"
                                 />{" "}
-                                VNĐ
+                                đ
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] font-medium text-gray-800 dark:text-gray-200">
                                 {i?.bill[i?.bill?.length - 1]?.month}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.newEle} -{" "}
-                                {i?.bill[i?.bill?.length - 1]?.oldEle} ={" "}
-                                {i?.bill[i?.bill?.length - 1]?.newEle -
-                                  i?.bill[i?.bill?.length - 1]?.oldEle}{" "}
-                                Kí ({" "}
-                                <NumericFormat
-                                  value={i?.electricityPrice}
-                                  thousandSeparator
-                                  displayType="text"
-                                />
-                                /1kí)
+                                {i?.bill[i?.bill?.length - 1]?.oldEle}
+                                {/* {i?.bill[i?.bill?.length - 1]?.eleUnit} */}
+                                {i?.bill[i?.bill?.length - 1]?.eleUnit == "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : ""}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.newWater} -{" "}
-                                {i?.bill[i?.bill?.length - 1]?.oldWater} ={" "}
-                                {i?.bill[i?.bill?.length - 1]?.newWater -
-                                  i?.bill[i?.bill?.length - 1]?.oldWater}{" "}
-                                Khối ({" "}
-                                <NumericFormat
-                                  value={i?.waterPrice}
-                                  thousandSeparator
-                                  displayType="text"
-                                />
-                                /1 Khối)
+                                {i?.bill[i?.bill?.length - 1]?.newEle}
+                                {i?.bill[i?.bill?.length - 1]?.eleUnit == "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : ""}
                               </td>
-
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
                                 <NumericFormat
                                   value={
-                                    Number(
-                                      Number(
-                                        (i?.bill[i?.bill.length - 1]?.newWater -
-                                          i?.bill[i?.bill.length - 1]
-                                            ?.oldWater) *
-                                          Number(i?.waterPrice)
-                                      ) +
+                                    i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                    "kwh"
+                                      ? (Number(
+                                          i?.bill[i?.bill?.length - 1]?.newEle
+                                        ) -
+                                          Number(
+                                            i?.bill[i?.bill?.length - 1]?.oldEle
+                                          )) *
                                         Number(
-                                          i?.bill[i?.bill.length - 1]?.newEle -
-                                            i?.bill[i?.bill.length - 1]?.oldEle
-                                        ) *
-                                          Number(i?.electricityPrice)
-                                    ) + Number(i?.roomFee)
+                                          i?.bill[i?.bill?.length - 1]?.elePrice
+                                        )
+                                      : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                        "room"
+                                      ? Number(
+                                          i?.bill[i?.bill?.length - 1]?.elePrice
+                                        )
+                                      : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                        "member"
+                                      ? Number(i.member.length) *
+                                        Number(
+                                          i?.bill[i?.bill?.length - 1]?.elePrice
+                                        )
+                                      : 0
+                                  }
+                                  thousandSeparator
+                                  displayType="text"
+                                />
+                                <span className="italic font-bold text-[13px]">
+                                  đ
+                                </span>
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
+                                {i?.bill[i?.bill?.length - 1]?.oldWater}
+                                {/* {i?.bill[i?.bill?.length - 1]?.waterUnit} */}
+                                {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : ""}
+                              </td>
+
+                              <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
+                                {i?.bill[i?.bill?.length - 1]?.newWater}
+                                {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                "free"
+                                  ? "Miễn Phí"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "room"
+                                  ? "Phòng"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "member"
+                                  ? "Trên Người"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "met"
+                                  ? "Khối"
+                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "kwh"
+                                  ? "Kwh"
+                                  : ""}
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
+                                <NumericFormat
+                                  value={
+                                    i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "met"
+                                      ? (Number(
+                                          i?.bill[i?.bill?.length - 1]?.newWater
+                                        ) -
+                                          Number(
+                                            i?.bill[i?.bill?.length - 1]
+                                              ?.oldWater
+                                          )) *
+                                        Number(
+                                          i?.bill[i?.bill?.length - 1]
+                                            ?.waterPrice
+                                        )
+                                      : i?.bill[i?.bill?.length - 1]
+                                          ?.waterUnit == "room"
+                                      ? Number(
+                                          i?.bill[i?.bill?.length - 1]
+                                            ?.waterPrice
+                                        )
+                                      : i?.bill[i?.bill?.length - 1]
+                                          ?.waterUnit == "member"
+                                      ? Number(i.member.length) *
+                                        Number(
+                                          i?.bill[i?.bill?.length - 1]
+                                            ?.waterPrice
+                                        )
+                                      : 0
+                                  }
+                                  thousandSeparator
+                                  displayType="text"
+                                />
+                                <span className="italic font-bold text-[13px]">
+                                  đ
+                                </span>
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
+                                {i?.bill[i?.bill?.length - 1]?.service?.map(
+                                  (i) => {
+                                    return (
+                                      <>
+                                        <p className="">
+                                          <span className="italic font-bold text-[10px]">
+                                            {i.name}
+                                          </span>{" "}
+                                          ={" "}
+                                          <NumericFormat
+                                            value={i?.value}
+                                            thousandSeparator
+                                            displayType="text"
+                                          />
+                                          <span className="italic font-bold text-[10px]">
+                                            đ
+                                          </span>{" "}
+                                          <span className="italic font-bold text-[14px]">
+                                            /
+                                          </span>
+                                          <span className="italic  text-[10px]">
+                                            {i.unit}
+                                          </span>
+                                        </p>
+                                      </>
+                                    );
+                                  }
+                                )}
+                              </td>
+                              <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
+                                {/* tien phong + tien dien + nuoc + dichj vu  */}
+                                <NumericFormat
+                                  value={
+                                    Number(i?.roomFee) +
+                                    Number(
+                                      i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                        "kwh"
+                                        ? (Number(
+                                            i?.bill[i?.bill?.length - 1]?.newEle
+                                          ) -
+                                            Number(
+                                              i?.bill[i?.bill?.length - 1]
+                                                ?.oldEle
+                                            )) *
+                                            Number(
+                                              i?.bill[i?.bill?.length - 1]
+                                                ?.elePrice
+                                            )
+                                        : i?.bill[i?.bill?.length - 1]
+                                            ?.eleUnit == "room"
+                                        ? Number(
+                                            i?.bill[i?.bill?.length - 1]
+                                              ?.elePrice
+                                          )
+                                        : i?.bill[i?.bill?.length - 1]
+                                            ?.eleUnit == "member"
+                                        ? Number(i.member.length) *
+                                          Number(
+                                            i?.bill[i?.bill?.length - 1]
+                                              ?.elePrice
+                                          )
+                                        : 0
+                                    ) +
+                                    Number(
+                                      i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                        "met"
+                                        ? (Number(
+                                            i?.bill[i?.bill?.length - 1]
+                                              ?.newWater
+                                          ) -
+                                            Number(
+                                              i?.bill[i?.bill?.length - 1]
+                                                ?.oldWater
+                                            )) *
+                                            Number(
+                                              i?.bill[i?.bill?.length - 1]
+                                                ?.waterPrice
+                                            )
+                                        : i?.bill[i?.bill?.length - 1]
+                                            ?.waterUnit == "room"
+                                        ? Number(
+                                            i?.bill[i?.bill?.length - 1]
+                                              ?.waterPrice
+                                          )
+                                        : i?.bill[i?.bill?.length - 1]
+                                            ?.waterUnit == "member"
+                                        ? Number(i.member.length) *
+                                          Number(
+                                            i?.bill[i?.bill?.length - 1]
+                                              ?.waterPrice
+                                          )
+                                        : 0
+                                    ) +
+                                    Number(
+                                      i?.bill[
+                                        i?.bill?.length - 1
+                                      ]?.service.reduce(
+                                        (accumulator, currentValue) =>
+                                          accumulator +
+                                          parseInt(currentValue.value),
+                                        0
+                                      )
+                                    )
                                   }
                                   thousandSeparator
                                   displayType="text"
                                 />{" "}
-                                VNĐ
+                                đ
                               </td>
-                              <td class="px-6 py-4 whitespace-nowrap text-center text-[10px] font-medium">
+                              <td class=" whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
+                                {i?.bill[i?.bill?.length - 1]?.status ? (
+                                  <span className="text-green-500">Đã Thu</span>
+                                ) : (
+                                  <span className="text-red-700">Chưa Thu</span>
+                                )}
+                              </td>
+                              <td class=" whitespace-nowrap text-center text-[10px] font-medium">
                                 <div className="flex  justify-center gap-1 items-center w-full">
                                   <div>
                                     <p class="group max-w-max relative flex flex-col items-center justify-center rounded-full border border-gray-500 p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-600">
                                       <button
+                                        // onClick={(e) =>
+                                        //   addPay(
+                                        //     i?._id,
+                                        //     i?.bill,
+                                        //     i?.deposit,
+                                        //     i?.electricityPrice,
+                                        //     i?.roomFee,
+                                        //     i?.waterPrice
+                                        //   )
+                                        // }
                                         onClick={(e) => removePay(pay[index])}
                                         className="cursor-pointer px-2  z-10 bg-blue-300 rounded-full hover:bg-blue-500"
                                       >
@@ -1016,7 +1365,7 @@ function PaymemtsForm({ user }) {
                                       <div class="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] z-1 group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
                                         <div class="flex max-w-xs flex-col items-center">
                                           <div class="rounded bg-gray-100 px-2 text-xs text-gray-800  text-center shadow-lg">
-                                            Thêm
+                                            Xoá
                                           </div>
                                           <div class="clip-bottom h-2 w-4 "></div>
                                         </div>

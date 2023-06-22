@@ -41,7 +41,7 @@ function MemberPage({ user }) {
   };
   useEffect(() => {
     getApiMember();
-  }, [isAdd]);
+  }, []);
 
   const ViewIdPhoto = async (id1, id2) => {
     try {
@@ -70,35 +70,25 @@ function MemberPage({ user }) {
   return (
     <>
       <div className=" w-full">
-        <div
-          className={`${
-            isAdd ? " " : "hidden"
-          } overflow-y-auto w-full h-full -mt-4  `}
-        >
-          {/* <AddMemberToRoom /> */}
-          <AddMember user={user} isAdd={isAdd} setIsAdd={setIsAdd} />
-        </div>
-        <div className={`${isUp || isAdd ? "hidden" : ""} w-full `}>
+        <div className={` w-full `}>
           <div className="w-full flex justify-center items-center ">
-            <div className="w-[80%] flex z-40 shadow-xl justify-between items-center rounded-lg py-1 px-4">
+            <div className="w-[90%] flex z-40 border justify-between items-center rounded-lg py-1 px-4">
               <p className="text-lg text-blue-700 font-medium flex justify-start">
                 Danh Sách Thành Viên Nhà Trọ
               </p>
-              <div
-                onClick={(e) => setIsAdd(!isAdd)}
-                // onClick={(e) => M.Render_AddMember()}
-                class="bg-blue-300 hover:bg-blue-400 flex justify-end text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-              >
-                <button>Thêm Thành Viên Mới +</button>
-              </div>
+              <NavLink to="/member/add">
+                <div
+                  // onClick={(e) => setIsAdd(!isAdd)}
+                  // onClick={(e) => M.Render_AddMember()}
+                  class="bg-blue-300 hover:bg-blue-400 flex justify-end text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                >
+                  <button>Thêm Thành Viên Mới +</button>
+                </div>
+              </NavLink>
             </div>
           </div>
 
-          <div
-            className={`${
-              !isAdd || !isUp ? " " : "hidden"
-            } w-full flex justify-center items-center`}
-          >
+          <div className={` w-full flex justify-center items-center`}>
             <div class="w-full flex justify-center items-center">
               <div class="w-full ">
                 <div class="w-full py-2 inline-block w-full ">
@@ -161,7 +151,7 @@ function MemberPage({ user }) {
                         {dataMember?.map((i, index) => {
                           return (
                             <>
-                              <tr class="border-b ">
+                              <tr class="border-b hover:bg-gray-200 ">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                   {index + 1}
                                 </td>

@@ -2,6 +2,7 @@ import * as React from "react";
 import ReactToPrint from "react-to-print";
 
 import { FunctionalComponentToPrint } from "./FunctionalComponentToPrint.jsx";
+import Breadcrumb from "../Componets/Breadcrumb.jsx";
 
 export const FunctionalComponentWithFunctionalComponentToPrint = () => {
   const componentRef = React.useRef(null);
@@ -71,6 +72,14 @@ export const FunctionalComponentWithFunctionalComponentToPrint = () => {
 
   return (
     <div>
+      <div className="mb-4">
+        <Breadcrumb
+          to1={"/payment"}
+          s1={`Phiếu chi`}
+          to2={`/payment/print`}
+          s2={`in phiếu chi`}
+        />
+      </div>
       <ReactToPrint
         content={reactToPrintContent}
         documentTitle="AwesomeFileName"

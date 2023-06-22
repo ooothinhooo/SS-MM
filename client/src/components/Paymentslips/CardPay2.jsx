@@ -36,17 +36,19 @@ function CardPay2({ item }) {
                     {/* <div class="text-sm">Invoice #: INV12345</div> */}
                   </div>
                 </div>
-                <div class="border-b-2 border-gray-300  mb-2">
-                  <h2 class="text-2xl font-bold mb-4">
+                <div class="border-b-2 border-gray-300  mb-2 ">
+                  <h2 class="text-2xl font-bold mb-2">
                     Hoá đơn tháng: {item?.bill[item?.bill?.length - 1]?.month}
                   </h2>
-                  <p>Tên khách thuê:{item?.userSub?.fullName}</p>
-                  <p>SĐT khách thuê:{item?.userSub?.phone}</p>
-                  <p>Ngày giờ in: {formattedDate}</p>
+                  <p className="text-left">
+                    <p>Tên khách thuê:{item?.userSub?.fullName}</p>
+                    <p>SĐT khách thuê:{item?.userSub?.phone}</p>
+                    <p>Ngày giờ in: {formattedDate}</p>
+                  </p>
                 </div>
                 <table class="w-full text-left mb-8">
                   <thead>
-                    <tr>
+                    <tr className="text-sm">
                       <th class="text-gray-700 font-bold uppercase py-2">
                         Tên Dịch Vụ
                       </th>
@@ -64,7 +66,7 @@ function CardPay2({ item }) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-left">
                     <tr>
                       <td class="py-4 text-gray-700">Tiền Phòng</td>
                       <td class="py-4 text-gray-700">Phòng</td>
@@ -88,83 +90,142 @@ function CardPay2({ item }) {
                         <span className="text-[12px] italic">VNĐ</span>
                       </td>
                     </tr>
+                    {item?.bill[item?.bill?.length - 1]?.eleUnit != "free" ? (
+                      <>
+                        <tr>
+                          <td class="py-4 text-gray-700">Tiền Điện</td>
+                          <td class="py-4 text-gray-700">
+                            {/* {item?.bill[item?.bill?.length - 1]?.eleUnit} */}
+                            {item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                            "free"
+                              ? "Miễn Phí"
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "room"
+                              ? "Phòng"
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "member"
+                              ? "Trên Người"
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "met"
+                              ? "Khối"
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "kwh"
+                              ? "Kwh"
+                              : ""}
+                          </td>
+                          <td class="py-4 text-gray-700">
+                            {" "}
+                            {Number(
+                              item?.bill[item?.bill?.length - 1]?.newEle
+                            ) -
+                              Number(
+                                item?.bill[item?.bill?.length - 1]?.oldEle
+                              )}
+                          </td>
+                          <td class="py-4 text-gray-700">
+                            <NumericFormat
+                              value={
+                                item?.bill[item?.bill?.length - 1]?.elePrice
+                              }
+                              thousandSeparator
+                              displayType="text"
+                            />{" "}
+                            <span className="text-[12px] italic">VNĐ</span>
+                          </td>
+                          <td class="py-4 text-gray-700">
+                            <NumericFormat
+                              value={
+                                Number(
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.newEle
+                                  ) -
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]?.oldEle
+                                    )
+                                ) *
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.elePrice
+                                )
+                              }
+                              thousandSeparator
+                              displayType="text"
+                            />{" "}
+                            <span className="text-[12px] italic">VNĐ</span>
+                          </td>
+                        </tr>
+                      </>
+                    ) : (
+                      <></>
+                    )}
 
-                    <tr>
-                      <td class="py-4 text-gray-700">Tiền Điện</td>
-                      <td class="py-4 text-gray-700">
-                        {item?.bill[item?.bill?.length - 1]?.eleUnit}
-                      </td>
-                      <td class="py-4 text-gray-700">
-                        {" "}
-                        {Number(item?.bill[item?.bill?.length - 1]?.newEle) -
-                          Number(item?.bill[item?.bill?.length - 1]?.oldEle)}
-                      </td>
-                      <td class="py-4 text-gray-700">
-                        <NumericFormat
-                          value={item?.bill[item?.bill?.length - 1]?.elePrice}
-                          thousandSeparator
-                          displayType="text"
-                        />{" "}
-                        <span className="text-[12px] italic">VNĐ</span>
-                      </td>
-                      <td class="py-4 text-gray-700">
-                        <NumericFormat
-                          value={
-                            Number(
+                    {item?.bill[item?.bill?.length - 1]?.waterUnit != "free" ? (
+                      <>
+                        <tr>
+                          <td class="py-4 text-gray-700">Tiền Nước</td>
+                          <td class="py-4 text-gray-700">
+                            {/* {item?.bill[item?.bill?.length - 1]?.waterUnit} */}
+                            {item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                            "free"
+                              ? "Miễn Phí"
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "room"
+                              ? "Phòng"
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "member"
+                              ? "Trên Người"
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "met"
+                              ? "Khối"
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "kwh"
+                              ? "Kwh"
+                              : ""}
+                          </td>
+                          <td class="py-4 text-gray-700">
+                            {Number(
+                              item?.bill[item?.bill?.length - 1]?.newWater
+                            ) -
                               Number(
-                                item?.bill[item?.bill?.length - 1]?.newEle
-                              ) -
+                                item?.bill[item?.bill?.length - 1]?.oldWater
+                              )}
+                          </td>
+                          <td class="py-4 text-gray-700">
+                            <NumericFormat
+                              value={
+                                item?.bill[item?.bill?.length - 1]?.waterPrice
+                              }
+                              thousandSeparator
+                              displayType="text"
+                            />{" "}
+                            <span className="text-[12px] italic">VNĐ</span>
+                          </td>
+                          <td class="py-4 text-gray-700">
+                            {" "}
+                            <NumericFormat
+                              value={
                                 Number(
-                                  item?.bill[item?.bill?.length - 1]?.oldEle
-                                )
-                            ) *
-                            Number(item?.bill[item?.bill?.length - 1]?.elePrice)
-                          }
-                          thousandSeparator
-                          displayType="text"
-                        />{" "}
-                        <span className="text-[12px] italic">VNĐ</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-4 text-gray-700">Tiền Nước</td>
-                      <td class="py-4 text-gray-700">
-                        {item?.bill[item?.bill?.length - 1]?.waterUnit}
-                      </td>
-                      <td class="py-4 text-gray-700">
-                        {Number(item?.bill[item?.bill?.length - 1]?.newWater) -
-                          Number(item?.bill[item?.bill?.length - 1]?.oldWater)}
-                      </td>
-                      <td class="py-4 text-gray-700">
-                        <NumericFormat
-                          value={item?.bill[item?.bill?.length - 1]?.waterPrice}
-                          thousandSeparator
-                          displayType="text"
-                        />{" "}
-                        <span className="text-[12px] italic">VNĐ</span>
-                      </td>
-                      <td class="py-4 text-gray-700">
-                        {" "}
-                        <NumericFormat
-                          value={
-                            Number(
-                              Number(
-                                item?.bill[item?.bill?.length - 1]?.newWater
-                              ) -
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.newWater
+                                  ) -
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.oldWater
+                                    )
+                                ) *
                                 Number(
-                                  item?.bill[item?.bill?.length - 1]?.oldWater
+                                  item?.bill[item?.bill?.length - 1]?.waterPrice
                                 )
-                            ) *
-                            Number(
-                              item?.bill[item?.bill?.length - 1]?.waterPrice
-                            )
-                          }
-                          thousandSeparator
-                          displayType="text"
-                        />{" "}
-                        <span className="text-[12px] italic">VNĐ</span>
-                      </td>
-                    </tr>
+                              }
+                              thousandSeparator
+                              displayType="text"
+                            />{" "}
+                            <span className="text-[12px] italic">VNĐ</span>
+                          </td>
+                        </tr>
+                      </>
+                    ) : (
+                      <></>
+                    )}
 
                     {item?.bill[item?.bill?.length - 1]?.service?.map((b) => {
                       return (
@@ -215,7 +276,7 @@ function CardPay2({ item }) {
                       value={
                         Number(item?.roomFee) +
                         Number(
-                          item?.bill[item?.bill?.length - 1]?.eleUnit == "Kwh"
+                          item?.bill[item?.bill?.length - 1]?.eleUnit == "kwh"
                             ? (Number(
                                 item?.bill[item?.bill?.length - 1]?.newEle
                               ) -
@@ -226,12 +287,12 @@ function CardPay2({ item }) {
                                   item?.bill[item?.bill?.length - 1]?.elePrice
                                 )
                             : item?.bill[item?.bill?.length - 1]?.eleUnit ==
-                              "Phòng"
+                              "room"
                             ? Number(
                                 item?.bill[item?.bill?.length - 1]?.elePrice
                               )
                             : item?.bill[item?.bill?.length - 1]?.eleUnit ==
-                              "Người"
+                              "member"
                             ? Number(item.member.length) *
                               Number(
                                 item?.bill[item?.bill?.length - 1]?.elePrice
@@ -239,8 +300,7 @@ function CardPay2({ item }) {
                             : 0
                         ) +
                         Number(
-                          item?.bill[item?.bill?.length - 1]?.waterUnit ==
-                            "Khối"
+                          item?.bill[item?.bill?.length - 1]?.waterUnit == "met"
                             ? (Number(
                                 item?.bill[item?.bill?.length - 1]?.newWater
                               ) -
@@ -251,12 +311,12 @@ function CardPay2({ item }) {
                                   item?.bill[item?.bill?.length - 1]?.waterPrice
                                 )
                             : item?.bill[item?.bill?.length - 1]?.waterUnit ==
-                              "Phòng"
+                              "room"
                             ? Number(
                                 item?.bill[item?.bill?.length - 1]?.waterPrice
                               )
                             : item?.bill[item?.bill?.length - 1]?.waterUnit ==
-                              "Người"
+                              "member"
                             ? Number(item.member.length) *
                               Number(
                                 item?.bill[item?.bill?.length - 1]?.waterPrice

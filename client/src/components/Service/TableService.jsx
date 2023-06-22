@@ -135,17 +135,34 @@ function TableService({ user }) {
                                     displayType="text"
                                   />{" "}
                                   <span className="italic font-bold text-[13px]">
-                                    {
+                                    {/* {
                                       item?.bill[item?.bill?.length - 1]
                                         ?.eleUnit
-                                    }
+                                    } */}
+
+                                    {item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "free"
+                                      ? "Miễn Phí"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "room"
+                                      ? "Phòng"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "member"
+                                      ? "Trên Người"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "met"
+                                      ? "Khối"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "kwh"
+                                      ? "Kwh"
+                                      : ""}
                                   </span>
                                 </td>
                                 <td class="px-4 py-2 border-2 border-gray-400 border-x">
                                   <NumericFormat
                                     value={
                                       item?.bill[item?.bill?.length - 1]
-                                        ?.eleUnit == "Kwh"
+                                        ?.eleUnit == "kwh"
                                         ? (Number(
                                             item?.bill[item?.bill?.length - 1]
                                               ?.newEle
@@ -159,13 +176,13 @@ function TableService({ user }) {
                                               ?.elePrice
                                           )
                                         : item?.bill[item?.bill?.length - 1]
-                                            ?.eleUnit == "Phòng"
+                                            ?.eleUnit == "room"
                                         ? Number(
                                             item?.bill[item?.bill?.length - 1]
                                               ?.elePrice
                                           )
                                         : item?.bill[item?.bill?.length - 1]
-                                            ?.eleUnit == "Người"
+                                            ?.eleUnit == "member"
                                         ? Number(item.member.length) *
                                           Number(
                                             item?.bill[item?.bill?.length - 1]
@@ -196,17 +213,33 @@ function TableService({ user }) {
                                     displayType="text"
                                   />{" "}
                                   <span className="italic font-bold text-[13px]">
-                                    {
+                                    {/* {
                                       item?.bill[item?.bill?.length - 1]
                                         ?.waterUnit
-                                    }
+                                    } */}
+                                    {item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "free"
+                                      ? "Miễn Phí"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "room"
+                                      ? "Phòng"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "member"
+                                      ? "Trên Người"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "met"
+                                      ? "Khối"
+                                      : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "kwh"
+                                      ? "Kwh"
+                                      : ""}
                                   </span>
                                 </td>
                                 <td class="px-4 py-2 border-2 border-gray-400 border-x">
                                   <NumericFormat
                                     value={
                                       item?.bill[item?.bill?.length - 1]
-                                        ?.waterUnit == "Khối"
+                                        ?.waterUnit == "met"
                                         ? (Number(
                                             item?.bill[item?.bill?.length - 1]
                                               ?.newWater
@@ -220,13 +253,13 @@ function TableService({ user }) {
                                               ?.waterPrice
                                           )
                                         : item?.bill[item?.bill?.length - 1]
-                                            ?.waterUnit == "Phòng"
+                                            ?.waterUnit == "room"
                                         ? Number(
                                             item?.bill[item?.bill?.length - 1]
                                               ?.waterPrice
                                           )
                                         : item?.bill[item?.bill?.length - 1]
-                                            ?.waterUnit == "Người"
+                                            ?.waterUnit == "member"
                                         ? Number(item.member.length) *
                                           Number(
                                             item?.bill[item?.bill?.length - 1]
@@ -264,7 +297,17 @@ function TableService({ user }) {
                                             /
                                           </span>
                                           <span className="italic  text-[13px]">
-                                            {i.unit}
+                                            {i.unit == "free"
+                                              ? "Miễn Phí"
+                                              : i.unit == "room"
+                                              ? "Phòng"
+                                              : i.unit == "member"
+                                              ? "Trên Người"
+                                              : i.unit == "met"
+                                              ? "Khối"
+                                              : i.unit == "kwh"
+                                              ? "Kwh"
+                                              : ""}
                                           </span>
                                         </p>
                                       </>

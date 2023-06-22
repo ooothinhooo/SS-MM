@@ -11,6 +11,7 @@ export const routesManagingMotel = {
 
   Room: "/room",
   Member: "/member",
+  AddMember: "/member/add",
   UpdateMember: "/member/:id",
   ViewMember: "/member/view/:id",
   ViewRoom: "/room/view/:id",

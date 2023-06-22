@@ -113,7 +113,23 @@ function Cardpay4() {
                               </td>
                               <td class="p-2">
                                 <div class="text-left">
-                                  {item?.bill[item?.bill?.length - 1]?.eleUnit}
+                                  {/* {item?.bill[item?.bill?.length - 1]?.eleUnit} */}
+                                  {item?.bill[item?.bill?.length - 1]
+                                    ?.eleUnit == "free"
+                                    ? "Miễn Phí"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "room"
+                                    ? "Phòng"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "member"
+                                    ? "Trên Người"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "met"
+                                    ? "Khối"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "kwh"
+                                    ? "Kwh"
+                                    : ""}
                                 </div>
                               </td>
                               <td class="p-2">
@@ -171,10 +187,26 @@ function Cardpay4() {
                               </td>
                               <td class="p-2">
                                 <div class="text-left">
-                                  {
+                                  {/* {
                                     item?.bill[item?.bill?.length - 1]
                                       ?.waterUnit
-                                  }
+                                  } */}
+                                  {item?.bill[item?.bill?.length - 1]
+                                    ?.waterUnit == "free"
+                                    ? "Miễn Phí"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "room"
+                                    ? "Phòng"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "member"
+                                    ? "Trên Người"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "met"
+                                    ? "Khối"
+                                    : item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "kwh"
+                                    ? "Kwh"
+                                    : ""}
                                 </div>
                               </td>
                               <td class="p-2">
@@ -284,7 +316,7 @@ function Cardpay4() {
                                         Number(item?.roomFee) +
                                         Number(
                                           item?.bill[item?.bill?.length - 1]
-                                            ?.eleUnit == "Kwh"
+                                            ?.eleUnit == "kwh"
                                             ? (Number(
                                                 item?.bill[
                                                   item?.bill?.length - 1
@@ -301,14 +333,14 @@ function Cardpay4() {
                                                   ]?.elePrice
                                                 )
                                             : item?.bill[item?.bill?.length - 1]
-                                                ?.eleUnit == "Phòng"
+                                                ?.eleUnit == "room"
                                             ? Number(
                                                 item?.bill[
                                                   item?.bill?.length - 1
                                                 ]?.elePrice
                                               )
                                             : item?.bill[item?.bill?.length - 1]
-                                                ?.eleUnit == "Người"
+                                                ?.eleUnit == "member"
                                             ? Number(item.member.length) *
                                               Number(
                                                 item?.bill[
@@ -319,7 +351,7 @@ function Cardpay4() {
                                         ) +
                                         Number(
                                           item?.bill[item?.bill?.length - 1]
-                                            ?.waterUnit == "Khối"
+                                            ?.waterUnit == "met"
                                             ? (Number(
                                                 item?.bill[
                                                   item?.bill?.length - 1
@@ -336,14 +368,14 @@ function Cardpay4() {
                                                   ]?.waterPrice
                                                 )
                                             : item?.bill[item?.bill?.length - 1]
-                                                ?.waterUnit == "Phòng"
+                                                ?.waterUnit == "room"
                                             ? Number(
                                                 item?.bill[
                                                   item?.bill?.length - 1
                                                 ]?.waterPrice
                                               )
                                             : item?.bill[item?.bill?.length - 1]
-                                                ?.waterUnit == "Người"
+                                                ?.waterUnit == "member"
                                             ? Number(item.member.length) *
                                               Number(
                                                 item?.bill[

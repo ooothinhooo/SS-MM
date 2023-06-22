@@ -72,11 +72,10 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           <select 
           id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option selected>Choose a service</option>
-          <option value="Trên Người">Trên Người</option>
-          <option value="Kwh">Kwh</option>
-          <option value="Khối">Khối</option>
-          <option value="Phòng">Phòng</option>
-          <option value="Miễm Phí">Miễn Phí</option>
+          <option value="member">Trên Người</option>
+          <option value="kwh">Kwh</option>
+          <option value="met">Khối</option>
+          <option value="room">Phòng</option>
       </select>
           </div>
       </div>
@@ -88,9 +87,13 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         focusConfirm: false,
 
         preConfirm: () => {
+          var value = document.getElementById("value").value;
+          if (document.getElementById("unit").value == "Miễm Phí") {
+            value = 0;
+          }
           return [
             document.getElementById("name").value,
-            document.getElementById("value").value,
+            value,
             document.getElementById("unit").value,
             // document.getElementById("dropzone-file").value,
           ];
@@ -98,6 +101,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       });
       if (formService) {
         // R.PostAPI_addRoom(formValues,formService)
+
         console.log(JSON.stringify(formService));
         CreateService(formService);
       }
@@ -221,12 +225,25 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Đơn Vị Tính</label>
           <select 
           id="unit"   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option  value=${data?.unit} >${data.unit}</option>
-          <option value="Trên Người">Trên Người</option>
-          <option value="Kwh">Kwh</option>
-          <option value="Khối">Khối</option>
-          <option value="Phòng">Phòng</option>
-          <option value="Miễm Phí">Miễn Phí</option>
+          <option  value=${data?.unit} >
+            ${
+              data.unit == "free"
+                ? "Miễn Phí"
+                : data.unit == "room"
+                ? "Phòng"
+                : data.unit == "member"
+                ? "Trên Người"
+                : data.unit == "met"
+                ? "Khối"
+                : data.unit == "kwh"
+                ? "Kwh"
+                : ""
+            }</option>
+          <option value="member">Trên Người</option>
+          <option value="kwh">Kwh</option>
+          <option value="met">Khối</option>
+          <option value="room">Phòng</option>
+          <option value="free">Miễn Phí</option>
       </select>
           </div>
       </div>
@@ -234,12 +251,41 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         focusConfirm: false,
 
         preConfirm: () => {
+          var value = document.getElementById("value").value;
+          if (
+            document.getElementById("unit").value == "free" ||
+            document.getElementById("unit").value == "member" ||
+            document.getElementById("unit").value == "room"
+          ) {
+            value = 0;
+          } else if (
+            document.getElementById("unit").value == "kwh" ||
+            document.getElementById("unit").value == "met"
+          ) {
+            if (value == 0) {
+              Swal.fire({
+                title: "Are you sure?",
+                text: "Bạn Chưa nhập giá tiền cho dịch vụ",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Nhập lại",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Render_UpdateService(id, data);
+                }
+              });
+            }
+          }
+
           const name = check
             ? data?.name
             : document.getElementById("name").value;
           return [
             name,
-            document.getElementById("value").value,
+            // document.getElementById("value").value,
+            value,
             document.getElementById("unit").value,
           ];
         },
@@ -419,7 +465,20 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                             />{" "}
                           </span>
                           <span className="italic text-sm">VNĐ</span>
-                          <span>/{item?.unit}</span>
+                          <span>
+                            /
+                            {item.unit == "free"
+                              ? "Miễn Phí"
+                              : item.unit == "room"
+                              ? "Phòng"
+                              : item.unit == "member"
+                              ? "Trên Người"
+                              : item.unit == "met"
+                              ? "Khối"
+                              : item.unit == "kwh"
+                              ? "Kwh"
+                              : ""}
+                          </span>
                         </p>
                         <p className="font-light italic text-green-400 text-sm">
                           <span>

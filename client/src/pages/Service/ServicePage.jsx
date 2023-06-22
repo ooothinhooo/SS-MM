@@ -57,7 +57,7 @@ function ServicePage({ user, service }) {
               <div className="w-full">
                 <div className="text-left">
                   <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
-                    Quản lý dịch vụ
+                    Hoá Đơn và Dịch Vụ
                   </span>
                 </div>
                 <TableService user={user} />

@@ -492,9 +492,25 @@ ${
                                     thousandSeparator
                                     displayType="text"
                                   />{" "}
-                                  {i?.bill != ""
+                                  {i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                  "free"
+                                    ? "Miễn Phí"
+                                    : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                      "room"
+                                    ? "Phòng"
+                                    : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                      "member"
+                                    ? "Trên Người"
+                                    : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                      "met"
+                                    ? "Khối"
+                                    : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                      "kwh"
+                                    ? "Kwh"
+                                    : ""}
+                                  {/* {i?.bill != ""
                                     ? i?.bill[i?.bill.length - 1]?.eleUnit
-                                    : ""}{" "}
+                                    : ""}{" "} */}{" "}
                                   -{" "}
                                   <NumericFormat
                                     value={
@@ -507,9 +523,25 @@ ${
                                     thousandSeparator
                                     displayType="text"
                                   />{" "}
-                                  {i?.bill != ""
+                                  {/* {i?.bill != ""
                                     ? i?.bill[i?.bill.length - 1]?.waterUnit
-                                    : ""}
+                                    : ""} */}
+                                  {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                  "free"
+                                    ? "Miễn Phí"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "room"
+                                    ? "Phòng"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "member"
+                                    ? "Trên Người"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "met"
+                                    ? "Khối"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "kwh"
+                                    ? "Kwh"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                   {i?.bill[i?.bill?.length - 1]?.service?.map(

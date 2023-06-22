@@ -33,7 +33,12 @@ function CardPay3() {
                       </h1>
                     </div>
                     <div class="text-gray-700">
-                      <QRCode value="http://localhost:9009/room" size="80" />
+                      <QRCode
+                        value={`https://fe-ss-mm.onrender.com/bill/view/${
+                          item?._id
+                        }/${item?.bill[item?.bill?.length - 1]?.month}`}
+                        size="80"
+                      />
                     </div>
                   </div>
                   <div class="mb-8"></div>
@@ -65,66 +70,89 @@ function CardPay3() {
                           <span className="text-[12px] italic">VNĐ</span>
                         </td>
                       </tr>
-                      <tr>
-                        <td class="text-left text-gray-700">Tiền điện</td>
-                        <td class="text-left text-gray-700">
-                          {" "}
-                          {Number(item?.bill[item?.bill?.length - 1]?.newEle) -
-                            Number(item?.bill[item?.bill?.length - 1]?.oldEle)}
-                        </td>
-                        <td class="text-left text-gray-700">
-                          <NumericFormat
-                            value={
-                              Number(
+                      {item?.bill[item?.bill?.length - 1]?.eleUnit != "free" ? (
+                        <>
+                          <tr>
+                            <td class="text-left text-gray-700">Tiền điện</td>
+                            <td class="text-left text-gray-700">
+                              {" "}
+                              {Number(
+                                item?.bill[item?.bill?.length - 1]?.newEle
+                              ) -
                                 Number(
-                                  item?.bill[item?.bill?.length - 1]?.newEle
-                                ) -
+                                  item?.bill[item?.bill?.length - 1]?.oldEle
+                                )}
+                            </td>
+                            <td class="text-left text-gray-700">
+                              <NumericFormat
+                                value={
                                   Number(
-                                    item?.bill[item?.bill?.length - 1]?.oldEle
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]?.newEle
+                                    ) -
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.oldEle
+                                      )
+                                  ) *
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.elePrice
                                   )
-                              ) *
-                              Number(
-                                item?.bill[item?.bill?.length - 1]?.elePrice
-                              )
-                            }
-                            thousandSeparator
-                            displayType="text"
-                          />{" "}
-                          <span className="text-[12px] italic">VNĐ</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-left text-gray-700">Tiền nước</td>
-                        <td class="text-left text-gray-700">
-                          {Number(
-                            item?.bill[item?.bill?.length - 1]?.newWater
-                          ) -
-                            Number(
-                              item?.bill[item?.bill?.length - 1]?.oldWater
-                            )}
-                        </td>
-                        <td class="text-left text-gray-700">
-                          {" "}
-                          <NumericFormat
-                            value={
-                              Number(
+                                }
+                                thousandSeparator
+                                displayType="text"
+                              />{" "}
+                              <span className="text-[12px] italic">VNĐ</span>
+                            </td>
+                          </tr>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+
+                      {item?.bill[item?.bill?.length - 1]?.waterUnit !=
+                      "free" ? (
+                        <>
+                          <tr>
+                            <td class="text-left text-gray-700">Tiền nước</td>
+                            <td class="text-left text-gray-700">
+                              {Number(
+                                item?.bill[item?.bill?.length - 1]?.newWater
+                              ) -
                                 Number(
-                                  item?.bill[item?.bill?.length - 1]?.newWater
-                                ) -
+                                  item?.bill[item?.bill?.length - 1]?.oldWater
+                                )}
+                            </td>
+                            <td class="text-left text-gray-700">
+                              {" "}
+                              <NumericFormat
+                                value={
                                   Number(
-                                    item?.bill[item?.bill?.length - 1]?.oldWater
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.newWater
+                                    ) -
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.oldWater
+                                      )
+                                  ) *
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]
+                                      ?.waterPrice
                                   )
-                              ) *
-                              Number(
-                                item?.bill[item?.bill?.length - 1]?.waterPrice
-                              )
-                            }
-                            thousandSeparator
-                            displayType="text"
-                          />{" "}
-                          <span className="text-[12px] italic">VNĐ</span>
-                        </td>
-                      </tr>
+                                }
+                                thousandSeparator
+                                displayType="text"
+                              />{" "}
+                              <span className="text-[12px] italic">VNĐ</span>
+                            </td>
+                          </tr>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+
                       {item?.bill[item?.bill?.length - 1]?.service?.map((b) => {
                         return (
                           <>

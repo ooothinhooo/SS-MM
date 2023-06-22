@@ -5,6 +5,7 @@ import LoginPage from "../pages/Account/LoginPage.jsx";
 import SignUpPage from "../pages/Account/SignUpPage.jsx";
 import BillPage from "../pages/Billing/BillPage.jsx";
 import UpdateBillPage from "../pages/Billing/UpdateBillPage.jsx";
+import ViewBillPage from "../pages/Billing/ViewBillPage.jsx";
 import DashboardPage from "../pages/Dashboard/DashboardPage.jsx";
 import HomePage from "../pages/HomePage.jsx";
 import ChangPassPage from "../pages/Info/ChangPassPage.jsx";
@@ -34,6 +35,8 @@ import ServicePage from "../pages/Service/ServicePage.jsx";
 const SignInWithAcc = [
   { path: config.routeSocial.home, component: HomePage },
   { path: config.routeSocial.Motel, component: MotelPage },
+
+  { path: config.routesManagingMotel.ViewBIll, component: ViewBillPage },
 ];
 
 //Login with Create Acc register
@@ -47,11 +50,15 @@ const SignedIn = [
   { path: config.routeSocial.Pass, component: ChangPassPage },
   { path: config.routeSocial.Dash, component: DashContentPage },
   { path: config.routeSocial.Search, component: SearchPage },
+
+  { path: config.routeSocial.ViewBIll, component: ViewBillPage },
 ];
 const NotLoggedIn = [
   { path: config.routes.home, component: LoginPage },
   { path: config.routes.Login, component: LoginPage },
   { path: config.routes.Register, component: SignUpPage },
+  { path: config.routes.ViewBIll, component: ViewBillPage },
+
   // { path: config.routes.home, component: HomePage },
   // { path: config.routes.home, component: HomePage },
 ];
@@ -73,5 +80,7 @@ const ManagingMotel = [
   { path: config.routesManagingMotel.PrintPayment, component: PrintPayPage },
   { path: config.routesManagingMotel.ExportPayment, component: ExportPayPage },
   { path: config.routesManagingMotel.Service, component: ServicePage },
+
+  { path: config.routesManagingMotel.ViewBIll, component: ViewBillPage },
 ];
 export { SignInWithAcc, SignedIn, NotLoggedIn, ManagingMotel };

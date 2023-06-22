@@ -11,6 +11,7 @@ import ServicePage from "../../pages/Service/ServicePage.jsx";
 import { ADD_SERVICE_TOROOM } from "../../API/Service/addService.api.js";
 import { UPDATE_SERVICE } from "../../API/Service/updateService.api.js";
 import { NumericFormat } from "react-number-format";
+import { Toast } from "../../Func/Toast.js";
 
 function ListService({ user, Service, GETAPI_MOTELS }) {
   const [room, setRoom] = useState();
@@ -316,7 +317,9 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
   const Render_AddRoomUseService = async (serviceId, name) => {
     try {
       let html = "";
+      let allRoomId = [];
       const x = room.map((i) => {
+        allRoomId.push(i?._id);
         html += `
         
         <div class="flex items-center   pl-4 border border-gray-200 rounded dark:border-gray-700">
@@ -331,16 +334,24 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
 </div>
         `;
       });
-      const { value: formValues } = await Swal.fire({
+      const { value: formValues, value: isDenied } = await Swal.fire({
         title: "Danh Sách Phòng Sử Dụng Dịch Vụ",
         width: 1200,
+        showCancelButton: true,
+        cancelButtonText: `Áp dụng Cho Tất Cả Phòng`,
+        confirmButtonText: "Áp dụng",
+        // showDenyButton: true,
+        // denyButtonText: `Don't save`,
+
         html: `
+       
         <div class="grid grid-cols-8 gap-4 p-2">  
        
         ${html}
 
       </div>
          `,
+        // returnInputValueOnDeny: false,
         focusConfirm: false,
         preConfirm: () => {
           const checkboxes = document.querySelectorAll(
@@ -382,6 +393,11 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
 
         console.log(serviceId, ArrayChecked, ArrayNoChecked);
         AddRoomUseService(serviceId, ArrayChecked, ArrayNoChecked);
+      } else {
+        // Swal.fire('Any fool can use a computer')
+
+        console.log(allRoomId);
+        AddRoomUseService(serviceId, allRoomId, null);
       }
     } catch (error) {}
   };
@@ -396,7 +412,11 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         ArrayNoChecked
       );
       console.log(result);
-      toast.success("Thay đổi thành công");
+
+      Toast.fire({
+        icon: "success",
+        title: "Thay đổi thành công",
+      });
       GETAPI_MOTELS();
       GETAPI_ROOM();
     } catch (error) {}

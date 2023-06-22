@@ -105,158 +105,179 @@ function Cardpay4() {
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td class="p-2">
-                                <div class="font-medium text-left text-gray-800">
-                                  Tiền Điện
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left">
-                                  {/* {item?.bill[item?.bill?.length - 1]?.eleUnit} */}
-                                  {item?.bill[item?.bill?.length - 1]
-                                    ?.eleUnit == "free"
-                                    ? "Miễn Phí"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.eleUnit == "room"
-                                    ? "Phòng"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.eleUnit == "member"
-                                    ? "Trên Người"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.eleUnit == "met"
-                                    ? "Khối"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.eleUnit == "kwh"
-                                    ? "Kwh"
-                                    : ""}
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left font-medium text-green-500">
-                                  {Number(
-                                    item?.bill[item?.bill?.length - 1]?.newEle
-                                  ) -
-                                    Number(
-                                      item?.bill[item?.bill?.length - 1]?.oldEle
-                                    )}
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left font-medium text-green-500">
-                                  <NumericFormat
-                                    value={
-                                      item?.bill[item?.bill?.length - 1]
-                                        ?.elePrice
-                                    }
-                                    thousandSeparator
-                                    displayType="text"
-                                  />
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left font-medium text-green-500">
-                                  <NumericFormat
-                                    value={
-                                      Number(
+                            {item?.bill[item?.bill?.length - 1]?.eleUnit !=
+                            "free" ? (
+                              <>
+                                <tr>
+                                  <td class="p-2">
+                                    <div class="font-medium text-left text-gray-800">
+                                      Tiền Điện
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left">
+                                      {/* {item?.bill[item?.bill?.length - 1]?.eleUnit} */}
+                                      {item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "free"
+                                        ? "Miễn Phí"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.eleUnit == "room"
+                                        ? "Phòng"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.eleUnit == "member"
+                                        ? "Trên Người"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.eleUnit == "met"
+                                        ? "Khối"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.eleUnit == "kwh"
+                                        ? "Kwh"
+                                        : ""}
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left font-medium text-green-500">
+                                      {Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newEle
+                                      ) -
                                         Number(
                                           item?.bill[item?.bill?.length - 1]
-                                            ?.newEle
-                                        ) -
+                                            ?.oldEle
+                                        )}
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left font-medium text-green-500">
+                                      <NumericFormat
+                                        value={
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.elePrice
+                                        }
+                                        thousandSeparator
+                                        displayType="text"
+                                      />
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left font-medium text-green-500">
+                                      <NumericFormat
+                                        value={
+                                          Number(
+                                            Number(
+                                              item?.bill[item?.bill?.length - 1]
+                                                ?.newEle
+                                            ) -
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.oldEle
+                                              )
+                                          ) *
                                           Number(
                                             item?.bill[item?.bill?.length - 1]
-                                              ?.oldEle
+                                              ?.elePrice
                                           )
-                                      ) *
-                                      Number(
-                                        item?.bill[item?.bill?.length - 1]
-                                          ?.elePrice
-                                      )
-                                    }
-                                    thousandSeparator
-                                    displayType="text"
-                                  />
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="p-2">
-                                <div class="font-medium text-left text-gray-800">
-                                  Tiền Nước
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left">
-                                  {/* {
+                                        }
+                                        thousandSeparator
+                                        displayType="text"
+                                      />
+                                    </div>
+                                  </td>
+                                </tr>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+
+                            {item?.bill[item?.bill?.length - 1]?.waterUnit !=
+                            "free" ? (
+                              <>
+                                <tr>
+                                  <td class="p-2">
+                                    <div class="font-medium text-left text-gray-800">
+                                      Tiền Nước
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left">
+                                      {/* {
                                     item?.bill[item?.bill?.length - 1]
                                       ?.waterUnit
                                   } */}
-                                  {item?.bill[item?.bill?.length - 1]
-                                    ?.waterUnit == "free"
-                                    ? "Miễn Phí"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.waterUnit == "room"
-                                    ? "Phòng"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.waterUnit == "member"
-                                    ? "Trên Người"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.waterUnit == "met"
-                                    ? "Khối"
-                                    : item?.bill[item?.bill?.length - 1]
-                                        ?.waterUnit == "kwh"
-                                    ? "Kwh"
-                                    : ""}
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left font-medium text-green-500">
-                                  {Number(
-                                    item?.bill[item?.bill?.length - 1]?.newWater
-                                  ) -
-                                    Number(
-                                      item?.bill[item?.bill?.length - 1]
-                                        ?.oldWater
-                                    )}
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left font-medium text-green-500">
-                                  <NumericFormat
-                                    value={
-                                      item?.bill[item?.bill?.length - 1]
-                                        ?.waterPrice
-                                    }
-                                    thousandSeparator
-                                    displayType="text"
-                                  />
-                                </div>
-                              </td>
-                              <td class="p-2">
-                                <div class="text-left font-medium text-green-500">
-                                  <NumericFormat
-                                    value={
-                                      Number(
+                                      {item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "free"
+                                        ? "Miễn Phí"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.waterUnit == "room"
+                                        ? "Phòng"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.waterUnit == "member"
+                                        ? "Trên Người"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.waterUnit == "met"
+                                        ? "Khối"
+                                        : item?.bill[item?.bill?.length - 1]
+                                            ?.waterUnit == "kwh"
+                                        ? "Kwh"
+                                        : ""}
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left font-medium text-green-500">
+                                      {Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newWater
+                                      ) -
                                         Number(
                                           item?.bill[item?.bill?.length - 1]
-                                            ?.newWater
-                                        ) -
+                                            ?.oldWater
+                                        )}
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left font-medium text-green-500">
+                                      <NumericFormat
+                                        value={
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.waterPrice
+                                        }
+                                        thousandSeparator
+                                        displayType="text"
+                                      />
+                                    </div>
+                                  </td>
+                                  <td class="p-2">
+                                    <div class="text-left font-medium text-green-500">
+                                      <NumericFormat
+                                        value={
+                                          Number(
+                                            Number(
+                                              item?.bill[item?.bill?.length - 1]
+                                                ?.newWater
+                                            ) -
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.oldWater
+                                              )
+                                          ) *
                                           Number(
                                             item?.bill[item?.bill?.length - 1]
-                                              ?.oldWater
+                                              ?.waterPrice
                                           )
-                                      ) *
-                                      Number(
-                                        item?.bill[item?.bill?.length - 1]
-                                          ?.waterPrice
-                                      )
-                                    }
-                                    thousandSeparator
-                                    displayType="text"
-                                  />
-                                </div>
-                              </td>
-                            </tr>
+                                        }
+                                        thousandSeparator
+                                        displayType="text"
+                                      />
+                                    </div>
+                                  </td>
+                                </tr>
+                              </>
+                            ) : (
+                              <></>
+                            )}
+
                             {item?.bill[item?.bill?.length - 1]?.service?.map(
                               (b) => {
                                 return (

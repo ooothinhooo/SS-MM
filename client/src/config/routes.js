@@ -3,9 +3,12 @@ export const routes = {
 
   Login: "/login",
   Register: "/register",
+  ViewBIll: "/bill/view/:id/:month",
 };
 
 export const routesManagingMotel = {
+  ViewBIll: "/bill/view/:id/:month",
+
   Dashboard: "/dashboard*",
   Mainpage: "/main",
 
@@ -28,6 +31,8 @@ export const routesManagingMotel = {
 };
 
 export const routeSocial = {
+  ViewBIll: "/bill/view/:id/:month",
+
   home: "/*",
   Motel: "/motel",
   Post: "/post",

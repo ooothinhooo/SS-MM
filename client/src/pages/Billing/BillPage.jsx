@@ -565,7 +565,19 @@ ${
                                               /
                                             </span>
                                             <span className="italic  text-[13px]">
-                                              {item.unit}
+                                              {/* {item.unit} */}
+
+                                              {item.unit == "free"
+                                                ? "Miễn Phí"
+                                                : item.unit == "room"
+                                                ? "Phòng"
+                                                : item.unit == "member"
+                                                ? "Trên Người"
+                                                : item.unit == "met"
+                                                ? "Khối"
+                                                : item.unit == "kwh"
+                                                ? "Kwh"
+                                                : item.unit}
                                             </span>
                                           </p>
                                         </>

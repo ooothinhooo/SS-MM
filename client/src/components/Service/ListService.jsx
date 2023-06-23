@@ -253,15 +253,13 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
 
         preConfirm: () => {
           var value = document.getElementById("value").value;
-          if (
-            document.getElementById("unit").value == "free" ||
-            document.getElementById("unit").value == "member" ||
-            document.getElementById("unit").value == "room"
-          ) {
+          if (document.getElementById("unit").value == "free") {
             value = 0;
           } else if (
             document.getElementById("unit").value == "kwh" ||
-            document.getElementById("unit").value == "met"
+            document.getElementById("unit").value == "met" ||
+            document.getElementById("unit").value == "member" ||
+            document.getElementById("unit").value == "room"
           ) {
             if (value == 0) {
               Swal.fire({

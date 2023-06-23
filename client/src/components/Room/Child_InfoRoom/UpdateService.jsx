@@ -112,7 +112,7 @@ function UpdateService({ user, roomId, getAPI_Room }) {
                 value={data.checkIn}
                 handleInputState={handleInputState}
               />
-              <span className="font-serif text-blue-700">VND</span>
+              {/* <span className="font-serif text-blue-700">VND</span> */}
             </p>
           </div>
 

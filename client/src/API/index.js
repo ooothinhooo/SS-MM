@@ -24,3 +24,4 @@ export const URL_ADD_WATER_ROOM = `${ROOM}/addwater`;
 export const URL_DELETE_WATER_ROOM = `${ROOM}/deletewater`;
 
 //?
+export const URL_DEPLOP = `https://api-ss-mm.onrender.com`;

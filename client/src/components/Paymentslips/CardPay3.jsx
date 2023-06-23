@@ -34,7 +34,7 @@ function CardPay3() {
                     </div>
                     <div class="text-gray-700">
                       <QRCode
-                        value={`https://fe-ss-mm.onrender.com/bill/view/${
+                        value={`https://fe-ss-mm.vercel.app/bill/view/${
                           item?._id
                         }/${item?.bill[item?.bill?.length - 1]?.month}`}
                         size="80"

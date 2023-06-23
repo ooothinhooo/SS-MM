@@ -138,8 +138,19 @@ function ViewBillPage() {
                         <td class="py-4 text-gray-700">{bill?.newEle}</td>
 
                         <td class="py-4 text-gray-700">
-                          {" "}
-                          {Number(bill?.newEle) - Number(bill?.oldEle)}
+                          {bill?.eleUnit == "free" ? (
+                            "0"
+                          ) : bill?.eleUnit == "room" ? (
+                            "1"
+                          ) : bill?.eleUnit == "member" ? (
+                            room?.member.length
+                          ) : bill?.eleUnit == "met" ? (
+                            <>{Number(bill?.newEle) - Number(bill?.oldEle)}</>
+                          ) : bill?.eleUnit == "kwh" ? (
+                            <>{Number(bill?.newEle) - Number(bill?.oldEle)}</>
+                          ) : (
+                            ""
+                          )}
                         </td>
                         <td class="py-4 text-gray-700">
                           <NumericFormat
@@ -151,14 +162,28 @@ function ViewBillPage() {
                         </td>
                         <td class="py-4 text-gray-700">
                           <NumericFormat
-                            value={
-                              Number(
-                                Number(bill?.newEle) - Number(bill?.oldEle)
-                              ) * Number(bill?.elePrice)
-                            }
+                            value={Number(
+                              bill?.eleUnit == "free"
+                                ? 0
+                                : bill?.eleUnit == "room"
+                                ? Number(bill?.elePrice)
+                                : bill?.eleUnit == "member"
+                                ? Number(room?.member?.length) *
+                                  Number(bill?.elePrice)
+                                : bill?.eleUnit == "met"
+                                ? Number(
+                                    Number(bill?.newEle) - Number(bill?.oldEle)
+                                  ) * Number(bill?.elePrice)
+                                : bill?.eleUnit == "kwh"
+                                ? Number(
+                                    Number(bill?.newEle) - Number(bill?.oldEle)
+                                  ) * Number(bill?.elePrice)
+                                : 0
+                            )}
                             thousandSeparator
                             displayType="text"
                           />{" "}
+                          {/*  */}
                           <span className="md:text-[12px] italic">VNĐ</span>
                         </td>
                       </tr>
@@ -189,7 +214,26 @@ function ViewBillPage() {
                         <td class="py-4 text-gray-700">{bill?.newWater}</td>
 
                         <td class="py-4 text-gray-700">
-                          {Number(bill?.newWater) - Number(bill?.oldWater)}
+                          {/* {Number(bill?.newWater) - Number(bill?.oldWater)} */}
+                          {bill?.waterUnit == "free" ? (
+                            "0"
+                          ) : bill?.waterUnit == "room" ? (
+                            "1"
+                          ) : bill?.waterUnit == "member" ? (
+                            room?.member.length
+                          ) : bill?.waterUnit == "met" ? (
+                            <>
+                              {" "}
+                              {Number(bill?.newWater) - Number(bill?.oldWater)}
+                            </>
+                          ) : bill?.waterUnit == "kwh" ? (
+                            <>
+                              {" "}
+                              {Number(bill?.newWater) - Number(bill?.oldWater)}
+                            </>
+                          ) : (
+                            ""
+                          )}
                         </td>
                         <td class="py-4 text-gray-700">
                           <NumericFormat
@@ -202,11 +246,26 @@ function ViewBillPage() {
                         <td class="py-4 text-gray-700">
                           {" "}
                           <NumericFormat
-                            value={
-                              Number(
-                                Number(bill?.newWater) - Number(bill?.oldWater)
-                              ) * Number(bill?.waterPrice)
-                            }
+                            value={Number(
+                              bill?.waterUnit == "free"
+                                ? 0
+                                : bill?.waterUnit == "room"
+                                ? Number(bill?.waterPrice)
+                                : bill?.waterUnit == "member"
+                                ? Number(room?.member?.length) *
+                                  Number(bill?.waterPrice)
+                                : bill?.waterUnit == "met"
+                                ? Number(
+                                    Number(bill?.newWater) -
+                                      Number(bill?.oldWater)
+                                  ) * Number(bill?.waterPrice)
+                                : bill?.waterUnit == "kwh"
+                                ? Number(
+                                    Number(bill?.newWater) -
+                                      Number(bill?.oldWater)
+                                  ) * Number(bill?.waterPrice)
+                                : 0
+                            )}
                             thousandSeparator
                             displayType="text"
                           />{" "}
@@ -241,7 +300,14 @@ function ViewBillPage() {
                           <td class="p-2">-- </td>
                           <td class="p-2">--</td>
                           <td class="p-2">
-                            <div class="text-left font-medium ">1</div>
+                            <div class="text-left font-medium ">
+                              {" "}
+                              {b?.unit == "room"
+                                ? 1
+                                : b?.unit == "member"
+                                ? room?.member.length
+                                : ""}
+                            </div>
                           </td>
                           <td class="p-2">
                             <div class="text-left ">
@@ -256,10 +322,18 @@ function ViewBillPage() {
                           <td class="p-2">
                             <div class="text-left font-medium ">
                               <NumericFormat
-                                value={b?.value}
+                                value={
+                                  b?.unit == "room"
+                                    ? b.value
+                                    : b?.unit == "member"
+                                    ? Number(room?.member.length) *
+                                      Number(b.value)
+                                    : 0
+                                }
                                 thousandSeparator
                                 displayType="text"
-                              />{" "}
+                              />
+
                               <span className="md:text-[12px] italic">VNĐ</span>
                             </div>
                           </td>
@@ -271,7 +345,7 @@ function ViewBillPage() {
               </table>
 
               <div class="flex justify-end mb-8">
-                <div class="text-gray-700 mr-2">Total:</div>
+                <div class="text-gray-700 mr-2">Tổng:</div>
                 <div class="text-gray-700 font-bold text-xl">
                   <NumericFormat
                     value={
@@ -300,7 +374,15 @@ function ViewBillPage() {
                       Number(
                         bill?.service.reduce(
                           (accumulator, currentValue) =>
-                            accumulator + parseInt(currentValue.value),
+                            accumulator +
+                            parseInt(
+                              currentValue?.unit == "room"
+                                ? currentValue.value
+                                : currentValue?.unit == "member"
+                                ? Number(room?.member.length) *
+                                  Number(currentValue.value)
+                                : 0
+                            ),
                           0
                         )
                       )

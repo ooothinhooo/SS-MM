@@ -95,8 +95,32 @@ function CardPay1() {
                       <td class="px-4 py-2 border-2 border-gray-400 border-x">
                         <NumericFormat
                           value={
-                            Number(item?.bill[item?.bill?.length - 1]?.newEle) -
-                            Number(item?.bill[item?.bill?.length - 1]?.oldEle)
+                            item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                            "free"
+                              ? 0
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "room"
+                              ? 1
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "member"
+                              ? item?.member?.length
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "met"
+                              ? Number(
+                                  item?.bill[item?.bill?.length - 1]?.newEle
+                                ) -
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.oldEle
+                                )
+                              : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                "kwh"
+                              ? Number(
+                                  item?.bill[item?.bill?.length - 1]?.newEle
+                                ) -
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.oldEle
+                                )
+                              : 0
                           }
                           thousandSeparator
                           displayType="text"
@@ -110,7 +134,7 @@ function CardPay1() {
                             ? "Phòng"
                             : item?.bill[item?.bill?.length - 1]?.eleUnit ==
                               "member"
-                            ? "Trên Người"
+                            ? "Người"
                             : item?.bill[item?.bill?.length - 1]?.eleUnit ==
                               "met"
                             ? "Khối"
@@ -154,10 +178,32 @@ function CardPay1() {
                       <td class="px-4 py-2 border-2 border-gray-400 border-x">
                         <NumericFormat
                           value={
-                            Number(
-                              item?.bill[item?.bill?.length - 1]?.newWater
-                            ) -
-                            Number(item?.bill[item?.bill?.length - 1]?.oldWater)
+                            item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                            "free"
+                              ? 0
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "room"
+                              ? 1
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "member"
+                              ? item?.member.length
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "met"
+                              ? Number(
+                                  item?.bill[item?.bill?.length - 1]?.newWater
+                                ) -
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.oldWater
+                                )
+                              : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                "kwh"
+                              ? Number(
+                                  item?.bill[item?.bill?.length - 1]?.newWater
+                                ) -
+                                Number(
+                                  item?.bill[item?.bill?.length - 1]?.oldWater
+                                )
+                              : 0
                           }
                           thousandSeparator
                           displayType="text"
@@ -172,7 +218,7 @@ function CardPay1() {
                             ? "Phòng"
                             : item?.bill[item?.bill?.length - 1]?.waterUnit ==
                               "member"
-                            ? "Trên Người"
+                            ? "Người"
                             : item?.bill[item?.bill?.length - 1]?.waterUnit ==
                               "met"
                             ? "Khối"
@@ -236,7 +282,17 @@ function CardPay1() {
                                     /
                                   </span>
                                   <span className="italic  text-[13px]">
-                                    {i.unit}
+                                    {i.unit == "free"
+                                      ? "Miễn Phí"
+                                      : i.unit == "room"
+                                      ? "Phòng"
+                                      : i.unit == "member"
+                                      ? "Trên Người"
+                                      : i.unit == "met"
+                                      ? "Khối"
+                                      : i.unit == "kwh"
+                                      ? "Kwh"
+                                      : ""}
                                   </span>
                                 </p>
                               </>
@@ -317,7 +373,14 @@ function CardPay1() {
                                   ]?.service.reduce(
                                     (accumulator, currentValue) =>
                                       accumulator +
-                                      parseInt(currentValue.value),
+                                      parseInt(
+                                        currentValue?.unit == "room"
+                                          ? currentValue.value
+                                          : currentValue?.unit == "member"
+                                          ? Number(item?.member.length) *
+                                            Number(currentValue.value)
+                                          : 0
+                                      ),
                                     0
                                   )
                                 )

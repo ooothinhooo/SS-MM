@@ -609,7 +609,9 @@ function PaymemtsForm({ user }) {
                                 {i?.bill[i?.bill?.length - 1]?.month}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.oldEle}{" "}
+                                {i?.bill[i?.bill?.length - 1]?.oldEle == 0
+                                  ? "---"
+                                  : i?.bill[i?.bill?.length - 1]?.oldEle}{" "}
                                 {i?.bill[i?.bill?.length - 1]?.eleUnit == "free"
                                   ? "Miễn Phí"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
@@ -628,22 +630,29 @@ function PaymemtsForm({ user }) {
                                 {/* {i?.bill[i?.bill?.length - 1]?.eleUnit} */}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.newEle}{" "}
-                                {i?.bill[i?.bill?.length - 1]?.eleUnit == "free"
-                                  ? "Miễn Phí"
-                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                    "room"
-                                  ? "Phòng"
-                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                    "member"
-                                  ? "Trên Người"
-                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                    "met"
-                                  ? "Khối"
-                                  : i?.bill[i?.bill?.length - 1]?.eleUnit ==
-                                    "kwh"
-                                  ? "Kwh"
-                                  : ""}
+                                {/* {i?.bill[i?.bill?.length - 1]?.newEle}{" "} */}
+                                {i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                "free" ? (
+                                  "Miễn Phí"
+                                ) : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                  "room" ? (
+                                  "1 Phòng"
+                                ) : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                  "member" ? (
+                                  <>{i?.member.length}</>
+                                ) : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                  "met" ? (
+                                  <>
+                                    {i?.bill[i?.bill?.length - 1]?.newEle} Khối
+                                  </>
+                                ) : i?.bill[i?.bill?.length - 1]?.eleUnit ==
+                                  "kwh" ? (
+                                  <>
+                                    {i?.bill[i?.bill?.length - 1]?.newEle} Kwh
+                                  </>
+                                ) : (
+                                  ""
+                                )}
                                 {/* {i?.bill[i?.bill?.length - 1]?.eleUnit} */}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
@@ -681,44 +690,69 @@ function PaymemtsForm({ user }) {
                                 </span>
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.oldWater}{" "}
-                                {i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                "free"
-                                  ? "Miễn Phí"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "room"
-                                  ? "Phòng"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "member"
-                                  ? "Trên Người"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "met"
-                                  ? "Khối"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "kwh"
-                                  ? "Kwh"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                {i?.bill[i?.bill?.length - 1]?.oldWater == 0 ? (
+                                  "---"
+                                ) : (
+                                  <>
+                                    {i?.bill[i?.bill?.length - 1]?.oldWater}
+                                    {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                    "free"
+                                      ? "Miễn Phí"
+                                      : i?.bill[i?.bill?.length - 1]
+                                          ?.waterUnit == "room"
+                                      ? "Phòng"
+                                      : i?.bill[i?.bill?.length - 1]
+                                          ?.waterUnit == "member"
+                                      ? "Trên Người"
+                                      : i?.bill[i?.bill?.length - 1]
+                                          ?.waterUnit == "met"
+                                      ? "Khối"
+                                      : i?.bill[i?.bill?.length - 1]
+                                          ?.waterUnit == "kwh"
+                                      ? "Kwh"
+                                      : i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                  </>
+                                )}{" "}
                                 {/* {i?.bill[i?.bill?.length - 1]?.waterUnit} */}
                               </td>
 
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
-                                {i?.bill[i?.bill?.length - 1]?.newWater}
-                                {i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                "free"
-                                  ? "Miễn Phí"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "room"
-                                  ? "Phòng"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "member"
-                                  ? "Trên Người"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "met"
-                                  ? "Khối"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit ==
-                                    "kwh"
-                                  ? "Kwh"
-                                  : i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                <>
+                                  {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                  "free"
+                                    ? "Miễn Phí"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "room"
+                                    ? 1
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "member"
+                                    ? i?.member?.length
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "met"
+                                    ? i?.bill[i?.bill?.length - 1]?.newWater
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "kwh"
+                                    ? i?.bill[i?.bill?.length - 1]?.newWater
+                                    : i?.bill[i?.bill?.length - 1]
+                                        ?.newWater}{" "}
+                                  {i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                  "free"
+                                    ? "Miễn Phí"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "room"
+                                    ? "Phòng"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "member"
+                                    ? "Người"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "met"
+                                    ? "Khối"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit ==
+                                      "kwh"
+                                    ? "Kwh"
+                                    : i?.bill[i?.bill?.length - 1]?.waterUnit}
+                                </>
+
                                 {/* {i?.bill[i?.bill?.length - 1]?.waterUnit} */}
                               </td>
                               <td class="px-6 py-4 whitespace-nowrap text-[10px] text-gray-800 dark:text-gray-200">
@@ -781,7 +815,17 @@ function PaymemtsForm({ user }) {
                                             /
                                           </span>
                                           <span className="italic  text-[10px]">
-                                            {i.unit}
+                                            {i.unit == "free"
+                                              ? "Miễn Phí"
+                                              : i.unit == "room"
+                                              ? "Phòng"
+                                              : i.unit == "member"
+                                              ? "Người"
+                                              : i.unit == "met"
+                                              ? "Khối"
+                                              : i.unit == "kwh"
+                                              ? "Kwh"
+                                              : ""}
                                           </span>
                                         </p>
                                       </>

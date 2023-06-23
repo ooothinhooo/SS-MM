@@ -114,13 +114,44 @@ function CardPay2({ item }) {
                               : ""}
                           </td>
                           <td class="py-4 text-gray-700">
-                            {" "}
-                            {Number(
+                            {item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                            "free" ? (
+                              "0"
+                            ) : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "room" ? (
+                              "1"
+                            ) : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "member" ? (
+                              item?.member.length
+                            ) : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "met" ? (
+                              <>
+                                {Number(
+                                  item?.bill[item?.bill?.length - 1]?.newEle
+                                ) -
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.oldEle
+                                  )}
+                              </>
+                            ) : item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                              "kwh" ? (
+                              <>
+                                {Number(
+                                  item?.bill[item?.bill?.length - 1]?.newEle
+                                ) -
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.oldEle
+                                  )}
+                              </>
+                            ) : (
+                              ""
+                            )}
+                            {/* {Number(
                               item?.bill[item?.bill?.length - 1]?.newEle
                             ) -
                               Number(
                                 item?.bill[item?.bill?.length - 1]?.oldEle
-                              )}
+                              )} */}
                           </td>
                           <td class="py-4 text-gray-700">
                             <NumericFormat
@@ -134,22 +165,61 @@ function CardPay2({ item }) {
                           </td>
                           <td class="py-4 text-gray-700">
                             <NumericFormat
-                              value={
-                                Number(
-                                  Number(
-                                    item?.bill[item?.bill?.length - 1]?.newEle
-                                  ) -
-                                    Number(
-                                      item?.bill[item?.bill?.length - 1]?.oldEle
+                              value={Number(
+                                item?.bill[item?.bill?.length - 1]?.eleUnit ==
+                                  "free"
+                                  ? 0
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "room"
+                                  ? Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
                                     )
-                                ) *
-                                Number(
-                                  item?.bill[item?.bill?.length - 1]?.elePrice
-                                )
-                              }
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "member"
+                                  ? Number(item?.member?.length) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
+                                    )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "met"
+                                  ? Number(
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newEle
+                                      ) -
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.oldEle
+                                        )
+                                    ) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
+                                    )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.eleUnit == "kwh"
+                                  ? Number(
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newEle
+                                      ) -
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.oldEle
+                                        )
+                                    ) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.elePrice
+                                    )
+                                  : 0
+                              )}
                               thousandSeparator
                               displayType="text"
                             />{" "}
+                            {/*  */}
                             <span className="text-[12px] italic">VNĐ</span>
                           </td>
                         </tr>
@@ -182,12 +252,41 @@ function CardPay2({ item }) {
                               : ""}
                           </td>
                           <td class="py-4 text-gray-700">
-                            {Number(
-                              item?.bill[item?.bill?.length - 1]?.newWater
-                            ) -
-                              Number(
-                                item?.bill[item?.bill?.length - 1]?.oldWater
-                              )}
+                            {item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                            "free" ? (
+                              "0"
+                            ) : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "room" ? (
+                              "1"
+                            ) : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "member" ? (
+                              item?.member.length
+                            ) : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "met" ? (
+                              <>
+                                {" "}
+                                {Number(
+                                  item?.bill[item?.bill?.length - 1]?.newWater
+                                ) -
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.oldWater
+                                  )}
+                              </>
+                            ) : item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                              "kwh" ? (
+                              <>
+                                {" "}
+                                {Number(
+                                  item?.bill[item?.bill?.length - 1]?.newWater
+                                ) -
+                                  Number(
+                                    item?.bill[item?.bill?.length - 1]?.oldWater
+                                  )}
+                              </>
+                            ) : (
+                              ""
+                            )}
+                            {/*  */}
                           </td>
                           <td class="py-4 text-gray-700">
                             <NumericFormat
@@ -201,21 +300,59 @@ function CardPay2({ item }) {
                           </td>
                           <td class="py-4 text-gray-700">
                             {" "}
+                            {/*  */}
                             <NumericFormat
-                              value={
-                                Number(
-                                  Number(
-                                    item?.bill[item?.bill?.length - 1]?.newWater
-                                  ) -
+                              value={Number(
+                                item?.bill[item?.bill?.length - 1]?.waterUnit ==
+                                  "free"
+                                  ? 0
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "room"
+                                  ? Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.waterPrice
+                                    )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "member"
+                                  ? Number(item?.member?.length) *
                                     Number(
                                       item?.bill[item?.bill?.length - 1]
-                                        ?.oldWater
+                                        ?.waterPrice
                                     )
-                                ) *
-                                Number(
-                                  item?.bill[item?.bill?.length - 1]?.waterPrice
-                                )
-                              }
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "met"
+                                  ? Number(
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newWater
+                                      ) -
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.oldWater
+                                        )
+                                    ) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.waterPrice
+                                    )
+                                  : item?.bill[item?.bill?.length - 1]
+                                      ?.waterUnit == "kwh"
+                                  ? Number(
+                                      Number(
+                                        item?.bill[item?.bill?.length - 1]
+                                          ?.newWater
+                                      ) -
+                                        Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.oldWater
+                                        )
+                                    ) *
+                                    Number(
+                                      item?.bill[item?.bill?.length - 1]
+                                        ?.waterPrice
+                                    )
+                                  : 0
+                              )}
                               thousandSeparator
                               displayType="text"
                             />{" "}
@@ -227,25 +364,47 @@ function CardPay2({ item }) {
                       <></>
                     )}
 
-                    {item?.bill[item?.bill?.length - 1]?.service?.map((b) => {
+                    {item?.bill[item?.bill?.length - 1]?.service?.map((i) => {
                       return (
                         <>
                           <tr>
                             <td class="p-2">
                               <div class="font-medium text-left ">
-                                {b?.name}
+                                {i?.name}
                               </div>
                             </td>
                             <td class="p-2">
-                              <div class="text-left">{b?.unit}</div>
+                              <div class="text-left">
+                                {" "}
+                                <div class="text-left">
+                                  {" "}
+                                  {i.unit == "free"
+                                    ? "Miễn Phí"
+                                    : i.unit == "room"
+                                    ? "Phòng"
+                                    : i.unit == "member"
+                                    ? "Trên Người"
+                                    : i.unit == "met"
+                                    ? "Khối"
+                                    : i.unit == "kwh"
+                                    ? "Kwh"
+                                    : ""}
+                                </div>
+                              </div>
                             </td>
                             <td class="p-2">
-                              <div class="text-left font-medium ">1</div>
+                              <div class="text-left font-medium ">
+                                {i?.unit == "room"
+                                  ? 1
+                                  : i?.unit == "member"
+                                  ? item?.member.length
+                                  : ""}
+                              </div>
                             </td>
                             <td class="p-2">
                               <div class="text-left ">
                                 <NumericFormat
-                                  value={b?.value}
+                                  value={i?.value}
                                   thousandSeparator
                                   displayType="text"
                                 />{" "}
@@ -255,7 +414,14 @@ function CardPay2({ item }) {
                             <td class="p-2">
                               <div class="text-left font-medium ">
                                 <NumericFormat
-                                  value={b?.value}
+                                  value={
+                                    i?.unit == "room"
+                                      ? i.value
+                                      : i?.unit == "member"
+                                      ? Number(item?.member.length) *
+                                        Number(i.value)
+                                      : 0
+                                  }
                                   thousandSeparator
                                   displayType="text"
                                 />{" "}
@@ -326,7 +492,15 @@ function CardPay2({ item }) {
                         Number(
                           item?.bill[item?.bill?.length - 1]?.service.reduce(
                             (accumulator, currentValue) =>
-                              accumulator + parseInt(currentValue.value),
+                              accumulator +
+                              parseInt(
+                                currentValue?.unit == "room"
+                                  ? currentValue.value
+                                  : currentValue?.unit == "member"
+                                  ? Number(item?.member.length) *
+                                    Number(currentValue.value)
+                                  : 0
+                              ),
                             0
                           )
                         )

@@ -125,7 +125,7 @@ function Cardpay4() {
                                         ? "Phòng"
                                         : item?.bill[item?.bill?.length - 1]
                                             ?.eleUnit == "member"
-                                        ? "Trên Người"
+                                        ? "Người"
                                         : item?.bill[item?.bill?.length - 1]
                                             ?.eleUnit == "met"
                                         ? "Khối"
@@ -137,14 +137,42 @@ function Cardpay4() {
                                   </td>
                                   <td class="p-2">
                                     <div class="text-left font-medium text-green-500">
-                                      {Number(
-                                        item?.bill[item?.bill?.length - 1]
-                                          ?.newEle
-                                      ) -
-                                        Number(
-                                          item?.bill[item?.bill?.length - 1]
-                                            ?.oldEle
-                                        )}
+                                      {item?.bill[item?.bill?.length - 1]
+                                        ?.eleUnit == "free" ? (
+                                        "0"
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "room" ? (
+                                        "1"
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "member" ? (
+                                        item?.member.length
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "met" ? (
+                                        <>
+                                          {Number(
+                                            item?.bill[item?.bill?.length - 1]
+                                              ?.newEle
+                                          ) -
+                                            Number(
+                                              item?.bill[item?.bill?.length - 1]
+                                                ?.oldEle
+                                            )}
+                                        </>
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.eleUnit == "kwh" ? (
+                                        <>
+                                          {Number(
+                                            item?.bill[item?.bill?.length - 1]
+                                              ?.newEle
+                                          ) -
+                                            Number(
+                                              item?.bill[item?.bill?.length - 1]
+                                                ?.oldEle
+                                            )}
+                                        </>
+                                      ) : (
+                                        ""
+                                      )}
                                     </div>
                                   </td>
                                   <td class="p-2">
@@ -162,26 +190,68 @@ function Cardpay4() {
                                   <td class="p-2">
                                     <div class="text-left font-medium text-green-500">
                                       <NumericFormat
-                                        value={
-                                          Number(
-                                            Number(
-                                              item?.bill[item?.bill?.length - 1]
-                                                ?.newEle
-                                            ) -
+                                        value={Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.eleUnit == "free"
+                                            ? 0
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.eleUnit == "room"
+                                            ? Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.elePrice
+                                              )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.eleUnit == "member"
+                                            ? Number(item?.member?.length) *
                                               Number(
                                                 item?.bill[
                                                   item?.bill?.length - 1
-                                                ]?.oldEle
+                                                ]?.elePrice
                                               )
-                                          ) *
-                                          Number(
-                                            item?.bill[item?.bill?.length - 1]
-                                              ?.elePrice
-                                          )
-                                        }
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.eleUnit == "met"
+                                            ? Number(
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.newEle
+                                                ) -
+                                                  Number(
+                                                    item?.bill[
+                                                      item?.bill?.length - 1
+                                                    ]?.oldEle
+                                                  )
+                                              ) *
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.elePrice
+                                              )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.eleUnit == "kwh"
+                                            ? Number(
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.newEle
+                                                ) -
+                                                  Number(
+                                                    item?.bill[
+                                                      item?.bill?.length - 1
+                                                    ]?.oldEle
+                                                  )
+                                              ) *
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.elePrice
+                                              )
+                                            : 0
+                                        )}
                                         thousandSeparator
                                         displayType="text"
-                                      />
+                                      />{" "}
                                     </div>
                                   </td>
                                 </tr>
@@ -225,14 +295,45 @@ function Cardpay4() {
                                   </td>
                                   <td class="p-2">
                                     <div class="text-left font-medium text-green-500">
-                                      {Number(
-                                        item?.bill[item?.bill?.length - 1]
-                                          ?.newWater
-                                      ) -
-                                        Number(
-                                          item?.bill[item?.bill?.length - 1]
-                                            ?.oldWater
-                                        )}
+                                      {item?.bill[item?.bill?.length - 1]
+                                        ?.waterUnit == "free" ? (
+                                        "0"
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "room" ? (
+                                        "1"
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "member" ? (
+                                        item?.member.length
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "met" ? (
+                                        <>
+                                          {" "}
+                                          {Number(
+                                            item?.bill[item?.bill?.length - 1]
+                                              ?.newWater
+                                          ) -
+                                            Number(
+                                              item?.bill[item?.bill?.length - 1]
+                                                ?.oldWater
+                                            )}
+                                        </>
+                                      ) : item?.bill[item?.bill?.length - 1]
+                                          ?.waterUnit == "kwh" ? (
+                                        <>
+                                          {" "}
+                                          {Number(
+                                            item?.bill[item?.bill?.length - 1]
+                                              ?.newWater
+                                          ) -
+                                            Number(
+                                              item?.bill[item?.bill?.length - 1]
+                                                ?.oldWater
+                                            )}
+                                        </>
+                                      ) : (
+                                        ""
+                                      )}
+                                      {/*  */}
                                     </div>
                                   </td>
                                   <td class="p-2">
@@ -250,26 +351,68 @@ function Cardpay4() {
                                   <td class="p-2">
                                     <div class="text-left font-medium text-green-500">
                                       <NumericFormat
-                                        value={
-                                          Number(
-                                            Number(
-                                              item?.bill[item?.bill?.length - 1]
-                                                ?.newWater
-                                            ) -
+                                        value={Number(
+                                          item?.bill[item?.bill?.length - 1]
+                                            ?.waterUnit == "free"
+                                            ? 0
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.waterUnit == "room"
+                                            ? Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.waterPrice
+                                              )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.waterUnit == "member"
+                                            ? Number(item?.member?.length) *
                                               Number(
                                                 item?.bill[
                                                   item?.bill?.length - 1
-                                                ]?.oldWater
+                                                ]?.waterPrice
                                               )
-                                          ) *
-                                          Number(
-                                            item?.bill[item?.bill?.length - 1]
-                                              ?.waterPrice
-                                          )
-                                        }
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.waterUnit == "met"
+                                            ? Number(
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.newWater
+                                                ) -
+                                                  Number(
+                                                    item?.bill[
+                                                      item?.bill?.length - 1
+                                                    ]?.oldWater
+                                                  )
+                                              ) *
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.waterPrice
+                                              )
+                                            : item?.bill[item?.bill?.length - 1]
+                                                ?.waterUnit == "kwh"
+                                            ? Number(
+                                                Number(
+                                                  item?.bill[
+                                                    item?.bill?.length - 1
+                                                  ]?.newWater
+                                                ) -
+                                                  Number(
+                                                    item?.bill[
+                                                      item?.bill?.length - 1
+                                                    ]?.oldWater
+                                                  )
+                                              ) *
+                                              Number(
+                                                item?.bill[
+                                                  item?.bill?.length - 1
+                                                ]?.waterPrice
+                                              )
+                                            : 0
+                                        )}
                                         thousandSeparator
                                         displayType="text"
-                                      />
+                                      />{" "}
                                     </div>
                                   </td>
                                 </tr>
@@ -279,27 +422,44 @@ function Cardpay4() {
                             )}
 
                             {item?.bill[item?.bill?.length - 1]?.service?.map(
-                              (b) => {
+                              (i) => {
                                 return (
                                   <>
                                     <tr>
                                       <td class="p-2">
                                         <div class="font-medium text-left text-gray-800">
-                                          {b?.name}
+                                          {i?.name}
                                         </div>
                                       </td>
                                       <td class="p-2">
-                                        <div class="text-left">{b?.unit}</div>
+                                        <div class="text-left">
+                                          {" "}
+                                          {i.unit == "free"
+                                            ? "Miễn Phí"
+                                            : i.unit == "room"
+                                            ? "Phòng"
+                                            : i.unit == "member"
+                                            ? "Trên Người"
+                                            : i.unit == "met"
+                                            ? "Khối"
+                                            : i.unit == "kwh"
+                                            ? "Kwh"
+                                            : ""}
+                                        </div>
                                       </td>
                                       <td class="p-2">
                                         <div class="text-left font-medium text-green-500">
-                                          1
+                                          {i?.unit == "room"
+                                            ? 1
+                                            : i?.unit == "member"
+                                            ? item?.member.length
+                                            : ""}
                                         </div>
                                       </td>
                                       <td class="p-2">
                                         <div class="text-left font-medium text-green-500">
                                           <NumericFormat
-                                            value={b?.value}
+                                            value={i?.value}
                                             thousandSeparator
                                             displayType="text"
                                           />
@@ -308,10 +468,20 @@ function Cardpay4() {
                                       <td class="p-2">
                                         <div class="text-left font-medium text-green-500">
                                           <NumericFormat
-                                            value={b?.value}
+                                            value={
+                                              i?.unit == "room"
+                                                ? i.value
+                                                : i?.unit == "member"
+                                                ? Number(item?.member.length) *
+                                                  Number(i.value)
+                                                : 0
+                                            }
                                             thousandSeparator
                                             displayType="text"
-                                          />
+                                          />{" "}
+                                          <span className="text-[12px] italic">
+                                            VNĐ
+                                          </span>
                                         </div>
                                       </td>
                                     </tr>
@@ -411,7 +581,17 @@ function Cardpay4() {
                                           ]?.service.reduce(
                                             (accumulator, currentValue) =>
                                               accumulator +
-                                              parseInt(currentValue.value),
+                                              parseInt(
+                                                currentValue?.unit == "room"
+                                                  ? currentValue.value
+                                                  : currentValue?.unit ==
+                                                    "member"
+                                                  ? Number(
+                                                      item?.member.length
+                                                    ) *
+                                                    Number(currentValue.value)
+                                                  : 0
+                                              ),
                                             0
                                           )
                                         )

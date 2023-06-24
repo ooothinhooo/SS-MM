@@ -104,7 +104,7 @@ function CardPay2({ item }) {
                               ? "Phòng"
                               : item?.bill[item?.bill?.length - 1]?.eleUnit ==
                                 "member"
-                              ? "Trên Người"
+                              ? "Người"
                               : item?.bill[item?.bill?.length - 1]?.eleUnit ==
                                 "met"
                               ? "Khối"
@@ -242,7 +242,7 @@ function CardPay2({ item }) {
                               ? "Phòng"
                               : item?.bill[item?.bill?.length - 1]?.waterUnit ==
                                 "member"
-                              ? "Trên Người"
+                              ? "Người"
                               : item?.bill[item?.bill?.length - 1]?.waterUnit ==
                                 "met"
                               ? "Khối"
@@ -368,12 +368,12 @@ function CardPay2({ item }) {
                       return (
                         <>
                           <tr>
-                            <td class="p-2">
+                            <td class="">
                               <div class="font-medium text-left ">
                                 {i?.name}
                               </div>
                             </td>
-                            <td class="p-2">
+                            <td class="">
                               <div class="text-left">
                                 {" "}
                                 <div class="text-left">
@@ -383,7 +383,7 @@ function CardPay2({ item }) {
                                     : i.unit == "room"
                                     ? "Phòng"
                                     : i.unit == "member"
-                                    ? "Trên Người"
+                                    ? "Người"
                                     : i.unit == "met"
                                     ? "Khối"
                                     : i.unit == "kwh"
@@ -392,8 +392,8 @@ function CardPay2({ item }) {
                                 </div>
                               </div>
                             </td>
-                            <td class="p-2">
-                              <div class="text-left font-medium ">
+                            <td class="">
+                              <div class=" text-left font-medium ">
                                 {i?.unit == "room"
                                   ? 1
                                   : i?.unit == "member"
@@ -401,7 +401,7 @@ function CardPay2({ item }) {
                                   : ""}
                               </div>
                             </td>
-                            <td class="p-2">
+                            <td class="">
                               <div class="text-left ">
                                 <NumericFormat
                                   value={i?.value}
@@ -411,7 +411,7 @@ function CardPay2({ item }) {
                                 <span className="text-[12px] italic">VNĐ</span>
                               </div>
                             </td>
-                            <td class="p-2">
+                            <td class="">
                               <div class="text-left font-medium ">
                                 <NumericFormat
                                   value={
@@ -436,7 +436,7 @@ function CardPay2({ item }) {
                 </table>
 
                 <div class="flex justify-end mb-8">
-                  <div class="text-gray-700 mr-2">Total:</div>
+                  <div class="text-gray-700 mr-2">Tổng:</div>
                   <div class="text-gray-700 font-bold text-xl">
                     <NumericFormat
                       value={
@@ -516,7 +516,7 @@ function CardPay2({ item }) {
                     Vui Lòng Thanh Toán Hoá Đơn Trước 30 ngày
                   </div>
                   <div class="text-gray-700 mb-2">
-                    Mọi thông tin chi tiết liên hệ {item?.motelId?.motelPhone}
+                    Mọi thông tin chi tiết liên hệ {item?.motelId?.phone}
                   </div>
                   {/* <div class="text-gray-700">123 Main St., Anytown, USA 12345</div> */}
                 </div>

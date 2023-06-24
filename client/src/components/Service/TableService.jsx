@@ -148,7 +148,7 @@ function TableService({ user }) {
                                       ? "Phòng"
                                       : item?.bill[item?.bill?.length - 1]
                                           ?.eleUnit == "member"
-                                      ? "Trên Người"
+                                      ? "Người"
                                       : item?.bill[item?.bill?.length - 1]
                                           ?.eleUnit == "met"
                                       ? "Khối"
@@ -225,7 +225,7 @@ function TableService({ user }) {
                                       ? "Phòng"
                                       : item?.bill[item?.bill?.length - 1]
                                           ?.waterUnit == "member"
-                                      ? "Trên Người"
+                                      ? "Người"
                                       : item?.bill[item?.bill?.length - 1]
                                           ?.waterUnit == "met"
                                       ? "Khối"
@@ -302,7 +302,7 @@ function TableService({ user }) {
                                               : i.unit == "room"
                                               ? "Phòng"
                                               : i.unit == "member"
-                                              ? "Trên Người"
+                                              ? "Người"
                                               : i.unit == "met"
                                               ? "Khối"
                                               : i.unit == "kwh"

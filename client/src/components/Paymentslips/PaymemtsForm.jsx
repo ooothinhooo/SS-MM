@@ -619,7 +619,7 @@ function PaymemtsForm({ user }) {
                                   ? "Phòng"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                     "member"
-                                  ? "Trên Người"
+                                  ? "Người"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                     "met"
                                   ? "Khối"
@@ -703,7 +703,7 @@ function PaymemtsForm({ user }) {
                                       ? "Phòng"
                                       : i?.bill[i?.bill?.length - 1]
                                           ?.waterUnit == "member"
-                                      ? "Trên Người"
+                                      ? "Người"
                                       : i?.bill[i?.bill?.length - 1]
                                           ?.waterUnit == "met"
                                       ? "Khối"
@@ -903,7 +903,14 @@ function PaymemtsForm({ user }) {
                                       ]?.service.reduce(
                                         (accumulator, currentValue) =>
                                           accumulator +
-                                          parseInt(currentValue.value),
+                                          parseInt(
+                                            currentValue?.unit == "room"
+                                              ? currentValue.value
+                                              : currentValue?.unit == "member"
+                                              ? Number(i?.member.length) *
+                                                Number(currentValue.value)
+                                              : 0
+                                          ),
                                         0
                                       )
                                     )
@@ -1128,7 +1135,7 @@ function PaymemtsForm({ user }) {
                                   ? "Phòng"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                     "member"
-                                  ? "Trên Người"
+                                  ? "Người"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                     "met"
                                   ? "Khối"
@@ -1146,7 +1153,7 @@ function PaymemtsForm({ user }) {
                                   ? "Phòng"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                     "member"
-                                  ? "Trên Người"
+                                  ? "Người"
                                   : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                     "met"
                                   ? "Khối"
@@ -1200,7 +1207,7 @@ function PaymemtsForm({ user }) {
                                   ? "Phòng"
                                   : i?.bill[i?.bill?.length - 1]?.waterUnit ==
                                     "member"
-                                  ? "Trên Người"
+                                  ? "Người"
                                   : i?.bill[i?.bill?.length - 1]?.waterUnit ==
                                     "met"
                                   ? "Khối"
@@ -1220,7 +1227,7 @@ function PaymemtsForm({ user }) {
                                   ? "Phòng"
                                   : i?.bill[i?.bill?.length - 1]?.waterUnit ==
                                     "member"
-                                  ? "Trên Người"
+                                  ? "Người"
                                   : i?.bill[i?.bill?.length - 1]?.waterUnit ==
                                     "met"
                                   ? "Khối"

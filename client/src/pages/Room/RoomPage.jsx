@@ -164,7 +164,7 @@ function RoomPage({ user }) {
             <select 
             id="eleUnit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option selected>Choose a service</option>
-            <option value="Trên Người">Trên Người</option>
+            <option value="Người">Người</option>
             <option value="KWH">KWH</option>
             <option value="Phòng">Phòng</option>
             <option value="Miễm Phí">Miễn Phí</option>
@@ -191,7 +191,7 @@ function RoomPage({ user }) {
           <select 
           id="waterUnit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option selected>Choose a service</option>
-          <option value="Trên Người">Trên Người</option>
+          <option value="Người">Người</option>
           <option value="Khối">Khối</option>
           <option value="Phòng">Phòng</option>
           <option value="Miễm Phí">Miễn Phí</option>

@@ -73,7 +73,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           <select 
           id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option selected>Choose a service</option>
-          <option value="member">Trên Người</option>
+          <option value="member">Người</option>
           <option value="kwh">Kwh</option>
           <option value="met">Khối</option>
           <option value="room">Phòng</option>
@@ -233,14 +233,14 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                 : data.unit == "room"
                 ? "Phòng"
                 : data.unit == "member"
-                ? "Trên Người"
+                ? "Người"
                 : data.unit == "met"
                 ? "Khối"
                 : data.unit == "kwh"
                 ? "Kwh"
                 : ""
             }</option>
-          <option value="member">Trên Người</option>
+          <option value="member">Người</option>
           <option value="kwh">Kwh</option>
           <option value="met">Khối</option>
           <option value="room">Phòng</option>
@@ -490,7 +490,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                               : item.unit == "room"
                               ? "Phòng"
                               : item.unit == "member"
-                              ? "Trên Người"
+                              ? "Người"
                               : item.unit == "met"
                               ? "Khối"
                               : item.unit == "kwh"

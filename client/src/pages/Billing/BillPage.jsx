@@ -130,7 +130,7 @@ function BillPage({ user }) {
        : i.unit == "room"
        ? "Phòng"
        : i.unit == "member"
-       ? "Trên Người"
+       ? "Người"
        : i.unit == "met"
        ? "Khối"
        : i.unit == "kwh"
@@ -182,10 +182,29 @@ function BillPage({ user }) {
        </span>
        <span>/</span>
        <span>
+      
        ${
          data?.services?.find((i) => {
            return i.name === "Tiền Điện";
-         })?.unit
+         })?.unit == "free"
+           ? "Miễn Phí"
+           : data?.services?.find((i) => {
+               return i.name === "Tiền Điện";
+             })?.unit == "room"
+           ? "Phòng"
+           : data?.services?.find((i) => {
+               return i.name === "Tiền Điện";
+             })?.unit == "member"
+           ? "Người"
+           : data?.services?.find((i) => {
+               return i.name === "Tiền Điện";
+             })?.unit == "met"
+           ? "Khối"
+           : data?.services?.find((i) => {
+               return i.name === "Tiền Điện";
+             })?.unit == "kwh"
+           ? "Kwh"
+           : ""
        }
        </span>
        </p>
@@ -235,7 +254,25 @@ ${
         ${
           data?.services?.find((i) => {
             return i.name === "Tiền Nước";
-          })?.unit
+          })?.unit == "free"
+            ? "Miễn Phí"
+            : data?.services?.find((i) => {
+                return i.name === "Tiền Nước";
+              })?.unit == "room"
+            ? "Phòng"
+            : data?.services?.find((i) => {
+                return i.name === "Tiền Nước";
+              })?.unit == "member"
+            ? "Người"
+            : data?.services?.find((i) => {
+                return i.name === "Tiền Nước";
+              })?.unit == "met"
+            ? "Khối"
+            : data?.services?.find((i) => {
+                return i.name === "Tiền Nước";
+              })?.unit == "kwh"
+            ? "Kwh"
+            : ""
         }
         </span>
         </p>
@@ -500,7 +537,7 @@ ${
                                     ? "Phòng"
                                     : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                       "member"
-                                    ? "Trên Người"
+                                    ? "Người"
                                     : i?.bill[i?.bill?.length - 1]?.eleUnit ==
                                       "met"
                                     ? "Khối"
@@ -534,7 +571,7 @@ ${
                                     ? "Phòng"
                                     : i?.bill[i?.bill?.length - 1]?.waterUnit ==
                                       "member"
-                                    ? "Trên Người"
+                                    ? "Người"
                                     : i?.bill[i?.bill?.length - 1]?.waterUnit ==
                                       "met"
                                     ? "Khối"
@@ -572,7 +609,7 @@ ${
                                                 : item.unit == "room"
                                                 ? "Phòng"
                                                 : item.unit == "member"
-                                                ? "Trên Người"
+                                                ? "Người"
                                                 : item.unit == "met"
                                                 ? "Khối"
                                                 : item.unit == "kwh"

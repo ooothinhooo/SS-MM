@@ -283,7 +283,7 @@ function Cardpay4() {
                                         ? "Phòng"
                                         : item?.bill[item?.bill?.length - 1]
                                             ?.waterUnit == "member"
-                                        ? "Trên Người"
+                                        ? "Người"
                                         : item?.bill[item?.bill?.length - 1]
                                             ?.waterUnit == "met"
                                         ? "Khối"
@@ -439,7 +439,7 @@ function Cardpay4() {
                                             : i.unit == "room"
                                             ? "Phòng"
                                             : i.unit == "member"
-                                            ? "Trên Người"
+                                            ? "Người"
                                             : i.unit == "met"
                                             ? "Khối"
                                             : i.unit == "kwh"
@@ -479,9 +479,9 @@ function Cardpay4() {
                                             thousandSeparator
                                             displayType="text"
                                           />{" "}
-                                          <span className="text-[12px] italic">
+                                          {/* <span className="text-[12px] italic">
                                             VNĐ
-                                          </span>
+                                          </span> */}
                                         </div>
                                       </td>
                                     </tr>
@@ -599,6 +599,9 @@ function Cardpay4() {
                                       thousandSeparator
                                       displayType="text"
                                     />
+                                    <span className="text-[12px] italic">
+                                      VNĐ
+                                    </span>
                                   </div>
                                 </div>
                               </td>

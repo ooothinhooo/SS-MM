@@ -465,7 +465,7 @@ function CardPay3() {
                     Vui lòng chuyển khoản thanh toán trong vòng 30 ngày.
                   </div>
                   <div class="text-gray-700">
-                    Mọi thông tin chi tiết liên hệ {item?.motelId?.motelPhone}
+                    Mọi thông tin chi tiết liên hệ {item?.motelId?.phone}
                   </div>
                 </div>
               </div>

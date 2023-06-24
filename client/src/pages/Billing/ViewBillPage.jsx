@@ -127,7 +127,7 @@ function ViewBillPage() {
                             : bill?.eleUnit == "room"
                             ? "Phòng"
                             : bill?.eleUnit == "member"
-                            ? "Trên Người"
+                            ? "Người"
                             : bill?.eleUnit == "met"
                             ? "Khối"
                             : bill?.eleUnit == "kwh"
@@ -203,7 +203,7 @@ function ViewBillPage() {
                             : bill?.waterUnit == "room"
                             ? "Phòng"
                             : bill?.waterUnit == "member"
-                            ? "Trên Người"
+                            ? "Người"
                             : bill?.waterUnit == "met"
                             ? "Khối"
                             : bill?.waterUnit == "kwh"
@@ -281,7 +281,7 @@ function ViewBillPage() {
                     return (
                       <>
                         <tr>
-                          <td class="p-2">
+                          <td class="text-left">
                             <div class="font-medium text-left ">{b?.name}</div>
                           </td>
                           <td class="p-2 text-left">
@@ -290,18 +290,17 @@ function ViewBillPage() {
                               : b?.unit == "room"
                               ? "Phòng"
                               : b?.unit == "member"
-                              ? "Trên Người"
+                              ? "Người"
                               : b?.unit == "met"
                               ? "Khối"
                               : b?.unit == "kwh"
                               ? "Kwh"
                               : ""}
                           </td>
-                          <td class="p-2">-- </td>
-                          <td class="p-2">--</td>
-                          <td class="p-2">
-                            <div class="text-left font-medium ">
-                              {" "}
+                          <td class="text-left ">-- </td>
+                          <td class="text-left ">--</td>
+                          <td class="text-left">
+                            <div class=" font-medium ">
                               {b?.unit == "room"
                                 ? 1
                                 : b?.unit == "member"
@@ -309,7 +308,7 @@ function ViewBillPage() {
                                 : ""}
                             </div>
                           </td>
-                          <td class="p-2">
+                          <td class="">
                             <div class="text-left ">
                               <NumericFormat
                                 value={b?.value}
@@ -319,7 +318,7 @@ function ViewBillPage() {
                               <span className="md:text-[12px] italic">VNĐ</span>
                             </div>
                           </td>
-                          <td class="p-2">
+                          <td class="text-left">
                             <div class="text-left font-medium ">
                               <NumericFormat
                                 value={
@@ -366,7 +365,7 @@ function ViewBillPage() {
                               Number(bill?.waterPrice)
                           : bill?.waterUnit == "room"
                           ? Number(bill?.waterPrice)
-                          : room?.bill?.waterUnit == "member"
+                          : bill?.waterUnit == "member"
                           ? Number(room.member.length) *
                             Number(bill?.waterPrice)
                           : 0
@@ -398,7 +397,7 @@ function ViewBillPage() {
                   Vui Lòng Thanh Toán Hoá Đơn Trước 30 ngày
                 </div>
                 <div class="text-gray-700 mb-2">
-                  Mọi thông tin chi tiết liên hệ {room?.motelId?.motelPhone}
+                  Mọi thông tin chi tiết liên hệ {room?.motelId?.phone}
                 </div>
                 {/* <div class="text-gray-700">123 Main St., Anytown, USA 12345</div> */}
               </div>

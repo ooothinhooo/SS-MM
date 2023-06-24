@@ -287,7 +287,7 @@ function CardPay1() {
                                       : i.unit == "room"
                                       ? "Phòng"
                                       : i.unit == "member"
-                                      ? "Trên Người"
+                                      ? "Người"
                                       : i.unit == "met"
                                       ? "Khối"
                                       : i.unit == "kwh"

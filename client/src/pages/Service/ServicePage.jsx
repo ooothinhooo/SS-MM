@@ -40,9 +40,12 @@ function ServicePage({ user, service }) {
           <div class="grid grid-flow-col auto-cols-max w-full  ">
             {/* left */}
             <div className="w-full">
-              <div className="text-left mx-6">
-                <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
-                  Quản lý dịch vụ
+              <div className="text-left ">
+                <span className="text-left ">
+                  <p className="text-3xl font-bold text-blue-800 uppercase">
+                    Quản lý dịch vụ
+                  </p>
+                  <p className="text-sm italic ">Các dịch vụ của nhà trọ</p>
                 </span>
               </div>
               <ListService
@@ -56,8 +59,13 @@ function ServicePage({ user, service }) {
             <div class="ml-4  w-full">
               <div className="w-full">
                 <div className="text-left">
-                  <span className="text-left text-3xl font-bold text-blue-800 uppercase ">
-                    Hoá Đơn và Dịch Vụ
+                  <span className="text-left  ">
+                    <p className="text-3xl font-bold text-blue-800 uppercase">
+                      Khách thuê sử dụng trong tháng
+                    </p>
+                    <p className="text-sm italic ">
+                      Thống kê mỗi tháng khách thuê xài
+                    </p>
                   </span>
                 </div>
                 <TableService user={user} />

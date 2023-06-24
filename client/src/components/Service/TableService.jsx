@@ -35,7 +35,7 @@ function TableService({ user }) {
       <ToastContainer />
 
       <div className=" w-full flex justify-center items-center ">
-        <div className="w-full px-4 py-2 shadow-xl rounded-md ">
+        <div className="w-full px-4 py-2  ">
           <div className="w-full h-full">
             <div class="flex flex-col">
               <div class="-m-1.5 overflow-x-auto">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Tooltip } from "flowbite-react";
 import { AiFillEdit, AiFillTags, AiOutlineUserAdd } from "react-icons/ai";
 import { MdAddToQueue } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -72,10 +73,8 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Đơn Vị Tính</label>
           <select 
           id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <option selected>Choose a service</option>
+          <option value="" selected>Chọn đơn vị</option>
           <option value="member">Người</option>
-          <option value="kwh">Kwh</option>
-          <option value="met">Khối</option>
           <option value="room">Phòng</option>
       </select>
           </div>
@@ -91,6 +90,8 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
           var value = document.getElementById("value").value;
           if (document.getElementById("unit").value == "Miễm Phí") {
             value = 0;
+          } else if (document.getElementById("unit").value == "") {
+            Render_CreateService();
           }
           return [
             document.getElementById("name").value,
@@ -166,7 +167,11 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
       console.log(result);
       GETAPI_MOTELS();
       if (result?.data.status == 200)
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        // Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Toast.fire({
+          icon: "success",
+          title: "Dịch vụ đã được xoá",
+        });
     } catch (error) {}
   };
 
@@ -433,7 +438,7 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
         pauseOnHover
         theme="light"
       />
-      <div class="w-full h-auto flex justify-center items-center my-4  ">
+      <div class="w-full h-auto flex justify-center items-center  ">
         <div className="w-[90%]  ">
           <p
             onClick={(e) => Render_CreateService()}
@@ -521,7 +526,10 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                       }
                       className="text-4xl border-2 text-black bg-gray-100 rounded-full p-2 cursor-pointer"
                     >
-                      <AiFillEdit />
+                      <Tooltip content="Cập nhật dịch vụ" style="light">
+                        {/* Default tooltip */}
+                        <AiFillEdit />
+                      </Tooltip>
                     </p>
                     <p
                       onClick={(e) =>
@@ -529,7 +537,10 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                       }
                       className="text-4xl border-2 text-black bg-blue-300 rounded-full p-2 cursor-pointer"
                     >
-                      <MdAddToQueue />
+                      <Tooltip content="Thêm dịch vụ vào phòng" style="light">
+                        {/* Default tooltip */}
+                        <MdAddToQueue />
+                      </Tooltip>
                     </p>
                     <p
                       onClick={(e) =>
@@ -537,7 +548,13 @@ function ListService({ user, Service, GETAPI_MOTELS }) {
                       }
                       className="text-4xl border-2 text-white bg-red-600 rounded-full p-2 cursor-pointer"
                     >
-                      <RiDeleteBin5Fill />
+                      <Tooltip
+                        content="Xoá dịch vụ"
+                        placement="right"
+                        style="light"
+                      >
+                        <RiDeleteBin5Fill />
+                      </Tooltip>
                     </p>
                   </div>
                 </div>

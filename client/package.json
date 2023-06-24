@@ -12,6 +12,7 @@
     "diacritic": "^0.0.2",
     "firebase": "^9.19.1",
     "flowbite": "^1.6.5",
+    "flowbite-react": "^0.4.9",
     "framer-motion": "^10.11.3",
     "moment": "^2.29.4",
     "motion": "^10.15.5",

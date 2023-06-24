@@ -12,6 +12,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { randomString } from "../../Func/RamdomString.js";
 import Swal from "sweetalert2";
 import { ADD_MEMBER_TOROOM } from "../../API/Room/addMemberToRoom.api.js";
+import { Toast } from "../../Func/Toast.js";
 
 function UpdateMember({ user, memberId }) {
   const navigation = useNavigate();
@@ -49,17 +50,21 @@ function UpdateMember({ user, memberId }) {
       console.log(result?.data?.status);
       if (result?.data?.status === 200) {
         // getApiMember();
-        console.log(data);
-        toast.success("Cập Nhật Thành Viên thành công", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        // console.log(data);
+        Toast.fire({
+          icon: "success",
+          title: "Cập Nhật Thành Viên thành công",
         });
+        // toast.success("Cập Nhật Thành Viên thành công", {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
         setData({
           fullName: "",
           dob: "",
@@ -100,16 +105,20 @@ function UpdateMember({ user, memberId }) {
         // getApiMember();
         GetInfoMemberAPI();
         console.log(data);
-        toast.success("Cập Nhật Phòng thành công", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Cập Nhật Thành Phòng Thành Công",
         });
+        // toast.success("Cập Nhật Phòng thành công", {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
       }
     } catch (error) {}
   };

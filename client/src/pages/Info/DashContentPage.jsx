@@ -5,6 +5,7 @@ import moment from "moment";
 import { NumericFormat } from "react-number-format";
 import { DELETE_POST } from "../../API/Posts/DeletePost.api.js";
 import { toast } from "react-toastify";
+import { Toast } from "../../Func/Toast.js";
 function DashContentPage({ user }) {
   let { id } = useParams();
 
@@ -21,7 +22,11 @@ function DashContentPage({ user }) {
     try {
       const result = await DELETE_POST(user?.token, id);
       if (result) {
-        toast.success("Đã xoá 1 bài viết", {});
+        Toast.fire({
+          icon: "success",
+          title: "Đã xoá 1 bài viết",
+        });
+        // toast.success("Đã xoá 1 bài viết", {});
         GET_FIND_USER();
       }
     } catch (error) {}

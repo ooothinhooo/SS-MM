@@ -5,6 +5,7 @@ import { LIST_MEMBER_ONROOM } from "../../API/Member/listMemberOnRoom.api.js";
 import { useParams } from "react-router-dom";
 import { REMOVE_MEMBER_OUTROOM } from "../../API/Room/removeMemberOutRoom.api.js";
 import { ToastContainer, toast } from "react-toastify";
+import { Toast } from "../../Func/Toast.js";
 
 function Member({ data, user }) {
   const a = [1, 2, 4];
@@ -26,16 +27,9 @@ function Member({ data, user }) {
       const result = await REMOVE_MEMBER_OUTROOM(user?.token, id, _id);
       getMember();
       if (result?.data?.status === 200)
-        toast.success("Xoá thành công", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          // theme: "colored",
+        Toast.fire({
+          icon: "success",
+          title: "Xoá thành công",
         });
     } catch (error) {}
   };

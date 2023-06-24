@@ -20,6 +20,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { randomString } from "../../Func/RamdomString.js";
 import { LOGIN } from "../../API/Auth/Login.js";
 import { REGISTER } from "../../API/Auth/Register.js";
+import { Toast } from "../../Func/Toast.js";
 
 function SignUp() {
   const navigation = useNavigate();
@@ -99,7 +100,11 @@ function SignUp() {
     // console.log(resultLogin);
     if (resultLogin.status == 200) {
       if (resultLogin.data.status === 200) {
-        toast.success("Đăng nhập thành công");
+        // toast.success("Đăng nhập thành công");
+        Toast.fire({
+          icon: "success",
+          title: "Đăng nhập thành công",
+        });
         localStorage.setItem("user", JSON.stringify(resultLogin.data.data));
         setTimeout(() => {
           window.location = "/";
@@ -107,12 +112,20 @@ function SignUp() {
         return;
       }
       if (resultLogin.data.status === 201) {
-        toast.error("Đăng nhập thất bại");
+        // toast.error("Đăng nhập thất bại");
+        Toast.fire({
+          icon: "error",
+          title: "Đăng nhập thất bại",
+        });
         return;
       }
 
       if (resultLogin.data.status === 202) {
-        toast.error("Đăng nhập thất bại");
+        // toast.error("Đăng nhập thất bại");
+        Toast.fire({
+          icon: "error",
+          title: "Đăng nhập thất bại",
+        });
 
         return;
       }
@@ -156,7 +169,11 @@ function SignUp() {
       if (result.data.status === 201) {
         // setErorrs(result.data.data);
         // console.log("201", result.data.data);
-        toast.error("Đăng ký tài khoản thất bại");
+        // toast.error("Đăng ký tài khoản thất bại");
+        Toast.fire({
+          icon: "error",
+          title: "Đăng ký tài khoản thất bại",
+        });
         return;
       }
       if (result.data.status === 202) {
@@ -187,10 +204,18 @@ function SignUp() {
           if (form2.phone.length == 10) {
             SignUp();
           } else {
-            toast.error("Số điện thoại không hợp lệ");
+            // toast.error("Số điện thoại không hợp lệ");
+            Toast.fire({
+              icon: "error",
+              title: "Số điện thoại không hợp lệ",
+            });
           }
         } else {
-          toast.error("Mật Khẩu Không Khớp");
+          // toast.error("Mật Khẩu Không Khớp");
+          Toast.fire({
+            icon: "error",
+            title: "Mật Khẩu Không Khớp",
+          });
         }
       } else {
         Swal.fire({
@@ -207,8 +232,11 @@ function SignUp() {
       const result = await REGISTER(form2);
       if (result.status == 200) {
         if (result.data.status === 200) {
-          toast.success("Đăng Ký Tài Khoản Thành Công");
-
+          // toast.success("Đăng Ký Tài Khoản Thành Công");
+          Toast.fire({
+            icon: "success",
+            title: "Đăng ký tài khoản thành công",
+          });
           setTimeout(() => {
             navigation("/login");
           }, 2000);
@@ -216,12 +244,19 @@ function SignUp() {
         }
         if (result.data.status === 201) {
           setErorrs(result.data.data);
-          toast.error("Đăng ký tài khoản thất bại");
+          // toast.error("Đăng ký tài khoản thất bại");
+          Toast.fire({
+            icon: "error",
+            title: "Đăng ký tài khoản thất bại",
+          });
           return;
         }
 
         if (result.data.status === 202) {
-          toast.error("Đăng ký tài khoản thất bại");
+          Toast.fire({
+            icon: "error",
+            title: "Đăng ký tài khoản thất bại",
+          });
 
           return;
         }
@@ -266,7 +301,10 @@ function SignUp() {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setAvatar(downloadURL);
             toast.success("Thêm ảnh đại diện thành công");
-
+            Toast.fire({
+              icon: "success",
+              title: "Thêm ảnh đại diện thành công",
+            });
             // console.log(downloadURL);
           });
         }

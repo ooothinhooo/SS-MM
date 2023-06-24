@@ -10,6 +10,7 @@ import { NumericFormat } from "react-number-format";
 import { AiOutlineUser } from "react-icons/ai";
 import { CiMinimize2 } from "react-icons/ci";
 import { CHECK_STATUS_BILL } from "../../API/Bill/CheckStatusBill.api.js";
+import { Toast } from "../../Func/Toast.js";
 
 function ListRoom({ data, user, dele, GetAPI }) {
   const [room, setRoom] = useState();
@@ -50,17 +51,11 @@ function ListRoom({ data, user, dele, GetAPI }) {
       console.log(result);
       if (result.status == 200) {
         if (result.data.status == 200) {
-          toast.success("Xoá Phòng Thành Công", {
-            position: "top-right",
-            autoClose: 200,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            // theme: "colored",
+          Toast.fire({
+            icon: "success",
+            title: "Xoá Phòng Thành Công",
           });
+
           GetAPI();
         }
       }
@@ -158,7 +153,11 @@ function ListRoom({ data, user, dele, GetAPI }) {
       );
       console.log(result);
       if (result?.data.status == 200) {
-        toast.success("Cập nhật thành công");
+        // toast.success("Cập nhật thành công");
+        Toast.fire({
+          icon: "success",
+          title: "Cập nhật thành công",
+        });
         GetAPI();
       }
     } catch (error) {}

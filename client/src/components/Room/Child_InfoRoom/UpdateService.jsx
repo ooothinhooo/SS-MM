@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { UPDATE_SERVICE_TOROOM } from "../../../API/Room/updateServiceToRoom.api.js";
 
 import { NumericFormat } from "react-number-format";
+import { Toast } from "../../../Func/Toast.js";
 function UpdateService({ user, roomId, getAPI_Room }) {
   const [data, setData] = useState({});
   const handleInputState = (name, value) => {
@@ -24,16 +25,20 @@ function UpdateService({ user, roomId, getAPI_Room }) {
 
       if (result?.data?.status === 200) {
         getAPI_Room();
-        toast.success("Cập nhật thành công", {
-          position: "top-right",
-          autoClose: 500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Cập nhật thành công",
         });
+        // toast.success("Cập nhật thành công", {
+        //   position: "top-right",
+        //   autoClose: 500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
       }
     } catch (error) {}
   };

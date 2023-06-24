@@ -15,6 +15,7 @@ import { splitName } from "../../Func/SliceName.js";
 import "flowbite";
 import { LOGIN } from "../../API/Auth/Login.js";
 import { REGISTER } from "../../API/Auth/Register.js";
+import { Toast } from "../../Func/Toast.js";
 // import { async } from "@firebase/util";
 function Login() {
   const navigation = useNavigate();
@@ -94,7 +95,12 @@ function Login() {
     // console.log(resultLogin);
     if (resultLogin.status == 200) {
       if (resultLogin.data.status === 200 || resultLogin.data.status === 100) {
-        toast.success("Đăng nhập thành công");
+        // toast.success("Đăng nhập thành công");
+        Toast.fire({
+          icon: "success",
+          title: "Đăng nhập thành công",
+        });
+
         // console.log(result);
         // toast("Vui Lòng Chờ");
         localStorage.setItem("user", JSON.stringify(resultLogin.data.data));
@@ -107,14 +113,21 @@ function Login() {
       }
       if (resultLogin.data.status === 201) {
         // setErorrs(resultLogin.data.data);
-        toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+        // toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+        Toast.fire({
+          icon: "error",
+          title: "Tên đăng nhập hoặc mật khẩu không chính xác",
+        });
         return;
       }
 
       if (resultLogin.data.status === 202) {
         // toast(resultLogin.data.message);
-        toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
-
+        // toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+        Toast.fire({
+          icon: "error",
+          title: "Tên đăng nhập hoặc mật khẩu không chính xác",
+        });
         return;
       }
     }
@@ -152,7 +165,11 @@ function Login() {
       // console.log(result);
       if (result.status == 200) {
         if (result.data.status == 200 || result.data.status == 100) {
-          toast.success("Đăng nhập thành công");
+          // toast.success("Đăng nhập thành công");
+          Toast.fire({
+            icon: "success",
+            title: "Đăng nhập thành công",
+          });
           // toast("Vui Lòng Chờ");
           // console.log(result);
           localStorage.setItem("user", JSON.stringify(result.data.data));
@@ -167,14 +184,22 @@ function Login() {
         if (result.data.status === 201) {
           setErorrs(result.data.data);
           // toast(result.data.data);
-          toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+          // toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+          Toast.fire({
+            icon: "error",
+            title: "Tên đăng nhập hoặc mật khẩu không chính xác",
+          });
 
           return;
         }
 
         if (result.data.status === 202) {
           // toast(result.data.message);
-          toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
+          Toast.fire({
+            icon: "error",
+            title: "Tên đăng nhập hoặc mật khẩu không chính xác",
+          });
+          // toast.error("Tên đăng nhập hoặc mật khẩu không chính xác");
 
           return;
         }

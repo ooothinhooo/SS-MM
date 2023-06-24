@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { DELETE_ROOM } from "../../API/Motels/DeleteRoom.api.js";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
+import { Toast } from "../../Func/Toast.js";
 
 function BoxRoom({ data, user, dele }) {
   const [room, setRoom] = useState();
@@ -44,7 +45,11 @@ function BoxRoom({ data, user, dele }) {
       console.log(result);
       if (result.status == 200) {
         if (result.data.status == 200) {
-          toast.success("Xoá Phòng Thành Công");
+          // toast.success("Xoá Phòng Thành Công");
+          Toast.fire({
+            icon: "success",
+            title: "Xoá Phòng Thành Công",
+          });
           GetAPI();
         }
       }

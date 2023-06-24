@@ -7,6 +7,7 @@ import { UPDATE_BILL } from "../../API/Bill/updateBill.api.js";
 import { DELETE_BILL } from "../../API/Bill/deleteBill.api.js";
 import { DELETE_ALL_BILL } from "../../API/Bill/deteleAllBill.api.js";
 import { NumericFormat } from "react-number-format";
+import { Toast } from "../../Func/Toast.js";
 
 function Bill({ user, roomId }) {
   const [room, setRoom] = useState();
@@ -116,27 +117,25 @@ function Bill({ user, roomId }) {
       if (obj) {
         const result = await UPDATE_BILL(user?.token, roomId, obj);
         console.log(result);
-        toast.success("Thêm  thành công", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Thêm  thành công",
         });
+        // toast.success("Thêm  thành công", {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
         getAPI_Room();
       } else {
-        toast.error("Thêm Thất Bại", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Thêm Thất Bại",
         });
       }
     } catch (error) {}
@@ -148,16 +147,20 @@ function Bill({ user, roomId }) {
       const result = await DELETE_BILL(user?.token, roomId, month);
       console.log(result);
       if (result?.data?.status == 200) {
-        toast.success("Xoá  thành công", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Xoá thành công",
         });
+        // toast.success("Xoá  thành công", {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
         getAPI_Room();
       }
     } catch (error) {}
@@ -169,6 +172,7 @@ function Bill({ user, roomId }) {
       console.log(result);
       if (result?.data?.status == 200) {
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
+
         getAPI_Room();
       }
     } catch (error) {}

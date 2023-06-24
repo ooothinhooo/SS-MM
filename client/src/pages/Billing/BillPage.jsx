@@ -9,6 +9,7 @@ import { AiOutlineFileAdd, AiOutlineEdit } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { GET_ONE_ROOM } from "../../API/Motels/GetOneRoom.api.js";
 import { NumericFormat } from "react-number-format";
+import { Toast } from "../../Func/Toast.js";
 function BillPage({ user }) {
   const [month, setMonth] = useState();
   const [value, setValue] = useState();
@@ -33,28 +34,28 @@ function BillPage({ user }) {
       if (obj) {
         const result = await CREATE_BILL(user?.token, roomId, obj);
         console.log(result);
-        toast.success("Thêm  thành công", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Thêm thành công",
         });
+
         GETAPI_ROOM();
       } else {
-        toast.error("Thêm Thất Bại", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+        Toast.fire({
+          icon: "success",
+          title: "Thêm thất bại",
         });
+
+        // toast.error("Thêm Thất Bại", {
+        //   position: "top-right",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
       }
     } catch (error) {}
   };

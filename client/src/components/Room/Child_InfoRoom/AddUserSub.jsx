@@ -9,6 +9,7 @@ import { USERS_SUB_TOROOM } from "../../../API/Room/userSubToRoom.api.js";
 import ViewRoomPage from "../../../pages/Room/ViewRoomPage.jsx";
 import { LIST_MEMBER } from "../../../API/Member/listMember.api.js";
 import { LIST_MEMBER_ONROOM } from "../../../API/Member/listMemberOnRoom.api.js";
+import { Toast } from "../../../Func/Toast.js";
 
 function AddUserSub({ user, roomId, isAdd, getAPI_Room }) {
   const [dataMember, setDataMember] = useState();
@@ -27,18 +28,12 @@ function AddUserSub({ user, roomId, isAdd, getAPI_Room }) {
   const addUserSub = async (_id) => {
     try {
       const result = await USERS_SUB_TOROOM(user?.token, roomId, _id);
-      console.log(result);
-      toast.success("Thêm thành công", {
-        position: "top-right",
-        autoClose: 500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        // theme: "colored",
+      // console.log(result);
+      Toast.fire({
+        icon: "success",
+        title: "Thêm thành công",
       });
+
       getApiMember();
       getAPI_Room();
     } catch (error) {}

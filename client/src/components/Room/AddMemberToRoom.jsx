@@ -5,6 +5,7 @@ import Button from "../Componets/InputType/Button.jsx";
 import { ADD_MEMBER_TOROOM } from "../../API/Room/addMemberToRoom.api.js";
 import { ToastContainer, toast } from "react-toastify";
 import { LIST_MEMBER_NO_ROOM } from "../../API/Member/listMemberNoRoom.api.js";
+import { Toast } from "../../Func/Toast.js";
 
 function AddMemberToRoom({ user, roomId, isAdd }) {
   const [dataMember, setDataMember] = useState();
@@ -24,17 +25,11 @@ function AddMemberToRoom({ user, roomId, isAdd }) {
       const result = await ADD_MEMBER_TOROOM(user?.token, roomId, _id);
       console.log(result);
       // toast.success("Thêm thành công");
-      toast.success("🦄 Thêm thành công", {
-        position: "top-right",
-        autoClose: 500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        // theme: "colored",
+      Toast.fire({
+        icon: "success",
+        title: "Thêm thành công",
       });
+
       getApiMember();
     } catch (error) {}
   };

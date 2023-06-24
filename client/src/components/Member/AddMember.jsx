@@ -9,6 +9,7 @@ import { randomString } from "../../Func/RamdomString.js";
 import { LIST_ROOM } from "../../API/Motels/ListRoom.api.js";
 import Swal from "sweetalert2";
 import { NavLink } from "react-router-dom";
+import { Toast } from "../../Func/Toast.js";
 function AddMember({ user }) {
   const [roomId, setRoomId] = useState("");
   const [data, setData] = useState({
@@ -65,16 +66,20 @@ function AddMember({ user }) {
         const result = await ADD_MEMBER(user?.token, data);
         console.log(result);
         if (result?.data?.status === 200) {
-          toast.success("Thêm thành viên thành công", {
-            position: "top-right",
-            autoClose: 500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+          Toast.fire({
+            icon: "success",
+            title: "Thêm thành viên thành công",
           });
+          // toast.success("Thêm thành viên thành công", {
+          //   position: "top-right",
+          //   autoClose: 500,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          //   theme: "light",
+          // });
 
           setData({
             fullName: "",
@@ -126,10 +131,22 @@ function AddMember({ user }) {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             if (id == "idPhoto1") {
-              data.idPhoto1 = downloadURL;
+              setData({
+                ...data,
+                idPhoto1: downloadURL,
+              });
+              // data.idPhoto1 = downloadURL;
             } else {
-              data.idPhoto2 = downloadURL;
+              setData({
+                ...data,
+                idPhoto2: downloadURL,
+              });
+              // data.idPhoto2 = downloadURL;
             }
+            Toast.fire({
+              icon: "success",
+              title: "Thêm thành công",
+            });
           });
         }
       );

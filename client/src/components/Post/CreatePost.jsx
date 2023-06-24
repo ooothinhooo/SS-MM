@@ -12,6 +12,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { CREATE_POST } from "../../API/Posts/CreatePost.api.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Toast } from "../../Func/Toast.js";
+
 function CreatePost({ user }) {
   const host = "https://provinces.open-api.vn/api/";
   const navigation = useNavigate();
@@ -113,8 +115,11 @@ function CreatePost({ user }) {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             // setAvatar(downloadURL);
-            toast.success("Thêm ảnh thành công");
-
+            // toast.success("Thêm ảnh thành công");
+            Toast.fire({
+              icon: "success",
+              title: "Một ảnh được thêm",
+            });
             console.log(downloadURL);
             setImg([
               ...img,
@@ -154,13 +159,18 @@ function CreatePost({ user }) {
       console.log(form);
       const result = await CREATE_POST(user?.token, form);
       console.log(result);
-      toast.success("Đăng bài thành công");
+      // toast.success("Đăng bài thành công");
+      Toast.fire({
+        icon: "success",
+        title: "Đăng bài thành công",
+      });
+
       navigation("/");
     } catch (error) {}
   };
   return (
     <div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <div className="border-none">
         <div class="grid grid-cols-2 gap-4">
           <div className=" border rounded-lg justify-center">
@@ -430,7 +440,7 @@ function CreatePost({ user }) {
                         <p>
                           <div
                             onClick={(e) => handleDelete(i?.id)}
-                            class="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out"
+                            class="text-xs cursor-pointer absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out"
                           >
                             Delete
                           </div>

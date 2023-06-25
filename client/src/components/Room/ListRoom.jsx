@@ -11,8 +11,14 @@ import { AiOutlineUser } from "react-icons/ai";
 import { CiMinimize2 } from "react-icons/ci";
 import { CHECK_STATUS_BILL } from "../../API/Bill/CheckStatusBill.api.js";
 import { Toast } from "../../Func/Toast.js";
+import { Tooltip } from "flowbite-react";
 
-function ListRoom({ data, user, dele, GetAPI }) {
+function ListRoom({
+  data,
+  user,
+
+  GetAPI,
+}) {
   const [room, setRoom] = useState();
   const navigation = useNavigate();
 
@@ -162,6 +168,7 @@ function ListRoom({ data, user, dele, GetAPI }) {
       }
     } catch (error) {}
   };
+
   return (
     <div>
       <div class="w-full ">
@@ -171,9 +178,9 @@ function ListRoom({ data, user, dele, GetAPI }) {
               <table class=" w-full table-auto ">
                 <thead className="">
                   <tr class="  bg-gray-200 text-gray-600 uppercase text-[13px] leading-normal">
-                    <th class="py-3 px-6 text-left ">Tên Phòng</th>
+                    <th class="py-3 px-6 text-left ">Phòng</th>
                     <th class="py-3 px-6 text-left ">Loại Phòng</th>
-                    <th class="py-3 px-6 text-left ">Giá thuê</th>
+                    <th class="py-3 px-6 text-left ">Giá </th>
                     <th class="py-3 px-6 text-left ">Cọc</th>
                     <th class="py-3 px-6 text-left ">Khách Thuê</th>
                     <th class="py-3 px-6 text-left ">Ngày Vào</th>
@@ -288,26 +295,12 @@ function ListRoom({ data, user, dele, GetAPI }) {
                                     </svg>
                                   </NavLink>
                                 </div>
-                                {/* <div class="w-4 mr-2 cursor-pointer text-lg transform hover:text-purple-500 hover:scale-150">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                                    />
-                                  </svg>
-                                </div> */}
+
                                 <div
                                   onClick={(e) =>
                                     deleteRoom(item?._id, item?.roomCode)
                                   }
-                                  class="w-4 mr-2 cursor-pointer text-lg transform hover:text-purple-500 hover:scale-150"
+                                  class={` w-4 mr-2 cursor-pointer text-lg transform hover:text-purple-500 hover:scale-150`}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"

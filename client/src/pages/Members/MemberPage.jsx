@@ -69,12 +69,16 @@ function MemberPage({ user }) {
       const dataMember = await GET_ONE_MEMBER(user?.token, memberId);
       // console.log(dataMember.data.data);
       if (dataMember.data?.status === 200) {
-        Render_AddRoomUseService(dataMember.data.data?.roomId?._id, memberId);
+        Render_AddRoomUseService(
+          dataMember.data.data?.roomId?._id,
+          memberId,
+          dataMember.data.data?.fullName
+        );
       }
     } catch (error) {}
   };
 
-  const Render_AddRoomUseService = async (roomId, memberId) => {
+  const Render_AddRoomUseService = async (roomId, memberId, name) => {
     try {
       let html = "";
       const x = room.map((i) => {
@@ -94,7 +98,7 @@ function MemberPage({ user }) {
         `;
       });
       const { value: formValues } = await Swal.fire({
-        title: "Chọn Phòng Cho Khách Thuê",
+        title: `Chọn Phòng Cho Khách Thuê ${name}`,
         width: 1200,
         html: `
         <div class="grid grid-cols-8 gap-4 p-2">  

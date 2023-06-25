@@ -12,7 +12,8 @@ import { CREATE_ROOM } from "../../API/Motels/CreateRoom.api.js";
 
 function RoomPage({ user }) {
   const [room, setRoom] = useState();
-  const [dele, setDele] = useState(Boolean(false));
+  const [isdele, setIsdele] = useState(Boolean(false));
+  const [ismember, setIsmember] = useState(Boolean(false));
   const [num, setNum] = useState("");
 
   const GetAPI = async () => {
@@ -437,45 +438,112 @@ function RoomPage({ user }) {
   return (
     <div className=" w-full ">
       <ToastContainer />
+
       <div class="flex w-full  justify-center items-center">
-        {" "}
-        <div class="rounded-xl border p-2 shadow-md w-[90%] bg-white">
+        <div class="rounded-md  p-2 w-[98%] ">
           <div class="flex w-full items-center justify-between  ">
             <div class="flex items-center space-x-3">
               <div class="text-lg font-bold text-slate-700">
                 {user?.first_name + " " + user?.last_name}
               </div>
             </div>
-            <div class="flex items-center space-x-8 text-white">
-              <button
-                onClick={(e) => MR.RenderAddRoom()}
-                class={`${
-                  dele ? "hidden" : ""
-                } rounded-lg py-2 border bg-blue-600 px-3  text-[13px] font-semibold`}
-              >
-                {/* <NavLink to={`/room/add`}>Thêm Phòng</NavLink> */}
-                Thêm Nhiều Phòng Trọ
-              </button>
-              <button
-                onClick={(e) => OR.addRoom()}
-                class={`${
-                  dele ? "hidden" : ""
-                } rounded-lg py-2 border bg-blue-600 px-3  text-[13px] font-semibold`}
-              >
-                {/* <NavLink to={`/room/add`}>Thêm Phòng</NavLink> */}
-                Thêm Phòng Trọ
-              </button>
-              {/* <button class="rounded-lg py-2 border bg-green-600 px-3  text-xs font-semibold">
-                Sửa Thành Viên
-              </button> */}
+            <div class="flex items-center space-x-8 text-black">
+              <div class="inline-flex items-center rounded-md shadow-sm">
+                <button 
+                 onClick={(e) => OR.addRoom()}
+                class="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
+                  <span>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 6C12.5523 6 13 6.44772 13 7V11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H13V17C13 17.5523 12.5523 18 12 18C11.4477 18 11 17.5523 11 17V13H7C6.44772 13 6 12.5523 6 12C6 11.4477 6.44772 11 7 11H11V7C11 6.44772 11.4477 6 12 6Z"
+                        fill="currentColor"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5 22C3.34315 22 2 20.6569 2 19V5C2 3.34315 3.34315 2 5 2H19C20.6569 2 22 3.34315 22 5V19C22 20.6569 20.6569 22 19 22H5ZM4 19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V5C20 4.44772 19.5523 4 19 4H5C4.44772 4 4 4.44772 4 5V19Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span class="hidden md:inline-block">Thêm Phòng</span>
+                </button>
+                <button 
+                  onClick={(e) => MR.RenderAddRoom()}
+                class="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border-y rounded-r-lg border-r border-slate-200 font-medium px-4 py-2 inline-flex space-x-1 items-center">
+                  <span>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M2 5H14V7H2V5Z" fill="currentColor" />
+                      <path d="M2 9H14V11H2V9Z" fill="currentColor" />
+                      <path d="M10 13H2V15H10V13Z" fill="currentColor" />
+                      <path
+                        d="M16 9H18V13H22V15H18V19H16V15H12V13H16V9Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
+                  <span class="hidden md:inline-block">Thêm Phòng Nhanh</span>
+                </button>
+                
+
+               
+              </div>
             </div>
           </div>
         </div>
       </div>
       {/* <BoxRoom data={room} user={user} dele={dele} /> */}
-      <ListRoom data={room} user={user} dele={dele} GetAPI={GetAPI} />
+      <ListRoom data={room} user={user} GetAPI={GetAPI} />
     </div>
   );
 }
 
 export default RoomPage;
+
+
+//  <div class="flex w-full  justify-center items-center">
+//         <div class="rounded-xl border p-2 shadow-md w-[90%] bg-white">
+//           <div class="flex w-full items-center justify-between  ">
+//             <div class="flex items-center space-x-3">
+//               <div class="text-lg font-bold text-slate-700">
+//                 {user?.first_name + " " + user?.last_name}
+//               </div>
+//             </div>
+//             <div class="flex items-center space-x-8 text-white">
+//               <button
+//                 onClick={(e) => MR.RenderAddRoom()}
+//                 class={`${
+//                   dele ? "hidden" : ""
+//                 } rounded-lg py-2 border bg-blue-600 px-3  text-[13px] font-semibold`}
+//               >
+//                 {/* <NavLink to={`/room/add`}>Thêm Phòng</NavLink> */}
+//       //           Thêm Nhiều Phòng Trọ
+//       //         </button>
+//       //         <button
+      //           onClick={(e) => OR.addRoom()}
+      //           class={`${
+      //             dele ? "hidden" : ""
+      //           } rounded-lg py-2 border bg-blue-600 px-3  text-[13px] font-semibold`}
+      //         >
+      //           {/* <NavLink to={`/room/add`}>Thêm Phòng</NavLink> */}
+      //           Thêm Phòng Trọ
+      //         </button>
+      //         {/* <button class="rounded-lg py-2 border bg-green-600 px-3  text-xs font-semibold">
+      //           Sửa Thành Viên
+      //         </button> */}
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>

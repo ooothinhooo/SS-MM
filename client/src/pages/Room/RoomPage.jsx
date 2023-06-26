@@ -256,11 +256,12 @@ function RoomPage({ user }) {
       try {
         const { value: formValues } = await Swal.fire({
           title: `THÊM NHIỀU PHÒNG`,
+          width: 750,
           html: `
-            <div class="w-full max-w-lg">
+            <div class="w-full ">
             <div class="flex justify-center items-center -mx-3 mb-6">
             <div class="w-full  px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                <label class="block text-left uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                    Kí Hiệu Phòng
                 </label>
                 <input 
@@ -271,31 +272,31 @@ function RoomPage({ user }) {
                 />
             </div>
             <div class="w-full px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+            <label class="block text-left uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                Từ Phòng
             </label>
             <input 
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+            class="appearance-none block uppercase w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
             type="number" 
             id="start"
-            placeholder="Số phòng bắt đầu" 
+            placeholder="Phòng bắt đầu" 
             />
         </div>
             <div class="w-full  px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                <label class="block text-left uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                     Đến Phòng
                 </label>
                 <input 
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+                class="appearance-none uppercase block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
                 type="number" 
                 id="end"
-                placeholder="Số phòng kết thúc" 
+                placeholder="phòng kết thúc" 
                 />
             </div>
             </div>
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+            <label class="block text-left uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
             Tiền Phòng*
            </label>
            <input
@@ -307,7 +308,7 @@ function RoomPage({ user }) {
             </div>
             <div class="w-full md:w-1/2 px-3">
            
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Chọn Loại Phòng</label>
+          <label class="block uppercase tracking-wide text-left text-gray-700 text-xs font-bold mb-2" for="grid-last-name">Chọn Loại Phòng</label>
           <select 
           id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
           <option selected>Chọn Loại Phòng</option>

@@ -34,7 +34,7 @@ class MyComponent extends React.Component {
     const value = JSON.parse(sessionStorage.getItem("pay"));
     return (
       <React.Fragment>
-        <div ref={this.componentRef} className="mt-6">
+        <div ref={this.componentRef} className="mt-6 ">
           {/* <PrintData /> */}
           {card == "1" ? (
             <CardPay1 />

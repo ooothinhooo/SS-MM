@@ -5,6 +5,9 @@ import CreatePostPage from "../Post/CreatePostPage.js";
 import { NavLink } from "react-router-dom";
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { LIST_POST } from "../../API/Api/ListPost.api.js";
+import Qc1 from "../../components/Banner/Qc1.jsx";
+import img1 from "../../images/vnpt1.jpg";
+
 function MainPage({ user }) {
   const host = "https://provinces.open-api.vn/api/";
   const [data, setData] = useState();
@@ -559,15 +562,17 @@ function MainPage({ user }) {
               </div>
               {/*  */}
               <div className="w-full flex justify-center items-center my-4">
-                <div className="w-[90%]  border rounded-md">
-                  <div className="p-2 h-[900px] bg-blue-300"> quảng cáo</div>
+                <div className="w-[90%] ">
+                  {/* <div className="p-2 h-[900px] bg-blue-300"> quảng cáo</div> */}
+                  <Qc1 img={img1} />
                 </div>
               </div>
               {/* ... */}
               {/*  */}
               <div className="w-full flex justify-center items-center my-4">
-                <div className="w-[90%]  border rounded-md">
-                  <div className="p-2 h-[900px] bg-blue-300"> quảng cáo</div>
+                <div className="w-[90%]  ">
+                  {/* <div className="p-2 h-[900px] bg-blue-300"> quảng cáo</div> */}
+                  <Qc1 img={img1} />
                 </div>
               </div>
               {/* ... */}

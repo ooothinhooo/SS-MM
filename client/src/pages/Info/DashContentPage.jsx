@@ -38,7 +38,7 @@ function DashContentPage({ user }) {
   return (
     <div>
       <div className="w-full flex justify-center items-center">
-        <div className="w-[90%] border-x px-4 text-left">
+        <div className="w-[97%] border-x px-4 text-left">
           <div>
             <Breadcrumb />
           </div>
@@ -46,7 +46,7 @@ function DashContentPage({ user }) {
             <h1 className="text-2xl font-bold p-2">Quản lý tin đăng</h1>
           </div>
           <div className="rounded-md border">
-            <div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
+            <div class="w-full shadow-lg rounded-lg overflow-hidden ">
               <table class="w-full table-fixed">
                 <thead>
                   <tr class="bg-gray-100">

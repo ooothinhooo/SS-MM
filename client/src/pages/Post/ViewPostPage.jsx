@@ -8,6 +8,7 @@ import { HiChevronDoubleRight } from "react-icons/hi";
 
 import CommentsPage from "../Comments/CommentsPage.jsx";
 import { NumericFormat } from "react-number-format";
+import Qc1 from "../../components/Banner/Qc1.jsx";
 
 function ViewPostPage({ user }) {
   let { id } = useParams();
@@ -120,12 +121,28 @@ function ViewPostPage({ user }) {
       </div>
       <div className="w-full flex justify-center items-center mt-2">
         <div className="w-[90%] ">
-          <div>
-            <div class="grid grid-cols-2 gap-4">
-              <div className="border rounded-md bg-red-300"></div>
-
-              <div className="border w-full rounded-md text-left">
-                <CommentsPage user={user} colDB={colDB} />
+          <div class="grid grid-cols-5 gap-2">
+            <div class="flex justify-center items-center w-full ">
+              <div className="w-full h-full">
+                <Qc1
+                  img={`https://vnpt.com.vn/Media/Images/14042020/Poster%2050%20x%2070cm.jpg?w=500&mode=crop`}
+                />
+                <Qc1
+                  img={`https://capquangvnpt.net/wp-content/uploads/2021/02/goi-v59-dtcd-vnpt.jpg`}
+                />
+              </div>
+            </div>
+            <div class="col-span-3 w-full  ">
+              <CommentsPage user={user} colDB={colDB} />
+            </div>
+            <div class="flex justify-center items-center w-full ">
+              <div className="w-full h-full">
+                <Qc1
+                  img={`https://vnpt.com.vn/Media/Images/17092020/620x805.jpg?w=768&mode=crop`}
+                />
+                <Qc1
+                  img={`https://vnpt.com.vn/Media/Images/14032020/123.jpg?w=500&mode=crop`}
+                />
               </div>
             </div>
           </div>

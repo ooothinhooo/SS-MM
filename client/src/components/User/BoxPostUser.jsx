@@ -10,11 +10,15 @@ import { SAVE_POST } from "../../API/Posts/SavePost.api.js";
 import { NumericFormat } from "react-number-format";
 import { Toast } from "../../Func/Toast.js";
 
-function BoxPost({ user, value, GETAPI_LISTPOST }) {
-  console.log(value);
+function BoxPostUser({ user, value, GETAPI_LISTPOST }) {
   const handlerLike = async (id) => {
     try {
       const result = await INTERACT_POST(user?.token, id);
+      Toast.fire({
+        icon: "success",
+        title: "👍",
+      });
+
       GETAPI_LISTPOST();
     } catch (error) {}
   };
@@ -23,6 +27,10 @@ function BoxPost({ user, value, GETAPI_LISTPOST }) {
     try {
       const result = await SAVE_POST(user?.token, id);
       console.log(result);
+      Toast.fire({
+        icon: "success",
+        title: "👍",
+      });
       GETAPI_LISTPOST();
     } catch (error) {}
   };
@@ -112,4 +120,4 @@ function BoxPost({ user, value, GETAPI_LISTPOST }) {
   );
 }
 
-export default BoxPost;
+export default BoxPostUser;

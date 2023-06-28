@@ -14,6 +14,7 @@ function InfoPage({ user }) {
       setData(result?.data?.data);
     } catch (error) {}
   };
+  console.log(user);
   useEffect(() => {
     GET_FIND_USER();
   }, []);
@@ -48,7 +49,7 @@ function InfoPage({ user }) {
                   </div>
                 </div>
                 <p class="my-6 border-t border-gray-300"></p>
-                <div class="flex flex-col">
+                {/* <div class="flex flex-col">
                   <span class="text-gray-600 uppercase font-bold tracking-wider mb-2">
                     Skills
                   </span>
@@ -59,20 +60,24 @@ function InfoPage({ user }) {
                     <li class="mb-2">HTML/CSS</li>
                     <li class="mb-2">Tailwind Css</li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
             <div class="col-span-4 sm:col-span-9">
               <div class="w-full  mx-auto">
                 <div class="flex border-b border-gray-300">
                   <button
-                    class="w-1/2 border mx-1 py-4 text-center font-medium text-gray-700 bg-gray-100 rounded-tl-lg focus:outline-none active:bg-gray-200"
+                    class={`${
+                      tab ? "bg-blue-800  text-white" : ""
+                    } w-1/2 border mx-1 py-4 text-center font-medium font-bold text-gray-700 rounded-tl-lg focus:outline-none active:bg-gray-200`}
                     onClick={(e) => setTab(!tab)}
                   >
                     Bài viết đã đăng
                   </button>
                   <button
-                    class="w-1/2 border mx-1 py-4 text-center font-medium text-gray-700 bg-gray-100 rounded-tr-lg focus:outline-none"
+                    class={`${
+                      !tab ? "bg-blue-800  text-white" : ""
+                    } w-1/2 border mx-1 py-4 text-center font-medium font-bold text-gray-700  rounded-tr-lg focus:outline-none`}
                     onClick={(e) => setTab(!tab)}
                   >
                     Bài viết đã lưu
@@ -89,7 +94,7 @@ function InfoPage({ user }) {
                           <BoxPost
                             user={user}
                             value={value}
-                            // GETAPI_LISTPOST={GETAPI_LISTPOST}
+                            GETAPI_LISTPOST={GET_FIND_USER}
                           />
                         );
                       })}
@@ -107,6 +112,8 @@ function InfoPage({ user }) {
                           <BoxPost
                             user={user}
                             value={value}
+                            GETAPI_LISTPOST={GET_FIND_USER}
+
                             // GETAPI_LISTPOST={GETAPI_LISTPOST}
                           />
                         );

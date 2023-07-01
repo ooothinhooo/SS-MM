@@ -72,10 +72,10 @@ function RoomPage({ user }) {
                     Tên Phòng *
                 </label>
                 <input 
-                class="appearance-none uppercase block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+                class="appearance-none uppercase block w-full  text-black border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
                 type="text" 
                 id="roomCode"
-                placeholder="Tên Phòng" 
+                
                 />
             </div>
             <div class="w-full md:w-1/2 px-3">
@@ -101,10 +101,10 @@ function RoomPage({ user }) {
         Tiền Phòng*
        </label>
        <input
-           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+           class="appearance-none block w-full text-black border border-blue-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
            type="number" 
            id="roomFee"
-       placeholder="Tiền phòng" 
+       
        />
           
         </div>
@@ -113,10 +113,10 @@ function RoomPage({ user }) {
             Tiền cọc *
             </label>
             <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full  text-black border border-blue-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="number" 
           id="deposit"
-          placeholder="Tiền cọc" 
+         
         </div>
     </div>
     </div> `,
@@ -153,7 +153,7 @@ function RoomPage({ user }) {
                       GIÁ ĐIỆN *
                   </label>
                   <input 
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+                  class="appearance-none block w-full  text-black border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
                   type="text" 
                   id="electricityPrice"
                   placeholder="Tên Phòng" 
@@ -180,7 +180,7 @@ function RoomPage({ user }) {
           Giá Nước*
          </label>
          <input
-             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+             class="appearance-none block w-full text-black border border-blue-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
              type="number" 
              id="waterPrice"
          placeholder="Giá Nước" 
@@ -265,10 +265,10 @@ function RoomPage({ user }) {
                    Kí Hiệu Phòng
                 </label>
                 <input 
-                class="appearance-none uppercase block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+                class="appearance-none uppercase block w-full  text-black border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
                 type="text" 
                 id="kihieu"
-                placeholder="Kí Hiệu Phòng" 
+  
                 />
             </div>
             <div class="w-full px-3 mb-6 md:mb-0">
@@ -276,10 +276,10 @@ function RoomPage({ user }) {
                Từ Phòng
             </label>
             <input 
-            class="appearance-none block uppercase w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+            class="appearance-none block uppercase w-full  text-black border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
             type="number" 
             id="start"
-            placeholder="Phòng bắt đầu" 
+      
             />
         </div>
             <div class="w-full  px-3 mb-6 md:mb-0">
@@ -287,10 +287,10 @@ function RoomPage({ user }) {
                     Đến Phòng
                 </label>
                 <input 
-                class="appearance-none uppercase block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
+                class="appearance-none uppercase block w-full  text-black border border-blue-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" 
                 type="number" 
                 id="end"
-                placeholder="phòng kết thúc" 
+            
                 />
             </div>
             </div>
@@ -300,10 +300,10 @@ function RoomPage({ user }) {
             Tiền Phòng*
            </label>
            <input
-               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+               class="appearance-none block w-full text-black border border-blue-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                type="number" 
                id="roomFee"
-           placeholder="Tiền phòng" 
+
            />
             </div>
             <div class="w-full md:w-1/2 px-3">

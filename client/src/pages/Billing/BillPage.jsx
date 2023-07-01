@@ -11,7 +11,7 @@ import { GET_ONE_ROOM } from "../../API/Motels/GetOneRoom.api.js";
 import { NumericFormat } from "react-number-format";
 import { Toast } from "../../Func/Toast.js";
 function BillPage({ user }) {
-  const [month, setMonth] = useState();
+  // const [month, setMonth] = useState();
   const [value, setValue] = useState();
   const [data, setData] = useState({});
 
@@ -360,7 +360,13 @@ ${
   };
   useEffect(() => {
     GETAPI_ROOM();
+    console.table(data);
   }, [data, value]);
+
+  var today = new Date();
+  var month = (today.getMonth() + 1).toString().padStart(2, "0");
+  var year = today.getFullYear();
+  console.log(month, year);
   return (
     <div>
       <ToastContainer />
@@ -372,23 +378,96 @@ ${
               Thêm Chỉ Số Điện và Nước Cho Phòng Trọ
             </p>
             <div className="w-full border-b bottom-6 bg-blue-gray-300 my-1"></div>
+            <p className="mr-4 flex items-start font-extralight text-xl    uppercase text-center">
+              {" "}
+              Chọn Tháng Cần Thêm Các Chỉ Số
+            </p>
+
             <div
-              class="mb-4 rounded-lg bg-blue-gray-50 px-6 py-2 text-base text-secondary-800 text-left flex  "
+              class="mb-4 rounded-md border shadow-md px-6 py-1.5 text-base text-secondary-800 text-left flex  "
               role="alert"
             >
-              <p className="mr-4 flex items-start">
-                {" "}
-                Chọn Tháng Cần Thêm Các Chỉ Số
-              </p>
-              <div>
-                <input
-                  type="month"
-                  name="month"
-                  value={data?.month}
-                  onChange={handleChange}
-                  class="peer block w-full font-bold  rounded-md appearance-none  border-gray-500 bg-transparent py-2.5 px-2 text-md text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
-                  placeholder=" "
-                />
+              <div className="flex items-center justify-between w-full">
+                <div class="flex gap-1 w-full">
+                  <button
+                    onClick={() => {
+                      setData({
+                        ...data,
+                        month:
+                          year +
+                          "-" +
+                          (today.getMonth() - 1).toString().padStart(2, "0"),
+                      });
+                    }}
+                    class={` px-2 py-2 text-md font-medium border border-black hover:bg-green-800 hover:text-white  focus:outline-none flex`}
+                  >
+                    <span className="text-blue-600 font-bold hover:text-blue-300">
+                      Tháng {(today.getMonth() - 1).toString().padStart(2, "0")}
+                    </span>{" "}
+                    năm {year}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setData({
+                        ...data,
+                        month:
+                          year +
+                          "-" +
+                          today.getMonth().toString().padStart(2, "0"),
+                      });
+                    }}
+                    class={` px-2 py-2 text-md font-medium border border-black hover:bg-green-800 hover:text-white  focus:outline-none flex`}
+                  >
+                    <span className="text-blue-600 font-bold hover:text-blue-300">
+                      Tháng {today.getMonth().toString().padStart(2, "0")}
+                    </span>{" "}
+                    năm {year}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setData({
+                        ...data,
+                        month:
+                          year +
+                          "-" +
+                          (today.getMonth() + 1).toString().padStart(2, "0"),
+                      });
+                    }}
+                    class={` px-2 py-2 text-md font-medium border border-black hover:bg-green-800 hover:text-white  focus:outline-none flex`}
+                  >
+                    <span className="text-blue-600 font-bold hover:text-blue-300">
+                      Tháng {month}
+                    </span>{" "}
+                    năm {year}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setData({
+                        ...data,
+                        month:
+                          year +
+                          "-" +
+                          (today.getMonth() + 2).toString().padStart(2, "0"),
+                      });
+                    }}
+                    class={` px-2 py-2 text-md font-medium border border-black hover:bg-green-800 hover:text-white  focus:outline-none flex`}
+                  >
+                    <span className="text-blue-600 font-bold hover:text-blue-300">
+                      Tháng {(today.getMonth() + 2).toString().padStart(2, "0")}
+                    </span>{" "}
+                    năm {year}
+                  </button>
+                </div>
+                <div className="flex items-center justify-end w-full">
+                  <input
+                    type="month"
+                    name="month"
+                    value={data?.month}
+                    onChange={handleChange}
+                    class="peer block  font-bold  rounded-md appearance-none  border-gray-500 bg-transparent py-2.5 px-2 text-md text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                    placeholder=" "
+                  />
+                </div>
                 {/* <label class="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
                   Chọn Tháng
                 </label> */}
